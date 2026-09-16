@@ -1,0 +1,1403 @@
+<title>Digital Exhibition: Aram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: #D5CCA4;
+  }
+
+  * { box-sizing: border-box; }
+
+  /* ---- Hero: the quote, pinned in place, fades as the page scrolls ---- */
+
+  .hero {
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #D5CCA4;
+    display: flex;
+    padding: 200px 24px 0;
+    z-index: 0;
+  }
+
+  .quote-frame {
+    position: relative;
+    display: grid;
+    grid-template-columns: 25px 1fr 25px;
+    grid-template-rows: 25px auto 25px;
+    width: min(92vw, 820px);
+    margin: auto;
+    transition: opacity 0.05s linear;
+  }
+
+  .qf-logo {
+    position: absolute;
+    bottom: 100%;
+    margin-bottom: 18px;
+    width: 260px;
+    pointer-events: none;
+  }
+
+  .qf-logo svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .qf-logo-left {
+    left: 0;
+  }
+
+  .qf-logo-right {
+    right: 0;
+    transform: scaleX(-1);
+  }
+
+  .qf-portrait {
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    z-index: 20;
+    width: 200px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .qf-portrait img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+  }
+
+  .qf-corner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .qf-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #1a3a2a;
+  }
+
+  .qf-bar {
+    background-color: #1a3a2a;
+  }
+
+  .qf-edge-left {
+    border: 1.4px solid #263F27;
+  }
+
+  .qf-edge-right {
+    border: 1.4px solid #263F27;
+  }
+
+  .quote-frame-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 64px;
+  }
+
+  .quote-text {
+    max-width: 620px;
+    margin: 0;
+    font-family: 'Cardo', "Times New Roman", Times, serif;
+    font-size: 20px;
+    line-height: 33px;
+    color: #000;
+    text-align: center;
+  }
+
+  .hero-spacer {
+    height: 100vh;
+    width: 100%;
+  }
+
+  /* ---- Intro: two-column section that scrolls up over the hero ---- */
+
+  .intro {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #D5CCA4;
+  }
+
+  .intro-col {
+    flex: 1 1 380px;
+    min-height: 100vh;
+    display: flex;
+    background-color: transparent;
+  }
+
+  .intro-copy {
+    margin: 0 auto;
+    max-width: 780px;
+    padding: 64px 40px;
+    font-family: 'Cardo', "Times New Roman", Times, serif;
+    font-size: 20px;
+    line-height: 33px;
+    color: #000;
+  }
+
+  .intro-copy p + p {
+    margin-top: 24px;
+  }
+
+  .intro-copy sup {
+    font-size: 0.7em;
+  }
+
+  /* ---- Studio: two-column section, copy left, image carousel right ---- */
+
+  .studio {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
+    background-color: #D5CCA4;
+    padding-bottom: 50px;
+  }
+
+  .studio-col {
+    flex: 1 1 380px;
+    display: flex;
+    align-items: flex-start;
+    background-color: transparent;
+  }
+
+  .studio-copy {
+    margin: 0 auto;
+    max-width: 620px;
+    padding: 64px 40px;
+    font-family: 'Cardo', "Times New Roman", Times, serif;
+    font-size: 20px;
+    line-height: 33px;
+    color: #000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .studio.is-zoom-active .studio-copy {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .studio-copy p + p {
+    margin-top: 24px;
+  }
+
+  /* ---- Carousel: rotating Garo Studio photographs, right column ---- */
+
+  .studio-right {
+    position: relative;
+    align-self: flex-start;
+    width: 100%;
+    height: clamp(380px, 48vw, 640px);
+    overflow: hidden;
+    background-color: transparent;
+  }
+
+  .studio.is-zoom-active .studio-right {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30'><circle cx='15' cy='15' r='13' fill='transparent' stroke='white' stroke-width='1'/></svg>") 15 15, crosshair;
+  }
+
+  .carousel-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.1s ease;
+  }
+
+  .carousel-slide.is-active {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  #carousel .carousel-slide {
+    inset: 64px 40px 80px;
+  }
+
+  #carousel .carousel-slide img {
+    object-position: center top;
+  }
+
+  #carousel .carousel-left-controls,
+  #carousel .carousel-right-controls,
+  #carousel .carousel-dots {
+    bottom: 10px;
+  }
+
+  .carousel-left-controls {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .caption-toggle {
+    padding: 9px 20px;
+    border: none;
+    border-radius: 999px;
+    background: #263F27;
+    opacity: 1;
+    color: #FDFFDF;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .caption-toggle:hover,
+  .caption-toggle:focus-visible {
+    background: transparent;
+    color: #263F27;
+    outline: 2px solid #263F27;
+    outline-offset: 2px;
+  }
+
+  .caption-toggle[aria-pressed="true"] {
+    background: #6D3D0A;
+    color: #FDFFDF;
+  }
+
+  .zoom-toggle {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #263F27;
+    opacity: 1;
+    color: #FDFFDF;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .zoom-toggle:hover,
+  .zoom-toggle:focus-visible {
+    background: transparent;
+    color: #263F27;
+    outline: 2px solid #263F27;
+    outline-offset: 2px;
+  }
+
+  .zoom-toggle[aria-pressed="true"] {
+    background: #6D3D0A;
+    color: #FDFFDF;
+  }
+
+  .zoom-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* ---- Zoom view: large version of the current carousel photo, full width, behind the carousel ---- */
+
+  .zoom-view {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: #D5CCA4;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 300%;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  }
+
+  .zoom-view.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .carousel-caption {
+    position: fixed;
+    left: 50%;
+    bottom: 8%;
+    z-index: 999999;
+    max-width: min(560px, calc(100vw - 48px));
+    margin: 0;
+    padding: 28px 40px 28px 32px;
+    border-radius: 22px;
+    background-color: #f6c9d8;
+    color: #3a1420;
+    font-family: 'Cardo', "Times New Roman", Times, serif;
+    font-size: 20px;
+    line-height: 30px;
+    font-style: italic;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-50%) scale(0.96);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
+  }
+
+  .carousel-caption.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) scale(1);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  #carousel-caption {
+    position: absolute;
+    max-width: min(90%, 480px);
+  }
+
+  .caption-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #3a1420;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 17px;
+    font-style: normal;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
+
+  .caption-close:hover,
+  .caption-close:focus-visible {
+    background: rgba(58, 20, 32, 0.14);
+    outline: 2px solid #3a1420;
+    outline-offset: 1px;
+  }
+
+  .carousel-right-controls {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: #263F27;
+    opacity: 1;
+    color: #FDFFDF;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .carousel-btn:hover,
+  .carousel-btn:focus-visible {
+    background: transparent;
+    color: #263F27;
+    outline: 2px solid #263F27;
+    outline-offset: 2px;
+  }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    gap: 8px;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid #263F27;
+    background: #263F27;
+    opacity: 1;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .carousel-dot:hover,
+  .carousel-dot:focus-visible {
+    background: transparent;
+    border-color: #263F27;
+  }
+
+  .carousel-dot.is-active {
+    background: #6D3D0A;
+    border-color: #6D3D0A;
+  }
+
+  /* ---- Full-width photograph: pinned via sticky, so the next section scrolls up over it ---- */
+
+  .full-image-track {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    height: calc(80.85vw + 100vh);
+  }
+
+  .full-image {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    background-color: #D5CCA4;
+  }
+
+  .full-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .full-image .carousel-left-controls {
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    bottom: auto;
+  }
+
+  /* ---- Bio: two-column section, copy left, blank right, scrolls up over the photograph ---- */
+
+  .bio {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 100vh;
+    margin-top: -100vh;
+    background-color: transparent;
+  }
+
+  .bio-col {
+    flex: 1 1 380px;
+    min-height: 100vh;
+    display: flex;
+    background-color: transparent;
+  }
+
+  .bio-left {
+    background-color: #D5CCA4;
+  }
+
+  .bio-copy {
+    margin: 0 auto;
+    max-width: 620px;
+    padding: 64px 40px;
+    font-family: 'Cardo', "Times New Roman", Times, serif;
+    font-size: 20px;
+    line-height: 33px;
+    color: #000;
+  }
+
+  .bio-copy p + p {
+    margin-top: 24px;
+  }
+
+  .bio-copy sup {
+    font-size: 0.7em;
+  }
+
+  /* ---- Quotes: checkerboards against bio, blank left, quotes right, still over the pinned photograph ---- */
+
+  .quotes {
+    position: relative;
+    z-index: 6;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 100vh;
+    background-color: transparent;
+  }
+
+  .quotes-col {
+    flex: 1 1 380px;
+    min-height: 100vh;
+    display: flex;
+    background-color: transparent;
+  }
+
+  .quotes-right {
+    background-color: #D5CCA4;
+  }
+
+  .quotes-copy {
+    margin: 0 auto;
+    max-width: 620px;
+    padding: 64px 40px;
+    font-family: 'Cardo', "Times New Roman", Times, serif;
+    font-size: 20px;
+    line-height: 33px;
+    color: #000;
+  }
+
+  .quotes-copy blockquote {
+    margin: 0;
+    font-style: italic;
+  }
+
+  .quotes-copy p {
+    margin: 0;
+  }
+
+  .quotes-copy > * + * {
+    margin-top: 40px;
+  }
+
+  .quotes-copy footer {
+    margin-top: 12px;
+    font-style: normal;
+    font-size: 18px;
+  }
+
+  .quotes-copy sup {
+    font-size: 0.7em;
+  }
+
+  /* ---- Full-width carousel: placeholder, same photographs, full-bleed ---- */
+
+  .full-carousel-wrap {
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+    background-color: #000;
+  }
+
+  .full-carousel {
+    position: relative;
+    z-index: 7;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: #000;
+  }
+
+  .full-carousel .carousel-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .full-carousel .carousel-slide img {
+    width: 90%;
+    height: 90%;
+  }
+
+  .full-carousel.is-zoom-active {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30'><circle cx='15' cy='15' r='13' fill='transparent' stroke='white' stroke-width='1'/></svg>") 15 15, crosshair;
+  }
+
+  .full-carousel .carousel-slide img {
+    transition: transform 0.05s linear;
+  }
+
+  @media (max-width: 500px) {
+    .qf-logo {
+      width: 76px;
+      margin-bottom: 10px;
+    }
+    .qf-portrait {
+      width: 112px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .quote-frame-content {
+      padding: 40px 24px;
+    }
+    .full-carousel-wrap {
+      padding: 16px;
+    }
+    .full-carousel {
+      height: 60vh;
+    }
+    .full-image-track {
+      height: auto;
+    }
+    .full-image {
+      position: static;
+    }
+    .bio {
+      margin-top: 0;
+    }
+    .bio-col {
+      min-height: auto;
+    }
+    .bio-right {
+      display: none;
+    }
+    .bio-copy {
+      padding: 56px 28px;
+    }
+    .quotes-col {
+      min-height: auto;
+    }
+    .quotes-left {
+      display: none;
+    }
+    .quotes-copy {
+      padding: 56px 28px;
+    }
+    .intro-col {
+      min-height: auto;
+    }
+    .intro-copy {
+      max-width: 620px;
+      padding: 56px 28px;
+    }
+    .studio {
+      display: block;
+      min-height: 0;
+    }
+    .studio-col {
+      display: block;
+      flex: none;
+      width: 100%;
+      min-height: 0;
+    }
+    .studio-right {
+      height: 55vh;
+      min-height: 0;
+    }
+
+    #carousel .carousel-slide {
+      inset: 56px 28px 80px;
+    }
+    .studio-copy {
+      margin: 0 auto;
+      padding: 56px 28px;
+    }
+    .zoom-toggle,
+    .zoom-view {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .quote-frame { transition: none; }
+    .intro-left {
+      opacity: 1;
+      transition: none;
+    }
+  }
+</style>
+
+<div class="hero" id="hero">
+  <div class="quote-frame" id="quote">
+    <div class="qf-logo qf-logo-left" aria-hidden="true">
+      <svg width="231" height="281" viewBox="0 0 231 281" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="166.921" cy="35.1996" rx="2.90527" ry="2.97789" fill="#263F27"/>
+        <ellipse cx="152.54" cy="42.4627" rx="2.90527" ry="2.97789" fill="#263F27"/>
+        <path d="M2.09375 90.4142V166.959M2.09375 278.831V166.959M2.09375 166.959L57.703 56.3945M20.7392 129.887V258.223M37.0949 175.137V146.023M53.1234 211.119V138.827M37.0949 146.023V124.107L53.1234 116.91V138.827M37.0949 146.023L53.1234 138.827M64.5724 110.368L78.9654 103.172L60.3199 164.015L78.9654 156.491M85.1805 153.22V98.5921L100.882 90.4142V116.91M100.882 185.277V116.91M87.7974 124.107L100.882 116.91M117.565 138.827V84.1991L135.883 124.107L137.846 45.9269M153.874 66.535C153.874 80.4918 153.874 103.499 153.874 128.359C153.874 153.22 137.846 159.435 131.303 151.257M168.267 59.0114V113.966M181.679 105.134V76.3484M194.763 138.827V69.8061M210.138 90.4142V37.4219L228.456 80.2738V2.09375M181.679 76.3484V53.1234L194.763 47.8895V69.8061M181.679 76.3484L194.763 69.8061" stroke="#263F27" stroke-width="4.18767" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="qf-logo qf-logo-right" aria-hidden="true">
+      <svg width="231" height="281" viewBox="0 0 231 281" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="166.921" cy="35.1996" rx="2.90527" ry="2.97789" fill="#263F27"/>
+        <ellipse cx="152.54" cy="42.4627" rx="2.90527" ry="2.97789" fill="#263F27"/>
+        <path d="M2.09375 90.4142V166.959M2.09375 278.831V166.959M2.09375 166.959L57.703 56.3945M20.7392 129.887V258.223M37.0949 175.137V146.023M53.1234 211.119V138.827M37.0949 146.023V124.107L53.1234 116.91V138.827M37.0949 146.023L53.1234 138.827M64.5724 110.368L78.9654 103.172L60.3199 164.015L78.9654 156.491M85.1805 153.22V98.5921L100.882 90.4142V116.91M100.882 185.277V116.91M87.7974 124.107L100.882 116.91M117.565 138.827V84.1991L135.883 124.107L137.846 45.9269M153.874 66.535C153.874 80.4918 153.874 103.499 153.874 128.359C153.874 153.22 137.846 159.435 131.303 151.257M168.267 59.0114V113.966M181.679 105.134V76.3484M194.763 138.827V69.8061M210.138 90.4142V37.4219L228.456 80.2738V2.09375M181.679 76.3484V53.1234L194.763 47.8895V69.8061M181.679 76.3484L194.763 69.8061" stroke="#263F27" stroke-width="4.18767" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="qf-corner qf-corner-tl"><div class="qf-dot"></div></div>
+    <div class="qf-bar qf-bar-top"></div>
+    <div class="qf-corner qf-corner-tr"><div class="qf-dot"></div></div>
+
+    <div class="qf-edge-left"></div>
+    <div class="quote-frame-content">
+      <p class="quote-text">The fleeting quality of fame is a well-known concept to any scholar of history. Recognition and renown can fade, just as an old-format photographic image will &ldquo;wash-out&rdquo; through overexposure. A few names stand the test of time, but most are lost, except to those who knew the individual personally or who are devoted students of the individual&rsquo;s particular field.</p>
+    </div>
+    <div class="qf-edge-right"></div>
+
+    <div class="qf-corner qf-corner-bl"><div class="qf-dot"></div></div>
+    <div class="qf-bar qf-bar-bottom"></div>
+    <div class="qf-corner qf-corner-br"><div class="qf-dot"></div></div>
+  </div>
+</div>
+    <div class="qf-portrait" id="quotePortrait">
+      <img src="https://codeplayfully.online/img_uploads/aram_circle.png" alt="Circular black-and-white portrait of Aram Kazanjian.">
+    </div>
+
+<div class="hero-spacer"></div>
+
+<section class="intro" id="intro">
+  <div class="intro-col intro-right">
+    <div class="intro-copy">
+      <p>Aram Kazanjian (ca. 1878&ndash;1966) held a prominent place in the history of photography. He shaped the world of commercial portraiture in Boston and New York. Like many of the Armenian photographers who rose to prominence during the early part of the 20th century, Kazanjian&rsquo;s photographic oeuvre and renown have faded into obscurity and lost in the mists of time. To celebrate his life and legacy, this retrospective highlights Kazanjian&rsquo;s prolific photographic output during a dynamic era in the medium&rsquo;s history.</p>
+      <p>Kazanjian&rsquo;s career emerged and evolved during the early 20th century in Boston. Beyond the camera&rsquo;s ability to accurately record reality and to produce candid portraiture, there was an aesthetic movement referred to as Pictorialism. This movement aimed to establish photography as fine art. Pictorialist photographers manipulated an image &ldquo;to express their artistic and abstract ideas&rdquo; and their &ldquo;subjective points of view.&rdquo;<sup>2</sup> Influenced by Impressionism, the 19th century art movement that began in France, photographers practicing Pictorialism employed soft-focus techniques and manipulated light to create compositions that were aesthetically pleasing and &ldquo;painterly in style.&rdquo;<sup>3</sup> The ultimate goal was to elevate photography to the rank of fine art. Along with the practice of producing straightforward portraiture, Kazanjian was influenced by this aesthetic movement that created photographic images rather than simply recording them. As such, his oeuvre reflected a blend of varied photographic styles that evolved around the turn of the 20th century.</p>
+      <p>Boston became a hub for Pictorialism which promoted photography as fine art. Amongst the influx of Armenian immigrants in this rapidly growing diasporan community, those who were entrepreneurial, artistically creative, and trained to practice photography established successful commercial portrait studios. Armenians were widely known to have mastered photography throughout the Ottoman Empire; this reputation not only made assimilation easier into American society, but it also facilitated their efforts to open studios in the major diaspora hubs of Boston and New York.</p>
+      <p>Along with Kazanjian, two prominent Armenian studios that represented disparate styles in photographic practice around the turn of the 20th century were the Diran Studio run by Suren and Arsen Diran, and the Garo Studio established by John Higue Garo.</p>
+    </div>
+  </div>
+</section>
+
+<section class="studio" id="studio">
+  <div class="zoom-view" id="zoomView" role="img" aria-label=""></div>
+  <div class="studio-col studio-left">
+    <div class="studio-copy">
+      <p>Arsen Diran arrived as an Armenian &eacute;migr&eacute; from Kharpert, Turkey to the Boston area around 1890. He opened a commercial studio sometime around the early 1890s. Whether he had an artistic background or photographic training in Turkey remains unknown. His focus was the production of straightforward, traditional portraits which were often portrayed by subjects in stiff and constricted poses, painted backdrops, and distinctive props to complement or enhance the main subject. Following standard printing techniques, these images were affixed onto decorative mounting cards. Around the early 1900s, Suren Diran (1881&ndash;1932) joined his older brother, Arsen. Together, they ran the studio until the late 1920s when Arsen moved to Fresno, California. The studio remained open until Suren&rsquo;s passing in 1932. Much to his dismay during the last years of his life, the studio was adversely impacted by a massive drop in clients during the Great Depression.</p>
+      <p>As a traditional commercial studio, the Diran studio used the camera as a recording tool that prioritized meticulously composed, sharp, and standardized portraits. Their work stands in contrast to Pictorialism which infused images with a creative vision that evoked an emotional mood. Diran&rsquo;s portraiture did not rely on variations in lighting, blurred imagery, painterly techniques, nor experimentation with complex printing methods.</p>
+    </div>
+  </div>
+  <div class="studio-col studio-right" id="carousel">
+    <div class="carousel-slide is-active">
+      <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/1.png" alt="Oval portrait of a young woman with a ribbon in her hair, with an inset photograph of Charles H. Gallup mounted above.">
+    </div>
+    <div class="carousel-slide">
+      <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/2.png" alt="Wedding portrait of an Armenian couple, the bride in a veil and gown, the groom in a dark suit.">
+    </div>
+    <div class="carousel-slide">
+      <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/3.png" alt="Wedding portrait of an Armenian couple standing before a painted studio backdrop.">
+    </div>
+    <div class="carousel-slide">
+      <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/4.png" alt="Family portrait of five people, including a young boy standing on a chair.">
+    </div>
+    <div class="carousel-slide">
+      <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/5.png" alt="Portrait of a Black baby in a long white baptismal gown.">
+    </div>
+    <div class="carousel-slide">
+      <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/6.png" alt="Portrait of an Armenian baby seated on a lace-draped cushion, holding a small basket.">
+    </div>
+    <div class="carousel-slide">
+      <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/7.png" alt="Group portrait of four Dorchester High School Cadets in uniform, holding sabers.">
+    </div>
+
+    <div class="carousel-left-controls">
+      <button type="button" class="caption-toggle" id="captionToggle" aria-pressed="false" aria-controls="carousel-caption">Caption</button>
+      <button type="button" class="zoom-toggle" id="zoomToggle" aria-pressed="false" aria-controls="zoomView" aria-label="View larger image">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="carousel-right-controls">
+      <button type="button" class="carousel-btn carousel-prev" aria-label="Previous photograph">&#8249;</button>
+      <button type="button" class="carousel-btn carousel-next" aria-label="Next photograph">&#8250;</button>
+    </div>
+
+    <div class="carousel-dots">
+      <button type="button" class="carousel-dot is-active" aria-label="Go to photograph 1"></button>
+      <button type="button" class="carousel-dot" aria-label="Go to photograph 2"></button>
+      <button type="button" class="carousel-dot" aria-label="Go to photograph 3"></button>
+      <button type="button" class="carousel-dot" aria-label="Go to photograph 4"></button>
+      <button type="button" class="carousel-dot" aria-label="Go to photograph 5"></button>
+      <button type="button" class="carousel-dot" aria-label="Go to photograph 6"></button>
+      <button type="button" class="carousel-dot" aria-label="Go to photograph 7"></button>
+    </div>
+
+    <div class="carousel-caption" id="carousel-caption">
+      <button type="button" class="caption-close" id="captionClose" aria-label="Close caption">&times;</button>
+      <span id="carousel-caption-text">Portrait of a young woman, ca. 1910, with a stamp on the mount of Charles H. Gallup, owner of the renowned Gallup photographic studio in Poughkeepsie, New York. Arsen Diran, Diran Studio, Boston. Courtesy of the Malikian Collection.</span>
+    </div>
+  </div>
+</section>
+
+
+<div class="full-image-track" id="fullImageTrack">
+  <div class="full-image" id="fullImage">
+    <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/1.png" alt="John Higue Garo (1875&ndash;1939), Armenian American portrait photographer and painter, seated reading a newspaper. Photographed by Yousuf Karsh.">
+    <div class="carousel-left-controls">
+      <button type="button" class="caption-toggle" id="captionToggle3" aria-pressed="false" aria-controls="carousel-caption-3">Caption</button>
+    </div>
+  </div>
+</div>
+
+<div class="carousel-caption" id="carousel-caption-3">
+  <button type="button" class="caption-close" id="captionClose3" aria-label="Close caption">&times;</button>
+  <span id="carousel-caption-text-3">John Higue Garo (1875&ndash;1939), Armenian American portrait photographer and painter. Yousuf Karsh, Boston. Estate of Yousuf Karsh. Photogravure. Courtesy of the Malikian Collection.</span>
+</div>
+
+<section class="bio" id="bio">
+  <div class="bio-col bio-left">
+    <div class="bio-copy">
+      <p>Born in Kharpert, Turkey, John Higue Garo (1870&ndash;1939) landed in Worcester, Massachusetts at the age of 14. With his artistic proclivities and penchant for painting, he immersed himself in the study of the arts and the photographic medium. As the proprietor of an upscale portrait studio in Boston, frequented by members of Boston&rsquo;s elite society, Garo emerged as one of the most celebrated and gifted pictorialist photographers in New England. The renowned Armenian photographer and Garo&rsquo;s mentee, Yousuf Karsh, regarded him as &ldquo;one of the greatest photographers in the history of the art.&rdquo;<sup>4</sup> During the early 20th century, Garo was the recipient of many national and international honors and awards for his artistic photographs. Many of his portraits were published in prestigious American publications like <em>The Spur</em> which catered to affluent high society.</p>
+      <p>A study of Garo&rsquo;s photographs illustrates his reliance on the aesthetic quality set forth by Impressionism and Art Nouveau (1890&ndash;1914) which emphasized soft flowing imagery and natural light. This artistic style influenced him to create photographs of visual beauty that emphasized his subject&rsquo;s personality and their emotional state. Using soft flowing curves and soft-focus techniques to create blur, Garo was motivated to create a work of art rather than to record it. In his estimation, photography was more than a technical practice to record an image, but an artistic pursuit to make photographs look like paintings or etchings. Described as &ldquo;a renaissance man with many colors on his palette,&rdquo; Garo regarded photography as a true form of art which exceeded all other artistic mediums.<sup>5</sup></p>
+    </div>
+  </div>
+  <div class="bio-col bio-right"></div>
+</section>
+
+<section class="quotes" id="quotes">
+  <div class="quotes-col quotes-left"></div>
+  <div class="quotes-col quotes-right">
+    <div class="quotes-copy">
+      <blockquote>
+        <p>The one outstanding characteristic of photography&mdash;the quality that distinguishes it from drawing, painting, etching, or any other means of pictorial representation&mdash;is the ability of the lens and sensitive film to record infinitely delicate and subtle gradation of tones. This is where photography is supreme and it is because of this quality that photography claims and holds a special place among the fine arts.<sup>6</sup></p>
+        <footer>&mdash; John Higue Garo</footer>
+      </blockquote>
+      <p>By the 1930s, Garo did not make the necessary adjustments in his practice to meet the rapid changes occurring in the photographic medium. His acclaimed and innovative technical achievements, like the gum arabic technique which created a painterly effect, became obsolete. Under the influence of the Art Deco movement (1920s&ndash;1940s), commercial photography shifted towards streamlined, simpler forms and high contrast in lighting. As such, &ldquo;the days of the photo&rsquo;s soft edge and ethereal mood had yielded to the sharp realism practiced by the modernists in the field.&rdquo;<sup>8</sup></p>
+      <blockquote>
+        <p>&ldquo;I have enjoyed every minute of my life. Photography is my vocation and I love it because I find in it the medium to interpret the art of painting, the art of music, the art of classical literature. But greatest of all, it is my canvas for the fine art of living. Art is everywhere if one can see, hear or feel it. But most of all, it is in life.&rdquo;<sup>7</sup></p>
+        <footer>&mdash; John Higue Garo</footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<div class="full-carousel-wrap">
+<section class="full-carousel" id="fullCarousel">
+  <div class="carousel-slide is-active">
+    <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/1a.png" alt="Diran Studio photograph, Boston. Courtesy of the Malikian Collection.">
+  </div>
+  <div class="carousel-slide">
+    <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/2.png" alt="Diran Studio photograph, Boston. Courtesy of the Malikian Collection.">
+  </div>
+  <div class="carousel-slide">
+    <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/3.png" alt="Diran Studio photograph, Boston. Courtesy of the Malikian Collection.">
+  </div>
+  <div class="carousel-slide">
+    <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/4.png" alt="Diran Studio photograph, Boston. Courtesy of the Malikian Collection.">
+  </div>
+  <div class="carousel-slide">
+    <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/5.png" alt="Diran Studio photograph, Boston. Courtesy of the Malikian Collection.">
+  </div>
+  <div class="carousel-slide">
+    <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/5a.png" alt="Diran Studio photograph, Boston. Courtesy of the Malikian Collection.">
+  </div>
+  <div class="carousel-slide">
+    <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/5b.png" alt="Diran Studio photograph, Boston. Courtesy of the Malikian Collection.">
+  </div>
+  <div class="carousel-slide">
+    <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/6.png" alt="Diran Studio photograph, Boston. Courtesy of the Malikian Collection.">
+  </div>
+  <div class="carousel-slide">
+    <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/7.png" alt="Diran Studio photograph, Boston. Courtesy of the Malikian Collection.">
+  </div>
+  <div class="carousel-slide">
+    <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/8.png" alt="Diran Studio photograph, Boston. Courtesy of the Malikian Collection.">
+  </div>
+  <div class="carousel-slide">
+    <img src="http://malikianphotography.com/wp-content/uploads/2026/kazanjian/1/9a.png" alt="Diran Studio photograph, Boston. Courtesy of the Malikian Collection.">
+  </div>
+
+  <div class="carousel-left-controls">
+    <button type="button" class="caption-toggle" id="captionToggle2" aria-pressed="false" aria-controls="carousel-caption-2">Caption</button>
+    <button type="button" class="zoom-toggle" id="fullCarouselZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div class="carousel-right-controls">
+    <button type="button" class="carousel-btn carousel-prev" aria-label="Previous photograph">&#8249;</button>
+    <button type="button" class="carousel-btn carousel-next" aria-label="Next photograph">&#8250;</button>
+  </div>
+
+  <div class="carousel-dots">
+    <button type="button" class="carousel-dot is-active" aria-label="Go to photograph 1"></button>
+    <button type="button" class="carousel-dot" aria-label="Go to photograph 2"></button>
+    <button type="button" class="carousel-dot" aria-label="Go to photograph 3"></button>
+    <button type="button" class="carousel-dot" aria-label="Go to photograph 4"></button>
+    <button type="button" class="carousel-dot" aria-label="Go to photograph 5"></button>
+    <button type="button" class="carousel-dot" aria-label="Go to photograph 6"></button>
+    <button type="button" class="carousel-dot" aria-label="Go to photograph 7"></button>
+    <button type="button" class="carousel-dot" aria-label="Go to photograph 8"></button>
+    <button type="button" class="carousel-dot" aria-label="Go to photograph 9"></button>
+    <button type="button" class="carousel-dot" aria-label="Go to photograph 10"></button>
+    <button type="button" class="carousel-dot" aria-label="Go to photograph 11"></button>
+  </div>
+</section>
+</div>
+
+<div class="carousel-caption" id="carousel-caption-2">
+  <button type="button" class="caption-close" id="captionClose2" aria-label="Close caption">&times;</button>
+  <span id="carousel-caption-text-2">Diran Studio photograph, Boston. Courtesy of the Malikian Collection.</span>
+</div>
+
+<script>
+  (function () {
+    var quote = document.getElementById('quote');
+    var portrait = document.getElementById('quotePortrait');
+    var introCopy = document.querySelector('.intro-copy');
+    var logoLeft = document.querySelector('.qf-logo-left');
+    var intro = document.getElementById('intro');
+    var studio = document.getElementById('studio');
+    var bio = document.getElementById('bio');
+    var quotes = document.getElementById('quotes');
+    var revealTargets = [intro, studio, bio, quotes];
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var fullImageTrack = document.getElementById('fullImageTrack');
+    var fullImageEl = document.getElementById('fullImage');
+
+    function syncBioOverlap() {
+      if (!fullImageTrack || !fullImageEl || !bio || !quotes) return;
+      if (window.innerWidth <= 700) {
+        fullImageTrack.style.height = '';
+        bio.style.marginTop = '';
+        return;
+      }
+      var bioHeight = bio.offsetHeight;
+      var quotesHeight = quotes.offsetHeight;
+      var imageHeight = fullImageEl.offsetHeight;
+      var overlapHeight = bioHeight + quotesHeight;
+      fullImageTrack.style.height = (imageHeight + overlapHeight) + 'px';
+      bio.style.marginTop = '-' + overlapHeight + 'px';
+    }
+
+    syncBioOverlap();
+    window.addEventListener('load', syncBioOverlap);
+    window.addEventListener('resize', syncBioOverlap);
+
+    var fullImageCaptionEl = document.getElementById('carousel-caption-3');
+    var fullImageCaptionToggle = document.getElementById('captionToggle3');
+    var fullImageCaptionClose = document.getElementById('captionClose3');
+    if (fullImageCaptionEl && fullImageCaptionToggle && fullImageCaptionClose) {
+      function setFullImageCaptionOpen(open) {
+        fullImageCaptionEl.classList.toggle('is-open', open);
+        fullImageCaptionToggle.setAttribute('aria-pressed', String(open));
+      }
+      fullImageCaptionToggle.addEventListener('click', function () {
+        setFullImageCaptionOpen(!fullImageCaptionEl.classList.contains('is-open'));
+      });
+      fullImageCaptionClose.addEventListener('click', function () {
+        setFullImageCaptionOpen(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && fullImageCaptionEl.classList.contains('is-open')) {
+          setFullImageCaptionOpen(false);
+        }
+      });
+      if ('IntersectionObserver' in window && fullImageTrack) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) setFullImageCaptionOpen(false);
+          });
+        }, { threshold: 0 }).observe(fullImageTrack);
+      }
+    }
+    var fadeDistance = (window.innerHeight || 800) * 0.4;
+    var fallRange = fadeDistance * 2.5;
+    var FALL_DISTANCE = 220;
+    var LOGO_GAP = -38;
+    var LANDING_GAP = 20;
+    var ticking = false;
+
+    var portraitCurrentTop = null;
+    var portraitRafId = null;
+    var PORTRAIT_EASE = 0.35;
+
+    function getPortraitTargetTop() {
+      var progress = Math.min(Math.max(window.scrollY / fallRange, 0), 1);
+      var logoRect = logoLeft.getBoundingClientRect();
+      var startTop = logoRect.top - LOGO_GAP;
+      var fallingTop = startTop + progress * FALL_DISTANCE;
+      var introRect = introCopy.getBoundingClientRect();
+      var landedTop = introRect.top - (portrait.offsetHeight || 0) * 0.5 - LANDING_GAP;
+      return Math.min(fallingTop, landedTop);
+    }
+
+    function easePortrait() {
+      var target = getPortraitTargetTop();
+      if (portraitCurrentTop === null) portraitCurrentTop = target;
+      portraitCurrentTop += (target - portraitCurrentTop) * PORTRAIT_EASE;
+      if (Math.abs(target - portraitCurrentTop) > 0.5) {
+        portrait.style.top = portraitCurrentTop + 'px';
+        portraitRafId = window.requestAnimationFrame(easePortrait);
+      } else {
+        portraitCurrentTop = target;
+        portrait.style.top = target + 'px';
+        portraitRafId = null;
+      }
+    }
+
+    function schedulePortrait() {
+      if (!portrait || !introCopy || !logoLeft) return;
+      if (portraitRafId === null) {
+        portraitRafId = window.requestAnimationFrame(easePortrait);
+      }
+    }
+
+    function updateHero() {
+      ticking = false;
+      if (reduceMotion) return;
+      var progress = Math.min(Math.max(window.scrollY / fadeDistance, 0), 1);
+      quote.style.opacity = String(1 - progress);
+      schedulePortrait();
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHero);
+        ticking = true;
+      }
+    }
+
+    if (!reduceMotion) {
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', function () {
+        fadeDistance = (window.innerHeight || 800) * 0.4;
+        fallRange = fadeDistance * 2.5;
+        schedulePortrait();
+      });
+      updateHero();
+    } else if (portrait) {
+      portrait.style.position = 'absolute';
+      portrait.style.top = '0';
+    }
+
+    if ('IntersectionObserver' in window && !reduceMotion) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          entry.target.classList.toggle('is-visible', entry.isIntersecting);
+        });
+      }, { threshold: 0.15 });
+      revealTargets.forEach(function (target) {
+        observer.observe(target);
+      });
+    } else {
+      revealTargets.forEach(function (target) {
+        target.classList.add('is-visible');
+      });
+    }
+
+    var captionsStudio = [
+      'Portrait of a young woman, ca. 1910, with a stamp on the mount of Charles H. Gallup, owner of the renowned Gallup photographic studio in Poughkeepsie, New York. Arsen Diran, Diran Studio, Boston. Courtesy of the Malikian Collection.',
+      'Wedding portrait of an Armenian couple, ca. 1900. Arsen Diran, Diran Studio, Boston. Courtesy of the Malikian Collection.',
+      'Wedding portrait of an Armenian couple, ca. 1900. Diran Studio, Boston. Courtesy of the Malikian Collection.',
+      'Family portrait, ca. 1910. Diran Studio, Boston. Courtesy of the Malikian Collection.',
+      'Black baby in a baptismal gown, ca. 1910. Diran Studio, Boston. Courtesy of the Malikian Collection.',
+      'Armenian baby, ca. 1925. Diran Studio, Boston. Courtesy of the Malikian Collection.',
+      'Dorchester High School Cadets, 1910. Diran Studio, Boston. Courtesy of the Malikian Collection.'
+    ];
+
+    var captionsFull = [
+      'Diran Studio photograph, Boston. Courtesy of the Malikian Collection.',
+      'Diran Studio photograph, Boston. Courtesy of the Malikian Collection.',
+      'Diran Studio photograph, Boston. Courtesy of the Malikian Collection.',
+      'Diran Studio photograph, Boston. Courtesy of the Malikian Collection.',
+      'Diran Studio photograph, Boston. Courtesy of the Malikian Collection.',
+      'Diran Studio photograph, Boston. Courtesy of the Malikian Collection.',
+      'Diran Studio photograph, Boston. Courtesy of the Malikian Collection.',
+      'Diran Studio photograph, Boston. Courtesy of the Malikian Collection.',
+      'Diran Studio photograph, Boston. Courtesy of the Malikian Collection.',
+      'Diran Studio photograph, Boston. Courtesy of the Malikian Collection.',
+      'Diran Studio photograph, Boston. Courtesy of the Malikian Collection.'
+    ];
+
+    var carousel = document.getElementById('carousel');
+    if (carousel) {
+      var slides = carousel.querySelectorAll('.carousel-slide');
+      var dots = carousel.querySelectorAll('.carousel-dot');
+      var captionEl = document.getElementById('carousel-caption');
+      var captionText = document.getElementById('carousel-caption-text');
+      var captionToggle = document.getElementById('captionToggle');
+      var captionClose = document.getElementById('captionClose');
+      var zoomView = document.getElementById('zoomView');
+      var zoomToggle = document.getElementById('zoomToggle');
+      var slideSources = Array.prototype.map.call(slides, function (slide) {
+        var img = slide.querySelector('img');
+        return { src: img.getAttribute('src'), alt: img.getAttribute('alt') };
+      });
+      var current = 0;
+      var autoTimer = null;
+      var AUTO_MS = 5500;
+
+      function updateZoomImage() {
+        var data = slideSources[current];
+        zoomView.style.backgroundImage = 'url("' + data.src + '")';
+        zoomView.setAttribute('aria-label', data.alt);
+      }
+
+      function goTo(index) {
+        var next = (index + slides.length) % slides.length;
+        slides[current].classList.remove('is-active');
+        dots[current].classList.remove('is-active');
+        current = next;
+        slides[current].classList.add('is-active');
+        dots[current].classList.add('is-active');
+        captionText.textContent = captionsStudio[current];
+        if (zoomView.classList.contains('is-open')) {
+          updateZoomImage();
+        }
+      }
+
+      function stopAuto() {
+        if (autoTimer) {
+          window.clearInterval(autoTimer);
+          autoTimer = null;
+        }
+      }
+
+      function startAuto() {
+        if (reduceMotion) return;
+        stopAuto();
+        autoTimer = window.setInterval(function () { goTo(current + 1); }, AUTO_MS);
+      }
+
+      carousel.querySelector('.carousel-next').addEventListener('click', function () {
+        goTo(current + 1);
+        startAuto();
+      });
+      carousel.querySelector('.carousel-prev').addEventListener('click', function () {
+        goTo(current - 1);
+        startAuto();
+      });
+      dots.forEach(function (dot, i) {
+        dot.addEventListener('click', function () {
+          goTo(i);
+          startAuto();
+        });
+      });
+
+      carousel.addEventListener('mouseenter', stopAuto);
+      carousel.addEventListener('mouseleave', startAuto);
+      carousel.addEventListener('focusin', stopAuto);
+      carousel.addEventListener('focusout', startAuto);
+
+      function setCaptionOpen(open) {
+        captionEl.classList.toggle('is-open', open);
+        captionToggle.setAttribute('aria-pressed', String(open));
+      }
+
+      function setZoomOpen(open) {
+        zoomView.classList.toggle('is-open', open);
+        zoomToggle.setAttribute('aria-pressed', String(open));
+        studio.classList.toggle('is-zoom-active', open);
+        if (open) {
+          updateZoomImage();
+          zoomView.style.backgroundPosition = '50% 50%';
+        }
+      }
+
+      carousel.addEventListener('mousemove', function (e) {
+        if (!zoomView.classList.contains('is-open')) return;
+        var rect = carousel.getBoundingClientRect();
+        var x = ((e.clientX - rect.left) / rect.width) * 100;
+        var y = ((e.clientY - rect.top) / rect.height) * 100;
+        x = Math.min(100, Math.max(0, x));
+        y = Math.min(100, Math.max(0, y));
+        zoomView.style.backgroundPosition = x + '% ' + y + '%';
+      });
+
+      captionToggle.addEventListener('click', function () {
+        setCaptionOpen(!captionEl.classList.contains('is-open'));
+      });
+
+      captionClose.addEventListener('click', function () {
+        setCaptionOpen(false);
+      });
+
+      zoomToggle.addEventListener('click', function () {
+        setZoomOpen(!zoomView.classList.contains('is-open'));
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        if (captionEl.classList.contains('is-open')) setCaptionOpen(false);
+        if (zoomView.classList.contains('is-open')) setZoomOpen(false);
+      });
+
+      if ('IntersectionObserver' in window) {
+        var studioVisibilityObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) {
+              setCaptionOpen(false);
+              setZoomOpen(false);
+            }
+          });
+        }, { threshold: 0 });
+        studioVisibilityObserver.observe(studio);
+      }
+
+      startAuto();
+    }
+
+    function initSimpleCarousel(root, opts) {
+      if (!root) return;
+      opts = opts || {};
+      var slides = root.querySelectorAll('.carousel-slide');
+      var dots = root.querySelectorAll('.carousel-dot');
+      var current = 0;
+      var autoTimer = null;
+      var AUTO_MS = 5500;
+
+      var capEl = opts.captionEl;
+      var capText = opts.captionText;
+      var capToggle = opts.captionToggle;
+      var capClose = opts.captionClose;
+      var capList = opts.captions;
+
+      function updateCaption() {
+        if (capText && capList) capText.textContent = capList[current];
+      }
+
+      function goTo(index) {
+        var next = (index + slides.length) % slides.length;
+        slides[current].classList.remove('is-active');
+        dots[current].classList.remove('is-active');
+        current = next;
+        slides[current].classList.add('is-active');
+        dots[current].classList.add('is-active');
+        updateCaption();
+      }
+
+      function stopAuto() {
+        if (autoTimer) {
+          window.clearInterval(autoTimer);
+          autoTimer = null;
+        }
+      }
+
+      function startAuto() {
+        if (reduceMotion) return;
+        stopAuto();
+        autoTimer = window.setInterval(function () { goTo(current + 1); }, AUTO_MS);
+      }
+
+      root.querySelector('.carousel-next').addEventListener('click', function () {
+        goTo(current + 1);
+        startAuto();
+      });
+      root.querySelector('.carousel-prev').addEventListener('click', function () {
+        goTo(current - 1);
+        startAuto();
+      });
+      dots.forEach(function (dot, i) {
+        dot.addEventListener('click', function () {
+          goTo(i);
+          startAuto();
+        });
+      });
+
+      root.addEventListener('mouseenter', stopAuto);
+      root.addEventListener('mouseleave', startAuto);
+      root.addEventListener('focusin', stopAuto);
+      root.addEventListener('focusout', startAuto);
+
+      if (capEl && capToggle && capClose) {
+        function setCapOpen(open) {
+          capEl.classList.toggle('is-open', open);
+          capToggle.setAttribute('aria-pressed', String(open));
+        }
+        capToggle.addEventListener('click', function () {
+          setCapOpen(!capEl.classList.contains('is-open'));
+        });
+        capClose.addEventListener('click', function () {
+          setCapOpen(false);
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && capEl.classList.contains('is-open')) setCapOpen(false);
+        });
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) setCapOpen(false);
+            });
+          }, { threshold: 0 }).observe(root);
+        }
+      }
+
+      var zoomToggle = opts.zoomToggle;
+      if (zoomToggle) {
+        var zoomActive = false;
+        var ZOOM_SCALE = 2.2;
+
+        function resetSlideZoom(slide) {
+          var img = slide.querySelector('img');
+          if (img) {
+            img.style.transform = '';
+            img.style.transformOrigin = '';
+          }
+        }
+
+        function setZoomActive(active) {
+          zoomActive = active;
+          root.classList.toggle('is-zoom-active', active);
+          zoomToggle.setAttribute('aria-pressed', String(active));
+          if (!active) {
+            slides.forEach(resetSlideZoom);
+          }
+        }
+
+        zoomToggle.addEventListener('click', function () {
+          setZoomActive(!zoomActive);
+        });
+
+        root.addEventListener('mousemove', function (e) {
+          if (!zoomActive) return;
+          var img = slides[current].querySelector('img');
+          if (!img) return;
+          var rect = img.getBoundingClientRect();
+          var x = ((e.clientX - rect.left) / rect.width) * 100;
+          var y = ((e.clientY - rect.top) / rect.height) * 100;
+          x = Math.min(100, Math.max(0, x));
+          y = Math.min(100, Math.max(0, y));
+          img.style.transformOrigin = x + '% ' + y + '%';
+          img.style.transform = 'scale(' + ZOOM_SCALE + ')';
+        });
+
+        root.addEventListener('mouseleave', function () {
+          if (zoomActive) resetSlideZoom(slides[current]);
+        });
+      }
+
+      startAuto();
+    }
+
+    initSimpleCarousel(document.getElementById('fullCarousel'), {
+      captions: captionsFull,
+      captionEl: document.getElementById('carousel-caption-2'),
+      captionText: document.getElementById('carousel-caption-text-2'),
+      captionToggle: document.getElementById('captionToggle2'),
+      captionClose: document.getElementById('captionClose2'),
+      zoomToggle: document.getElementById('fullCarouselZoomToggle')
+    });
+  })();
+</script>
