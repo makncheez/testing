@@ -25,9 +25,10 @@
     width: 100vw;
     background-color: #D5CCA4;
     display: flex;
-    padding: 0 24px;
+    padding: clamp(24px, 8vh, 120px) 24px 0;
     margin-top: 50px;
     z-index: 0;
+    overflow-y: auto;
   }
 
   .quote-frame {
