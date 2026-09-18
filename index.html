@@ -95,29 +95,32 @@
   }
 
   .hero-label-corner {
-    top: 40px;
-    left: 24px;
+    top: 5%;
+    left: 3%;
     font-size: 1.3em;
     line-height: 1.3em;
   }
 
-  .hero-label-center {
-    left: 50%;
-    bottom: 22%;
-    transform: translateX(-50%);
-    font-size: 2em;
-  }
-
   .hero-label-left {
-    left: 60px;
-    bottom: 8%;
+    left: 8%;
+    bottom: 10%;
     font-size: 1.2em;
   }
 
   .hero-label-right {
-    right: 60px;
-    bottom: 8%;
+    right: 8%;
+    bottom: 10%;
     font-size: 1.2em;
+  }
+
+  .quote-frame .hero-label-center {
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    margin-bottom: 40px;
+    font-size: 2em;
+    white-space: nowrap;
   }
 
   .qf-corner {
@@ -912,10 +915,11 @@
     <div class="qf-corner qf-corner-bl"><div class="qf-dot"></div></div>
     <div class="qf-bar qf-bar-bottom"></div>
     <div class="qf-corner qf-corner-br"><div class="qf-dot"></div></div>
+
+    <p class="hero-label hero-label-center">Pictorialism</p>
   </div>
 
   <p class="hero-label hero-label-corner">Arem<br>Kazanjian</p>
-  <p class="hero-label hero-label-center">Pictorialism</p>
   <p class="hero-label hero-label-left">From Boston</p>
   <p class="hero-label hero-label-right">To New York</p>
 </div>
