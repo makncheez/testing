@@ -1221,12 +1221,12 @@
       var progress = Math.min(Math.max(window.scrollY / fallRange, 0), 1);
       var logoRect = logoLeft.getBoundingClientRect();
       var startTop = logoRect.top - LOGO_GAP;
-      var fallingTop = startTop + progress * FALL_DISTANCE;
-      var introRect = introCopy.getBoundingClientRect();
-      var landedTop = introRect.top - (portrait.offsetHeight || 0) * 0.5 - LANDING_GAP;
       var halfHeight = (portrait.offsetHeight || 0) * 0.5;
       var minTop = halfHeight + 8;
-      return Math.max(Math.min(fallingTop, landedTop), minTop);
+      var fallingTop = Math.max(startTop + progress * FALL_DISTANCE, minTop);
+      var introRect = introCopy.getBoundingClientRect();
+      var landedTop = introRect.top - halfHeight - LANDING_GAP;
+      return Math.min(fallingTop, landedTop);
     }
 
     function easePortrait() {
