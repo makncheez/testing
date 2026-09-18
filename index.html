@@ -1224,7 +1224,9 @@
       var fallingTop = startTop + progress * FALL_DISTANCE;
       var introRect = introCopy.getBoundingClientRect();
       var landedTop = introRect.top - (portrait.offsetHeight || 0) * 0.5 - LANDING_GAP;
-      return Math.min(fallingTop, landedTop);
+      var halfHeight = (portrait.offsetHeight || 0) * 0.5;
+      var minTop = halfHeight + 8;
+      return Math.max(Math.min(fallingTop, landedTop), minTop);
     }
 
     function easePortrait() {
