@@ -19,9 +19,10 @@
   /* ---- Hero: the quote, pinned in place, fades as the page scrolls ---- */
 
   .hero {
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    width: 100vw;
     background-color: #D5CCA4;
     display: flex;
     padding: 200px 24px 0;
@@ -124,7 +125,12 @@
     text-align: center;
   }
 
-  /* ---- Intro: two-column section that follows the hero in normal flow ---- */
+  .hero-spacer {
+    height: 100vh;
+    width: 100%;
+  }
+
+  /* ---- Intro: two-column section that scrolls up over the hero ---- */
 
   .intro {
     position: relative;
@@ -842,6 +848,8 @@
   </div>
 </div>
     <div class="qf-portrait" id="quotePortrait" role="img" aria-label="Circular black-and-white portrait of Aram Kazanjian."></div>
+
+<div class="hero-spacer"></div>
 
 <section class="intro" id="intro">
   <div class="intro-col intro-right">
