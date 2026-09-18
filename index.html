@@ -1148,7 +1148,8 @@
       updateHero();
     } else if (portrait) {
       portrait.style.position = 'absolute';
-      portrait.style.top = '0';
+      portrait.style.top = '40px';
+      portrait.style.transform = 'translateX(-50%)';
     }
 
     if ('IntersectionObserver' in window && !reduceMotion) {
