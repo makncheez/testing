@@ -66,21 +66,19 @@
     top: 40px;
     left: 50%;
     z-index: 20;
-    width: 200px;
+    width: 150px;
     aspect-ratio: 338 / 456;
     transform: translate(-50%, -50%);
     pointer-events: none;
-  }
-
-  .qf-portrait img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    background-image: url("https://codeplayfully.online/img_uploads/aram_circle.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #D5CCA4;
+    background-blend-mode: multiply;
     border-radius: 50% / 37%;
     border: 6px solid #F93F3F;
     box-shadow: 0 4px 6.2px 2px rgba(0, 0, 0, 0.25);
-    mix-blend-mode: multiply;
   }
 
   .qf-corner {
@@ -813,9 +811,7 @@
     <div class="qf-corner qf-corner-br"><div class="qf-dot"></div></div>
   </div>
 </div>
-    <div class="qf-portrait" id="quotePortrait">
-      <img src="https://codeplayfully.online/img_uploads/aram_circle.png" alt="Circular black-and-white portrait of Aram Kazanjian.">
-    </div>
+    <div class="qf-portrait" id="quotePortrait" role="img" aria-label="Circular black-and-white portrait of Aram Kazanjian."></div>
 
 <div class="hero-spacer"></div>
 
