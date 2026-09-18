@@ -101,26 +101,35 @@
     line-height: 1.3em;
   }
 
-  .hero-label-left {
-    left: 8%;
-    bottom: 10%;
-    font-size: 1.2em;
-  }
-
-  .hero-label-right {
-    right: 8%;
-    bottom: 10%;
-    font-size: 1.2em;
-  }
-
-  .quote-frame .hero-label-center {
+  .quote-frame .hero-label-group {
     position: absolute;
+    z-index: 21;
     left: 50%;
     bottom: 100%;
     transform: translateX(-50%);
     margin-bottom: 40px;
-    font-size: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    color: #263F27;
+    pointer-events: none;
     white-space: nowrap;
+  }
+
+  .hero-label-group p {
+    margin: 0;
+  }
+
+  .hero-label-title {
+    font-size: 2em;
+  }
+
+  .hero-label-sub {
+    display: flex;
+    gap: 24px;
+    font-size: 1.2em;
   }
 
   .qf-corner {
@@ -911,12 +920,16 @@
     <div class="qf-bar qf-bar-bottom"></div>
     <div class="qf-corner qf-corner-br"><div class="qf-dot"></div></div>
 
-    <p class="hero-label hero-label-center">Pictorialism</p>
+    <div class="hero-label-group">
+      <p class="hero-label-title">Pictorialism</p>
+      <div class="hero-label-sub">
+        <p>From Boston</p>
+        <p>To New York</p>
+      </div>
+    </div>
   </div>
 
   <p class="hero-label hero-label-corner">Arem<br>Kazanjian</p>
-  <p class="hero-label hero-label-left">From Boston</p>
-  <p class="hero-label hero-label-right">To New York</p>
 </div>
     <div class="qf-portrait" id="quotePortrait" role="img" aria-label="Circular black-and-white portrait of Aram Kazanjian."></div>
 
