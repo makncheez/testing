@@ -200,15 +200,16 @@
     flex: 1 1 380px;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     background-color: transparent;
   }
 
   .intro-copy {
-    margin: 0 auto;
-    max-width: 1100px;
+    width: 100%;
     padding: 20px 30px;
     font-family: 'Cardo', "Times New Roman", Times, serif;
     color: #000;
+    background-color: #D5CCA4;
   }
 
   .intro-copy p {
@@ -225,15 +226,21 @@
   }
 
   .intro-lead {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    padding: 24px 30px;
+    width: 100%;
+    padding: 20px 30px;
+    font-family: 'Cardo', "Times New Roman", Times, serif;
+    color: #000;
     background-color: #D5CCA4;
     transition: background-color 0.05s linear;
+  }
+
+  .intro-lead p {
+    font-size: 1.667em;
+    line-height: 1.3em;
+    margin: 0 0 20px;
+    padding: 0;
+    -webkit-hyphens: auto;
+    hyphens: auto;
   }
 
   .intro-columns {
@@ -1023,10 +1030,10 @@
 
 <section class="intro" id="intro">
   <div class="intro-col intro-right">
+    <div class="intro-lead" id="introLead">
+      <p style="text-align: center; max-width: 500px; margin-left: auto; margin-right: auto;"><span style="color: #263F27;">Aram Kazanjian (ca. 1878&ndash;1966)</span><br>held a prominent place in the history of photography. He shaped the world of commercial portraiture in Boston and New York. Like many of the Armenian photographers who rose to prominence during the early part of the 20th century, Kazanjian&rsquo;s photographic oeuvre and renown have faded into obscurity and lost in the mists of time. To celebrate his life and legacy, this retrospective highlights Kazanjian&rsquo;s prolific photographic output during a dynamic era in the medium&rsquo;s history.</p>
+    </div>
     <div class="intro-copy">
-      <div class="intro-lead" id="introLead">
-        <p style="text-align: center; max-width: 500px; margin-left: auto; margin-right: auto;"><span style="color: #263F27;">Aram Kazanjian (ca. 1878&ndash;1966)</span><br>held a prominent place in the history of photography. He shaped the world of commercial portraiture in Boston and New York. Like many of the Armenian photographers who rose to prominence during the early part of the 20th century, Kazanjian&rsquo;s photographic oeuvre and renown have faded into obscurity and lost in the mists of time. To celebrate his life and legacy, this retrospective highlights Kazanjian&rsquo;s prolific photographic output during a dynamic era in the medium&rsquo;s history.</p>
-      </div>
       <div class="intro-columns">
         <h1>The History of Armenia Photography in Boston</h1>
         <p>Kazanjian&rsquo;s career emerged and evolved during the early 20th century in Boston. Beyond the camera&rsquo;s ability to accurately record reality and to produce candid portraiture, there was an aesthetic movement referred to as Pictorialism. This movement aimed to establish photography as fine art. Pictorialist photographers manipulated an image &ldquo;to express their artistic and abstract ideas&rdquo; and their &ldquo;subjective points of view.&rdquo;<sup>2</sup> Influenced by Impressionism, the 19th century art movement that began in France, photographers practicing Pictorialism employed soft-focus techniques and manipulated light to create compositions that were aesthetically pleasing and &ldquo;painterly in style.&rdquo;<sup>3</sup> The ultimate goal was to elevate photography to the rank of fine art. Along with the practice of producing straightforward portraiture, Kazanjian was influenced by this aesthetic movement that created photographic images rather than simply recording them. As such, his oeuvre reflected a blend of varied photographic styles that evolved around the turn of the 20th century.</p>
@@ -1233,7 +1240,6 @@
     var heroEl = document.getElementById('hero');
     var introLead = document.getElementById('introLead');
     var portrait = document.getElementById('quotePortrait');
-    var introCopy = document.querySelector('.intro-copy');
     var logoLeft = document.querySelector('.qf-logo-left');
     var intro = document.getElementById('intro');
     var studio = document.getElementById('studio');
@@ -1309,7 +1315,7 @@
       var halfHeight = (portrait.offsetHeight || 0) * 0.5;
       var minTop = halfHeight + 8;
       var fallingTop = Math.max(startTop + progress * FALL_DISTANCE, minTop);
-      var introRect = introCopy.getBoundingClientRect();
+      var introRect = introLead.getBoundingClientRect();
       var landedTop = introRect.top - halfHeight - LANDING_GAP;
       return Math.min(fallingTop, landedTop);
     }
@@ -1329,7 +1335,7 @@
     }
 
     function schedulePortrait() {
-      if (!portrait || !introCopy || !logoLeft) return;
+      if (!portrait || !introLead || !logoLeft) return;
       if (portraitRafId === null) {
         portraitRafId = window.requestAnimationFrame(easePortrait);
       }
