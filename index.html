@@ -1321,16 +1321,13 @@
 
     var INTRO_BG_START = [213, 204, 164]; // #D5CCA4
     var INTRO_BG_END = [38, 63, 39]; // #263F27
-    var introBgMaxProgress = 0;
 
     function updateIntroBg() {
       if (!intro) return;
       var rect = intro.getBoundingClientRect();
       var vh = window.innerHeight || 800;
       var raw = 1 - (rect.top / vh);
-      var progress = Math.min(Math.max(raw, 0), 1);
-      if (progress > introBgMaxProgress) introBgMaxProgress = progress;
-      var p = introBgMaxProgress;
+      var p = Math.min(Math.max(raw, 0), 1);
       var r = Math.round(INTRO_BG_START[0] + (INTRO_BG_END[0] - INTRO_BG_START[0]) * p);
       var g = Math.round(INTRO_BG_START[1] + (INTRO_BG_END[1] - INTRO_BG_START[1]) * p);
       var b = Math.round(INTRO_BG_START[2] + (INTRO_BG_END[2] - INTRO_BG_START[2]) * p);
