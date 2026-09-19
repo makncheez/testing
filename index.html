@@ -28,6 +28,7 @@
     padding: clamp(24px, 8vh, 120px) 24px 0;
     z-index: 0;
     overflow-y: auto;
+    transition: background-color 0.05s linear;
   }
 
   .quote-frame {
@@ -1214,6 +1215,7 @@
 <script>
   (function () {
     var quote = document.getElementById('quote');
+    var heroEl = document.getElementById('hero');
     var portrait = document.getElementById('quotePortrait');
     var introCopy = document.querySelector('.intro-copy');
     var logoLeft = document.querySelector('.qf-logo-left');
@@ -1332,7 +1334,9 @@
       var r = Math.round(INTRO_BG_START[0] + (INTRO_BG_END[0] - INTRO_BG_START[0]) * p);
       var g = Math.round(INTRO_BG_START[1] + (INTRO_BG_END[1] - INTRO_BG_START[1]) * p);
       var b = Math.round(INTRO_BG_START[2] + (INTRO_BG_END[2] - INTRO_BG_START[2]) * p);
-      intro.style.backgroundColor = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+      var color = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+      intro.style.backgroundColor = color;
+      if (heroEl) heroEl.style.backgroundColor = color;
     }
 
     function updateHero() {
