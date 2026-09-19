@@ -28,6 +28,7 @@
     padding: clamp(24px, 8vh, 120px) 24px 0;
     z-index: 0;
     overflow-y: auto;
+    transition: background-color 0.05s linear;
   }
 
   .quote-frame {
@@ -192,6 +193,7 @@
     width: 100%;
     min-height: 100vh;
     background-color: #D5CCA4;
+    transition: background-color 0.05s linear;
   }
 
   .intro-col {
@@ -223,6 +225,13 @@
   }
 
   .intro-lead {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 24px 30px;
     background-color: #D5CCA4;
     transition: background-color 0.05s linear;
   }
@@ -1221,6 +1230,7 @@
 <script>
   (function () {
     var quote = document.getElementById('quote');
+    var heroEl = document.getElementById('hero');
     var introLead = document.getElementById('introLead');
     var portrait = document.getElementById('quotePortrait');
     var introCopy = document.querySelector('.intro-copy');
@@ -1337,7 +1347,10 @@
       var r = Math.round(INTRO_BG_START[0] + (INTRO_BG_END[0] - INTRO_BG_START[0]) * p);
       var g = Math.round(INTRO_BG_START[1] + (INTRO_BG_END[1] - INTRO_BG_START[1]) * p);
       var b = Math.round(INTRO_BG_START[2] + (INTRO_BG_END[2] - INTRO_BG_START[2]) * p);
-      introLead.style.backgroundColor = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+      var color = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+      introLead.style.backgroundColor = color;
+      if (intro) intro.style.backgroundColor = color;
+      if (heroEl) heroEl.style.backgroundColor = color;
     }
 
     function updateHero() {
