@@ -391,10 +391,10 @@
     padding: 9px 20px;
     border: none;
     border-radius: 999px;
-    background: #263F27;
+    background: #9767a3;
     opacity: 1;
-    color: #FDFFDF;
-    font-family: "Times New Roman", Times, serif;
+    color: #263F27;
+    font-family: 'DM Mono', monospace;
     font-size: 1.167em;
     letter-spacing: 0.02em;
     cursor: pointer;
@@ -403,10 +403,8 @@
 
   .caption-toggle:hover,
   .caption-toggle:focus-visible {
-    background: transparent;
-    color: #263F27;
-    outline: 2px solid #263F27;
-    outline-offset: 2px;
+    background: #263F27;
+    color: #9767a3;
   }
 
   .caption-toggle[aria-pressed="true"] {
@@ -420,9 +418,9 @@
     padding: 0;
     border: none;
     border-radius: 50%;
-    background: #263F27;
+    background: #9767a3;
     opacity: 1;
-    color: #FDFFDF;
+    color: #263F27;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -432,10 +430,8 @@
 
   .zoom-toggle:hover,
   .zoom-toggle:focus-visible {
-    background: transparent;
-    color: #263F27;
-    outline: 2px solid #263F27;
-    outline-offset: 2px;
+    background: #263F27;
+    color: #9767a3;
   }
 
   .zoom-toggle[aria-pressed="true"] {
@@ -443,9 +439,10 @@
     color: #FDFFDF;
   }
 
-  .zoom-toggle svg {
-    width: 18px;
-    height: 18px;
+  .zoom-toggle .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-size: 20px;
+    pointer-events: none;
   }
 
   /* ---- Zoom view: large version of the current carousel photo, full width, behind the carousel ---- */
@@ -1056,10 +1053,7 @@
     <div class="carousel-left-controls">
       <button type="button" class="caption-toggle" id="captionToggle" aria-pressed="false" aria-controls="carousel-caption">Caption</button>
       <button type="button" class="zoom-toggle" id="zoomToggle" aria-pressed="false" aria-controls="zoomView" aria-label="View larger image">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="11" cy="11" r="7"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
+        <span class="material-symbols-outlined" aria-hidden="true">search</span>
       </button>
     </div>
 
@@ -1183,10 +1177,7 @@
   <div class="carousel-left-controls">
     <button type="button" class="caption-toggle" id="captionToggle2" aria-pressed="false" aria-controls="carousel-caption-2">Caption</button>
     <button type="button" class="zoom-toggle" id="fullCarouselZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="11" cy="11" r="7"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
+      <span class="material-symbols-outlined" aria-hidden="true">search</span>
     </button>
   </div>
 
