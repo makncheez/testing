@@ -3,7 +3,7 @@
 <title>Digital Exhibition: Aram</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;1,400&family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;1,400&family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
 <style>
   html, body {
     margin: 0;
@@ -552,9 +552,9 @@
     height: 40px;
     border: none;
     border-radius: 50%;
-    background: #263F27;
+    background: #9767a3;
     opacity: 1;
-    color: #FDFFDF;
+    color: #263F27;
     font-size: 1.667em;
     line-height: 1;
     cursor: pointer;
@@ -566,10 +566,15 @@
 
   .carousel-btn:hover,
   .carousel-btn:focus-visible {
-    background: transparent;
-    color: #263F27;
-    outline: 2px solid #263F27;
-    outline-offset: 2px;
+    background: #263F27;
+    color: #9767a3;
+    outline: none;
+  }
+
+  .carousel-btn .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-size: 22px;
+    pointer-events: none;
   }
 
   .carousel-dots {
@@ -1059,8 +1064,8 @@
     </div>
 
     <div class="carousel-right-controls">
-      <button type="button" class="carousel-btn carousel-prev" aria-label="Previous photograph">&#8249;</button>
-      <button type="button" class="carousel-btn carousel-next" aria-label="Next photograph">&#8250;</button>
+      <button type="button" class="carousel-btn carousel-prev" aria-label="Previous photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
+      <button type="button" class="carousel-btn carousel-next" aria-label="Next photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
     </div>
 
     <div class="carousel-dots">
@@ -1186,8 +1191,8 @@
   </div>
 
   <div class="carousel-right-controls">
-    <button type="button" class="carousel-btn carousel-prev" aria-label="Previous photograph">&#8249;</button>
-    <button type="button" class="carousel-btn carousel-next" aria-label="Next photograph">&#8250;</button>
+    <button type="button" class="carousel-btn carousel-prev" aria-label="Previous photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
+    <button type="button" class="carousel-btn carousel-next" aria-label="Next photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
   </div>
 
   <div class="carousel-dots">
