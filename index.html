@@ -10,11 +10,88 @@
     padding: 0;
     height: 100%;
     width: 100%;
-    background: #D5CCA4;
+    background: var(--color-tan);
     font-size: 12px;
   }
 
   * { box-sizing: border-box; }
+
+  :root {
+    --color-tan: #D5CCA4;
+    --color-green: #263F27;
+    --color-green-dot: #1a3a2a;
+    --color-purple: #9767a3;
+    --color-black: #000;
+    --color-maroon: #3a1420;
+    --color-maroon-rgb: 58, 20, 32;
+    --color-red: #CA2727;
+  }
+
+  /* ---- Colorways: background fills, text colors, icon fills, borders ---- */
+
+  .bg-tan { background-color: var(--color-tan); }
+  .bg-green { background-color: var(--color-green); }
+  .bg-black { background-color: var(--color-black); }
+
+  .text-tan { color: var(--color-tan); }
+  .text-green { color: var(--color-green); }
+  .text-black { color: var(--color-black); }
+  .text-maroon { color: var(--color-maroon); }
+
+  .fill-tan { color: var(--color-tan); }
+
+  .border-green { border-color: var(--color-green); }
+  .bg-green-dot { background-color: var(--color-green-dot); }
+
+  /* ---- Action button colorways: shared purple/green/tan swap, used by icon + text pill buttons ---- */
+
+  .btn-colorway-icon,
+  .btn-colorway-text {
+    background: var(--color-purple);
+  }
+
+  .btn-colorway-icon { color: var(--color-green); }
+  .btn-colorway-text { color: var(--color-tan); }
+
+  .btn-colorway-icon:hover,
+  .btn-colorway-icon:focus-visible,
+  .btn-colorway-text:hover,
+  .btn-colorway-text:focus-visible {
+    background: var(--color-green);
+  }
+
+  .btn-colorway-icon:hover,
+  .btn-colorway-icon:focus-visible,
+  .btn-colorway-text:hover,
+  .btn-colorway-text:focus-visible {
+    color: var(--color-purple);
+  }
+
+  .btn-colorway-icon[aria-pressed="true"],
+  .btn-colorway-text[aria-pressed="true"] {
+    background: var(--color-green);
+    color: var(--color-tan);
+  }
+
+  .btn-colorway-icon .material-symbols-outlined {
+    color: var(--color-tan);
+  }
+
+  .dot-colorway {
+    border-color: var(--color-purple);
+    background: var(--color-purple);
+  }
+
+  .dot-colorway:hover,
+  .dot-colorway:focus-visible {
+    background: transparent;
+    border-color: var(--color-purple);
+  }
+
+  .dot-colorway.is-active {
+    background: var(--color-green);
+    border-color: var(--color-green);
+  }
 
   /* ---- Hero: the quote, pinned in place, fades as the page scrolls ---- */
 
@@ -23,7 +100,6 @@
     inset: 0;
     height: 100vh;
     width: 100vw;
-    background-color: #D5CCA4;
     display: flex;
     padding: clamp(24px, 8vh, 120px) 24px 0;
     z-index: 0;
@@ -78,10 +154,10 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: #D5CCA4;
+    background-color: var(--color-tan);
     background-blend-mode: multiply;
     border-radius: 50% / 37%;
-    border: 4px solid #9767a3;
+    border: 4px solid var(--color-purple);
     box-shadow: 0 4px 6.2px 2px rgba(0, 0, 0, 0.25);
   }
 
@@ -92,7 +168,6 @@
     z-index: 21;
     margin: 0;
     font-family: 'DM Mono', monospace;
-    color: #263F27;
     pointer-events: none;
   }
 
@@ -116,7 +191,6 @@
     align-items: center;
     gap: 8px;
     font-family: 'DM Mono', monospace;
-    color: #263F27;
     pointer-events: none;
     white-space: nowrap;
   }
@@ -146,19 +220,12 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background-color: #1a3a2a;
   }
 
-  .qf-bar {
-    background-color: #1a3a2a;
-  }
-
-  .qf-edge-left {
-    border: 1.4px solid #263F27;
-  }
-
+  .qf-edge-left,
   .qf-edge-right {
-    border: 1.4px solid #263F27;
+    border-width: 1.4px;
+    border-style: solid;
   }
 
   .quote-frame-content {
@@ -174,7 +241,6 @@
     font-family: 'Cardo', "Times New Roman", Times, serif;
     font-size: 1.6em;
     line-height: 1.4em;
-    color: #263F27;
     text-align: center;
   }
 
@@ -192,7 +258,6 @@
     flex-wrap: wrap;
     width: 100%;
     min-height: 100vh;
-    background-color: #D5CCA4;
     transition: background-color 0.05s linear;
   }
 
@@ -208,8 +273,6 @@
     width: 100%;
     padding: 20px 30px;
     font-family: 'Cardo', "Times New Roman", Times, serif;
-    color: #000;
-    background-color: #D5CCA4;
   }
 
   .intro-copy p {
@@ -229,8 +292,6 @@
     width: 100%;
     padding: 20px 30px;
     font-family: 'Cardo', "Times New Roman", Times, serif;
-    color: #D5CCA4;
-    background-color: #D5CCA4;
     transition: background-color 0.05s linear;
   }
 
@@ -241,7 +302,6 @@
     padding: 0;
     -webkit-hyphens: auto;
     hyphens: auto;
-    color: #D5CCA4;
   }
 
   .intro-columns {
@@ -249,7 +309,6 @@
     column-gap: 20px;
     margin: 40px auto 0;
     max-width: 700px;
-    background-color: #D5CCA4;
   }
 
   .intro-columns p {
@@ -263,7 +322,6 @@
     font-size: 3.5em;
     line-height: 1em;
     font-weight: normal;
-    color: #263F27;
     text-align: center;
   }
 
@@ -274,7 +332,7 @@
   sup {
     font-size: 0.7em;
     padding: 5px;
-    color: #CA2727;
+    color: var(--color-red);
   }
 
   /* ---- Studio: two-column section, copy left, image carousel right ---- */
@@ -286,7 +344,6 @@
     flex-wrap: wrap;
     align-items: flex-start;
     width: 100%;
-    background-color: #D5CCA4;
     padding-bottom: 50px;
   }
 
@@ -310,7 +367,6 @@
     max-width: 620px;
     padding: 64px 40px;
     font-family: 'Cardo', "Times New Roman", Times, serif;
-    color: #000;
     opacity: 1;
     transition: opacity 0.3s ease;
   }
@@ -338,7 +394,6 @@
     font-family: 'DM Mono', monospace;
     font-size: 1.4em;
     font-weight: normal;
-    color: #263F27;
     text-align: center;
   }
 
@@ -349,7 +404,7 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background-color: #263F27;
+    background-color: var(--color-green);
   }
 
   /* ---- Carousel: rotating Garo Studio photographs, right column ---- */
@@ -414,25 +469,12 @@
     padding: 9px 20px;
     border: none;
     border-radius: 999px;
-    background: #9767a3;
     opacity: 1;
-    color: #D5CCA4;
     font-family: 'DM Mono', monospace;
     font-size: 16px;
     letter-spacing: 0.02em;
     cursor: pointer;
     transition: background 0.2s ease, color 0.2s ease;
-  }
-
-  .caption-toggle:hover,
-  .caption-toggle:focus-visible {
-    background: #263F27;
-    color: #9767a3;
-  }
-
-  .caption-toggle[aria-pressed="true"] {
-    background: #263F27;
-    color: #D5CCA4;
   }
 
   .zoom-toggle {
@@ -441,9 +483,7 @@
     padding: 0;
     border: none;
     border-radius: 50%;
-    background: #9767a3;
     opacity: 1;
-    color: #263F27;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -451,22 +491,10 @@
     transition: background 0.2s ease, color 0.2s ease;
   }
 
-  .zoom-toggle:hover,
-  .zoom-toggle:focus-visible {
-    background: #263F27;
-    color: #9767a3;
-  }
-
-  .zoom-toggle[aria-pressed="true"] {
-    background: #263F27;
-    color: #D5CCA4;
-  }
-
   .zoom-toggle .material-symbols-outlined {
     font-family: 'Material Symbols Outlined';
     font-size: 31px;
     pointer-events: none;
-    color: #D5CCA4;
   }
 
   /* ---- Zoom view: large version of the current carousel photo, full width, behind the carousel ---- */
@@ -475,7 +503,6 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background-color: #D5CCA4;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 300%;
@@ -501,8 +528,6 @@
     margin: 0;
     padding: 28px 40px 28px 32px;
     border-radius: 22px;
-    background-color: #263F27;
-    color: #D5CCA4;
     font-family: 'DM Mono', monospace;
     font-size: 1.667em;
     line-height: 1.3em;
@@ -539,7 +564,6 @@
     border: none;
     border-radius: 50%;
     background: transparent;
-    color: #3a1420;
     font-family: "Times New Roman", Times, serif;
     font-size: 0.85em;
     font-style: normal;
@@ -553,8 +577,8 @@
 
   .caption-close:hover,
   .caption-close:focus-visible {
-    background: rgba(58, 20, 32, 0.14);
-    outline: 2px solid #3a1420;
+    background: rgba(var(--color-maroon-rgb), 0.14);
+    outline: 2px solid var(--color-maroon);
     outline-offset: 1px;
   }
 
@@ -573,9 +597,7 @@
     height: 40px;
     border: none;
     border-radius: 50%;
-    background: #9767a3;
     opacity: 1;
-    color: #263F27;
     font-size: 1.667em;
     line-height: 1;
     cursor: pointer;
@@ -587,8 +609,6 @@
 
   .carousel-btn:hover,
   .carousel-btn:focus-visible {
-    background: #263F27;
-    color: #9767a3;
     outline: none;
   }
 
@@ -596,7 +616,6 @@
     font-family: 'Material Symbols Outlined';
     font-size: 37px;
     pointer-events: none;
-    color: #D5CCA4;
   }
 
   .carousel-dots {
@@ -614,22 +633,11 @@
     height: 8px;
     padding: 0;
     border-radius: 50%;
-    border: 1px solid #9767a3;
-    background: #9767a3;
+    border-width: 1px;
+    border-style: solid;
     opacity: 1;
     cursor: pointer;
     transition: background 0.2s ease, border-color 0.2s ease;
-  }
-
-  .carousel-dot:hover,
-  .carousel-dot:focus-visible {
-    background: transparent;
-    border-color: #9767a3;
-  }
-
-  .carousel-dot.is-active {
-    background: #263F27;
-    border-color: #263F27;
   }
 
   /* ---- Full-width photograph: pinned via sticky, so the next section scrolls up over it ---- */
@@ -646,7 +654,6 @@
     top: 0;
     width: 100%;
     overflow: hidden;
-    background-color: #D5CCA4;
   }
 
   .full-image img {
@@ -695,7 +702,6 @@
     font-family: 'Cardo', "Times New Roman", Times, serif;
     font-size: 1.667em;
     line-height: 33px;
-    color: #000;
   }
 
   /* ---- Bio text frame: offset outline box, built from divs like the hero quote-frame ---- */
@@ -717,13 +723,12 @@
     content: '';
     position: absolute;
     inset: 0;
-    border: 1px solid #D5CCA4;
+    border: 1px solid var(--color-tan);
     pointer-events: none;
   }
 
   .bio-frame-box {
     position: relative;
-    background-color: #D5CCA4;
     padding: 32px 10px;
   }
 
@@ -763,7 +768,6 @@
     font-family: 'Cardo', "Times New Roman", Times, serif;
     font-size: 1.667em;
     line-height: 33px;
-    color: #000;
   }
 
   .quotes-copy blockquote {
@@ -780,9 +784,9 @@
   }
 
   .plain-quote-box {
-    border: 1px solid #263F27;
+    border-width: 1px;
+    border-style: solid;
     padding: 10px;
-    color: #263F27;
   }
 
   .plain-quote-box blockquote {
@@ -809,7 +813,6 @@
     width: 100%;
     padding: 30px;
     box-sizing: border-box;
-    background-color: #000;
   }
 
   .full-carousel {
@@ -819,7 +822,6 @@
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
-    background-color: #000;
   }
 
   .full-carousel .carousel-slide {
@@ -983,7 +985,7 @@
   }
 </style>
 
-<div class="hero" id="hero">
+<div class="hero bg-tan" id="hero">
   <div class="quote-frame" id="quote">
     <div class="qf-logo qf-logo-left" aria-hidden="true">
       <svg width="231" height="281" viewBox="0 0 231 281" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -999,21 +1001,21 @@
         <path d="M2.09375 90.4142V166.959M2.09375 278.831V166.959M2.09375 166.959L57.703 56.3945M20.7392 129.887V258.223M37.0949 175.137V146.023M53.1234 211.119V138.827M37.0949 146.023V124.107L53.1234 116.91V138.827M37.0949 146.023L53.1234 138.827M64.5724 110.368L78.9654 103.172L60.3199 164.015L78.9654 156.491M85.1805 153.22V98.5921L100.882 90.4142V116.91M100.882 185.277V116.91M87.7974 124.107L100.882 116.91M117.565 138.827V84.1991L135.883 124.107L137.846 45.9269M153.874 66.535C153.874 80.4918 153.874 103.499 153.874 128.359C153.874 153.22 137.846 159.435 131.303 151.257M168.267 59.0114V113.966M181.679 105.134V76.3484M194.763 138.827V69.8061M210.138 90.4142V37.4219L228.456 80.2738V2.09375M181.679 76.3484V53.1234L194.763 47.8895V69.8061M181.679 76.3484L194.763 69.8061" stroke="#263F27" stroke-width="4.18767" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
-    <div class="qf-corner qf-corner-tl"><div class="qf-dot"></div></div>
-    <div class="qf-bar qf-bar-top"></div>
-    <div class="qf-corner qf-corner-tr"><div class="qf-dot"></div></div>
+    <div class="qf-corner qf-corner-tl"><div class="qf-dot bg-green-dot"></div></div>
+    <div class="qf-bar qf-bar-top bg-green-dot"></div>
+    <div class="qf-corner qf-corner-tr"><div class="qf-dot bg-green-dot"></div></div>
 
-    <div class="qf-edge-left"></div>
+    <div class="qf-edge-left border-green"></div>
     <div class="quote-frame-content">
-      <p class="quote-text">&ldquo;The fleeting quality of fame is a well-known concept to any scholar of history. Recognition and renown can fade, just as an old-format photographic image will &lsquo;wash-out&rsquo; through overexposure. A few names stand the test of time, but most are lost, except to those who knew the individual personally or who are devoted students of the individual&rsquo;s particular field.&rdquo;<sup>1</sup><br>&mdash; Mehmed Ali</p>
+      <p class="quote-text text-green">&ldquo;The fleeting quality of fame is a well-known concept to any scholar of history. Recognition and renown can fade, just as an old-format photographic image will &lsquo;wash-out&rsquo; through overexposure. A few names stand the test of time, but most are lost, except to those who knew the individual personally or who are devoted students of the individual&rsquo;s particular field.&rdquo;<sup>1</sup><br>&mdash; Mehmed Ali</p>
     </div>
-    <div class="qf-edge-right"></div>
+    <div class="qf-edge-right border-green"></div>
 
-    <div class="qf-corner qf-corner-bl"><div class="qf-dot"></div></div>
-    <div class="qf-bar qf-bar-bottom"></div>
-    <div class="qf-corner qf-corner-br"><div class="qf-dot"></div></div>
+    <div class="qf-corner qf-corner-bl"><div class="qf-dot bg-green-dot"></div></div>
+    <div class="qf-bar qf-bar-bottom bg-green-dot"></div>
+    <div class="qf-corner qf-corner-br"><div class="qf-dot bg-green-dot"></div></div>
 
-    <div class="hero-label-group">
+    <div class="hero-label-group text-green">
       <p class="hero-label-title">Pictorialism</p>
       <div class="hero-label-sub">
         <p>From Boston</p>
@@ -1021,21 +1023,21 @@
       </div>
     </div>
 
-    <p class="hero-label hero-label-corner">Arem<br>Kazanjian</p>
+    <p class="hero-label hero-label-corner text-green">Arem<br>Kazanjian</p>
   </div>
 </div>
     <div class="qf-portrait" id="quotePortrait" role="img" aria-label="Circular black-and-white portrait of Aram Kazanjian."></div>
 
 <div class="hero-spacer"></div>
 
-<section class="intro" id="intro">
+<section class="intro bg-tan" id="intro">
   <div class="intro-col intro-right">
-    <div class="intro-lead" id="introLead">
-      <p style="text-align: center; max-width: 500px; margin-left: auto; margin-right: auto;"><span style="color: #263F27;">Aram Kazanjian (ca. 1878&ndash;1966)</span><br>held a prominent place in the history of photography. He shaped the world of commercial portraiture in Boston and New York. Like many of the Armenian photographers who rose to prominence during the early part of the 20th century, Kazanjian&rsquo;s photographic oeuvre and renown have faded into obscurity and lost in the mists of time. To celebrate his life and legacy, this retrospective highlights Kazanjian&rsquo;s prolific photographic output during a dynamic era in the medium&rsquo;s history.</p>
+    <div class="intro-lead bg-tan text-tan" id="introLead">
+      <p style="text-align: center; max-width: 500px; margin-left: auto; margin-right: auto;"><span class="text-green">Aram Kazanjian (ca. 1878&ndash;1966)</span><br>held a prominent place in the history of photography. He shaped the world of commercial portraiture in Boston and New York. Like many of the Armenian photographers who rose to prominence during the early part of the 20th century, Kazanjian&rsquo;s photographic oeuvre and renown have faded into obscurity and lost in the mists of time. To celebrate his life and legacy, this retrospective highlights Kazanjian&rsquo;s prolific photographic output during a dynamic era in the medium&rsquo;s history.</p>
     </div>
-    <div class="intro-copy">
+    <div class="intro-copy text-black bg-tan">
       <div class="intro-columns">
-        <h1>The History of Armenia Photography in Boston</h1>
+        <h1 class="text-green">The History of Armenia Photography in Boston</h1>
         <p>Kazanjian&rsquo;s career emerged and evolved during the early 20th century in Boston. Beyond the camera&rsquo;s ability to accurately record reality and to produce candid portraiture, there was an aesthetic movement referred to as Pictorialism. This movement aimed to establish photography as fine art. Pictorialist photographers manipulated an image &ldquo;to express their artistic and abstract ideas&rdquo; and their &ldquo;subjective points of view.&rdquo;<sup>2</sup> Influenced by Impressionism, the 19th century art movement that began in France, photographers practicing Pictorialism employed soft-focus techniques and manipulated light to create compositions that were aesthetically pleasing and &ldquo;painterly in style.&rdquo;<sup>3</sup> The ultimate goal was to elevate photography to the rank of fine art. Along with the practice of producing straightforward portraiture, Kazanjian was influenced by this aesthetic movement that created photographic images rather than simply recording them. As such, his oeuvre reflected a blend of varied photographic styles that evolved around the turn of the 20th century.</p>
         <p>Boston became a hub for Pictorialism which promoted photography as fine art. Amongst the influx of Armenian immigrants in this rapidly growing diasporan community, those who were entrepreneurial, artistically creative, and trained to practice photography established successful commercial portrait studios. Armenians were widely known to have mastered photography throughout the Ottoman Empire; this reputation not only made assimilation easier into American society, but it also facilitated their efforts to open studios in the major diaspora hubs of Boston and New York.</p>
         <p>Along with Kazanjian, two prominent Armenian studios that represented disparate styles in photographic practice around the turn of the 20th century were the Diran Studio run by Suren and Arsen Diran, and the Garo Studio established by John Higue Garo.</p>
@@ -1044,11 +1046,11 @@
   </div>
 </section>
 
-<section class="studio" id="studio">
-  <div class="zoom-view" id="zoomView" role="img" aria-label=""></div>
+<section class="studio bg-tan" id="studio">
+  <div class="zoom-view bg-tan" id="zoomView" role="img" aria-label=""></div>
   <div class="studio-col studio-left">
-    <div class="studio-copy">
-      <h2>Diran Studio</h2>
+    <div class="studio-copy text-black">
+      <h2 class="text-green">Diran Studio</h2>
       <p>Arsen Diran arrived as an Armenian &eacute;migr&eacute; from Kharpert, Turkey to the Boston area around 1890. He opened a commercial studio sometime around the early 1890s. Whether he had an artistic background or photographic training in Turkey remains unknown. His focus was the production of straightforward, traditional portraits which were often portrayed by subjects in stiff and constricted poses, painted backdrops, and distinctive props to complement or enhance the main subject. Following standard printing techniques, these images were affixed onto decorative mounting cards. Around the early 1900s, Suren Diran (1881&ndash;1932) joined his older brother, Arsen. Together, they ran the studio until the late 1920s when Arsen moved to Fresno, California. The studio remained open until Suren&rsquo;s passing in 1932. Much to his dismay during the last years of his life, the studio was adversely impacted by a massive drop in clients during the Great Depression.</p>
       <p>As a traditional commercial studio, the Diran studio used the camera as a recording tool that prioritized meticulously composed, sharp, and standardized portraits. Their work stands in contrast to Pictorialism which infused images with a creative vision that evoked an emotional mood. Diran&rsquo;s portraiture did not rely on variations in lighting, blurred imagery, painterly techniques, nor experimentation with complex printing methods.</p>
     </div>
@@ -1077,29 +1079,29 @@
     </div>
 
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle" id="captionToggle" aria-pressed="false" aria-controls="carousel-caption">Caption</button>
-      <button type="button" class="zoom-toggle" id="zoomToggle" aria-pressed="false" aria-controls="zoomView" aria-label="View larger image">
+      <button type="button" class="caption-toggle btn-colorway-text" id="captionToggle" aria-pressed="false" aria-controls="carousel-caption">Caption</button>
+      <button type="button" class="zoom-toggle btn-colorway-icon" id="zoomToggle" aria-pressed="false" aria-controls="zoomView" aria-label="View larger image">
         <span class="material-symbols-outlined" aria-hidden="true">search</span>
       </button>
     </div>
 
     <div class="carousel-right-controls">
-      <button type="button" class="carousel-btn carousel-prev" aria-label="Previous photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
-      <button type="button" class="carousel-btn carousel-next" aria-label="Next photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
+      <button type="button" class="carousel-btn carousel-prev btn-colorway-icon" aria-label="Previous photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
+      <button type="button" class="carousel-btn carousel-next btn-colorway-icon" aria-label="Next photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
     </div>
 
     <div class="carousel-dots">
-      <button type="button" class="carousel-dot is-active" aria-label="Go to photograph 1"></button>
-      <button type="button" class="carousel-dot" aria-label="Go to photograph 2"></button>
-      <button type="button" class="carousel-dot" aria-label="Go to photograph 3"></button>
-      <button type="button" class="carousel-dot" aria-label="Go to photograph 4"></button>
-      <button type="button" class="carousel-dot" aria-label="Go to photograph 5"></button>
-      <button type="button" class="carousel-dot" aria-label="Go to photograph 6"></button>
-      <button type="button" class="carousel-dot" aria-label="Go to photograph 7"></button>
+      <button type="button" class="carousel-dot dot-colorway is-active" aria-label="Go to photograph 1"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 2"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 3"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 4"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 5"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 6"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 7"></button>
     </div>
 
-    <div class="carousel-caption" id="carousel-caption">
-      <button type="button" class="caption-close" id="captionClose" aria-label="Close caption">&times;</button>
+    <div class="carousel-caption bg-green text-tan" id="carousel-caption">
+      <button type="button" class="caption-close text-maroon" id="captionClose" aria-label="Close caption">&times;</button>
       <span id="carousel-caption-text">Portrait of a young woman, ca. 1910, with a stamp on the mount of Charles H. Gallup, owner of the renowned Gallup photographic studio in Poughkeepsie, New York. Arsen Diran, Diran Studio, Boston. Courtesy of the Malikian Collection.</span>
     </div>
   </div>
@@ -1107,24 +1109,24 @@
 
 
 <div class="full-image-track" id="fullImageTrack">
-  <div class="full-image" id="fullImage">
+  <div class="full-image bg-tan" id="fullImage">
     <img src="./images/1/1.png" alt="John Higue Garo (1875&ndash;1939), Armenian American portrait photographer and painter, seated reading a newspaper. Photographed by Yousuf Karsh.">
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle" id="captionToggle3" aria-pressed="false" aria-controls="carousel-caption-3">Caption</button>
+      <button type="button" class="caption-toggle btn-colorway-text" id="captionToggle3" aria-pressed="false" aria-controls="carousel-caption-3">Caption</button>
     </div>
   </div>
 </div>
 
-<div class="carousel-caption" id="carousel-caption-3">
-  <button type="button" class="caption-close" id="captionClose3" aria-label="Close caption">&times;</button>
+<div class="carousel-caption bg-green text-tan" id="carousel-caption-3">
+  <button type="button" class="caption-close text-maroon" id="captionClose3" aria-label="Close caption">&times;</button>
   <span id="carousel-caption-text-3">John Higue Garo (1875&ndash;1939), Armenian American portrait photographer and painter. Yousuf Karsh, Boston. Estate of Yousuf Karsh. Photogravure. Courtesy of the Malikian Collection.</span>
 </div>
 
 <section class="bio" id="bio">
   <div class="bio-col bio-left">
-    <div class="bio-copy">
+    <div class="bio-copy text-black">
       <div class="bio-frame">
-        <div class="bio-frame-box">
+        <div class="bio-frame-box bg-tan">
           <p>Born in Kharpert, Turkey, John Higue Garo (1870&ndash;1939) landed in Worcester, Massachusetts at the age of 14. With his artistic proclivities and penchant for painting, he immersed himself in the study of the arts and the photographic medium. As the proprietor of an upscale portrait studio in Boston, frequented by members of Boston&rsquo;s elite society, Garo emerged as one of the most celebrated and gifted pictorialist photographers in New England. The renowned Armenian photographer and Garo&rsquo;s mentee, Yousuf Karsh, regarded him as &ldquo;one of the greatest photographers in the history of the art.&rdquo;<sup>4</sup> During the early 20th century, Garo was the recipient of many national and international honors and awards for his artistic photographs. Many of his portraits were published in prestigious American publications like <em>The Spur</em> which catered to affluent high society.</p>
           <p>A study of Garo&rsquo;s photographs illustrates his reliance on the aesthetic quality set forth by Impressionism and Art Nouveau (1890&ndash;1914) which emphasized soft flowing imagery and natural light. This artistic style influenced him to create photographs of visual beauty that emphasized his subject&rsquo;s personality and their emotional state. Using soft flowing curves and soft-focus techniques to create blur, Garo was motivated to create a work of art rather than to record it. In his estimation, photography was more than a technical practice to record an image, but an artistic pursuit to make photographs look like paintings or etchings. Described as &ldquo;a renaissance man with many colors on his palette,&rdquo; Garo regarded photography as a true form of art which exceeded all other artistic mediums.<sup>5</sup></p>
         </div>
@@ -1137,18 +1139,18 @@
 <section class="quotes" id="quotes">
   <div class="quotes-col quotes-left"></div>
   <div class="quotes-col quotes-right">
-    <div class="quotes-copy">
+    <div class="quotes-copy text-black">
       <div class="bio-frame">
-        <div class="bio-frame-box">
+        <div class="bio-frame-box bg-tan">
           <div class="quotes-frame-content">
-            <div class="plain-quote-box">
+            <div class="plain-quote-box border-green text-green">
               <blockquote>
                 <p>The one outstanding characteristic of photography&mdash;the quality that distinguishes it from drawing, painting, etching, or any other means of pictorial representation&mdash;is the ability of the lens and sensitive film to record infinitely delicate and subtle gradation of tones. This is where photography is supreme and it is because of this quality that photography claims and holds a special place among the fine arts.<sup>6</sup></p>
                 <footer>&mdash; John Higue Garo</footer>
               </blockquote>
             </div>
             <p>By the 1930s, Garo did not make the necessary adjustments in his practice to meet the rapid changes occurring in the photographic medium. His acclaimed and innovative technical achievements, like the gum arabic technique which created a painterly effect, became obsolete. Under the influence of the Art Deco movement (1920s&ndash;1940s), commercial photography shifted towards streamlined, simpler forms and high contrast in lighting. As such, &ldquo;the days of the photo&rsquo;s soft edge and ethereal mood had yielded to the sharp realism practiced by the modernists in the field.&rdquo;<sup>8</sup></p>
-            <div class="plain-quote-box">
+            <div class="plain-quote-box border-green text-green">
               <blockquote>
                 <p>&ldquo;I have enjoyed every minute of my life. Photography is my vocation and I love it because I find in it the medium to interpret the art of painting, the art of music, the art of classical literature. But greatest of all, it is my canvas for the fine art of living. Art is everywhere if one can see, hear or feel it. But most of all, it is in life.&rdquo;<sup>7</sup></p>
                 <footer>&mdash; John Higue Garo</footer>
@@ -1161,8 +1163,8 @@
   </div>
 </section>
 
-<div class="full-carousel-wrap">
-<section class="full-carousel" id="fullCarousel">
+<div class="full-carousel-wrap bg-black">
+<section class="full-carousel bg-black" id="fullCarousel">
   <div class="carousel-slide is-active">
     <img src="./images/1/1a.png" alt="&ldquo;Untitled,&rdquo; 1911. Garo Studio, Boston. Yearbook of the Photographers&rsquo; Association of New England, Bridgeport Convention.">
   </div>
@@ -1201,36 +1203,36 @@
   </div>
 
   <div class="carousel-left-controls">
-    <button type="button" class="caption-toggle" id="captionToggle2" aria-pressed="false" aria-controls="carousel-caption-2">Caption</button>
-    <button type="button" class="zoom-toggle" id="fullCarouselZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
+    <button type="button" class="caption-toggle btn-colorway-text" id="captionToggle2" aria-pressed="false" aria-controls="carousel-caption-2">Caption</button>
+    <button type="button" class="zoom-toggle btn-colorway-icon" id="fullCarouselZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
       <span class="material-symbols-outlined" aria-hidden="true">search</span>
     </button>
   </div>
 
   <div class="carousel-right-controls">
-    <button type="button" class="carousel-btn carousel-prev" aria-label="Previous photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
-    <button type="button" class="carousel-btn carousel-next" aria-label="Next photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
+    <button type="button" class="carousel-btn carousel-prev btn-colorway-icon" aria-label="Previous photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
+    <button type="button" class="carousel-btn carousel-next btn-colorway-icon" aria-label="Next photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
   </div>
 
   <div class="carousel-dots">
-    <button type="button" class="carousel-dot is-active" aria-label="Go to photograph 1"></button>
-    <button type="button" class="carousel-dot" aria-label="Go to photograph 2"></button>
-    <button type="button" class="carousel-dot" aria-label="Go to photograph 3"></button>
-    <button type="button" class="carousel-dot" aria-label="Go to photograph 4"></button>
-    <button type="button" class="carousel-dot" aria-label="Go to photograph 5"></button>
-    <button type="button" class="carousel-dot" aria-label="Go to photograph 6"></button>
-    <button type="button" class="carousel-dot" aria-label="Go to photograph 7"></button>
-    <button type="button" class="carousel-dot" aria-label="Go to photograph 8"></button>
-    <button type="button" class="carousel-dot" aria-label="Go to photograph 9"></button>
-    <button type="button" class="carousel-dot" aria-label="Go to photograph 10"></button>
-    <button type="button" class="carousel-dot" aria-label="Go to photograph 11"></button>
-    <button type="button" class="carousel-dot" aria-label="Go to photograph 12"></button>
+    <button type="button" class="carousel-dot dot-colorway is-active" aria-label="Go to photograph 1"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 2"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 3"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 4"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 5"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 6"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 7"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 8"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 9"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 10"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 11"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 12"></button>
   </div>
 </section>
 </div>
 
-<div class="carousel-caption" id="carousel-caption-2">
-  <button type="button" class="caption-close" id="captionClose2" aria-label="Close caption">&times;</button>
+<div class="carousel-caption bg-green text-tan" id="carousel-caption-2">
+  <button type="button" class="caption-close text-maroon" id="captionClose2" aria-label="Close caption">&times;</button>
   <span id="carousel-caption-text-2">&ldquo;Untitled,&rdquo; 1911. Garo Studio, Boston. Yearbook of the Photographers&rsquo; Association of New England, Bridgeport Convention.</span>
 </div>
 
