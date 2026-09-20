@@ -12,6 +12,7 @@
     width: 100%;
     background: var(--color-tan);
     font-size: 12px;
+    font-family: 'Cardo', "Times New Roman", Times, serif;
   }
 
   * { box-sizing: border-box; }
@@ -91,6 +92,20 @@
   .dot-colorway.is-active {
     background: var(--color-green);
     border-color: var(--color-green);
+  }
+
+  /* ---- Shared body-copy paragraph typography ---- */
+
+  .intro-copy p,
+  .intro-lead p,
+  .studio-copy p,
+  .bio-copy p {
+    font-size: 1.667em;
+    line-height: 1.3em;
+    margin: 0 0 20px;
+    padding: 0;
+    -webkit-hyphens: auto;
+    hyphens: auto;
   }
 
   /* ---- Hero: the quote, pinned in place, fades as the page scrolls ---- */
@@ -238,7 +253,6 @@
   .quote-text {
     max-width: 620px;
     margin: 0;
-    font-family: 'Cardo', "Times New Roman", Times, serif;
     font-size: 1.6em;
     line-height: 1.4em;
     text-align: center;
@@ -266,22 +280,11 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: transparent;
   }
 
   .intro-copy {
     width: 100%;
     padding: 20px 30px;
-    font-family: 'Cardo', "Times New Roman", Times, serif;
-  }
-
-  .intro-copy p {
-    font-size: 1.667em;
-    line-height: 1.3em;
-    margin: 0 0 20px;
-    padding: 0;
-    -webkit-hyphens: auto;
-    hyphens: auto;
   }
 
   .intro-copy p + p {
@@ -291,17 +294,7 @@
   .intro-lead {
     width: 100%;
     padding: 20px 30px 50px 30px;
-    font-family: 'Cardo', "Times New Roman", Times, serif;
     transition: background-color 0.05s linear;
-  }
-
-  .intro-lead p {
-    font-size: 1.667em;
-    line-height: 1.3em;
-    margin: 0 0 20px;
-    padding: 0;
-    -webkit-hyphens: auto;
-    hyphens: auto;
   }
 
   .intro-columns {
@@ -351,33 +344,18 @@
     flex: 1 1 380px;
     display: flex;
     align-items: flex-start;
-    background-color: transparent;
   }
 
   .studio-left {
     flex: 1 1 420px;
   }
 
-  .studio-right {
-    flex: 2 1 600px;
-  }
-
   .studio-copy {
     margin: 0 auto;
     max-width: 620px;
     padding: 64px 40px;
-    font-family: 'Cardo', "Times New Roman", Times, serif;
     opacity: 1;
     transition: opacity 0.3s ease;
-  }
-
-  .studio-copy p {
-    font-size: 1.667em;
-    line-height: 1.3em;
-    margin: 0 0 20px;
-    padding: 0;
-    -webkit-hyphens: auto;
-    hyphens: auto;
   }
 
   .studio.is-zoom-active .studio-copy {
@@ -410,12 +388,12 @@
   /* ---- Carousel: rotating Garo Studio photographs, right column ---- */
 
   .studio-right {
+    flex: 2 1 600px;
     position: relative;
     align-self: flex-start;
     width: 100%;
     height: clamp(650px, 82vw, 1100px);
     overflow: hidden;
-    background-color: transparent;
   }
 
   .studio.is-zoom-active .studio-right {
@@ -469,7 +447,6 @@
     padding: 9px 20px;
     border: none;
     border-radius: 999px;
-    opacity: 1;
     font-family: 'DM Mono', monospace;
     font-size: 16px;
     letter-spacing: 0.02em;
@@ -483,7 +460,6 @@
     padding: 0;
     border: none;
     border-radius: 50%;
-    opacity: 1;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -597,7 +573,6 @@
     height: 40px;
     border: none;
     border-radius: 50%;
-    opacity: 1;
     font-size: 1.667em;
     line-height: 1;
     cursor: pointer;
@@ -635,7 +610,6 @@
     border-radius: 50%;
     border-width: 1px;
     border-style: solid;
-    opacity: 1;
     cursor: pointer;
     transition: background 0.2s ease, border-color 0.2s ease;
   }
@@ -679,7 +653,6 @@
     width: 100%;
     min-height: 100vh;
     margin-top: -100vh;
-    background-color: transparent;
   }
 
   .bio-col {
@@ -687,11 +660,9 @@
     min-height: 100vh;
     display: flex;
     align-items: flex-end;
-    background-color: transparent;
   }
 
   .bio-left {
-    background-color: transparent;
     margin-right: -100px;
   }
 
@@ -699,16 +670,6 @@
     margin: 0 0 0 auto;
     max-width: 620px;
     padding: 64px 40px;
-    font-family: 'Cardo', "Times New Roman", Times, serif;
-  }
-
-  .bio-copy p {
-    font-size: 1.667em;
-    line-height: 1.3em;
-    margin: 0 0 20px;
-    padding: 0;
-    -webkit-hyphens: auto;
-    hyphens: auto;
   }
 
   /* ---- Bio text frame: offset outline box, built from divs like the hero quote-frame ---- */
@@ -748,7 +709,6 @@
     flex-wrap: wrap;
     width: 100%;
     min-height: 100vh;
-    background-color: transparent;
   }
 
   .quotes-col {
@@ -756,11 +716,9 @@
     min-height: 100vh;
     display: flex;
     align-items: flex-start;
-    background-color: transparent;
   }
 
   .quotes-right {
-    background-color: transparent;
     margin-left: -100px;
   }
 
@@ -768,9 +726,10 @@
     margin: 0 auto 0 0;
     max-width: 620px;
     padding: 64px 40px;
-    font-family: 'Cardo', "Times New Roman", Times, serif;
     font-size: 1.667em;
-    line-height: 33px;
+    line-height: 1.3em;
+    -webkit-hyphens: auto;
+    hyphens: auto;
   }
 
   .quotes-copy blockquote {
@@ -981,10 +940,6 @@
 
   @media (prefers-reduced-motion: reduce) {
     .quote-frame { transition: none; }
-    .intro-left {
-      opacity: 1;
-      transition: none;
-    }
   }
 </style>
 
