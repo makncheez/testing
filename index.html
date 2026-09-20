@@ -49,6 +49,7 @@
   .btn-colorway-icon,
   .btn-colorway-text {
     background: var(--color-purple);
+    transition: background 0.2s ease, color 0.2s ease;
   }
 
   .btn-colorway-icon { color: var(--color-green); }
@@ -92,6 +93,65 @@
   .dot-colorway.is-active {
     background: var(--color-green);
     border-color: var(--color-green);
+  }
+
+  /* ---- Shared section/column layout ---- */
+
+  .intro,
+  .intro-col,
+  .bio,
+  .bio-col,
+  .quotes,
+  .quotes-col {
+    min-height: 100vh;
+  }
+
+  .intro-col,
+  .studio-col,
+  .bio-col,
+  .quotes-col {
+    flex: 1 1 380px;
+  }
+
+  .quote-frame-content,
+  .qf-corner,
+  .zoom-toggle,
+  .carousel-btn,
+  .caption-close,
+  .full-carousel .carousel-slide,
+  h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-slide,
+  .zoom-view {
+    position: absolute;
+    inset: 0;
+  }
+
+  .caption-toggle,
+  .zoom-toggle,
+  .carousel-btn,
+  .caption-close {
+    border: none;
+  }
+
+  .caption-toggle,
+  .zoom-toggle,
+  .caption-close,
+  .carousel-btn,
+  .carousel-dot {
+    cursor: pointer;
+  }
+
+  .hero-label,
+  .quote-frame .hero-label-group,
+  .caption-toggle,
+  .carousel-caption,
+  h2 {
+    font-family: 'DM Mono', monospace;
   }
 
   /* ---- Shared body-copy paragraph typography ---- */
@@ -182,7 +242,6 @@
     position: absolute;
     z-index: 21;
     margin: 0;
-    font-family: 'DM Mono', monospace;
     pointer-events: none;
   }
 
@@ -205,7 +264,6 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    font-family: 'DM Mono', monospace;
     pointer-events: none;
     white-space: nowrap;
   }
@@ -225,12 +283,6 @@
     font-size: 1.2em;
   }
 
-  .qf-corner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   .qf-dot {
     width: 14px;
     height: 14px;
@@ -244,9 +296,6 @@
   }
 
   .quote-frame-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 64px;
   }
 
@@ -271,13 +320,10 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    min-height: 100vh;
     transition: background-color 0.05s linear;
   }
 
   .intro-col {
-    flex: 1 1 380px;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
@@ -341,7 +387,6 @@
   }
 
   .studio-col {
-    flex: 1 1 380px;
     display: flex;
     align-items: flex-start;
   }
@@ -364,12 +409,8 @@
   }
 
   h2 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 16px;
     margin: 0 0 32px;
-    font-family: 'DM Mono', monospace;
     font-size: 1.4rem;
     font-weight: normal;
     text-align: center;
@@ -401,8 +442,6 @@
   }
 
   .carousel-slide {
-    position: absolute;
-    inset: 0;
     opacity: 0;
     transition: opacity 1.1s ease;
   }
@@ -433,51 +472,52 @@
     bottom: 10px;
   }
 
-  .carousel-left-controls {
+  .carousel-left-controls,
+  .carousel-right-controls,
+  .carousel-dots {
     position: absolute;
-    left: 18px;
     bottom: 18px;
     z-index: 3;
     display: flex;
+  }
+
+  .carousel-left-controls,
+  .carousel-right-controls {
     align-items: center;
     gap: 10px;
   }
 
+  .carousel-left-controls {
+    left: 18px;
+  }
+
   .caption-toggle {
     padding: 9px 20px;
-    border: none;
     border-radius: 999px;
-    font-family: 'DM Mono', monospace;
     font-size: 16px;
     letter-spacing: 0.02em;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
   }
 
   .zoom-toggle {
     width: 38px;
     height: 38px;
     padding: 0;
-    border: none;
     border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .zoom-toggle .material-symbols-outlined,
+  .carousel-btn .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    pointer-events: none;
   }
 
   .zoom-toggle .material-symbols-outlined {
-    font-family: 'Material Symbols Outlined';
     font-size: 31px;
-    pointer-events: none;
   }
 
   /* ---- Zoom view: large version of the current carousel photo, full width, behind the carousel ---- */
 
   .zoom-view {
-    position: absolute;
-    inset: 0;
     z-index: -1;
     background-repeat: no-repeat;
     background-position: center;
@@ -504,7 +544,6 @@
     margin: 0;
     padding: 28px 40px 28px 32px;
     border-radius: 22px;
-    font-family: 'DM Mono', monospace;
     font-size: 1.667em;
     line-height: 1.3em;
     font-style: normal;
@@ -537,17 +576,12 @@
     width: 24px;
     height: 24px;
     padding: 0;
-    border: none;
     border-radius: 50%;
     background: transparent;
     font-family: "Times New Roman", Times, serif;
     font-size: 0.85em;
     font-style: normal;
     line-height: 1;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     transition: background 0.2s ease;
   }
 
@@ -559,27 +593,15 @@
   }
 
   .carousel-right-controls {
-    position: absolute;
     right: 18px;
-    bottom: 18px;
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    gap: 10px;
   }
 
   .carousel-btn {
     width: 40px;
     height: 40px;
-    border: none;
     border-radius: 50%;
     font-size: 1.667em;
     line-height: 1;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s ease, color 0.2s ease;
   }
 
   .carousel-btn:hover,
@@ -588,18 +610,12 @@
   }
 
   .carousel-btn .material-symbols-outlined {
-    font-family: 'Material Symbols Outlined';
     font-size: 37px;
-    pointer-events: none;
   }
 
   .carousel-dots {
-    position: absolute;
-    bottom: 18px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 3;
-    display: flex;
     gap: 8px;
   }
 
@@ -610,7 +626,6 @@
     border-radius: 50%;
     border-width: 1px;
     border-style: solid;
-    cursor: pointer;
     transition: background 0.2s ease, border-color 0.2s ease;
   }
 
@@ -651,13 +666,10 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    min-height: 100vh;
     margin-top: -100vh;
   }
 
   .bio-col {
-    flex: 1 1 380px;
-    min-height: 100vh;
     display: flex;
     align-items: flex-end;
   }
@@ -708,12 +720,9 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    min-height: 100vh;
   }
 
   .quotes-col {
-    flex: 1 1 380px;
-    min-height: 100vh;
     display: flex;
     align-items: flex-start;
   }
@@ -786,12 +795,6 @@
     overflow: hidden;
   }
 
-  .full-carousel .carousel-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   .full-carousel .carousel-slide img {
     width: 90%;
     height: 90%;
@@ -828,6 +831,17 @@
   }
 
   @media (max-width: 700px) {
+    .intro-copy,
+    .bio-copy,
+    .quotes-copy,
+    .studio-copy {
+      padding: 56px 28px;
+    }
+    .bio-copy,
+    .quotes-copy,
+    .studio-copy {
+      margin: 0 auto;
+    }
     .quote-frame-content {
       padding: 40px 24px;
     }
@@ -850,59 +864,41 @@
     .bio {
       margin-top: 0;
     }
-    .bio-col {
+    .bio-col,
+    .quotes-col {
       min-height: auto;
     }
-    .bio-right {
+    .bio-right,
+    .quotes-left {
       display: none;
     }
     .bio-left {
       margin-right: 0;
     }
-    .bio-copy {
-      margin: 0 auto;
-      padding: 56px 28px;
+    .bio-left .bio-frame,
+    .quotes-right .bio-frame {
+      padding: 0;
     }
     .bio-left .bio-frame {
       margin-bottom: 0;
-      padding: 0;
     }
-    .bio-left .bio-frame::before {
-      display: none;
-    }
-    .bio-left .bio-frame-box {
-      background-color: transparent;
-      padding: 0;
-    }
-    .quotes-col {
-      min-height: auto;
-    }
-    .quotes-left {
-      display: none;
-    }
-    .quotes-right {
-      margin-left: 0;
-    }
-    .quotes-copy {
-      margin: 0 auto;
-      padding: 56px 28px;
-    }
-    .quotes-right .bio-frame {
-      margin-top: 0;
-      padding: 0;
-    }
+    .bio-left .bio-frame::before,
     .quotes-right .bio-frame::before {
       display: none;
     }
+    .bio-left .bio-frame-box,
     .quotes-right .bio-frame-box {
       background-color: transparent;
       padding: 0;
     }
+    .quotes-right {
+      margin-left: 0;
+    }
+    .quotes-right .bio-frame {
+      margin-top: 0;
+    }
     .intro-col {
       min-height: auto;
-    }
-    .intro-copy {
-      padding: 56px 28px;
     }
     .intro-columns {
       column-count: 1;
@@ -927,10 +923,6 @@
 
     #carousel .carousel-slide {
       inset: 56px 28px 80px;
-    }
-    .studio-copy {
-      margin: 0 auto;
-      padding: 56px 28px;
     }
     .zoom-toggle,
     .zoom-view {
