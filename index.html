@@ -190,6 +190,9 @@
     grid-template-rows: 25px auto 25px;
     width: min(92vw, 820px);
     margin: auto;
+  }
+
+  .quote-fade {
     transition: opacity 0.05s linear;
   }
 
@@ -199,6 +202,7 @@
     margin-bottom: 18px;
     width: 260px;
     pointer-events: none;
+    color: var(--color-green);
   }
 
   .qf-logo svg {
@@ -931,7 +935,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .quote-frame { transition: none; }
+    .quote-fade { transition: none; }
   }
 </style>
 
@@ -939,33 +943,33 @@
   <div class="quote-frame" id="quote">
     <div class="qf-logo qf-logo-left" aria-hidden="true">
       <svg width="231" height="281" viewBox="0 0 231 281" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="166.921" cy="35.1996" rx="2.90527" ry="2.97789" fill="#263F27"/>
-        <ellipse cx="152.54" cy="42.4627" rx="2.90527" ry="2.97789" fill="#263F27"/>
-        <path d="M2.09375 90.4142V166.959M2.09375 278.831V166.959M2.09375 166.959L57.703 56.3945M20.7392 129.887V258.223M37.0949 175.137V146.023M53.1234 211.119V138.827M37.0949 146.023V124.107L53.1234 116.91V138.827M37.0949 146.023L53.1234 138.827M64.5724 110.368L78.9654 103.172L60.3199 164.015L78.9654 156.491M85.1805 153.22V98.5921L100.882 90.4142V116.91M100.882 185.277V116.91M87.7974 124.107L100.882 116.91M117.565 138.827V84.1991L135.883 124.107L137.846 45.9269M153.874 66.535C153.874 80.4918 153.874 103.499 153.874 128.359C153.874 153.22 137.846 159.435 131.303 151.257M168.267 59.0114V113.966M181.679 105.134V76.3484M194.763 138.827V69.8061M210.138 90.4142V37.4219L228.456 80.2738V2.09375M181.679 76.3484V53.1234L194.763 47.8895V69.8061M181.679 76.3484L194.763 69.8061" stroke="#263F27" stroke-width="4.18767" stroke-linecap="round" stroke-linejoin="round"/>
+        <ellipse cx="166.921" cy="35.1996" rx="2.90527" ry="2.97789" fill="currentColor"/>
+        <ellipse cx="152.54" cy="42.4627" rx="2.90527" ry="2.97789" fill="currentColor"/>
+        <path d="M2.09375 90.4142V166.959M2.09375 278.831V166.959M2.09375 166.959L57.703 56.3945M20.7392 129.887V258.223M37.0949 175.137V146.023M53.1234 211.119V138.827M37.0949 146.023V124.107L53.1234 116.91V138.827M37.0949 146.023L53.1234 138.827M64.5724 110.368L78.9654 103.172L60.3199 164.015L78.9654 156.491M85.1805 153.22V98.5921L100.882 90.4142V116.91M100.882 185.277V116.91M87.7974 124.107L100.882 116.91M117.565 138.827V84.1991L135.883 124.107L137.846 45.9269M153.874 66.535C153.874 80.4918 153.874 103.499 153.874 128.359C153.874 153.22 137.846 159.435 131.303 151.257M168.267 59.0114V113.966M181.679 105.134V76.3484M194.763 138.827V69.8061M210.138 90.4142V37.4219L228.456 80.2738V2.09375M181.679 76.3484V53.1234L194.763 47.8895V69.8061M181.679 76.3484L194.763 69.8061" stroke="currentColor" stroke-width="4.18767" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
     <div class="qf-logo qf-logo-right" aria-hidden="true">
       <svg width="231" height="281" viewBox="0 0 231 281" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="166.921" cy="35.1996" rx="2.90527" ry="2.97789" fill="#263F27"/>
-        <ellipse cx="152.54" cy="42.4627" rx="2.90527" ry="2.97789" fill="#263F27"/>
-        <path d="M2.09375 90.4142V166.959M2.09375 278.831V166.959M2.09375 166.959L57.703 56.3945M20.7392 129.887V258.223M37.0949 175.137V146.023M53.1234 211.119V138.827M37.0949 146.023V124.107L53.1234 116.91V138.827M37.0949 146.023L53.1234 138.827M64.5724 110.368L78.9654 103.172L60.3199 164.015L78.9654 156.491M85.1805 153.22V98.5921L100.882 90.4142V116.91M100.882 185.277V116.91M87.7974 124.107L100.882 116.91M117.565 138.827V84.1991L135.883 124.107L137.846 45.9269M153.874 66.535C153.874 80.4918 153.874 103.499 153.874 128.359C153.874 153.22 137.846 159.435 131.303 151.257M168.267 59.0114V113.966M181.679 105.134V76.3484M194.763 138.827V69.8061M210.138 90.4142V37.4219L228.456 80.2738V2.09375M181.679 76.3484V53.1234L194.763 47.8895V69.8061M181.679 76.3484L194.763 69.8061" stroke="#263F27" stroke-width="4.18767" stroke-linecap="round" stroke-linejoin="round"/>
+        <ellipse cx="166.921" cy="35.1996" rx="2.90527" ry="2.97789" fill="currentColor"/>
+        <ellipse cx="152.54" cy="42.4627" rx="2.90527" ry="2.97789" fill="currentColor"/>
+        <path d="M2.09375 90.4142V166.959M2.09375 278.831V166.959M2.09375 166.959L57.703 56.3945M20.7392 129.887V258.223M37.0949 175.137V146.023M53.1234 211.119V138.827M37.0949 146.023V124.107L53.1234 116.91V138.827M37.0949 146.023L53.1234 138.827M64.5724 110.368L78.9654 103.172L60.3199 164.015L78.9654 156.491M85.1805 153.22V98.5921L100.882 90.4142V116.91M100.882 185.277V116.91M87.7974 124.107L100.882 116.91M117.565 138.827V84.1991L135.883 124.107L137.846 45.9269M153.874 66.535C153.874 80.4918 153.874 103.499 153.874 128.359C153.874 153.22 137.846 159.435 131.303 151.257M168.267 59.0114V113.966M181.679 105.134V76.3484M194.763 138.827V69.8061M210.138 90.4142V37.4219L228.456 80.2738V2.09375M181.679 76.3484V53.1234L194.763 47.8895V69.8061M181.679 76.3484L194.763 69.8061" stroke="currentColor" stroke-width="4.18767" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
-    <div class="qf-corner qf-corner-tl"><div class="qf-dot bg-green-dot"></div></div>
-    <div class="qf-bar qf-bar-top bg-green-dot"></div>
-    <div class="qf-corner qf-corner-tr"><div class="qf-dot bg-green-dot"></div></div>
+    <div class="qf-corner qf-corner-tl quote-fade"><div class="qf-dot bg-green-dot"></div></div>
+    <div class="qf-bar qf-bar-top bg-green-dot quote-fade"></div>
+    <div class="qf-corner qf-corner-tr quote-fade"><div class="qf-dot bg-green-dot"></div></div>
 
-    <div class="qf-edge-left border-green"></div>
-    <div class="quote-frame-content">
+    <div class="qf-edge-left border-green quote-fade"></div>
+    <div class="quote-frame-content quote-fade">
       <p class="quote-text text-green">&ldquo;The fleeting quality of fame is a well-known concept to any scholar of history. Recognition and renown can fade, just as an old-format photographic image will &lsquo;wash-out&rsquo; through overexposure. A few names stand the test of time, but most are lost, except to those who knew the individual personally or who are devoted students of the individual&rsquo;s particular field.&rdquo;<sup>1</sup><br>&mdash; Mehmed Ali</p>
     </div>
-    <div class="qf-edge-right border-green"></div>
+    <div class="qf-edge-right border-green quote-fade"></div>
 
-    <div class="qf-corner qf-corner-bl"><div class="qf-dot bg-green-dot"></div></div>
-    <div class="qf-bar qf-bar-bottom bg-green-dot"></div>
-    <div class="qf-corner qf-corner-br"><div class="qf-dot bg-green-dot"></div></div>
+    <div class="qf-corner qf-corner-bl quote-fade"><div class="qf-dot bg-green-dot"></div></div>
+    <div class="qf-bar qf-bar-bottom bg-green-dot quote-fade"></div>
+    <div class="qf-corner qf-corner-br quote-fade"><div class="qf-dot bg-green-dot"></div></div>
 
-    <div class="hero-label-group text-green">
+    <div class="hero-label-group text-green quote-fade">
       <p class="hero-label-title">Pictorialism</p>
       <div class="hero-label-sub">
         <p>From Boston</p>
@@ -973,7 +977,7 @@
       </div>
     </div>
 
-    <p class="hero-label hero-label-corner text-green">Arem<br>Kazanjian</p>
+    <p class="hero-label hero-label-corner text-green quote-fade">Arem<br>Kazanjian</p>
   </div>
 </div>
     <div class="qf-portrait" id="quotePortrait" role="img" aria-label="Circular black-and-white portrait of Aram Kazanjian."></div>
@@ -1189,11 +1193,12 @@
 
 <script>
   (function () {
-    var quote = document.getElementById('quote');
     var heroEl = document.getElementById('hero');
     var introLead = document.getElementById('introLead');
     var portrait = document.getElementById('quotePortrait');
     var logoLeft = document.querySelector('.qf-logo-left');
+    var logoRight = document.querySelector('.qf-logo-right');
+    var quoteFadeEls = document.querySelectorAll('.quote-fade');
     var intro = document.getElementById('intro');
     var studio = document.getElementById('studio');
     var bio = document.getElementById('bio');
@@ -1261,10 +1266,24 @@
     var portraitRafId = null;
     var PORTRAIT_EASE = 0.35;
 
+    var logoInitialTop = null;
+    var portraitBaseTop = null;
+
+    function measureLogoBaseline() {
+      if (!logoLeft) return;
+      var savedTransform = logoLeft.style.transform;
+      logoLeft.style.transform = 'none';
+      logoInitialTop = logoLeft.getBoundingClientRect().top;
+      logoLeft.style.transform = savedTransform;
+    }
+
+    function getFallProgress() {
+      return Math.min(Math.max(window.scrollY / fallRange, 0), 1);
+    }
+
     function getPortraitTargetTop() {
-      var progress = Math.min(Math.max(window.scrollY / fallRange, 0), 1);
-      var logoRect = logoLeft.getBoundingClientRect();
-      var startTop = logoRect.top - LOGO_GAP;
+      var progress = getFallProgress();
+      var startTop = logoInitialTop - LOGO_GAP;
       var halfHeight = (portrait.offsetHeight || 0) * 0.5;
       var minTop = halfHeight + 8;
       var fallingTop = Math.max(startTop + progress * FALL_DISTANCE, minTop);
@@ -1273,22 +1292,46 @@
       return Math.min(fallingTop, landedTop);
     }
 
+    var LOGO_COLOR_START = [38, 63, 39]; // #263F27 green
+    var LOGO_COLOR_END = [213, 204, 164]; // #D5CCA4 tan
+
+    function updateLogoAppearance() {
+      if (!logoLeft || !logoRight || portraitCurrentTop === null || portraitBaseTop === null) return;
+      var delta = portraitCurrentTop - portraitBaseTop;
+      logoLeft.style.transform = 'translateY(' + delta + 'px)';
+      logoRight.style.transform = 'scaleX(-1) translateY(' + delta + 'px)';
+
+      var progress = getFallProgress();
+      var r = Math.round(LOGO_COLOR_START[0] + (LOGO_COLOR_END[0] - LOGO_COLOR_START[0]) * progress);
+      var g = Math.round(LOGO_COLOR_START[1] + (LOGO_COLOR_END[1] - LOGO_COLOR_START[1]) * progress);
+      var b = Math.round(LOGO_COLOR_START[2] + (LOGO_COLOR_END[2] - LOGO_COLOR_START[2]) * progress);
+      var color = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+      logoLeft.style.color = color;
+      logoRight.style.color = color;
+    }
+
     function easePortrait() {
       var target = getPortraitTargetTop();
-      if (portraitCurrentTop === null) portraitCurrentTop = target;
+      if (portraitCurrentTop === null) {
+        portraitCurrentTop = target;
+        if (portraitBaseTop === null) portraitBaseTop = target;
+      }
       portraitCurrentTop += (target - portraitCurrentTop) * PORTRAIT_EASE;
       if (Math.abs(target - portraitCurrentTop) > 0.5) {
         portrait.style.top = portraitCurrentTop + 'px';
+        updateLogoAppearance();
         portraitRafId = window.requestAnimationFrame(easePortrait);
       } else {
         portraitCurrentTop = target;
         portrait.style.top = target + 'px';
+        updateLogoAppearance();
         portraitRafId = null;
       }
     }
 
     function schedulePortrait() {
       if (!portrait || !introLead || !logoLeft) return;
+      if (logoInitialTop === null) measureLogoBaseline();
       if (portraitRafId === null) {
         portraitRafId = window.requestAnimationFrame(easePortrait);
       }
@@ -1317,7 +1360,10 @@
       ticking = false;
       if (reduceMotion) return;
       var progress = Math.min(Math.max(window.scrollY / fadeDistance, 0), 1);
-      quote.style.opacity = String(1 - progress);
+      var op = String(1 - progress);
+      for (var i = 0; i < quoteFadeEls.length; i++) {
+        quoteFadeEls[i].style.opacity = op;
+      }
       schedulePortrait();
       updateIntroBg();
     }
@@ -1330,10 +1376,12 @@
     }
 
     if (!reduceMotion) {
+      measureLogoBaseline();
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', function () {
         fadeDistance = (window.innerHeight || 800) * 0.4;
         fallRange = fadeDistance * 2.5;
+        measureLogoBaseline();
         schedulePortrait();
       });
       updateHero();
