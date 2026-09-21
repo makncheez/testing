@@ -1276,14 +1276,14 @@
       logoLeft.style.left = quoteRect.left + 'px';
       logoRight.style.top = logoInitialTop + 'px';
       logoRight.style.right = (window.innerWidth - quoteRect.right) + 'px';
+      portraitBaseTop = computeFallTargetTop(0);
     }
 
     function getFallProgress() {
       return Math.min(Math.max(window.scrollY / fallRange, 0), 1);
     }
 
-    function getPortraitTargetTop() {
-      var progress = getFallProgress();
+    function computeFallTargetTop(progress) {
       var startTop = logoInitialTop - LOGO_GAP;
       var halfHeight = (portrait.offsetHeight || 0) * 0.5;
       var minTop = halfHeight + 8;
@@ -1291,6 +1291,10 @@
       var introRect = introLead.getBoundingClientRect();
       var landedTop = introRect.top - halfHeight - LANDING_GAP;
       return Math.min(fallingTop, landedTop);
+    }
+
+    function getPortraitTargetTop() {
+      return computeFallTargetTop(getFallProgress());
     }
 
     var LOGO_COLOR_START = [38, 63, 39]; // #263F27 green
