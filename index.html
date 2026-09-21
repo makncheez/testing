@@ -1256,6 +1256,7 @@
     }
     var fadeDistance = (window.innerHeight || 800) * 0.4;
     var fallRange = fadeDistance * 2.5;
+    var colorFadeDistance = fadeDistance * 0.5;
     var FALL_DISTANCE = 220;
     var LOGO_GAP = -38;
     var LANDING_GAP = 20;
@@ -1362,10 +1363,10 @@
       logoLeft.style.transform = 'translateY(' + delta + 'px)';
       logoRight.style.transform = 'scaleX(-1) translateY(' + delta + 'px)';
 
-      var progress = getFallProgress();
-      var r = Math.round(LOGO_COLOR_START[0] + (LOGO_COLOR_END[0] - LOGO_COLOR_START[0]) * progress);
-      var g = Math.round(LOGO_COLOR_START[1] + (LOGO_COLOR_END[1] - LOGO_COLOR_START[1]) * progress);
-      var b = Math.round(LOGO_COLOR_START[2] + (LOGO_COLOR_END[2] - LOGO_COLOR_START[2]) * progress);
+      var colorProgress = Math.min(Math.max(window.scrollY / colorFadeDistance, 0), 1);
+      var r = Math.round(LOGO_COLOR_START[0] + (LOGO_COLOR_END[0] - LOGO_COLOR_START[0]) * colorProgress);
+      var g = Math.round(LOGO_COLOR_START[1] + (LOGO_COLOR_END[1] - LOGO_COLOR_START[1]) * colorProgress);
+      var b = Math.round(LOGO_COLOR_START[2] + (LOGO_COLOR_END[2] - LOGO_COLOR_START[2]) * colorProgress);
       var color = 'rgb(' + r + ', ' + g + ', ' + b + ')';
       logoLeft.style.color = color;
       logoRight.style.color = color;
@@ -1446,6 +1447,7 @@
       window.addEventListener('resize', function () {
         fadeDistance = (window.innerHeight || 800) * 0.4;
         fallRange = fadeDistance * 2.5;
+        colorFadeDistance = fadeDistance * 0.5;
         positionLogos();
         positionHeroLabels();
         schedulePortrait();
