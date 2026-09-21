@@ -471,7 +471,7 @@
   }
 
   #carousel .carousel-slide {
-    inset: 24px 16px 56px;
+    inset: 56px 16px 24px;
   }
 
   #carousel .carousel-slide img {
@@ -479,7 +479,10 @@
   }
 
   #carousel .carousel-left-controls,
-  #carousel .carousel-right-controls,
+  #carousel .carousel-right-controls {
+    top: 10px;
+  }
+
   #carousel .carousel-dots {
     bottom: 10px;
   }
@@ -488,15 +491,19 @@
   .carousel-right-controls,
   .carousel-dots {
     position: absolute;
-    bottom: 18px;
     z-index: 3;
     display: flex;
   }
 
   .carousel-left-controls,
   .carousel-right-controls {
+    top: 18px;
     align-items: center;
     gap: 10px;
+  }
+
+  .carousel-dots {
+    bottom: 18px;
   }
 
   .carousel-left-controls {
@@ -635,10 +642,14 @@
     width: 8px;
     height: 8px;
     padding: 0;
-    border-radius: 50%;
+    border-radius: 999px;
     border-width: 1px;
     border-style: solid;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    transition: width 0.25s ease, background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .carousel-dot.is-active {
+    width: 22px;
   }
 
   /* ---- Full-width photograph: pinned via sticky, so the next section scrolls up over it ---- */
@@ -661,13 +672,6 @@
     display: block;
     width: 100%;
     height: auto;
-  }
-
-  .full-image .carousel-left-controls {
-    position: absolute;
-    left: 18px;
-    top: 18px;
-    bottom: auto;
   }
 
   /* ---- Bio: two-column section, copy left, blank right, scrolls up over the photograph ---- */
@@ -922,7 +926,7 @@
     }
 
     #carousel .carousel-slide {
-      inset: 56px 28px 80px;
+      inset: 80px 28px 56px;
     }
     .zoom-toggle,
     .zoom-view {
