@@ -252,6 +252,13 @@
     line-height: 1.3em;
   }
 
+  .hero-label-corner.is-stacked {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+
   .quote-frame .hero-label-group {
     position: absolute;
     z-index: 21;
@@ -265,6 +272,12 @@
     gap: 8px;
     pointer-events: none;
     white-space: nowrap;
+  }
+
+  .hero-label-group.is-stacked {
+    position: fixed;
+    bottom: auto;
+    margin-bottom: 0;
   }
 
   .hero-label-group p {
@@ -815,18 +828,6 @@
     .qf-portrait {
       width: 112px;
     }
-    .quote-frame .hero-label-group {
-      position: absolute;
-      z-index: 21;
-      left: 50%;
-      top: -240px;
-    }
-    .quote-frame .hero-label-corner {
-      top: -290px;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-    }
   }
 
   @media (max-width: 700px) {
@@ -1194,6 +1195,8 @@
     var portrait = document.getElementById('quotePortrait');
     var logoLeft = document.querySelector('.qf-logo-left');
     var logoRight = document.querySelector('.qf-logo-right');
+    var heroLabelCorner = document.querySelector('.hero-label-corner');
+    var heroLabelGroupEl = document.querySelector('.hero-label-group');
     var quoteFadeEls = document.querySelectorAll('.quote-fade');
     var intro = document.getElementById('intro');
     var studio = document.getElementById('studio');
@@ -1265,11 +1268,12 @@
     var logoInitialTop = null;
     var portraitBaseTop = null;
     var MIN_LOGO_TOP = 8;
+    var logoExtraGap = 0;
 
     function positionLogos() {
       if (!logoLeft || !logoRight || !quoteEl) return;
       var quoteRect = quoteEl.getBoundingClientRect();
-      var marginBottom = parseFloat(getComputedStyle(logoLeft).marginBottom) || 0;
+      var marginBottom = (parseFloat(getComputedStyle(logoLeft).marginBottom) || 0) + logoExtraGap;
       var logoHeight = logoLeft.offsetHeight;
       logoInitialTop = Math.max(quoteRect.top - marginBottom - logoHeight, MIN_LOGO_TOP);
       logoLeft.style.top = logoInitialTop + 'px';
@@ -1277,6 +1281,56 @@
       logoRight.style.top = logoInitialTop + 'px';
       logoRight.style.right = (window.innerWidth - quoteRect.right) + 'px';
       portraitBaseTop = computeFallTargetTop(0);
+    }
+
+    var HERO_LABEL_STACK_WIDTH = 820;
+    var GAP_PORTRAIT_TO_CORNER = 16;
+    var GAP_CORNER_TO_GROUP = 6;
+    var GAP_GROUP_TO_QUOTE = 24;
+    var QUOTE_BASE_TOP = 50;
+
+    function positionHeroLabels() {
+      if (!heroLabelCorner || !heroLabelGroupEl || !portrait || !quoteEl) return;
+      var stacked = window.innerWidth <= HERO_LABEL_STACK_WIDTH;
+      heroLabelCorner.classList.toggle('is-stacked', stacked);
+      heroLabelGroupEl.classList.toggle('is-stacked', stacked);
+      if (!stacked) {
+        heroLabelCorner.style.top = '';
+        heroLabelGroupEl.style.top = '';
+        logoExtraGap = 0;
+        positionLogos();
+        return;
+      }
+      logoExtraGap = 0;
+      quoteEl.style.top = '';
+      positionLogos();
+      var shortfall = 0;
+      var prevLogoInitialTop;
+      for (var iter = 0; iter < 4; iter++) {
+        var portraitHalfHeight = (portrait.offsetHeight || 0) * 0.5;
+        var portraitRestBottom = portraitBaseTop + portraitHalfHeight;
+        var cornerTop = portraitRestBottom + GAP_PORTRAIT_TO_CORNER;
+        heroLabelCorner.style.top = cornerTop + 'px';
+        var cornerHeight = heroLabelCorner.offsetHeight;
+        var groupTop = cornerTop + cornerHeight + GAP_CORNER_TO_GROUP;
+        heroLabelGroupEl.style.top = groupTop + 'px';
+        var groupHeight = heroLabelGroupEl.offsetHeight;
+        var neededBottom = groupTop + groupHeight + GAP_GROUP_TO_QUOTE;
+        var quoteTop = quoteEl.getBoundingClientRect().top;
+        shortfall = neededBottom - quoteTop;
+        if (shortfall <= 1) { shortfall = 0; break; }
+        prevLogoInitialTop = logoInitialTop;
+        logoExtraGap += shortfall;
+        positionLogos();
+        // Logo/portrait are pinned at their on-screen floor and can't move up
+        // any further; growing the gap won't help, so stop and push the quote
+        // frame down instead for whatever shortfall remains.
+        if (logoInitialTop <= MIN_LOGO_TOP && prevLogoInitialTop <= MIN_LOGO_TOP) break;
+      }
+      if (shortfall > 1) {
+        quoteEl.style.top = (QUOTE_BASE_TOP + shortfall) + 'px';
+        positionLogos();
+      }
     }
 
     function getFallProgress() {
@@ -1338,7 +1392,10 @@
 
     function schedulePortrait() {
       if (!portrait || !introLead || !logoLeft) return;
-      if (logoInitialTop === null) positionLogos();
+      if (logoInitialTop === null) {
+        positionLogos();
+        positionHeroLabels();
+      }
       if (portraitRafId === null) {
         portraitRafId = window.requestAnimationFrame(easePortrait);
       }
@@ -1384,11 +1441,13 @@
 
     if (!reduceMotion) {
       positionLogos();
+      positionHeroLabels();
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', function () {
         fadeDistance = (window.innerHeight || 800) * 0.4;
         fallRange = fadeDistance * 2.5;
         positionLogos();
+        positionHeroLabels();
         schedulePortrait();
       });
       updateHero();
@@ -1397,6 +1456,7 @@
       portrait.style.top = '40px';
       portrait.style.transform = 'translateX(-50%)';
       positionLogos();
+      positionHeroLabels();
     }
 
     if ('IntersectionObserver' in window && !reduceMotion) {
