@@ -1285,7 +1285,8 @@
       logoLeft.style.left = quoteRect.left + 'px';
       logoRight.style.top = logoInitialTop + 'px';
       logoRight.style.right = (window.innerWidth - quoteRect.right) + 'px';
-      portraitBaseTop = computeFallTargetTop(0);
+      var introTopAtRest = introLead.getBoundingClientRect().top + window.scrollY;
+      portraitBaseTop = computeFallTargetTop(0, introTopAtRest);
     }
 
     var HERO_LABEL_STACK_WIDTH = 820;
@@ -1342,13 +1343,13 @@
       return Math.min(Math.max(window.scrollY / fallRange, 0), 1);
     }
 
-    function computeFallTargetTop(progress) {
+    function computeFallTargetTop(progress, introTopOverride) {
       var startTop = logoInitialTop - LOGO_GAP;
       var halfHeight = (portrait.offsetHeight || 0) * 0.5;
       var minTop = halfHeight + 8;
       var fallingTop = Math.max(startTop + progress * FALL_DISTANCE, minTop);
-      var introRect = introLead.getBoundingClientRect();
-      var landedTop = introRect.top - halfHeight - LANDING_GAP;
+      var introTop = (introTopOverride !== undefined) ? introTopOverride : introLead.getBoundingClientRect().top;
+      var landedTop = introTop - halfHeight - LANDING_GAP;
       return Math.min(fallingTop, landedTop);
     }
 
