@@ -1264,13 +1264,14 @@
 
     var logoInitialTop = null;
     var portraitBaseTop = null;
+    var MIN_LOGO_TOP = 8;
 
     function positionLogos() {
       if (!logoLeft || !logoRight || !quoteEl) return;
       var quoteRect = quoteEl.getBoundingClientRect();
       var marginBottom = parseFloat(getComputedStyle(logoLeft).marginBottom) || 0;
       var logoHeight = logoLeft.offsetHeight;
-      logoInitialTop = quoteRect.top - marginBottom - logoHeight;
+      logoInitialTop = Math.max(quoteRect.top - marginBottom - logoHeight, MIN_LOGO_TOP);
       logoLeft.style.top = logoInitialTop + 'px';
       logoLeft.style.left = quoteRect.left + 'px';
       logoRight.style.top = logoInitialTop + 'px';
@@ -1297,7 +1298,9 @@
 
     function updateLogoAppearance() {
       if (!logoLeft || !logoRight || portraitCurrentTop === null || portraitBaseTop === null) return;
-      var delta = portraitCurrentTop - portraitBaseTop;
+      var rawDelta = portraitCurrentTop - portraitBaseTop;
+      var fadeProgress = Math.min(Math.max(window.scrollY / fadeDistance, 0), 1);
+      var delta = rawDelta * Math.pow(fadeProgress, 3);
       logoLeft.style.transform = 'translateY(' + delta + 'px)';
       logoRight.style.transform = 'scaleX(-1) translateY(' + delta + 'px)';
 
