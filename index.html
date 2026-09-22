@@ -381,9 +381,65 @@
   }
 
   sup {
-    font-size: 0.7em;
-    padding: 5px;
-    color: var(--color-red);
+    font-size: 1em;
+    vertical-align: baseline;
+  }
+
+  .footnote-marker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin: 0 1px;
+    vertical-align: 3px;
+    border: none;
+    border-radius: 50%;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s ease;
+  }
+
+  .footnote-marker:hover,
+  .footnote-marker:focus-visible {
+    background: var(--color-maroon);
+    outline: none;
+  }
+
+  .footnote-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.55);
+    padding: 24px;
+  }
+
+  .footnote-modal-overlay[hidden] {
+    display: none;
+  }
+
+  .footnote-modal {
+    position: relative;
+    max-width: 560px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 48px;
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  }
+
+  .footnote-modal-text {
+    margin: 0;
+    font-size: 1.3em;
+    line-height: 1.6em;
   }
 
   /* ---- Studio: two-column section, copy left, image carousel right ---- */
@@ -949,7 +1005,7 @@
 
     <div class="qf-edge-left border-green quote-fade"></div>
     <div class="quote-frame-content quote-fade">
-      <p class="quote-text text-green">&ldquo;The fleeting quality of fame is a well-known concept to any scholar of history. Recognition and renown can fade, just as an old-format photographic image will &lsquo;wash-out&rsquo; through overexposure. A few names stand the test of time, but most are lost, except to those who knew the individual personally or who are devoted students of the individual&rsquo;s particular field.&rdquo;<sup>1</sup><br>&mdash; Mehmed Ali</p>
+      <p class="quote-text text-green">&ldquo;The fleeting quality of fame is a well-known concept to any scholar of history. Recognition and renown can fade, just as an old-format photographic image will &lsquo;wash-out&rsquo; through overexposure. A few names stand the test of time, but most are lost, except to those who knew the individual personally or who are devoted students of the individual&rsquo;s particular field.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="1">1</button></sup><br>&mdash; Mehmed Ali</p>
     </div>
     <div class="qf-edge-right border-green quote-fade"></div>
 
@@ -994,7 +1050,7 @@
     <div class="intro-copy text-black bg-tan">
       <div class="intro-columns text-green">
         <h1 class="text-green">The History of Armenia Photography in Boston</h1>
-        <p>Kazanjian&rsquo;s career emerged and evolved during the early 20th century in Boston. Beyond the camera&rsquo;s ability to accurately record reality and to produce candid portraiture, there was an aesthetic movement referred to as Pictorialism. This movement aimed to establish photography as fine art. Pictorialist photographers manipulated an image &ldquo;to express their artistic and abstract ideas&rdquo; and their &ldquo;subjective points of view.&rdquo;<sup>2</sup> Influenced by Impressionism, the 19th century art movement that began in France, photographers practicing Pictorialism employed soft-focus techniques and manipulated light to create compositions that were aesthetically pleasing and &ldquo;painterly in style.&rdquo;<sup>3</sup> The ultimate goal was to elevate photography to the rank of fine art. Along with the practice of producing straightforward portraiture, Kazanjian was influenced by this aesthetic movement that created photographic images rather than simply recording them. As such, his oeuvre reflected a blend of varied photographic styles that evolved around the turn of the 20th century.</p>
+        <p>Kazanjian&rsquo;s career emerged and evolved during the early 20th century in Boston. Beyond the camera&rsquo;s ability to accurately record reality and to produce candid portraiture, there was an aesthetic movement referred to as Pictorialism. This movement aimed to establish photography as fine art. Pictorialist photographers manipulated an image &ldquo;to express their artistic and abstract ideas&rdquo; and their &ldquo;subjective points of view.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="2">2</button></sup> Influenced by Impressionism, the 19th century art movement that began in France, photographers practicing Pictorialism employed soft-focus techniques and manipulated light to create compositions that were aesthetically pleasing and &ldquo;painterly in style.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="3">3</button></sup> The ultimate goal was to elevate photography to the rank of fine art. Along with the practice of producing straightforward portraiture, Kazanjian was influenced by this aesthetic movement that created photographic images rather than simply recording them. As such, his oeuvre reflected a blend of varied photographic styles that evolved around the turn of the 20th century.</p>
         <p>Boston became a hub for Pictorialism which promoted photography as fine art. Amongst the influx of Armenian immigrants in this rapidly growing diasporan community, those who were entrepreneurial, artistically creative, and trained to practice photography established successful commercial portrait studios. Armenians were widely known to have mastered photography throughout the Ottoman Empire; this reputation not only made assimilation easier into American society, but it also facilitated their efforts to open studios in the major diaspora hubs of Boston and New York.</p>
         <p>Along with Kazanjian, two prominent Armenian studios that represented disparate styles in photographic practice around the turn of the 20th century were the Diran Studio run by Suren and Arsen Diran, and the Garo Studio established by John Higue Garo.</p>
       </div>
@@ -1084,8 +1140,8 @@
       <div class="bio-frame">
         <div class="bio-frame-box bg-tan">
           <h2 class="text-green">Garo Studio</h2>
-          <p>Born in Kharpert, Turkey, John Higue Garo (1870&ndash;1939) landed in Worcester, Massachusetts at the age of 14. With his artistic proclivities and penchant for painting, he immersed himself in the study of the arts and the photographic medium. As the proprietor of an upscale portrait studio in Boston, frequented by members of Boston&rsquo;s elite society, Garo emerged as one of the most celebrated and gifted pictorialist photographers in New England. The renowned Armenian photographer and Garo&rsquo;s mentee, Yousuf Karsh, regarded him as &ldquo;one of the greatest photographers in the history of the art.&rdquo;<sup>4</sup> During the early 20th century, Garo was the recipient of many national and international honors and awards for his artistic photographs. Many of his portraits were published in prestigious American publications like <em>The Spur</em> which catered to affluent high society.</p>
-          <p>A study of Garo&rsquo;s photographs illustrates his reliance on the aesthetic quality set forth by Impressionism and Art Nouveau (1890&ndash;1914) which emphasized soft flowing imagery and natural light. This artistic style influenced him to create photographs of visual beauty that emphasized his subject&rsquo;s personality and their emotional state. Using soft flowing curves and soft-focus techniques to create blur, Garo was motivated to create a work of art rather than to record it. In his estimation, photography was more than a technical practice to record an image, but an artistic pursuit to make photographs look like paintings or etchings. Described as &ldquo;a renaissance man with many colors on his palette,&rdquo; Garo regarded photography as a true form of art which exceeded all other artistic mediums.<sup>5</sup></p>
+          <p>Born in Kharpert, Turkey, John Higue Garo (1870&ndash;1939) landed in Worcester, Massachusetts at the age of 14. With his artistic proclivities and penchant for painting, he immersed himself in the study of the arts and the photographic medium. As the proprietor of an upscale portrait studio in Boston, frequented by members of Boston&rsquo;s elite society, Garo emerged as one of the most celebrated and gifted pictorialist photographers in New England. The renowned Armenian photographer and Garo&rsquo;s mentee, Yousuf Karsh, regarded him as &ldquo;one of the greatest photographers in the history of the art.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="4">4</button></sup> During the early 20th century, Garo was the recipient of many national and international honors and awards for his artistic photographs. Many of his portraits were published in prestigious American publications like <em>The Spur</em> which catered to affluent high society.</p>
+          <p>A study of Garo&rsquo;s photographs illustrates his reliance on the aesthetic quality set forth by Impressionism and Art Nouveau (1890&ndash;1914) which emphasized soft flowing imagery and natural light. This artistic style influenced him to create photographs of visual beauty that emphasized his subject&rsquo;s personality and their emotional state. Using soft flowing curves and soft-focus techniques to create blur, Garo was motivated to create a work of art rather than to record it. In his estimation, photography was more than a technical practice to record an image, but an artistic pursuit to make photographs look like paintings or etchings. Described as &ldquo;a renaissance man with many colors on his palette,&rdquo; Garo regarded photography as a true form of art which exceeded all other artistic mediums.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="5">5</button></sup></p>
         </div>
       </div>
     </div>
@@ -1103,16 +1159,16 @@
             <div class="plain-quote-box text-green">
               <div class="pqb-edge border-green"></div>
               <blockquote>
-                <p>The one outstanding characteristic of photography&mdash;the quality that distinguishes it from drawing, painting, etching, or any other means of pictorial representation&mdash;is the ability of the lens and sensitive film to record infinitely delicate and subtle gradation of tones. This is where photography is supreme and it is because of this quality that photography claims and holds a special place among the fine arts.<sup>6</sup></p>
+                <p>The one outstanding characteristic of photography&mdash;the quality that distinguishes it from drawing, painting, etching, or any other means of pictorial representation&mdash;is the ability of the lens and sensitive film to record infinitely delicate and subtle gradation of tones. This is where photography is supreme and it is because of this quality that photography claims and holds a special place among the fine arts.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="6">6</button></sup></p>
                 <footer>&mdash; John Higue Garo</footer>
               </blockquote>
               <div class="pqb-edge border-green"></div>
             </div>
-            <p>By the 1930s, Garo did not make the necessary adjustments in his practice to meet the rapid changes occurring in the photographic medium. His acclaimed and innovative technical achievements, like the gum arabic technique which created a painterly effect, became obsolete. Under the influence of the Art Deco movement (1920s&ndash;1940s), commercial photography shifted towards streamlined, simpler forms and high contrast in lighting. As such, &ldquo;the days of the photo&rsquo;s soft edge and ethereal mood had yielded to the sharp realism practiced by the modernists in the field.&rdquo;<sup>8</sup></p>
+            <p>By the 1930s, Garo did not make the necessary adjustments in his practice to meet the rapid changes occurring in the photographic medium. His acclaimed and innovative technical achievements, like the gum arabic technique which created a painterly effect, became obsolete. Under the influence of the Art Deco movement (1920s&ndash;1940s), commercial photography shifted towards streamlined, simpler forms and high contrast in lighting. As such, &ldquo;the days of the photo&rsquo;s soft edge and ethereal mood had yielded to the sharp realism practiced by the modernists in the field.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="8">8</button></sup></p>
             <div class="plain-quote-box text-green">
               <div class="pqb-edge border-green"></div>
               <blockquote>
-                <p>&ldquo;I have enjoyed every minute of my life. Photography is my vocation and I love it because I find in it the medium to interpret the art of painting, the art of music, the art of classical literature. But greatest of all, it is my canvas for the fine art of living. Art is everywhere if one can see, hear or feel it. But most of all, it is in life.&rdquo;<sup>7</sup></p>
+                <p>&ldquo;I have enjoyed every minute of my life. Photography is my vocation and I love it because I find in it the medium to interpret the art of painting, the art of music, the art of classical literature. But greatest of all, it is my canvas for the fine art of living. Art is everywhere if one can see, hear or feel it. But most of all, it is in life.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="7">7</button></sup></p>
                 <footer>&mdash; John Higue Garo</footer>
               </blockquote>
               <div class="pqb-edge border-green"></div>
@@ -1195,6 +1251,13 @@
 <div class="carousel-caption bg-green text-tan" id="carousel-caption-2">
   <button type="button" class="caption-close text-maroon" id="captionClose2" aria-label="Close caption">&times;</button>
   <span id="carousel-caption-text-2">&ldquo;Untitled,&rdquo; 1911. Garo Studio, Boston. Yearbook of the Photographers&rsquo; Association of New England, Bridgeport Convention.</span>
+</div>
+
+<div class="footnote-modal-overlay" id="footnoteModalOverlay" hidden>
+  <div class="footnote-modal bg-tan border-green" role="dialog" aria-modal="true" aria-labelledby="footnoteModalText">
+    <button type="button" class="caption-close text-maroon" id="footnoteModalClose" aria-label="Close citation">&times;</button>
+    <p class="footnote-modal-text text-green" id="footnoteModalText"></p>
+  </div>
 </div>
 
 <script>
@@ -1779,6 +1842,55 @@
       captionToggle: document.getElementById('captionToggle2'),
       captionClose: document.getElementById('captionClose2'),
       zoomToggle: document.getElementById('fullCarouselZoomToggle')
+    });
+
+    var footnoteData = {
+      '1': 'Mehmed Ali, Yousuf Karsh & John Garo: The Search for a Master’s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).',
+      '2': 'Adelaide Ryder, “The Photo-Secession Movement: Pioneering Artistry in Early Photography.” https://umfa.utah.edu.',
+      '3': 'Adelaide Ryder, “The Photo-Secession Movement: Pioneering Artistry in Early Photography.” https://umfa.utah.edu.',
+      '4': 'Mehmed Ali, Yousuf Karsh & John Garo: The Search for a Master’s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).',
+      '5': 'Mehmed Ali, Yousuf Karsh & John Garo: The Search for a Master’s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).',
+      '6': 'American Photography XXIII, no. 12, (1929).',
+      '7': 'Mehmed Ali, Yousuf Karsh & John Garo: The Search for a Master’s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).',
+      '8': 'Mehmed Ali, Yousuf Karsh & John Garo: The Search for a Master’s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).'
+    };
+
+    var footnoteOverlay = document.getElementById('footnoteModalOverlay');
+    var footnoteText = document.getElementById('footnoteModalText');
+    var footnoteCloseBtn = document.getElementById('footnoteModalClose');
+    var footnoteLastFocused = null;
+
+    function openFootnoteModal(num) {
+      var text = footnoteData[num];
+      if (!text || !footnoteOverlay || !footnoteText) return;
+      footnoteText.textContent = text;
+      footnoteOverlay.hidden = false;
+      footnoteLastFocused = document.activeElement;
+      footnoteCloseBtn.focus();
+    }
+
+    function closeFootnoteModal() {
+      if (!footnoteOverlay || footnoteOverlay.hidden) return;
+      footnoteOverlay.hidden = true;
+      if (footnoteLastFocused && footnoteLastFocused.focus) footnoteLastFocused.focus();
+    }
+
+    document.querySelectorAll('.footnote-marker').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        openFootnoteModal(btn.getAttribute('data-footnote'));
+      });
+    });
+
+    if (footnoteOverlay) {
+      footnoteOverlay.addEventListener('click', function (e) {
+        if (e.target === footnoteOverlay) closeFootnoteModal();
+      });
+    }
+    if (footnoteCloseBtn) {
+      footnoteCloseBtn.addEventListener('click', closeFootnoteModal);
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeFootnoteModal();
     });
   })();
 </script>
