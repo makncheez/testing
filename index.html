@@ -26,6 +26,7 @@
     --color-maroon: #3a1420;
     --color-maroon-rgb: 58, 20, 32;
     --color-red: #CA2727;
+    --color-pink: #E8A9C4;
   }
 
   /* ---- Colorways: background fills, text colors, icon fills, borders ---- */
@@ -33,6 +34,7 @@
   .bg-tan { background-color: var(--color-tan); }
   .bg-green { background-color: var(--color-green); }
   .bg-black { background-color: var(--color-black); }
+  .bg-pink { background-color: var(--color-pink); }
 
   .text-tan { color: var(--color-tan); }
   .text-green { color: var(--color-green); }
@@ -407,14 +409,13 @@
     line-height: 1;
     cursor: pointer;
     padding: 0;
-    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease;
   }
 
   .footnote-marker:hover,
   .footnote-marker:focus-visible {
     background: var(--color-purple);
-    color: var(--color-green);
-    transform: rotate(45deg);
+    color: transparent;
     outline: none;
   }
 
@@ -435,8 +436,8 @@
 
   .footnote-modal {
     position: relative;
-    max-width: 560px;
-    width: 100%;
+    width: 90%;
+    max-width: 90vw;
     max-height: 80vh;
     overflow-y: auto;
     padding: 36px 48px;
@@ -446,14 +447,49 @@
 
   .footnote-modal-text {
     margin: 0;
-    font-size: 18px;
-    line-height: 1.6em;
+    font-size: 1.9em;
+    line-height: 1.3em;
   }
 
-  .footnote-modal .caption-close {
+  .footnote-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .footnote-icon-btn:hover,
+  .footnote-icon-btn:focus-visible {
+    opacity: 0.75;
+    outline: none;
+  }
+
+  .footnote-icon-btn .material-symbols-outlined {
+    font-size: 20px;
+  }
+
+  .footnote-modal-close {
+    position: absolute;
     top: 50%;
-    right: 20px;
+    right: 28px;
     transform: translateY(-50%);
+  }
+
+  .footnote-copy-btn {
+    width: 24px;
+    height: 24px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .footnote-copy-btn .material-symbols-outlined {
+    font-size: 16px;
   }
 
   /* ---- Studio: two-column section, copy left, image carousel right ---- */
@@ -1270,8 +1306,12 @@
 
 <div class="footnote-modal-overlay" id="footnoteModalOverlay" hidden>
   <div class="footnote-modal bg-green" role="dialog" aria-modal="true" aria-labelledby="footnoteModalText">
-    <button type="button" class="caption-close text-tan" id="footnoteModalClose" aria-label="Close citation">&times;</button>
-    <p class="footnote-modal-text text-tan" id="footnoteModalText"></p>
+    <button type="button" class="footnote-icon-btn footnote-modal-close bg-pink text-green" id="footnoteModalClose" aria-label="Close citation">
+      <span class="material-symbols-outlined" aria-hidden="true">close</span>
+    </button>
+    <p class="footnote-modal-text text-tan" id="footnoteModalText"><span id="footnoteModalTextInner"></span><button type="button" class="footnote-icon-btn footnote-copy-btn bg-pink text-green" id="footnoteModalCopy" aria-label="Copy citation text">
+      <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+    </button></p>
   </div>
 </div>
 
@@ -1871,13 +1911,16 @@
     };
 
     var footnoteOverlay = document.getElementById('footnoteModalOverlay');
-    var footnoteText = document.getElementById('footnoteModalText');
+    var footnoteText = document.getElementById('footnoteModalTextInner');
     var footnoteCloseBtn = document.getElementById('footnoteModalClose');
+    var footnoteCopyBtn = document.getElementById('footnoteModalCopy');
     var footnoteLastFocused = null;
+    var footnoteCurrentText = '';
 
     function openFootnoteModal(num) {
       var text = footnoteData[num];
       if (!text || !footnoteOverlay || !footnoteText) return;
+      footnoteCurrentText = text;
       footnoteText.textContent = text;
       footnoteOverlay.hidden = false;
       footnoteLastFocused = document.activeElement;
@@ -1903,6 +1946,13 @@
     }
     if (footnoteCloseBtn) {
       footnoteCloseBtn.addEventListener('click', closeFootnoteModal);
+    }
+    if (footnoteCopyBtn) {
+      footnoteCopyBtn.addEventListener('click', function () {
+        if (navigator.clipboard && footnoteCurrentText) {
+          navigator.clipboard.writeText(footnoteCurrentText);
+        }
+      });
     }
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeFootnoteModal();
