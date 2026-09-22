@@ -776,10 +776,6 @@
     margin-top: -100vh;
   }
 
-  .bio.is-visible {
-    background-color: var(--color-tan);
-  }
-
   .bio-col {
     display: flex;
     align-items: flex-end;
@@ -831,10 +827,6 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-  }
-
-  .quotes.is-visible {
-    background-color: var(--color-tan);
   }
 
   .quotes-col {
@@ -946,6 +938,10 @@
   }
 
   @media (max-width: 700px) {
+    .bio.is-visible,
+    .quotes.is-visible {
+      background-color: var(--color-tan);
+    }
     .intro-copy,
     .bio-copy,
     .quotes-copy,
