@@ -119,7 +119,6 @@
   .qf-corner,
   .zoom-toggle,
   .carousel-btn,
-  .caption-close,
   .full-carousel .carousel-slide,
   h2 {
     display: flex;
@@ -135,14 +134,12 @@
 
   .caption-toggle,
   .zoom-toggle,
-  .carousel-btn,
-  .caption-close {
+  .carousel-btn {
     border: none;
   }
 
   .caption-toggle,
   .zoom-toggle,
-  .caption-close,
   .carousel-btn,
   .carousel-dot {
     cursor: pointer;
@@ -454,7 +451,7 @@
     line-height: 1.3em;
   }
 
-  .footnote-icon-btn {
+  .icon-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -467,24 +464,24 @@
     transition: opacity 0.2s ease;
   }
 
-  .footnote-icon-btn:hover,
-  .footnote-icon-btn:focus-visible {
+  .icon-btn:hover,
+  .icon-btn:focus-visible {
     opacity: 0.75;
     outline: none;
   }
 
-  .footnote-icon-btn .material-symbols-outlined {
+  .icon-btn .material-symbols-outlined {
     font-size: 20px;
   }
 
-  .footnote-modal-close {
+  .icon-btn-close-top {
     position: absolute;
     top: 0;
     left: 50%;
     transform: translate(-50%, -50%);
   }
 
-  .footnote-copy-btn {
+  .copy-btn {
     width: auto;
     height: auto;
     background: transparent;
@@ -494,11 +491,11 @@
     vertical-align: middle;
   }
 
-  .footnote-copy-btn .material-symbols-outlined {
+  .copy-btn .material-symbols-outlined {
     font-size: 16px;
   }
 
-  .footnote-copy-label {
+  .copy-label {
     font-family: 'DM Mono', monospace;
     font-size: 14px;
   }
@@ -669,14 +666,14 @@
   .carousel-caption {
     position: fixed;
     left: 50%;
-    bottom: 8%;
+    bottom: 12%;
     z-index: 999999;
-    max-width: 700px;
+    max-width: 900px;
     margin: 0;
     padding: 28px 40px 28px 32px;
     border-radius: 22px;
-    font-size: 1.4em;
-    line-height: 1.6em;
+    font-size: 1.9em;
+    line-height: 1.3em;
     font-style: normal;
     text-align: center;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
@@ -697,30 +694,7 @@
 
   #carousel-caption {
     position: absolute;
-    max-width: min(90%, 480px);
-  }
-
-  .caption-close {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    border-radius: 50%;
-    background: transparent;
-    font-family: "Times New Roman", Times, serif;
-    font-size: 0.85em;
-    font-style: normal;
-    line-height: 1;
-    transition: background 0.2s ease;
-  }
-
-  .caption-close:hover,
-  .caption-close:focus-visible {
-    background: rgba(var(--color-maroon-rgb), 0.14);
-    outline: 2px solid var(--color-maroon);
-    outline-offset: 1px;
+    max-width: min(90%, 620px);
   }
 
   .carousel-right-controls {
@@ -786,6 +760,11 @@
     height: auto;
   }
 
+  .full-image .carousel-left-controls {
+    top: 5%;
+    bottom: auto;
+  }
+
   /* ---- Bio: two-column section, copy left, blank right, scrolls up over the photograph ---- */
 
   .bio {
@@ -816,7 +795,7 @@
 
   .bio-frame {
     position: relative;
-    padding: 25px;
+    padding: 10px;
   }
 
   .bio-left .bio-frame {
@@ -1175,8 +1154,13 @@
     </div>
 
     <div class="carousel-caption bg-green text-tan" id="carousel-caption">
-      <button type="button" class="caption-close text-maroon" id="captionClose" aria-label="Close caption">&times;</button>
-      <span id="carousel-caption-text">Portrait of a young woman, ca. 1910, with a stamp on the mount of Charles H. Gallup, owner of the renowned Gallup photographic studio in Poughkeepsie, New York. Arsen Diran, Diran Studio, Boston. Courtesy of the Malikian Collection.</span>
+      <button type="button" class="icon-btn icon-btn-close-top bg-pink text-green" id="captionClose" aria-label="Close caption">
+        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+      </button>
+      <span id="carousel-caption-text">Portrait of a young woman, ca. 1910, with a stamp on the mount of Charles H. Gallup, owner of the renowned Gallup photographic studio in Poughkeepsie, New York. Arsen Diran, Diran Studio, Boston. Courtesy of the Malikian Collection.</span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text" aria-label="Copy caption text">
+        <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+        <span class="copy-label"></span>
+      </button>
     </div>
   </div>
 </section>
@@ -1192,8 +1176,13 @@
 </div>
 
 <div class="carousel-caption bg-green text-tan" id="carousel-caption-3">
-  <button type="button" class="caption-close text-maroon" id="captionClose3" aria-label="Close caption">&times;</button>
-  <span id="carousel-caption-text-3">John Higue Garo (1875&ndash;1939), Armenian American portrait photographer and painter. Yousuf Karsh, Boston. Estate of Yousuf Karsh. Photogravure. Courtesy of the Malikian Collection.</span>
+  <button type="button" class="icon-btn icon-btn-close-top bg-pink text-green" id="captionClose3" aria-label="Close caption">
+    <span class="material-symbols-outlined" aria-hidden="true">close</span>
+  </button>
+  <span id="carousel-caption-text-3">John Higue Garo (1875&ndash;1939), Armenian American portrait photographer and painter. Yousuf Karsh, Boston. Estate of Yousuf Karsh. Photogravure. Courtesy of the Malikian Collection.</span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text-3" aria-label="Copy caption text">
+    <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+    <span class="copy-label"></span>
+  </button>
 </div>
 
 <section class="bio" id="bio">
@@ -1311,19 +1300,24 @@
 </div>
 
 <div class="carousel-caption bg-green text-tan" id="carousel-caption-2">
-  <button type="button" class="caption-close text-maroon" id="captionClose2" aria-label="Close caption">&times;</button>
-  <span id="carousel-caption-text-2">&ldquo;Untitled,&rdquo; 1911. Garo Studio, Boston. Yearbook of the Photographers&rsquo; Association of New England, Bridgeport Convention.</span>
+  <button type="button" class="icon-btn icon-btn-close-top bg-pink text-green" id="captionClose2" aria-label="Close caption">
+    <span class="material-symbols-outlined" aria-hidden="true">close</span>
+  </button>
+  <span id="carousel-caption-text-2">&ldquo;Untitled,&rdquo; 1911. Garo Studio, Boston. Yearbook of the Photographers&rsquo; Association of New England, Bridgeport Convention.</span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text-2" aria-label="Copy caption text">
+    <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+    <span class="copy-label"></span>
+  </button>
 </div>
 
 <div class="footnote-modal-overlay" id="footnoteModalOverlay" hidden>
   <div class="footnote-modal bg-green" role="dialog" aria-modal="true" aria-labelledby="footnoteModalText">
-    <button type="button" class="footnote-icon-btn footnote-modal-close bg-pink text-green" id="footnoteModalClose" aria-label="Close citation">
+    <button type="button" class="icon-btn icon-btn-close-top bg-pink text-green" id="footnoteModalClose" aria-label="Close citation">
       <span class="material-symbols-outlined" aria-hidden="true">close</span>
     </button>
     <div class="footnote-modal-scroll">
-      <p class="footnote-modal-text text-tan" id="footnoteModalText"><span id="footnoteModalTextInner"></span><button type="button" class="footnote-icon-btn footnote-copy-btn text-tan" id="footnoteModalCopy" aria-label="Copy citation text">
+      <p class="footnote-modal-text text-tan" id="footnoteModalText"><span id="footnoteModalTextInner"></span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="footnoteModalTextInner" aria-label="Copy citation text">
         <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
-        <span class="footnote-copy-label" id="footnoteCopyLabel"></span>
+        <span class="copy-label"></span>
       </button></p>
     </div>
   </div>
@@ -1927,19 +1921,12 @@
     var footnoteOverlay = document.getElementById('footnoteModalOverlay');
     var footnoteText = document.getElementById('footnoteModalTextInner');
     var footnoteCloseBtn = document.getElementById('footnoteModalClose');
-    var footnoteCopyBtn = document.getElementById('footnoteModalCopy');
-    var footnoteCopyLabel = document.getElementById('footnoteCopyLabel');
-    var footnoteCopyTimeout = null;
     var footnoteLastFocused = null;
-    var footnoteCurrentText = '';
 
     function openFootnoteModal(num) {
       var text = footnoteData[num];
       if (!text || !footnoteOverlay || !footnoteText) return;
-      footnoteCurrentText = text;
       footnoteText.textContent = text;
-      if (footnoteCopyLabel) footnoteCopyLabel.textContent = '';
-      clearTimeout(footnoteCopyTimeout);
       footnoteOverlay.hidden = false;
       footnoteLastFocused = document.activeElement;
       footnoteCloseBtn.focus();
@@ -1965,22 +1952,27 @@
     if (footnoteCloseBtn) {
       footnoteCloseBtn.addEventListener('click', closeFootnoteModal);
     }
-    if (footnoteCopyBtn) {
-      footnoteCopyBtn.addEventListener('click', function () {
-        if (navigator.clipboard && footnoteCurrentText) {
-          navigator.clipboard.writeText(footnoteCurrentText);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeFootnoteModal();
+    });
+
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+      var label = btn.querySelector('.copy-label');
+      var copyTimeout = null;
+      btn.addEventListener('click', function () {
+        var targetEl = document.getElementById(btn.getAttribute('data-copy-target'));
+        var text = targetEl ? targetEl.textContent : '';
+        if (navigator.clipboard && text) {
+          navigator.clipboard.writeText(text);
         }
-        if (footnoteCopyLabel) {
-          footnoteCopyLabel.textContent = 'Copied';
-          clearTimeout(footnoteCopyTimeout);
-          footnoteCopyTimeout = setTimeout(function () {
-            footnoteCopyLabel.textContent = '';
+        if (label) {
+          label.textContent = 'Copied';
+          clearTimeout(copyTimeout);
+          copyTimeout = setTimeout(function () {
+            label.textContent = '';
           }, 1500);
         }
       });
-    }
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeFootnoteModal();
     });
   })();
 </script>
