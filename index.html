@@ -400,12 +400,14 @@
     line-height: 1;
     cursor: pointer;
     padding: 0;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
   }
 
   .footnote-marker:hover,
   .footnote-marker:focus-visible {
-    background: var(--color-maroon);
+    background: var(--color-purple);
+    color: var(--color-green);
+    transform: rotate(45deg);
     outline: none;
   }
 
