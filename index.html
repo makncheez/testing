@@ -766,12 +766,19 @@
   }
 
   .plain-quote-box {
-    border-width: 1px;
+    display: grid;
+    grid-template-columns: 20px 1fr 20px;
+    column-gap: 40px;
+    padding: 20px 0;
+  }
+
+  .pqb-edge {
+    border-width: 1.4px;
     border-style: solid;
-    padding: 10px;
   }
 
   .plain-quote-box blockquote {
+    grid-column: 2;
     margin: 0;
     font-style: normal;
   }
@@ -1093,18 +1100,22 @@
       <div class="bio-frame">
         <div class="bio-frame-box bg-tan">
           <div class="quotes-frame-content">
-            <div class="plain-quote-box border-green text-green">
+            <div class="plain-quote-box text-green">
+              <div class="pqb-edge border-green"></div>
               <blockquote>
                 <p>The one outstanding characteristic of photography&mdash;the quality that distinguishes it from drawing, painting, etching, or any other means of pictorial representation&mdash;is the ability of the lens and sensitive film to record infinitely delicate and subtle gradation of tones. This is where photography is supreme and it is because of this quality that photography claims and holds a special place among the fine arts.<sup>6</sup></p>
                 <footer>&mdash; John Higue Garo</footer>
               </blockquote>
+              <div class="pqb-edge border-green"></div>
             </div>
             <p>By the 1930s, Garo did not make the necessary adjustments in his practice to meet the rapid changes occurring in the photographic medium. His acclaimed and innovative technical achievements, like the gum arabic technique which created a painterly effect, became obsolete. Under the influence of the Art Deco movement (1920s&ndash;1940s), commercial photography shifted towards streamlined, simpler forms and high contrast in lighting. As such, &ldquo;the days of the photo&rsquo;s soft edge and ethereal mood had yielded to the sharp realism practiced by the modernists in the field.&rdquo;<sup>8</sup></p>
-            <div class="plain-quote-box border-green text-green">
+            <div class="plain-quote-box text-green">
+              <div class="pqb-edge border-green"></div>
               <blockquote>
                 <p>&ldquo;I have enjoyed every minute of my life. Photography is my vocation and I love it because I find in it the medium to interpret the art of painting, the art of music, the art of classical literature. But greatest of all, it is my canvas for the fine art of living. Art is everywhere if one can see, hear or feel it. But most of all, it is in life.&rdquo;<sup>7</sup></p>
                 <footer>&mdash; John Higue Garo</footer>
               </blockquote>
+              <div class="pqb-edge border-green"></div>
             </div>
           </div>
         </div>
