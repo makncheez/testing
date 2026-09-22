@@ -964,6 +964,11 @@
       font-size: 1.4em;
       line-height: 1.3em;
     }
+    .footnote-modal-text,
+    .carousel-caption {
+      font-size: 1.3em;
+      line-height: 1.4em;
+    }
     .full-carousel-wrap {
       padding: 16px;
     }
@@ -1942,6 +1947,10 @@
     var footnoteCloseBtn = document.getElementById('footnoteModalClose');
     var footnoteLastFocused = null;
 
+    function onFootnoteScroll() {
+      closeFootnoteModal();
+    }
+
     function openFootnoteModal(num) {
       var text = footnoteData[num];
       if (!text || !footnoteOverlay || !footnoteText) return;
@@ -1949,11 +1958,13 @@
       footnoteOverlay.hidden = false;
       footnoteLastFocused = document.activeElement;
       footnoteCloseBtn.focus();
+      window.addEventListener('scroll', onFootnoteScroll, { passive: true });
     }
 
     function closeFootnoteModal() {
       if (!footnoteOverlay || footnoteOverlay.hidden) return;
       footnoteOverlay.hidden = true;
+      window.removeEventListener('scroll', onFootnoteScroll);
       if (footnoteLastFocused && footnoteLastFocused.focus) footnoteLastFocused.focus();
     }
 
