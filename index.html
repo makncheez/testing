@@ -438,11 +438,14 @@
     position: relative;
     width: 90%;
     max-width: 90vw;
-    max-height: 80vh;
-    overflow-y: auto;
     padding: 36px 48px;
     border-radius: 999px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  }
+
+  .footnote-modal-scroll {
+    max-height: 80vh;
+    overflow-y: auto;
   }
 
   .footnote-modal-text {
@@ -1317,10 +1320,12 @@
     <button type="button" class="footnote-icon-btn footnote-modal-close bg-pink text-green" id="footnoteModalClose" aria-label="Close citation">
       <span class="material-symbols-outlined" aria-hidden="true">close</span>
     </button>
-    <p class="footnote-modal-text text-tan" id="footnoteModalText"><span id="footnoteModalTextInner"></span><button type="button" class="footnote-icon-btn footnote-copy-btn text-tan" id="footnoteModalCopy" aria-label="Copy citation text">
-      <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
-      <span class="footnote-copy-label" id="footnoteCopyLabel"></span>
-    </button></p>
+    <div class="footnote-modal-scroll">
+      <p class="footnote-modal-text text-tan" id="footnoteModalText"><span id="footnoteModalTextInner"></span><button type="button" class="footnote-icon-btn footnote-copy-btn text-tan" id="footnoteModalCopy" aria-label="Copy citation text">
+        <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+        <span class="footnote-copy-label" id="footnoteCopyLabel"></span>
+      </button></p>
+    </div>
   </div>
 </div>
 
