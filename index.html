@@ -476,20 +476,28 @@
 
   .footnote-modal-close {
     position: absolute;
-    top: 50%;
-    right: 28px;
-    transform: translateY(-50%);
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .footnote-copy-btn {
-    width: 24px;
-    height: 24px;
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-radius: 0;
+    gap: 4px;
     margin-left: 8px;
     vertical-align: middle;
   }
 
   .footnote-copy-btn .material-symbols-outlined {
     font-size: 16px;
+  }
+
+  .footnote-copy-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
   }
 
   /* ---- Studio: two-column section, copy left, image carousel right ---- */
@@ -1309,8 +1317,9 @@
     <button type="button" class="footnote-icon-btn footnote-modal-close bg-pink text-green" id="footnoteModalClose" aria-label="Close citation">
       <span class="material-symbols-outlined" aria-hidden="true">close</span>
     </button>
-    <p class="footnote-modal-text text-tan" id="footnoteModalText"><span id="footnoteModalTextInner"></span><button type="button" class="footnote-icon-btn footnote-copy-btn bg-pink text-green" id="footnoteModalCopy" aria-label="Copy citation text">
+    <p class="footnote-modal-text text-tan" id="footnoteModalText"><span id="footnoteModalTextInner"></span><button type="button" class="footnote-icon-btn footnote-copy-btn text-tan" id="footnoteModalCopy" aria-label="Copy citation text">
       <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+      <span class="footnote-copy-label" id="footnoteCopyLabel"></span>
     </button></p>
   </div>
 </div>
@@ -1914,6 +1923,8 @@
     var footnoteText = document.getElementById('footnoteModalTextInner');
     var footnoteCloseBtn = document.getElementById('footnoteModalClose');
     var footnoteCopyBtn = document.getElementById('footnoteModalCopy');
+    var footnoteCopyLabel = document.getElementById('footnoteCopyLabel');
+    var footnoteCopyTimeout = null;
     var footnoteLastFocused = null;
     var footnoteCurrentText = '';
 
@@ -1922,6 +1933,8 @@
       if (!text || !footnoteOverlay || !footnoteText) return;
       footnoteCurrentText = text;
       footnoteText.textContent = text;
+      if (footnoteCopyLabel) footnoteCopyLabel.textContent = '';
+      clearTimeout(footnoteCopyTimeout);
       footnoteOverlay.hidden = false;
       footnoteLastFocused = document.activeElement;
       footnoteCloseBtn.focus();
@@ -1951,6 +1964,13 @@
       footnoteCopyBtn.addEventListener('click', function () {
         if (navigator.clipboard && footnoteCurrentText) {
           navigator.clipboard.writeText(footnoteCurrentText);
+        }
+        if (footnoteCopyLabel) {
+          footnoteCopyLabel.textContent = 'Copied';
+          clearTimeout(footnoteCopyTimeout);
+          footnoteCopyTimeout = setTimeout(function () {
+            footnoteCopyLabel.textContent = '';
+          }, 1500);
         }
       });
     }
