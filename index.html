@@ -518,20 +518,17 @@
     padding-top: 64px;
   }
 
-  /* ---- Trio: three-column text layout ---- */
+  /* ---- Trio: single-column text layout ---- */
 
   .trio {
     position: relative;
     z-index: 1;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 40px;
+    max-width: 620px;
+    margin: 0 auto;
     padding: 64px 40px;
-  }
-
-  .trio-col {
-    flex: 1 1 0;
-    min-width: 0;
   }
 
   .studio-col {
@@ -981,7 +978,6 @@
       background-color: var(--color-tan);
     }
     .trio {
-      flex-direction: column;
       gap: 32px;
       padding: 56px 28px;
     }
