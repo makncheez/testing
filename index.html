@@ -561,7 +561,8 @@
     overflow: hidden;
   }
 
-  .studio.is-zoom-active .studio-right {
+  .studio.is-zoom-active .studio-right,
+  .studio-right.is-zoom-active {
     cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30'><circle cx='15' cy='15' r='13' fill='transparent' stroke='white' stroke-width='1'/></svg>") 15 15, crosshair;
   }
 
@@ -1366,6 +1367,68 @@
   </div>
 </div>
 
+<section class="studio bg-tan" id="studio2">
+  <div class="studio-col studio-left">
+    <div class="studio-copy text-black">
+      <p>Around the turn of the 20th century, Boston underwent a period of significant demographic shifts and modernization. This transformation was characterized by remarkable developments and rapid expansion, such as the opening of the Tremont Street Subway in 1897 which was the first underground transit system in the United States. Within this transformative period of revitalization in Boston, Kazanjian&mdash;who came to America as a traumatized indigent immigrant&mdash;found success both personally and professionally.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="9">9</button></sup></p>
+      <p>On January 17, 1907, Kazanjian married Leah Ethel Davis, daughter of the actor Albert Davis. It was Kazanjian&rsquo;s artistic background and his playful marketing strategy that brought his future wife to the studio.</p>
+      <div class="plain-quote-box text-green">
+        <div class="pqb-edge border-green"></div>
+        <blockquote>
+          <p>&ldquo;It was through his profession that Daddy met my mother. My aunt had heard about this photographer, whom she described as dark, handsome, mysterious, twirling fierce black moustachios, who painted birds, bees and butterflies on a lady&rsquo;s shoulder or cheek when he photographed her! Giggling with the wickedness of it all, my mother and aunt went over to have their pictures taken, and sure enough, Father painted a butterfly on Mother&rsquo;s shoulder.&rdquo;</p>
+          <p>&ldquo;When mother wandered into the studio with my aunt, he must have really been inspired. Taking note of her porcelain beauty&mdash;the fragile of her transparent skin, the wide, blue eyes, the shimmering gold hair&mdash;he painted the most delicate butterfly of his career and began his courtship on the spot by asking permission to call on her.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="10">10</button></sup></p>
+          <footer>&mdash; Arlene Kazanjian Francis</footer>
+        </blockquote>
+        <div class="pqb-edge border-green"></div>
+      </div>
+      <p>Kazanjian&rsquo;s romantic pursuit to impress Leah Davis led to fifty-nine years of marriage and a daughter, Arlene Kazanjian Francis (October 20, 1907&ndash;May 31, 2001), who became a renowned radio, television, film, and stage actress. Francis described her father as a stern, old-world, overly protective, and &ldquo;archaic&rdquo; paternal figure. Yet, this &ldquo;strait-laced,&rdquo; conventional Armenian father was undeniably an &ldquo;adorable&rdquo; man committed to his family, and passionate about his artistic endeavors.</p>
+    </div>
+  </div>
+  <div class="studio-col studio-right" id="carousel2">
+    <div class="carousel-slide is-active">
+      <img src="./images/2/1.png" alt="">
+    </div>
+    <div class="carousel-slide">
+      <img src="./images/2/2.png" alt="">
+    </div>
+    <div class="carousel-slide">
+      <img src="./images/2/3.png" alt="">
+    </div>
+    <div class="carousel-slide">
+      <img src="./images/2/4.png" alt="">
+    </div>
+
+    <div class="carousel-left-controls">
+      <button type="button" class="caption-toggle btn-colorway-text" id="captionToggle5" aria-pressed="false" aria-controls="carousel-caption-5">Caption</button>
+      <button type="button" class="zoom-toggle btn-colorway-icon" id="zoomToggle2" aria-pressed="false" aria-label="Toggle zoom">
+        <span class="material-symbols-outlined" aria-hidden="true">search</span>
+      </button>
+    </div>
+
+    <div class="carousel-right-controls">
+      <button type="button" class="carousel-btn carousel-prev btn-colorway-icon" aria-label="Previous photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
+      <button type="button" class="carousel-btn carousel-next btn-colorway-icon" aria-label="Next photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
+    </div>
+
+    <div class="carousel-dots">
+      <button type="button" class="carousel-dot dot-colorway is-active" aria-label="Go to photograph 1"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 2"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 3"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 4"></button>
+    </div>
+
+    <div class="carousel-caption bg-green text-tan" id="carousel-caption-5">
+      <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose5" aria-label="Close caption">
+        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+      </button>
+      <span id="carousel-caption-text-5"></span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text-5" aria-label="Copy caption text">
+        <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+        <span class="copy-label"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
 <div class="footnote-modal-overlay" id="footnoteModalOverlay" hidden>
   <div class="footnote-modal bg-green" role="dialog" aria-modal="true" aria-labelledby="footnoteModalText">
     <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="footnoteModalClose" aria-label="Close citation">
@@ -2004,6 +2067,13 @@
       zoomToggle: document.getElementById('fullCarouselZoomToggle')
     });
 
+    initSimpleCarousel(document.getElementById('carousel2'), {
+      captionEl: document.getElementById('carousel-caption-5'),
+      captionToggle: document.getElementById('captionToggle5'),
+      captionClose: document.getElementById('captionClose5'),
+      zoomToggle: document.getElementById('zoomToggle2')
+    });
+
     var footnoteData = {
       '1': 'Mehmed Ali, Yousuf Karsh & John Garo: The Search for a Master’s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).',
       '2': 'Adelaide Ryder, “The Photo-Secession Movement: Pioneering Artistry in Early Photography.” https://umfa.utah.edu.',
@@ -2012,7 +2082,9 @@
       '5': 'Mehmed Ali, Yousuf Karsh & John Garo: The Search for a Master’s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).',
       '6': 'American Photography XXIII, no. 12, (1929).',
       '7': 'Mehmed Ali, Yousuf Karsh & John Garo: The Search for a Master’s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).',
-      '8': 'Mehmed Ali, Yousuf Karsh & John Garo: The Search for a Master’s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).'
+      '8': 'Mehmed Ali, Yousuf Karsh & John Garo: The Search for a Master’s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).',
+      '9': 'Arlene Francis with Florence Roman, Arlene Francis: A Memoir. (New York: Simon and Schuster, 1978).',
+      '10': 'Arlene Francis with Florence Roman, Arlene Francis: A Memoir. (New York: Simon and Schuster, 1978).'
     };
 
     var footnoteOverlay = document.getElementById('footnoteModalOverlay');
