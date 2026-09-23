@@ -523,12 +523,16 @@
   .trio {
     position: relative;
     z-index: 1;
+    width: 100%;
+    padding: 64px 40px;
+  }
+
+  .trio-inner {
     display: flex;
     flex-direction: column;
     gap: 40px;
-    max-width: 620px;
+    max-width: 700px;
     margin: 0 auto;
-    padding: 64px 40px;
   }
 
   .studio-col {
@@ -978,8 +982,10 @@
       background-color: var(--color-tan);
     }
     .trio {
-      gap: 32px;
       padding: 56px 28px;
+    }
+    .trio-inner {
+      gap: 32px;
     }
     .intro-copy,
     .bio-copy,
@@ -1550,6 +1556,7 @@
 </section>
 
 <section class="trio bg-tan" id="aeroMeet">
+ <div class="trio-inner">
   <div class="trio-col text-black">
     <h2 class="text-green">The Harvard-Boston Aero Meet of 1910</h2>
     <p>During Kazanjian&rsquo;s years in Boston, he stepped out of the studio to visually document the inaugural Harvard-Boston Aero Meet which took place from September 3-13, 1910. These documentary-style photographs captured a sequence of images that chronicled &ldquo;the greatest meet of its kind in America which drew over 60,000 paid spectators.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="14">14</button></sup> Undoubtedly, these photographs, signed as &ldquo;Aram,&rdquo; added an important dimension to his portfolio. It gave him name recognition in the field of commercial and documentary photography.</p>
@@ -1569,6 +1576,7 @@
       <div class="pqb-edge border-green"></div>
     </div>
   </div>
+ </div>
 </section>
 
 <div class="footnote-modal-overlay" id="footnoteModalOverlay" hidden>
