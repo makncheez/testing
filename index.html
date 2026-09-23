@@ -26,7 +26,6 @@
     --color-maroon: #3a1420;
     --color-maroon-rgb: 58, 20, 32;
     --color-red: #CA2727;
-    --color-pink: #E8A9C4;
   }
 
   /* ---- Colorways: background fills, text colors, icon fills, borders ---- */
@@ -34,7 +33,7 @@
   .bg-tan { background-color: var(--color-tan); }
   .bg-green { background-color: var(--color-green); }
   .bg-black { background-color: var(--color-black); }
-  .bg-pink { background-color: var(--color-pink); }
+  .bg-purple { background-color: var(--color-purple); }
 
   .text-tan { color: var(--color-tan); }
   .text-green { color: var(--color-green); }
@@ -148,7 +147,6 @@
   .hero-label,
   .quote-frame .hero-label-group,
   .caption-toggle,
-  .carousel-caption,
   h2 {
     font-family: 'DM Mono', monospace;
   }
@@ -664,9 +662,9 @@
   }
 
   .carousel-caption {
-    position: fixed;
+    position: absolute;
     left: 50%;
-    bottom: 12%;
+    top: 5%;
     z-index: 999999;
     max-width: 900px;
     margin: 0;
@@ -693,7 +691,6 @@
   }
 
   #carousel-caption {
-    position: absolute;
     max-width: min(90%, 620px);
   }
 
@@ -1167,7 +1164,7 @@
     </div>
 
     <div class="carousel-caption bg-green text-tan" id="carousel-caption">
-      <button type="button" class="icon-btn icon-btn-close-top bg-pink text-green" id="captionClose" aria-label="Close caption">
+      <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose" aria-label="Close caption">
         <span class="material-symbols-outlined" aria-hidden="true">close</span>
       </button>
       <span id="carousel-caption-text">Portrait of a young woman, ca. 1910, with a stamp on the mount of Charles H. Gallup, owner of the renowned Gallup photographic studio in Poughkeepsie, New York. Arsen Diran, Diran Studio, Boston. Courtesy of the Malikian Collection.</span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text" aria-label="Copy caption text">
@@ -1185,17 +1182,16 @@
     <div class="carousel-left-controls">
       <button type="button" class="caption-toggle btn-colorway-text" id="captionToggle3" aria-pressed="false" aria-controls="carousel-caption-3">Caption</button>
     </div>
+    <div class="carousel-caption bg-green text-tan" id="carousel-caption-3">
+      <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose3" aria-label="Close caption">
+        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+      </button>
+      <span id="carousel-caption-text-3">John Higue Garo (1875&ndash;1939), Armenian American portrait photographer and painter. Yousuf Karsh, Boston. Estate of Yousuf Karsh. Photogravure. Courtesy of the Malikian Collection.</span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text-3" aria-label="Copy caption text">
+        <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+        <span class="copy-label"></span>
+      </button>
+    </div>
   </div>
-</div>
-
-<div class="carousel-caption bg-green text-tan" id="carousel-caption-3">
-  <button type="button" class="icon-btn icon-btn-close-top bg-pink text-green" id="captionClose3" aria-label="Close caption">
-    <span class="material-symbols-outlined" aria-hidden="true">close</span>
-  </button>
-  <span id="carousel-caption-text-3">John Higue Garo (1875&ndash;1939), Armenian American portrait photographer and painter. Yousuf Karsh, Boston. Estate of Yousuf Karsh. Photogravure. Courtesy of the Malikian Collection.</span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text-3" aria-label="Copy caption text">
-    <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
-    <span class="copy-label"></span>
-  </button>
 </div>
 
 <section class="bio" id="bio">
@@ -1309,6 +1305,16 @@
     <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 11"></button>
     <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 12"></button>
   </div>
+
+  <div class="carousel-caption bg-green text-tan" id="carousel-caption-2">
+    <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose2" aria-label="Close caption">
+      <span class="material-symbols-outlined" aria-hidden="true">close</span>
+    </button>
+    <span id="carousel-caption-text-2">&ldquo;Untitled,&rdquo; 1911. Garo Studio, Boston. Yearbook of the Photographers&rsquo; Association of New England, Bridgeport Convention.</span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text-2" aria-label="Copy caption text">
+      <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+      <span class="copy-label"></span>
+    </button>
+  </div>
 </section>
 </div>
 
@@ -1319,19 +1325,9 @@
   </div>
 </section>
 
-<div class="carousel-caption bg-green text-tan" id="carousel-caption-2">
-  <button type="button" class="icon-btn icon-btn-close-top bg-pink text-green" id="captionClose2" aria-label="Close caption">
-    <span class="material-symbols-outlined" aria-hidden="true">close</span>
-  </button>
-  <span id="carousel-caption-text-2">&ldquo;Untitled,&rdquo; 1911. Garo Studio, Boston. Yearbook of the Photographers&rsquo; Association of New England, Bridgeport Convention.</span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text-2" aria-label="Copy caption text">
-    <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
-    <span class="copy-label"></span>
-  </button>
-</div>
-
 <div class="footnote-modal-overlay" id="footnoteModalOverlay" hidden>
   <div class="footnote-modal bg-green" role="dialog" aria-modal="true" aria-labelledby="footnoteModalText">
-    <button type="button" class="icon-btn icon-btn-close-top bg-pink text-green" id="footnoteModalClose" aria-label="Close citation">
+    <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="footnoteModalClose" aria-label="Close citation">
       <span class="material-symbols-outlined" aria-hidden="true">close</span>
     </button>
     <div class="footnote-modal-scroll">
@@ -1387,9 +1383,17 @@
     var fullImageCaptionToggle = document.getElementById('captionToggle3');
     var fullImageCaptionClose = document.getElementById('captionClose3');
     if (fullImageCaptionEl && fullImageCaptionToggle && fullImageCaptionClose) {
+      function onFullImageCaptionScroll() {
+        setFullImageCaptionOpen(false);
+      }
       function setFullImageCaptionOpen(open) {
         fullImageCaptionEl.classList.toggle('is-open', open);
         fullImageCaptionToggle.setAttribute('aria-pressed', String(open));
+        if (open) {
+          window.addEventListener('scroll', onFullImageCaptionScroll, { passive: true });
+        } else {
+          window.removeEventListener('scroll', onFullImageCaptionScroll);
+        }
       }
       fullImageCaptionToggle.addEventListener('click', function () {
         setFullImageCaptionOpen(!fullImageCaptionEl.classList.contains('is-open'));
@@ -1728,9 +1732,17 @@
       carousel.addEventListener('focusin', stopAuto);
       carousel.addEventListener('focusout', startAuto);
 
+      function onCaptionScroll() {
+        setCaptionOpen(false);
+      }
       function setCaptionOpen(open) {
         captionEl.classList.toggle('is-open', open);
         captionToggle.setAttribute('aria-pressed', String(open));
+        if (open) {
+          window.addEventListener('scroll', onCaptionScroll, { passive: true });
+        } else {
+          window.removeEventListener('scroll', onCaptionScroll);
+        }
       }
 
       function setZoomOpen(open) {
@@ -1849,9 +1861,17 @@
       root.addEventListener('focusout', startAuto);
 
       if (capEl && capToggle && capClose) {
+        function onCapScroll() {
+          setCapOpen(false);
+        }
         function setCapOpen(open) {
           capEl.classList.toggle('is-open', open);
           capToggle.setAttribute('aria-pressed', String(open));
+          if (open) {
+            window.addEventListener('scroll', onCapScroll, { passive: true });
+          } else {
+            window.removeEventListener('scroll', onCapScroll);
+          }
         }
         capToggle.addEventListener('click', function () {
           setCapOpen(!capEl.classList.contains('is-open'));
