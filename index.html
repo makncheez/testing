@@ -664,7 +664,7 @@
   .carousel-caption {
     position: absolute;
     left: 50%;
-    top: 5%;
+    bottom: calc(5% + 56px);
     z-index: 999999;
     max-width: 900px;
     margin: 0;
@@ -692,6 +692,11 @@
 
   #carousel-caption {
     max-width: min(90%, 620px);
+  }
+
+  .full-image .carousel-caption {
+    bottom: auto;
+    top: calc(5% + 56px);
   }
 
   .carousel-right-controls {
@@ -961,6 +966,11 @@
     .carousel-caption {
       font-size: 1.3em;
       line-height: 1.4em;
+    }
+    .carousel-caption,
+    #carousel-caption {
+      width: 92%;
+      max-width: 92%;
     }
     .full-carousel-wrap {
       padding: 16px;
@@ -1383,6 +1393,7 @@
     var fullImageCaptionToggle = document.getElementById('captionToggle3');
     var fullImageCaptionClose = document.getElementById('captionClose3');
     if (fullImageCaptionEl && fullImageCaptionToggle && fullImageCaptionClose) {
+      var fullImageCaptionScrollArmTimer = null;
       function onFullImageCaptionScroll() {
         setFullImageCaptionOpen(false);
       }
@@ -1390,8 +1401,11 @@
         fullImageCaptionEl.classList.toggle('is-open', open);
         fullImageCaptionToggle.setAttribute('aria-pressed', String(open));
         if (open) {
-          window.addEventListener('scroll', onFullImageCaptionScroll, { passive: true });
+          fullImageCaptionScrollArmTimer = window.setTimeout(function () {
+            window.addEventListener('scroll', onFullImageCaptionScroll, { passive: true });
+          }, 150);
         } else {
+          window.clearTimeout(fullImageCaptionScrollArmTimer);
           window.removeEventListener('scroll', onFullImageCaptionScroll);
         }
       }
@@ -1735,12 +1749,16 @@
       function onCaptionScroll() {
         setCaptionOpen(false);
       }
+      var captionScrollArmTimer = null;
       function setCaptionOpen(open) {
         captionEl.classList.toggle('is-open', open);
         captionToggle.setAttribute('aria-pressed', String(open));
         if (open) {
-          window.addEventListener('scroll', onCaptionScroll, { passive: true });
+          captionScrollArmTimer = window.setTimeout(function () {
+            window.addEventListener('scroll', onCaptionScroll, { passive: true });
+          }, 150);
         } else {
+          window.clearTimeout(captionScrollArmTimer);
           window.removeEventListener('scroll', onCaptionScroll);
         }
       }
@@ -1861,6 +1879,7 @@
       root.addEventListener('focusout', startAuto);
 
       if (capEl && capToggle && capClose) {
+        var capScrollArmTimer = null;
         function onCapScroll() {
           setCapOpen(false);
         }
@@ -1868,8 +1887,11 @@
           capEl.classList.toggle('is-open', open);
           capToggle.setAttribute('aria-pressed', String(open));
           if (open) {
-            window.addEventListener('scroll', onCapScroll, { passive: true });
+            capScrollArmTimer = window.setTimeout(function () {
+              window.addEventListener('scroll', onCapScroll, { passive: true });
+            }, 150);
           } else {
+            window.clearTimeout(capScrollArmTimer);
             window.removeEventListener('scroll', onCapScroll);
           }
         }
@@ -1962,6 +1984,7 @@
     var footnoteText = document.getElementById('footnoteModalTextInner');
     var footnoteCloseBtn = document.getElementById('footnoteModalClose');
     var footnoteLastFocused = null;
+    var footnoteScrollArmTimer = null;
 
     function onFootnoteScroll() {
       closeFootnoteModal();
@@ -1974,12 +1997,17 @@
       footnoteOverlay.hidden = false;
       footnoteLastFocused = document.activeElement;
       footnoteCloseBtn.focus();
-      window.addEventListener('scroll', onFootnoteScroll, { passive: true });
+      // Deferred so the click's own focus-scroll (if the trigger was near
+      // the viewport edge) doesn't immediately trip the close-on-scroll.
+      footnoteScrollArmTimer = window.setTimeout(function () {
+        window.addEventListener('scroll', onFootnoteScroll, { passive: true });
+      }, 150);
     }
 
     function closeFootnoteModal() {
       if (!footnoteOverlay || footnoteOverlay.hidden) return;
       footnoteOverlay.hidden = true;
+      window.clearTimeout(footnoteScrollArmTimer);
       window.removeEventListener('scroll', onFootnoteScroll);
       if (footnoteLastFocused && footnoteLastFocused.focus) footnoteLastFocused.focus();
     }
