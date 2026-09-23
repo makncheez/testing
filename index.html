@@ -656,6 +656,7 @@
   }
 
   .zoom-view.is-open {
+    z-index: 20;
     opacity: 1;
     visibility: visible;
     pointer-events: none;
@@ -1387,16 +1388,16 @@
   </div>
   <div class="studio-col studio-right" id="carousel2">
     <div class="carousel-slide is-active">
-      <img src="./images/2/1.png" alt="">
+      <img src="./images/2/1.png" alt="Aram Kazanjian with his wife, Leah Ethel Davis Kazanjian and daughter Arlene Kazanjian Francis, ca. 1910. Courtesy of Arlene Kazanjian Francis.">
     </div>
     <div class="carousel-slide">
-      <img src="./images/2/2.png" alt="">
+      <img src="./images/2/2.png" alt="Aram Kazanjian with his wife, Leah Ethel Davis Kazanjian, daughter, Arlene Kazanjian Francis, and grandson, Peter Gabel, ca. 1960. Courtesy of Tombstone Tourist.">
     </div>
     <div class="carousel-slide">
-      <img src="./images/2/3.png" alt="">
+      <img src="./images/2/3.png" alt="Arlene Kazanjian Francis, 1946, daughter of Aram and Leah Kazanjian. Unknown Photographer. Courtesy of the Malikian Collection.">
     </div>
     <div class="carousel-slide">
-      <img src="./images/2/4.png" alt="">
+      <img src="./images/2/4.png" alt="Aram Kazanjian, ca. 1900. Boston Globe, October 6, 1905.">
     </div>
 
     <div class="carousel-left-controls">
@@ -1422,7 +1423,7 @@
       <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose5" aria-label="Close caption">
         <span class="material-symbols-outlined" aria-hidden="true">close</span>
       </button>
-      <span id="carousel-caption-text-5"></span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text-5" aria-label="Copy caption text">
+      <span id="carousel-caption-text-5">Aram Kazanjian with his wife, Leah Ethel Davis Kazanjian and daughter Arlene Kazanjian Francis, ca. 1910. Courtesy of Arlene Kazanjian Francis.</span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text-5" aria-label="Copy caption text">
         <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
         <span class="copy-label"></span>
       </button>
@@ -1775,6 +1776,13 @@
       'The Spur, February 15, 1926. Portrait of Miss Barbara Greenough. Garo Studio, Boston. Courtesy of the Malikian Collection.'
     ];
 
+    var captionsKazanjian = [
+      'Aram Kazanjian with his wife, Leah Ethel Davis Kazanjian and daughter Arlene Kazanjian Francis, ca. 1910. Courtesy of Arlene Kazanjian Francis.',
+      'Aram Kazanjian with his wife, Leah Ethel Davis Kazanjian, daughter, Arlene Kazanjian Francis, and grandson, Peter Gabel, ca. 1960. Courtesy of Tombstone Tourist.',
+      'Arlene Kazanjian Francis, 1946, daughter of Aram and Leah Kazanjian. Unknown Photographer. Courtesy of the Malikian Collection.',
+      'Aram Kazanjian, ca. 1900. Boston Globe, October 6, 1905.'
+    ];
+
     var carousel = document.getElementById('carousel');
     if (carousel) {
       var slides = carousel.querySelectorAll('.carousel-slide');
@@ -2097,7 +2105,9 @@
     });
 
     initSimpleCarousel(document.getElementById('carousel2'), {
+      captions: captionsKazanjian,
       captionEl: document.getElementById('carousel-caption-5'),
+      captionText: document.getElementById('carousel-caption-text-5'),
       captionToggle: document.getElementById('captionToggle5'),
       captionClose: document.getElementById('captionClose5'),
       zoomToggle: document.getElementById('zoomToggle2'),
