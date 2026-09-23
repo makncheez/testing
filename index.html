@@ -353,7 +353,7 @@
   }
 
   .intro-signature {
-    display: block;
+    display: none;
     width: 300px;
     height: auto;
     margin: 16px auto 0;
@@ -694,7 +694,8 @@
     max-width: min(90%, 620px);
   }
 
-  .full-image .carousel-caption {
+  .full-image .carousel-caption,
+  .full-image-block .carousel-caption {
     bottom: auto;
     top: calc(5% + 56px);
   }
@@ -762,9 +763,23 @@
     height: auto;
   }
 
-  .full-image .carousel-left-controls {
+  .full-image .carousel-left-controls,
+  .full-image-block .carousel-left-controls {
     top: 5%;
     bottom: auto;
+  }
+
+  .full-image-block {
+    position: relative;
+    z-index: 9;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .full-image-block img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   /* ---- Bio: two-column section, copy left, blank right, scrolls up over the photograph ---- */
@@ -1335,6 +1350,22 @@
   </div>
 </section>
 
+<div class="full-image-block bg-tan" id="fullImage2">
+  <img src="./images/3/1.png" alt="">
+  <div class="carousel-left-controls">
+    <button type="button" class="caption-toggle btn-colorway-text" id="captionToggle4" aria-pressed="false" aria-controls="carousel-caption-4">Caption</button>
+  </div>
+  <div class="carousel-caption bg-green text-tan" id="carousel-caption-4">
+    <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose4" aria-label="Close caption">
+      <span class="material-symbols-outlined" aria-hidden="true">close</span>
+    </button>
+    <span id="carousel-caption-text-4"></span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text-4" aria-label="Copy caption text">
+      <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+      <span class="copy-label"></span>
+    </button>
+  </div>
+</div>
+
 <div class="footnote-modal-overlay" id="footnoteModalOverlay" hidden>
   <div class="footnote-modal bg-green" role="dialog" aria-modal="true" aria-labelledby="footnoteModalText">
     <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="footnoteModalClose" aria-label="Close citation">
@@ -1389,45 +1420,49 @@
     window.addEventListener('load', syncBioOverlap);
     window.addEventListener('resize', syncBioOverlap);
 
-    var fullImageCaptionEl = document.getElementById('carousel-caption-3');
-    var fullImageCaptionToggle = document.getElementById('captionToggle3');
-    var fullImageCaptionClose = document.getElementById('captionClose3');
-    if (fullImageCaptionEl && fullImageCaptionToggle && fullImageCaptionClose) {
-      var fullImageCaptionScrollArmTimer = null;
-      function onFullImageCaptionScroll() {
-        setFullImageCaptionOpen(false);
+    function initEdgeCaption(toggleId, closeId, captionId, observeTarget) {
+      var el = document.getElementById(captionId);
+      var toggle = document.getElementById(toggleId);
+      var close = document.getElementById(closeId);
+      if (!el || !toggle || !close) return;
+      var scrollArmTimer = null;
+      function onScroll() {
+        setOpen(false);
       }
-      function setFullImageCaptionOpen(open) {
-        fullImageCaptionEl.classList.toggle('is-open', open);
-        fullImageCaptionToggle.setAttribute('aria-pressed', String(open));
+      function setOpen(open) {
+        el.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-pressed', String(open));
         if (open) {
-          fullImageCaptionScrollArmTimer = window.setTimeout(function () {
-            window.addEventListener('scroll', onFullImageCaptionScroll, { passive: true });
+          scrollArmTimer = window.setTimeout(function () {
+            window.addEventListener('scroll', onScroll, { passive: true });
           }, 150);
         } else {
-          window.clearTimeout(fullImageCaptionScrollArmTimer);
-          window.removeEventListener('scroll', onFullImageCaptionScroll);
+          window.clearTimeout(scrollArmTimer);
+          window.removeEventListener('scroll', onScroll);
         }
       }
-      fullImageCaptionToggle.addEventListener('click', function () {
-        setFullImageCaptionOpen(!fullImageCaptionEl.classList.contains('is-open'));
+      toggle.addEventListener('click', function () {
+        setOpen(!el.classList.contains('is-open'));
       });
-      fullImageCaptionClose.addEventListener('click', function () {
-        setFullImageCaptionOpen(false);
+      close.addEventListener('click', function () {
+        setOpen(false);
       });
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && fullImageCaptionEl.classList.contains('is-open')) {
-          setFullImageCaptionOpen(false);
+        if (e.key === 'Escape' && el.classList.contains('is-open')) {
+          setOpen(false);
         }
       });
-      if ('IntersectionObserver' in window && fullImageTrack) {
+      if ('IntersectionObserver' in window && observeTarget) {
         new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
-            if (!entry.isIntersecting) setFullImageCaptionOpen(false);
+            if (!entry.isIntersecting) setOpen(false);
           });
-        }, { threshold: 0 }).observe(fullImageTrack);
+        }, { threshold: 0 }).observe(observeTarget);
       }
     }
+
+    initEdgeCaption('captionToggle3', 'captionClose3', 'carousel-caption-3', fullImageTrack);
+    initEdgeCaption('captionToggle4', 'captionClose4', 'carousel-caption-4', document.getElementById('fullImage2'));
     var fadeDistance = (window.innerHeight || 800) * 0.4;
     var fallRange = fadeDistance * 2.5;
     var colorFadeDistance = fadeDistance * 0.5;
