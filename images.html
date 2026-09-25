@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Image Index: Aram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;1,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=block" rel="stylesheet">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    width: 100%;
+    background: var(--color-tan);
+    font-size: 12px;
+    font-family: 'Cardo', "Times New Roman", Times, serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  :root {
+    --color-tan: #D5CCA4;
+    --color-green: #263F27;
+    --color-purple: #9767a3;
+    --color-black: #000;
+  }
+
+  a { color: inherit; }
+
+  /* ---- Header ---- */
+
+  .page-header {
+    padding: 48px 40px 24px;
+    border-bottom: 1.4px solid var(--color-green);
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 1.2em;
+    letter-spacing: 0.02em;
+    color: var(--color-green);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  .back-link:hover,
+  .back-link:focus-visible {
+    border-bottom-color: var(--color-green);
+  }
+
+  .page-header h1 {
+    margin: 0 0 8px;
+    font-size: 2.6em;
+    font-weight: normal;
+    color: var(--color-green);
+  }
+
+  .page-header p {
+    margin: 0;
+    font-size: 1.4em;
+    color: var(--color-black);
+  }
+
+  /* ---- Filter bar ---- */
+
+  .filter-bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 40px;
+    background: var(--color-tan);
+    border-bottom: 1.4px solid var(--color-green);
+  }
+
+  .filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .filter-field label {
+    font-family: 'DM Mono', monospace;
+    font-size: 1em;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--color-green);
+  }
+
+  .filter-field select,
+  .filter-field input[type="search"] {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.2em;
+    padding: 8px 10px;
+    border: 1.4px solid var(--color-green);
+    border-radius: 6px;
+    background: var(--color-tan);
+    color: var(--color-black);
+    min-width: 180px;
+  }
+
+  .filter-field input[type="search"] {
+    min-width: 220px;
+  }
+
+  .filter-reset {
+    align-self: flex-end;
+    font-family: 'DM Mono', monospace;
+    font-size: 1.2em;
+    letter-spacing: 0.02em;
+    padding: 9px 18px;
+    border: 1.4px solid var(--color-purple);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-purple);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .filter-reset:hover,
+  .filter-reset:focus-visible {
+    background: var(--color-purple);
+    color: var(--color-tan);
+  }
+
+  .filter-count {
+    margin-left: auto;
+    align-self: flex-end;
+    font-family: 'DM Mono', monospace;
+    font-size: 1.2em;
+    color: var(--color-black);
+  }
+
+  /* ---- List ---- */
+
+  .image-list {
+    padding: 0 40px 80px;
+  }
+
+  .image-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(38, 63, 39, 0.3);
+  }
+
+  .image-row.is-hidden {
+    display: none;
+  }
+
+  .image-row-info {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .image-row-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .image-row-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 1em;
+    letter-spacing: 0.02em;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--color-green);
+    color: var(--color-tan);
+  }
+
+  .image-row-tag.is-collection {
+    background: transparent;
+    border: 1px solid var(--color-purple);
+    color: var(--color-purple);
+  }
+
+  .image-row-caption {
+    margin: 0;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    color: var(--color-black);
+  }
+
+  .image-row-file {
+    margin: 10px 0 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 1em;
+    color: rgba(0, 0, 0, 0.55);
+  }
+
+  .image-row-figure {
+    flex: 0 0 300px;
+    width: 300px;
+  }
+
+  .image-row-figure img {
+    display: block;
+    width: 300px;
+    height: auto;
+    border: 1.4px solid var(--color-green);
+  }
+
+  .empty-state {
+    display: none;
+    padding: 60px 0;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 1.3em;
+    color: var(--color-black);
+  }
+
+  .empty-state.is-visible {
+    display: block;
+  }
+
+  @media (max-width: 700px) {
+    .page-header {
+      padding: 40px 24px 20px;
+    }
+
+    .filter-bar {
+      padding: 16px 24px;
+    }
+
+    .filter-count {
+      margin-left: 0;
+    }
+
+    .image-list {
+      padding: 0 24px 60px;
+    }
+
+    .image-row {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .image-row-figure,
+    .image-row-figure img {
+      width: 100%;
+      flex-basis: auto;
+    }
+  }
+</style>
+
+<div class="page-header">
+  <a class="back-link" href="./index.html">&larr; Back to exhibition</a>
+  <h1>Image Index</h1>
+  <p>Every photograph used in the Aram Kazanjian digital exhibition, in one filterable list.</p>
+</div>
+
+<div class="filter-bar">
+  <div class="filter-field">
+    <label for="filterSection">Section</label>
+    <select id="filterSection">
+      <option value="">All sections</option>
+    </select>
+  </div>
+  <div class="filter-field">
+    <label for="filterDecade">Decade</label>
+    <select id="filterDecade">
+      <option value="">All decades</option>
+    </select>
+  </div>
+  <div class="filter-field">
+    <label for="filterCollection">Collection</label>
+    <select id="filterCollection">
+      <option value="">All collections</option>
+    </select>
+  </div>
+  <div class="filter-field">
+    <label for="filterSearch">Search caption</label>
+    <input type="search" id="filterSearch" placeholder="e.g. Boston, wedding, aviator&hellip;">
+  </div>
+  <button type="button" class="filter-reset" id="filterReset">Reset filters</button>
+  <div class="filter-count" id="filterCount"></div>
+</div>
+
+<div class="image-list" id="imageList"></div>
+<div class="empty-state" id="emptyState">No images match these filters.</div>
+
+<script>
+  (function () {
+    var images = [
+      { src: './images/1/10.png', caption: 'Portrait of a young woman, ca. 1910, with a stamp on the mount of Charles H. Gallup, owner of the renowned Gallup photographic studio in Poughkeepsie, New York. Arsen Diran, Diran Studio, Boston. Courtesy of the Malikian Collection.', section: 'Diran Studio', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/1/11.png', caption: 'Wedding portrait of an Armenian couple, ca. 1900. Arsen Diran, Diran Studio, Boston. Courtesy of the Malikian Collection.', section: 'Diran Studio', decade: '1900s', collection: 'Malikian Collection' },
+      { src: './images/1/12.png', caption: 'Wedding portrait of an Armenian couple, ca. 1900. Diran Studio, Boston. Courtesy of the Malikian Collection.', section: 'Diran Studio', decade: '1900s', collection: 'Malikian Collection' },
+      { src: './images/1/13.png', caption: 'Family portrait, ca. 1910. Diran Studio, Boston. Courtesy of the Malikian Collection.', section: 'Diran Studio', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/1/14.png', caption: 'Black baby in a baptismal gown, ca. 1910. Diran Studio, Boston. Courtesy of the Malikian Collection.', section: 'Diran Studio', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/1/15.png', caption: 'Armenian baby, ca. 1925. Diran Studio, Boston. Courtesy of the Malikian Collection.', section: 'Diran Studio', decade: '1920s', collection: 'Malikian Collection' },
+      { src: './images/1/16.png', caption: 'Dorchester High School Cadets, 1910. Diran Studio, Boston. Courtesy of the Malikian Collection.', section: 'Diran Studio', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/1/1.png', caption: 'John Higue Garo (1875–1939), Armenian American portrait photographer and painter, seated reading a newspaper. Photographed by Yousuf Karsh.', section: 'Garo Studio', decade: 'Undated', collection: 'Uncredited' },
+      { src: './images/1/1a.png', caption: '“Untitled,” 1911. Garo Studio, Boston. Yearbook of the Photographers’ Association of New England, Bridgeport Convention.', section: 'Garo Studio', decade: '1910s', collection: 'Uncredited' },
+      { src: './images/1/2.png', caption: 'Geraldine Farrar (1882–1967), 1908. Lyric soprano and actress in silent films. Garo Studio, Boston. Courtesy of the Library of Congress.', section: 'Garo Studio', decade: '1900s', collection: 'Library of Congress' },
+      { src: './images/1/3.png', caption: 'Laurente Torno (1903–1992), 1927. Musician, conductor, radio and music host. Garo Studio, Boston. Courtesy of the Harvard Art Museums, Fogg Museum.', section: 'Garo Studio', decade: '1920s', collection: 'Harvard Art Museums, Fogg Museum' },
+      { src: './images/1/4.png', caption: 'Portrait of a woman, ca. 1900. Garo Studio, Boston. Courtesy of the Museum of Fine Arts, Boston.', section: 'Garo Studio', decade: '1900s', collection: 'Museum of Fine Arts, Boston' },
+      { src: './images/1/5.png', caption: 'Samuel Mandell (1850–1920), 1916. Businessman and philanthropist. Garo Studio, Boston. Courtesy of Harvard Art Museums, Fogg Museum.', section: 'Garo Studio', decade: '1910s', collection: 'Harvard Art Museums, Fogg Museum' },
+      { src: './images/1/5a.png', caption: 'Malvina V. Longfellow (1889–1962), 1910. Stage and silent movie actress. Depicting her role in ‘The Watcher’ or the ‘Whirlwind.’ Garo Studio, Boston. Courtesy of the Library of Congress.', section: 'Garo Studio', decade: '1910s', collection: 'Library of Congress' },
+      { src: './images/1/5b.png', caption: '“Portrait.” Garo Studio, Boston. Winner of the C. P. Goerz Silver Cup, 1906. Courtesy of The Photographic Times, Volume 38, No.9, September 1906, page 432. New York: The Photographic Times Publishing Association.', section: 'Garo Studio', decade: '1900s', collection: 'The Photographic Times' },
+      { src: './images/1/6.png', caption: '“The Bubble.” Garo Studio. Photograms of 1912 in the annual publication of “London Salon of Photography.” Courtesy of the Malikian Collection.', section: 'Garo Studio', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/1/7.png', caption: '“Portrait of a Gentleman.” Garo Studio. Photograms of 1914 in the annual publication of “London Salon of Photography.” Courtesy of the Malikian Collection.', section: 'Garo Studio', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/1/8.png', caption: 'The Spur, October 1, 1923. Wedding portrait of Mrs. Henry Hardwick Faxon. Garo Studio, Boston. Courtesy of the Malikian Collection.', section: 'Garo Studio', decade: '1920s', collection: 'Malikian Collection' },
+      { src: './images/1/9.png', caption: 'The Spur, July 1, 1924. Wedding portrait of Mrs. David Hunter McAlpin 3rd. Garo Studio, Boston. Courtesy of the Malikian Collection.', section: 'Garo Studio', decade: '1920s', collection: 'Malikian Collection' },
+      { src: './images/1/9a.png', caption: 'The Spur, February 15, 1926. Portrait of Miss Barbara Greenough. Garo Studio, Boston. Courtesy of the Malikian Collection.', section: 'Garo Studio', decade: '1920s', collection: 'Malikian Collection' },
+      { src: './images/3/1.jpg', caption: 'Caption pending.', section: 'Kazanjian Family & Boston Studio', decade: 'Undated', collection: 'Uncredited' },
+      { src: './images/2/1.png', caption: 'Aram Kazanjian with his wife, Leah Ethel Davis Kazanjian and daughter Arlene Kazanjian Francis, ca. 1910. Courtesy of Arlene Kazanjian Francis.', section: 'Kazanjian Family & Boston Studio', decade: '1910s', collection: 'Arlene Kazanjian Francis' },
+      { src: './images/2/2.png', caption: 'Aram Kazanjian with his wife, Leah Ethel Davis Kazanjian, daughter, Arlene Kazanjian Francis, and grandson, Peter Gabel, ca. 1960. Courtesy of Tombstone Tourist.', section: 'Kazanjian Family & Boston Studio', decade: '1960s', collection: 'Tombstone Tourist' },
+      { src: './images/2/3.png', caption: 'Arlene Kazanjian Francis, 1946, daughter of Aram and Leah Kazanjian. Unknown Photographer. Courtesy of the Malikian Collection.', section: 'Kazanjian Family & Boston Studio', decade: '1940s', collection: 'Malikian Collection' },
+      { src: './images/2/4.png', caption: 'Aram Kazanjian, ca. 1900. Boston Globe, October 6, 1905.', section: 'Kazanjian Family & Boston Studio', decade: '1900s', collection: 'Uncredited' },
+      { src: './images/3/2.jpg', caption: 'Tremont Street, Boston, Massachusetts, 1904. Courtesy of the Malikian Collection.', section: 'Kazanjian Family & Boston Studio', decade: '1900s', collection: 'Malikian Collection' },
+      { src: './images/3/3.jpg', caption: 'Aram Studio stamp and address at 160 Tremont Street, Boston, Massachusetts, ca. 1900. Courtesy of the Malikian Collection.', section: 'Kazanjian Family & Boston Studio', decade: '1900s', collection: 'Malikian Collection' },
+      { src: './images/3/3a.jpg', caption: 'Aram Studio stamp and address at 74 Boylston Street, ca. 1910. Courtesy of Ani Babaian, National Association for Armenian Studies & Research.', section: 'Kazanjian Family & Boston Studio', decade: '1910s', collection: 'NAASR (Ani Babaian)' },
+      { src: './images/3/4.jpg', caption: 'Baby seated on fur, ca. 1910. Aram Studio, Boston. Courtesy of the Boston Athenaeum.', section: 'Kazanjian Family & Boston Studio', decade: '1910s', collection: 'Boston Athenaeum' },
+      { src: './images/3/5.jpg', caption: 'Older woman, ca. 1910. Aram Studio, Boston. Courtesy of the Boston Athenaeum.', section: 'Kazanjian Family & Boston Studio', decade: '1910s', collection: 'Boston Athenaeum' },
+      { src: './images/3/6.jpg', caption: 'Family portrait, ca. 1910. Aram Studio, Boston. Courtesy of the Boston Athenaeum.', section: 'Kazanjian Family & Boston Studio', decade: '1910s', collection: 'Boston Athenaeum' },
+      { src: './images/3/7.jpg', caption: 'Firefighter from Boston, ca. 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Kazanjian Family & Boston Studio', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/3/8.jpg', caption: 'Siranoosh Sarkisian Parnagian, 1904. Aram Studio, Boston. Courtesy of Marc Mamigonian.', section: 'Kazanjian Family & Boston Studio', decade: '1900s', collection: 'Marc Mamigonian' },
+      { src: './images/3/9.jpg', caption: 'Siranoosh Sarkisian Parnagian, 1904. Aram Studio, Boston. Courtesy of Marc Mamigonian.', section: 'Kazanjian Family & Boston Studio', decade: '1900s', collection: 'Marc Mamigonian' },
+      { src: './images/3/10.jpg', caption: 'Portrait of M. Vartan Malcolm, ca. 1910. Author of “The Armenians in America.” Aram Studio, Boston. Courtesy of Ani Babaian, National Association for Armenian Studies & Research.', section: 'Kazanjian Family & Boston Studio', decade: '1910s', collection: 'NAASR (Ani Babaian)' },
+      { src: './images/3/11.jpg', caption: 'Portrait of M. Vartan Malcolm, ca. 1910. Author of “The Armenians in America.” Aram Studio, Boston. Courtesy of Ani Babaian, National Association for Armenian Studies & Research.', section: 'Kazanjian Family & Boston Studio', decade: '1910s', collection: 'NAASR (Ani Babaian)' },
+      { src: './images/3/12.jpg', caption: '“Modern Mother of God and Child Jesus,” by Aram Kazanjian. Awarded the C.P. Goerz Silver Cup in 1905. The award was announced in the Boston Globe, October 6, 1905. Courtesy of Ani Babaian, National Association for Armenian Studies & Research.', section: 'Kazanjian Family & Boston Studio', decade: '1900s', collection: 'NAASR (Ani Babaian)' },
+      { src: './images/4/1b.png', caption: 'Caption pending.', section: 'Harvard-Boston Aero Meet', decade: 'Undated', collection: 'Uncredited' },
+      { src: './images/4/1.jpg', caption: 'Caption pending.', section: 'Harvard-Boston Aero Meet', decade: 'Undated', collection: 'Uncredited' },
+      { src: './images/4/2a.jpg', caption: 'Cromwell Dixon, the 18-year-old pilot who flew his own custom-built man-carrying dirigible, 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/4/2b.jpg', caption: 'Claude Graham-White, the famous English aviator, 1910. He won the $10,000 prize at the Harvard-Boston Aero Meet in 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/4/2c.jpg', caption: 'Claude Graham-White and his manager, Sidney McDonald, at the Harvard-Boston Aero Meet, 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/4/2d.jpg', caption: 'Claude Graham-White starting his engine for a flight at the Harvard-Boston Aero Meet, 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/4/2e.jpg', caption: 'Claude Graham-White prepares for his flight at the Harvard-Boston Aero Meet, 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/4/2f.jpg', caption: 'Claude Graham-White taking Miss McDonald for a flight, 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/4/2g.jpg', caption: 'Claude Graham-White in flight, 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/4/2h.jpg', caption: 'Mr. William Hilliard in a Burgess biplane, 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/4/2i.jpg', caption: 'Walter Brookins, a star Wright Brothers pilot who dazzled spectators with daring altitude and duration flights in a Wright biplane, 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/4/2j.jpg', caption: 'Claude Graham-White looking over Harmon’s biplane, 1910. Clifford B. Harmon was a prominent aviator and a millionaire enthusiast. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/4/2k.jpg', caption: 'R.E. Saleski on a Harvard biplane. He was a Harvard student and an early aviation enthusiast, 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/4/2m.jpg', caption: 'Horace F. Kearney. Flew the Pfitzner monoplane that was severely damaged in a crash during an unauthorized practice flight on August 31, 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/4/2n.jpg', caption: 'Man lifting kites on the Harvard Aviation Field during the Harvard-Boston Aero Meet, 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/4/21.jpg', caption: 'Charles Foster Willard, aviator and engineer, known as the first barnstormer, won $50.00 for second place in take-offs. Augustus Post, adventurer, balloonist, and key pioneer in aviation. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: 'Undated', collection: 'Malikian Collection' }
+    ];
+
+    var DECADE_ORDER = ['1900s', '1910s', '1920s', '1930s', '1940s', '1950s', '1960s', 'Undated'];
+
+    function uniqueSorted(values, order) {
+      var seen = {};
+      var out = [];
+      values.forEach(function (v) {
+        if (!seen[v]) { seen[v] = true; out.push(v); }
+      });
+      if (order) {
+        out.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+      } else {
+        out.sort();
+      }
+      return out;
+    }
+
+    function populateSelect(select, values) {
+      values.forEach(function (v) {
+        var opt = document.createElement('option');
+        opt.value = v;
+        opt.textContent = v;
+        select.appendChild(opt);
+      });
+    }
+
+    var sectionSelect = document.getElementById('filterSection');
+    var decadeSelect = document.getElementById('filterDecade');
+    var collectionSelect = document.getElementById('filterCollection');
+    var searchInput = document.getElementById('filterSearch');
+    var resetBtn = document.getElementById('filterReset');
+    var countEl = document.getElementById('filterCount');
+    var listEl = document.getElementById('imageList');
+    var emptyEl = document.getElementById('emptyState');
+
+    populateSelect(sectionSelect, uniqueSorted(images.map(function (d) { return d.section; })));
+    populateSelect(decadeSelect, uniqueSorted(images.map(function (d) { return d.decade; }), DECADE_ORDER));
+    populateSelect(collectionSelect, uniqueSorted(images.map(function (d) { return d.collection; })));
+
+    var rows = images.map(function (data) {
+      var row = document.createElement('div');
+      row.className = 'image-row';
+
+      var info = document.createElement('div');
+      info.className = 'image-row-info';
+
+      var tags = document.createElement('div');
+      tags.className = 'image-row-tags';
+
+      var sectionTag = document.createElement('span');
+      sectionTag.className = 'image-row-tag';
+      sectionTag.textContent = data.section;
+      tags.appendChild(sectionTag);
+
+      var decadeTag = document.createElement('span');
+      decadeTag.className = 'image-row-tag';
+      decadeTag.textContent = data.decade;
+      tags.appendChild(decadeTag);
+
+      var collectionTag = document.createElement('span');
+      collectionTag.className = 'image-row-tag is-collection';
+      collectionTag.textContent = data.collection;
+      tags.appendChild(collectionTag);
+
+      info.appendChild(tags);
+
+      var captionEl = document.createElement('p');
+      captionEl.className = 'image-row-caption';
+      captionEl.textContent = data.caption;
+      info.appendChild(captionEl);
+
+      var fileEl = document.createElement('p');
+      fileEl.className = 'image-row-file';
+      fileEl.textContent = data.src.replace('./', '');
+      info.appendChild(fileEl);
+
+      row.appendChild(info);
+
+      var figure = document.createElement('div');
+      figure.className = 'image-row-figure';
+      var img = document.createElement('img');
+      img.src = data.src;
+      img.alt = data.caption === 'Caption pending.' ? '' : data.caption;
+      img.loading = 'lazy';
+      figure.appendChild(img);
+      row.appendChild(figure);
+
+      listEl.appendChild(row);
+
+      return { el: row, data: data };
+    });
+
+    function applyFilters() {
+      var section = sectionSelect.value;
+      var decade = decadeSelect.value;
+      var collection = collectionSelect.value;
+      var search = searchInput.value.trim().toLowerCase();
+      var visibleCount = 0;
+
+      rows.forEach(function (r) {
+        var matches = true;
+        if (section && r.data.section !== section) matches = false;
+        if (decade && r.data.decade !== decade) matches = false;
+        if (collection && r.data.collection !== collection) matches = false;
+        if (search && r.data.caption.toLowerCase().indexOf(search) === -1) matches = false;
+
+        r.el.classList.toggle('is-hidden', !matches);
+        if (matches) visibleCount++;
+      });
+
+      countEl.textContent = 'Showing ' + visibleCount + ' of ' + rows.length + ' images';
+      emptyEl.classList.toggle('is-visible', visibleCount === 0);
+    }
+
+    [sectionSelect, decadeSelect, collectionSelect].forEach(function (el) {
+      el.addEventListener('change', applyFilters);
+    });
+    searchInput.addEventListener('input', applyFilters);
+
+    resetBtn.addEventListener('click', function () {
+      sectionSelect.value = '';
+      decadeSelect.value = '';
+      collectionSelect.value = '';
+      searchInput.value = '';
+      applyFilters();
+    });
+
+    applyFilters();
+  })();
+</script>
