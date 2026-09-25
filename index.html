@@ -118,6 +118,7 @@
 
   .quote-frame-content,
   .qf-corner,
+  .caption-toggle,
   .zoom-toggle,
   .carousel-btn,
   .full-carousel .carousel-slide,
@@ -148,7 +149,6 @@
 
   .hero-label,
   .quote-frame .hero-label-group,
-  .caption-toggle,
   h2 {
     font-family: 'DM Mono', monospace;
   }
@@ -673,13 +673,7 @@
     left: 18px;
   }
 
-  .caption-toggle {
-    padding: 9px 20px;
-    border-radius: 999px;
-    font-size: 16px;
-    letter-spacing: 0.02em;
-  }
-
+  .caption-toggle,
   .zoom-toggle {
     width: 38px;
     height: 38px;
@@ -687,12 +681,14 @@
     border-radius: 50%;
   }
 
+  .caption-toggle .material-symbols-outlined,
   .zoom-toggle .material-symbols-outlined,
   .carousel-btn .material-symbols-outlined {
     font-family: 'Material Symbols Outlined';
     pointer-events: none;
   }
 
+  .caption-toggle .material-symbols-outlined,
   .zoom-toggle .material-symbols-outlined {
     font-size: 31px;
   }
@@ -1230,7 +1226,7 @@
     </div>
 
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle btn-colorway-text" id="captionToggle" aria-pressed="false" aria-controls="carousel-caption">Caption</button>
+      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle" aria-pressed="false" aria-controls="carousel-caption" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
       <button type="button" class="zoom-toggle btn-colorway-icon" id="zoomToggle" aria-pressed="false" aria-controls="zoomView" aria-label="View larger image">
         <span class="material-symbols-outlined" aria-hidden="true">search</span>
       </button>
@@ -1268,7 +1264,7 @@
   <div class="full-image bg-tan" id="fullImage">
     <img src="./images/1/1.png" alt="John Higue Garo (1875&ndash;1939), Armenian American portrait photographer and painter, seated reading a newspaper. Photographed by Yousuf Karsh.">
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle btn-colorway-text" id="captionToggle3" aria-pressed="false" aria-controls="carousel-caption-3">Caption</button>
+      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle3" aria-pressed="false" aria-controls="carousel-caption-3" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
     </div>
     <div class="carousel-caption bg-green text-tan" id="carousel-caption-3">
       <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose3" aria-label="Close caption">
@@ -1368,7 +1364,7 @@
   </div>
 
   <div class="carousel-left-controls">
-    <button type="button" class="caption-toggle btn-colorway-text" id="captionToggle2" aria-pressed="false" aria-controls="carousel-caption-2">Caption</button>
+    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle2" aria-pressed="false" aria-controls="carousel-caption-2" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
     <button type="button" class="zoom-toggle btn-colorway-icon" id="fullCarouselZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
       <span class="material-symbols-outlined" aria-hidden="true">search</span>
     </button>
@@ -1416,7 +1412,7 @@
 <div class="full-image-block bg-tan" id="fullImage2">
   <img src="./images/3/1.jpg" alt="">
   <div class="carousel-left-controls">
-    <button type="button" class="caption-toggle btn-colorway-text" id="captionToggle4" aria-pressed="false" aria-controls="carousel-caption-4">Caption</button>
+    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle4" aria-pressed="false" aria-controls="carousel-caption-4" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
   </div>
   <div class="carousel-caption bg-green text-tan" id="carousel-caption-4">
     <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose4" aria-label="Close caption">
@@ -1462,7 +1458,7 @@
     </div>
 
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle btn-colorway-text" id="captionToggle5" aria-pressed="false" aria-controls="carousel-caption-5">Caption</button>
+      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle5" aria-pressed="false" aria-controls="carousel-caption-5" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
       <button type="button" class="zoom-toggle btn-colorway-icon" id="zoomToggle2" aria-pressed="false" aria-label="Toggle zoom">
         <span class="material-symbols-outlined" aria-hidden="true">search</span>
       </button>
@@ -1533,7 +1529,7 @@
     </div>
 
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle btn-colorway-text" id="captionToggle6" aria-pressed="false" aria-controls="carousel-caption-6">Caption</button>
+      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle6" aria-pressed="false" aria-controls="carousel-caption-6" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
       <button type="button" class="zoom-toggle btn-colorway-icon" id="zoomToggle3" aria-pressed="false" aria-label="Toggle zoom">
         <span class="material-symbols-outlined" aria-hidden="true">search</span>
       </button>
@@ -1647,7 +1643,7 @@
   </div>
 
   <div class="carousel-left-controls">
-    <button type="button" class="caption-toggle btn-colorway-text" id="captionToggle7" aria-pressed="false" aria-controls="carousel-caption-7">Caption</button>
+    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle7" aria-pressed="false" aria-controls="carousel-caption-7" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
     <button type="button" class="zoom-toggle btn-colorway-icon" id="fullCarousel2ZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
       <span class="material-symbols-outlined" aria-hidden="true">search</span>
     </button>
