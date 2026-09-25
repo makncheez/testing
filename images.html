@@ -137,76 +137,62 @@
     color: var(--color-black);
   }
 
-  /* ---- List ---- */
+  /* ---- Grid ---- */
 
-  .image-list {
-    padding: 0 40px 80px;
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px 32px;
+    padding: 40px;
   }
 
-  .image-row {
+  .image-card {
     display: flex;
-    align-items: flex-start;
-    gap: 40px;
-    padding: 32px 0;
-    border-bottom: 1px solid rgba(38, 63, 39, 0.3);
+    flex-direction: column;
   }
 
-  .image-row.is-hidden {
+  .image-card.is-hidden {
     display: none;
   }
 
-  .image-row-info {
-    flex: 1 1 auto;
-    min-width: 0;
+  .image-card-figure {
+    margin: 0 0 12px;
   }
 
-  .image-row-tags {
+  .image-card-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1.4px solid var(--color-green);
+  }
+
+  .image-card-caption {
+    margin: 0 0 10px;
+    font-size: 1.3em;
+    line-height: 1.5em;
+    color: var(--color-black);
+  }
+
+  .image-card-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 10px;
+    gap: 6px;
   }
 
-  .image-row-tag {
+  .image-card-tag {
     font-family: 'DM Mono', monospace;
-    font-size: 1em;
+    font-size: 0.9em;
     letter-spacing: 0.02em;
-    padding: 3px 10px;
+    padding: 3px 9px;
     border-radius: 999px;
     background: var(--color-green);
     color: var(--color-tan);
   }
 
-  .image-row-tag.is-collection {
+  .image-card-tag.is-collection {
     background: transparent;
     border: 1px solid var(--color-purple);
     color: var(--color-purple);
-  }
-
-  .image-row-caption {
-    margin: 0;
-    font-size: 1.5em;
-    line-height: 1.5em;
-    color: var(--color-black);
-  }
-
-  .image-row-file {
-    margin: 10px 0 0;
-    font-family: 'DM Mono', monospace;
-    font-size: 1em;
-    color: rgba(0, 0, 0, 0.55);
-  }
-
-  .image-row-figure {
-    flex: 0 0 300px;
-    width: 300px;
-  }
-
-  .image-row-figure img {
-    display: block;
-    width: 300px;
-    height: auto;
-    border: 1.4px solid var(--color-green);
   }
 
   .empty-state {
@@ -222,6 +208,12 @@
     display: block;
   }
 
+  @media (max-width: 1000px) {
+    .image-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   @media (max-width: 700px) {
     .page-header {
       padding: 40px 24px 20px;
@@ -235,19 +227,10 @@
       margin-left: 0;
     }
 
-    .image-list {
-      padding: 0 24px 60px;
-    }
-
-    .image-row {
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .image-row-figure,
-    .image-row-figure img {
-      width: 100%;
-      flex-basis: auto;
+    .image-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 24px;
     }
   }
 </style>
@@ -285,7 +268,7 @@
   <div class="filter-count" id="filterCount"></div>
 </div>
 
-<div class="image-list" id="imageList"></div>
+<div class="image-grid" id="imageList"></div>
 <div class="empty-state" id="emptyState">No images match these filters.</div>
 
 <script>
@@ -385,56 +368,46 @@
     populateSelect(collectionSelect, uniqueSorted(images.map(function (d) { return d.collection; })));
 
     var rows = images.map(function (data) {
-      var row = document.createElement('div');
-      row.className = 'image-row';
-
-      var info = document.createElement('div');
-      info.className = 'image-row-info';
-
-      var tags = document.createElement('div');
-      tags.className = 'image-row-tags';
-
-      var sectionTag = document.createElement('span');
-      sectionTag.className = 'image-row-tag';
-      sectionTag.textContent = data.section;
-      tags.appendChild(sectionTag);
-
-      var decadeTag = document.createElement('span');
-      decadeTag.className = 'image-row-tag';
-      decadeTag.textContent = data.decade;
-      tags.appendChild(decadeTag);
-
-      var collectionTag = document.createElement('span');
-      collectionTag.className = 'image-row-tag is-collection';
-      collectionTag.textContent = data.collection;
-      tags.appendChild(collectionTag);
-
-      info.appendChild(tags);
-
-      var captionEl = document.createElement('p');
-      captionEl.className = 'image-row-caption';
-      captionEl.textContent = data.caption;
-      info.appendChild(captionEl);
-
-      var fileEl = document.createElement('p');
-      fileEl.className = 'image-row-file';
-      fileEl.textContent = data.src.replace('./', '');
-      info.appendChild(fileEl);
-
-      row.appendChild(info);
+      var card = document.createElement('div');
+      card.className = 'image-card';
 
       var figure = document.createElement('div');
-      figure.className = 'image-row-figure';
+      figure.className = 'image-card-figure';
       var img = document.createElement('img');
       img.src = data.src;
       img.alt = data.caption === 'Caption pending.' ? '' : data.caption;
       img.loading = 'lazy';
       figure.appendChild(img);
-      row.appendChild(figure);
+      card.appendChild(figure);
 
-      listEl.appendChild(row);
+      var captionEl = document.createElement('p');
+      captionEl.className = 'image-card-caption';
+      captionEl.textContent = data.caption;
+      card.appendChild(captionEl);
 
-      return { el: row, data: data };
+      var tags = document.createElement('div');
+      tags.className = 'image-card-tags';
+
+      var sectionTag = document.createElement('span');
+      sectionTag.className = 'image-card-tag';
+      sectionTag.textContent = data.section;
+      tags.appendChild(sectionTag);
+
+      var decadeTag = document.createElement('span');
+      decadeTag.className = 'image-card-tag';
+      decadeTag.textContent = data.decade;
+      tags.appendChild(decadeTag);
+
+      var collectionTag = document.createElement('span');
+      collectionTag.className = 'image-card-tag is-collection';
+      collectionTag.textContent = data.collection;
+      tags.appendChild(collectionTag);
+
+      card.appendChild(tags);
+
+      listEl.appendChild(card);
+
+      return { el: card, data: data };
     });
 
     function applyFilters() {
@@ -475,3 +448,4 @@
     applyFilters();
   })();
 </script>
+</html>
