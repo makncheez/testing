@@ -514,7 +514,8 @@
   }
 
   #studio2,
-  #studio3 {
+  #studio3,
+  #studio4 {
     padding-top: 64px;
   }
 
@@ -1761,6 +1762,70 @@
  </div>
 </section>
 
+<section class="studio bg-tan" id="studio4">
+  <div class="zoom-view bg-tan" id="zoomView4" role="img" aria-label=""></div>
+  <div class="studio-col studio-left">
+    <div class="studio-copy text-black">
+      <p>During the early years in New York, Kazanjian specialized in children&rsquo;s photographs. He became very successful and garnered the reputation of being one of the best-known men in the field.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="21">21</button></sup> Some of his earlier works used elements of Pictorialism and Art Nouveau to produce photographs with a painterly effect. To achieve this result, these romanticized and idealized compositions emphasized the use of soft-focus techniques and the manipulation of light.</p>
+    </div>
+  </div>
+  <div class="studio-col studio-right" id="carousel4">
+    <div class="carousel-slide is-active">
+      <img src="./images/5/6.jpg" alt="">
+    </div>
+    <div class="carousel-slide">
+      <img src="./images/5/7.jpg" alt="">
+    </div>
+    <div class="carousel-slide">
+      <img src="./images/5/8.jpg" alt="">
+    </div>
+    <div class="carousel-slide">
+      <img src="./images/5/19.jpg" alt="">
+    </div>
+    <div class="carousel-slide">
+      <img src="./images/5/20.jpg" alt="">
+    </div>
+    <div class="carousel-slide">
+      <img src="./images/5/24.jpg" alt="">
+    </div>
+    <div class="carousel-slide">
+      <img src="./images/5/27.jpg" alt="">
+    </div>
+
+    <div class="carousel-left-controls">
+      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle9" aria-pressed="false" aria-controls="carousel-caption-9" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
+      <button type="button" class="zoom-toggle btn-colorway-icon" id="zoomToggle4" aria-pressed="false" aria-label="Toggle zoom">
+        <span class="material-symbols-outlined" aria-hidden="true">search</span>
+      </button>
+    </div>
+
+    <div class="carousel-right-controls">
+      <button type="button" class="carousel-btn carousel-prev btn-colorway-icon" aria-label="Previous photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
+      <button type="button" class="carousel-btn carousel-next btn-colorway-icon" aria-label="Next photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
+    </div>
+
+    <div class="carousel-dots">
+      <button type="button" class="carousel-dot dot-colorway is-active" aria-label="Go to photograph 1"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 2"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 3"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 4"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 5"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 6"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 7"></button>
+    </div>
+
+    <div class="carousel-caption bg-green text-tan" id="carousel-caption-9">
+      <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose9" aria-label="Close caption">
+        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+      </button>
+      <span id="carousel-caption-text-9"></span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text-9" aria-label="Copy caption text">
+        <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+        <span class="copy-label"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
 <div class="footnote-modal-overlay" id="footnoteModalOverlay" hidden>
   <div class="footnote-modal bg-green" role="dialog" aria-modal="true" aria-labelledby="footnoteModalText">
     <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="footnoteModalClose" aria-label="Close citation">
@@ -2151,6 +2216,16 @@
       'Fifth Avenue, New York City, January 1943. ACME NEWSPICTURES, Inc. Courtesy of the Malikian Collection.'
     ];
 
+    var captionsStudio4 = [
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      ''
+    ];
+
     var carousel = document.getElementById('carousel');
     if (carousel) {
       var slides = carousel.querySelectorAll('.carousel-slide');
@@ -2510,6 +2585,16 @@
       zoomView: document.getElementById('zoomView3')
     });
 
+    initSimpleCarousel(document.getElementById('carousel4'), {
+      captions: captionsStudio4,
+      captionEl: document.getElementById('carousel-caption-9'),
+      captionText: document.getElementById('carousel-caption-text-9'),
+      captionToggle: document.getElementById('captionToggle9'),
+      captionClose: document.getElementById('captionClose9'),
+      zoomToggle: document.getElementById('zoomToggle4'),
+      zoomView: document.getElementById('zoomView4')
+    });
+
     var footnoteData = {
       '1': 'Mehmed Ali, Yousuf Karsh & John Garo: The Search for a Master’s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).',
       '2': 'Adelaide Ryder, “The Photo-Secession Movement: Pioneering Artistry in Early Photography.” https://umfa.utah.edu.',
@@ -2530,7 +2615,8 @@
       '17': 'Mehmed Ali, Yousuf Karsh & John Garo: The Search for a Master’s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).',
       '18': 'Mehmed Ali, Yousuf Karsh & John Garo: The Search for a Master’s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).',
       '19': 'Arlene Francis with Florence Roman, Arlene Francis: A Memoir. (New York: Simon and Schuster, 1978).',
-      '20': 'Citation pending.'
+      '20': 'Citation pending.',
+      '21': 'Citation pending.'
     };
 
     var footnoteOverlay = document.getElementById('footnoteModalOverlay');
