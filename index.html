@@ -1827,6 +1827,96 @@
   </div>
 </section>
 
+<div class="full-carousel-wrap bg-black">
+<section class="full-carousel bg-black" id="fullCarousel4">
+  <div class="carousel-slide is-active">
+    <img src="./images/5/3a.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/5/9.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/5/10.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/5/11.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/5/12.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/5/13.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/5/14.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/5/15.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/5/16.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/5/17.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/5/18.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/5/21.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/5/22.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/5/23.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/5/26.jpg" alt="">
+  </div>
+
+  <div class="carousel-left-controls">
+    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle10" aria-pressed="false" aria-controls="carousel-caption-10" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
+    <button type="button" class="zoom-toggle btn-colorway-icon" id="fullCarousel4ZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
+      <span class="material-symbols-outlined" aria-hidden="true">search</span>
+    </button>
+  </div>
+
+  <div class="carousel-right-controls">
+    <button type="button" class="carousel-btn carousel-prev btn-colorway-icon" aria-label="Previous photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
+    <button type="button" class="carousel-btn carousel-next btn-colorway-icon" aria-label="Next photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
+  </div>
+
+  <div class="carousel-dots">
+    <button type="button" class="carousel-dot dot-colorway is-active" aria-label="Go to photograph 1"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 2"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 3"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 4"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 5"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 6"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 7"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 8"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 9"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 10"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 11"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 12"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 13"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 14"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 15"></button>
+  </div>
+
+  <div class="carousel-caption bg-green text-tan" id="carousel-caption-10">
+    <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose10" aria-label="Close caption">
+      <span class="material-symbols-outlined" aria-hidden="true">close</span>
+    </button>
+    <span id="carousel-caption-text-10"></span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text-10" aria-label="Copy caption text">
+      <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+      <span class="copy-label"></span>
+    </button>
+  </div>
+</section>
+</div>
+
 <div class="footnote-modal-overlay" id="footnoteModalOverlay" hidden>
   <div class="footnote-modal bg-green" role="dialog" aria-modal="true" aria-labelledby="footnoteModalText">
     <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="footnoteModalClose" aria-label="Close citation">
@@ -2227,6 +2317,10 @@
       ''
     ];
 
+    var captionsStudio5 = [
+      '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''
+    ];
+
     var carousel = document.getElementById('carousel');
     if (carousel) {
       var slides = carousel.querySelectorAll('.carousel-slide');
@@ -2594,6 +2688,15 @@
       captionClose: document.getElementById('captionClose9'),
       zoomToggle: document.getElementById('zoomToggle4'),
       zoomView: document.getElementById('zoomView4')
+    });
+
+    initSimpleCarousel(document.getElementById('fullCarousel4'), {
+      captions: captionsStudio5,
+      captionEl: document.getElementById('carousel-caption-10'),
+      captionText: document.getElementById('carousel-caption-text-10'),
+      captionToggle: document.getElementById('captionToggle10'),
+      captionClose: document.getElementById('captionClose10'),
+      zoomToggle: document.getElementById('fullCarousel4ZoomToggle')
     });
 
     var footnoteData = {
