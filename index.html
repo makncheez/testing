@@ -578,6 +578,26 @@
     height: auto;
   }
 
+  #studio6Images {
+    position: relative;
+    z-index: 1;
+  }
+
+  .side-by-side-images {
+    display: flex;
+    gap: 20px;
+    width: calc(100vw - 40px);
+    margin: 20px calc(50% - 50vw + 20px);
+  }
+
+  .side-by-side-images img {
+    display: block;
+    flex: 1 1 0;
+    min-width: 0;
+    width: 100%;
+    height: auto;
+  }
+
   .studio-col {
     display: flex;
     align-items: flex-start;
@@ -1022,6 +1042,9 @@
     }
     .trio {
       padding: 56px 28px;
+    }
+    .side-by-side-images {
+      flex-direction: column;
     }
     .intro-copy,
     .bio-copy,
@@ -1928,6 +1951,17 @@
     </div>
  </div>
 </section>
+
+<div class="bg-tan" id="studio6Images">
+  <div class="side-by-side-images">
+    <img src="./images/6/2.jpg" alt="">
+    <img src="./images/6/2a.jpg" alt="">
+  </div>
+  <div class="side-by-side-images">
+    <img src="./images/6/4.jpg" alt="">
+    <img src="./images/6/3.jpg" alt="">
+  </div>
+</div>
 
 <div class="footnote-modal-overlay" id="footnoteModalOverlay" hidden>
   <div class="footnote-modal bg-green" role="dialog" aria-modal="true" aria-labelledby="footnoteModalText">
