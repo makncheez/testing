@@ -568,28 +568,14 @@
 
   .stacked-images {
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
     gap: 24px;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
   }
 
   .stacked-images img {
     display: block;
-    flex-basis: 0;
-    min-width: 0;
+    width: 100%;
     height: auto;
-  }
-
-  .stacked-images img:first-child {
-    aspect-ratio: 1177 / 1200;
-    flex-grow: 981;
-  }
-
-  .stacked-images img:last-child {
-    aspect-ratio: 1677 / 1200;
-    flex-grow: 1398;
   }
 
   .studio-col {
@@ -1036,14 +1022,6 @@
     }
     .trio {
       padding: 56px 28px;
-    }
-    .stacked-images {
-      flex-direction: column;
-      gap: 16px;
-    }
-    .stacked-images img {
-      width: 100%;
-      flex: none;
     }
     .intro-copy,
     .bio-copy,
@@ -1777,10 +1755,10 @@
 <section class="trio bg-tan" id="fifthAvenueSection">
  <div class="trio-inner text-black">
     <p>Within this dynamic and progressive era in New York City, Kazanjian found enormous success. Along with his partner, Frances Kaiden, they established one of the premier photographic studios in the city. Kazanjian and Kaiden moved the studio four times, but it remained primarily in the Upper East Side along 5th Avenue. Within this world-famous corridor of New York City&rsquo;s elite wealth, grand architecture and cultural landmarks, the studio attracted many affluent patrons with social standing in the arts, politics and the business world. The studio not only attracted affluent members of New York society but also budding photographers in search of training and experience with the medium. Around 1915, the renowned documentary photographer and pioneer in socially committed photography, Dorothy Lange, worked as an assistant at the Kazanjian studio while taking photography classes at Columbia University.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="20">20</button></sup></p>
- </div>
- <div class="stacked-images">
-   <img src="./images/5/4.jpg" alt="">
-   <img src="./images/5/5.jpg" alt="">
+    <div class="stacked-images">
+      <img src="./images/5/4.jpg" alt="">
+      <img src="./images/5/5.jpg" alt="">
+    </div>
  </div>
 </section>
 
