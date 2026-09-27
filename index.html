@@ -51,30 +51,30 @@
 
   .btn-colorway-icon,
   .btn-colorway-text {
-    background: var(--color-purple);
+    background: var(--color-green);
     transition: background 0.2s ease, color 0.2s ease;
   }
 
-  .btn-colorway-icon { color: var(--color-green); }
+  .btn-colorway-icon { color: var(--color-purple); }
   .btn-colorway-text { color: var(--color-tan); }
 
   .btn-colorway-icon:hover,
   .btn-colorway-icon:focus-visible,
   .btn-colorway-text:hover,
   .btn-colorway-text:focus-visible {
-    background: var(--color-green);
+    background: var(--color-purple);
   }
 
   .btn-colorway-icon:hover,
   .btn-colorway-icon:focus-visible,
   .btn-colorway-text:hover,
   .btn-colorway-text:focus-visible {
-    color: var(--color-purple);
+    color: var(--color-green);
   }
 
   .btn-colorway-icon[aria-pressed="true"],
   .btn-colorway-text[aria-pressed="true"] {
-    background: var(--color-green);
+    background: var(--color-purple);
     color: var(--color-tan);
   }
 
@@ -692,15 +692,20 @@
   }
 
   .carousel-left-controls,
-  .carousel-right-controls,
   .carousel-dots {
     position: absolute;
     z-index: 3;
     display: flex;
   }
 
-  .carousel-left-controls,
   .carousel-right-controls {
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .carousel-left-controls {
     bottom: 5%;
     align-items: center;
     gap: 10px;
@@ -716,8 +721,8 @@
 
   .caption-toggle,
   .zoom-toggle {
-    width: 38px;
-    height: 38px;
+    width: 30px;
+    height: 30px;
     padding: 0;
     border-radius: 50%;
   }
@@ -731,7 +736,7 @@
 
   .caption-toggle .material-symbols-outlined,
   .zoom-toggle .material-symbols-outlined {
-    font-size: 31px;
+    font-size: 23px;
   }
 
   /* ---- Zoom view: large version of the current carousel photo, full width, behind the carousel ---- */
@@ -795,16 +800,24 @@
     top: calc(5% + 56px);
   }
 
-  .carousel-right-controls {
-    right: 18px;
-  }
-
   .carousel-btn {
-    width: 40px;
-    height: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: auto;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     font-size: 1.667em;
     line-height: 1;
+  }
+
+  .carousel-prev {
+    left: 18px;
+  }
+
+  .carousel-next {
+    right: 18px;
   }
 
   .carousel-btn:hover,
@@ -813,7 +826,7 @@
   }
 
   .carousel-btn .material-symbols-outlined {
-    font-size: 37px;
+    font-size: 24px;
   }
 
   .carousel-dots {
@@ -1063,6 +1076,7 @@
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
+    border-radius: 20px;
   }
 
   #kazanjianBio {
@@ -1320,7 +1334,7 @@
     </div>
 
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle" aria-pressed="false" aria-controls="carousel-caption" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
+      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle" aria-pressed="false" aria-controls="carousel-caption" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
       <button type="button" class="zoom-toggle btn-colorway-icon" id="zoomToggle" aria-pressed="false" aria-controls="zoomView" aria-label="View larger image">
         <span class="material-symbols-outlined" aria-hidden="true">search</span>
       </button>
@@ -1358,7 +1372,7 @@
   <div class="full-image bg-tan" id="fullImage">
     <img src="./images/1/1.png" alt="John Higue Garo (1875&ndash;1939), Armenian American portrait photographer and painter, seated reading a newspaper. Photographed by Yousuf Karsh.">
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle3" aria-pressed="false" aria-controls="carousel-caption-3" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
+      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle3" aria-pressed="false" aria-controls="carousel-caption-3" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
     </div>
     <div class="carousel-caption bg-green text-tan" id="carousel-caption-3">
       <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose3" aria-label="Close caption">
@@ -1458,7 +1472,7 @@
   </div>
 
   <div class="carousel-left-controls">
-    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle2" aria-pressed="false" aria-controls="carousel-caption-2" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
+    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle2" aria-pressed="false" aria-controls="carousel-caption-2" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
     <button type="button" class="zoom-toggle btn-colorway-icon" id="fullCarouselZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
       <span class="material-symbols-outlined" aria-hidden="true">search</span>
     </button>
@@ -1506,7 +1520,7 @@
 <div class="full-image-block bg-tan" id="fullImage2">
   <img src="./images/3/1.jpg" alt="">
   <div class="carousel-left-controls">
-    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle4" aria-pressed="false" aria-controls="carousel-caption-4" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
+    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle4" aria-pressed="false" aria-controls="carousel-caption-4" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
   </div>
   <div class="carousel-caption bg-green text-tan" id="carousel-caption-4">
     <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose4" aria-label="Close caption">
@@ -1552,7 +1566,7 @@
     </div>
 
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle5" aria-pressed="false" aria-controls="carousel-caption-5" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
+      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle5" aria-pressed="false" aria-controls="carousel-caption-5" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
       <button type="button" class="zoom-toggle btn-colorway-icon" id="zoomToggle2" aria-pressed="false" aria-label="Toggle zoom">
         <span class="material-symbols-outlined" aria-hidden="true">search</span>
       </button>
@@ -1623,7 +1637,7 @@
     </div>
 
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle6" aria-pressed="false" aria-controls="carousel-caption-6" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
+      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle6" aria-pressed="false" aria-controls="carousel-caption-6" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
       <button type="button" class="zoom-toggle btn-colorway-icon" id="zoomToggle3" aria-pressed="false" aria-label="Toggle zoom">
         <span class="material-symbols-outlined" aria-hidden="true">search</span>
       </button>
@@ -1737,7 +1751,7 @@
   </div>
 
   <div class="carousel-left-controls">
-    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle7" aria-pressed="false" aria-controls="carousel-caption-7" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
+    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle7" aria-pressed="false" aria-controls="carousel-caption-7" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
     <button type="button" class="zoom-toggle btn-colorway-icon" id="fullCarousel2ZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
       <span class="material-symbols-outlined" aria-hidden="true">search</span>
     </button>
@@ -1804,7 +1818,7 @@
   </div>
 
   <div class="carousel-left-controls">
-    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle8" aria-pressed="false" aria-controls="carousel-caption-8" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
+    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle8" aria-pressed="false" aria-controls="carousel-caption-8" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
     <button type="button" class="zoom-toggle btn-colorway-icon" id="fullCarousel3ZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
       <span class="material-symbols-outlined" aria-hidden="true">search</span>
     </button>
@@ -1875,7 +1889,7 @@
     </div>
 
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle9" aria-pressed="false" aria-controls="carousel-caption-9" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
+      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle9" aria-pressed="false" aria-controls="carousel-caption-9" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
       <button type="button" class="zoom-toggle btn-colorway-icon" id="zoomToggle4" aria-pressed="false" aria-label="Toggle zoom">
         <span class="material-symbols-outlined" aria-hidden="true">search</span>
       </button>
@@ -1954,7 +1968,7 @@
   </div>
 
   <div class="carousel-left-controls">
-    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle10" aria-pressed="false" aria-controls="carousel-caption-10" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
+    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle10" aria-pressed="false" aria-controls="carousel-caption-10" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
     <button type="button" class="zoom-toggle btn-colorway-icon" id="fullCarousel4ZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
       <span class="material-symbols-outlined" aria-hidden="true">search</span>
     </button>
