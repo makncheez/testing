@@ -1025,6 +1025,20 @@
     height: 90%;
   }
 
+  .full-carousel .carousel-slide.is-pair {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .full-carousel .carousel-slide.is-pair img {
+    width: auto;
+    max-width: calc(50% - 10px);
+    height: 90%;
+    object-fit: contain;
+  }
+
   .full-carousel.is-zoom-active {
     cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30'><circle cx='15' cy='15' r='13' fill='transparent' stroke='white' stroke-width='1'/></svg>") 15 15, crosshair;
   }
@@ -1989,6 +2003,90 @@
  </div>
 </section>
 
+<div class="full-carousel-wrap bg-black">
+<section class="full-carousel bg-black" id="fullCarousel5">
+  <div class="carousel-slide is-active">
+    <img src="./images/7/1.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/7/1a.jpg" alt="">
+  </div>
+  <div class="carousel-slide is-pair">
+    <img src="./images/7/2.jpg" alt="">
+    <img src="./images/7/2a.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/7/2b.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/7/2c.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/7/2d.jpg" alt="">
+  </div>
+  <div class="carousel-slide">
+    <img src="./images/7/3.jpg" alt="">
+  </div>
+  <div class="carousel-slide is-pair">
+    <img src="./images/7/4.jpg" alt="">
+    <img src="./images/7/4a.jpg" alt="">
+  </div>
+  <div class="carousel-slide is-pair">
+    <img src="./images/7/5.jpg" alt="">
+    <img src="./images/7/5a.jpg" alt="">
+  </div>
+  <div class="carousel-slide is-pair">
+    <img src="./images/7/6.jpg" alt="">
+    <img src="./images/7/6a.jpg" alt="">
+  </div>
+  <div class="carousel-slide is-pair">
+    <img src="./images/7/7.jpg" alt="">
+    <img src="./images/7/7a.jpg" alt="">
+  </div>
+  <div class="carousel-slide is-pair">
+    <img src="./images/7/8.jpg" alt="">
+    <img src="./images/7/8a.jpg" alt="">
+  </div>
+
+  <div class="carousel-left-controls">
+    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle11" aria-pressed="false" aria-controls="carousel-caption-11" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
+    <button type="button" class="zoom-toggle btn-colorway-icon" id="fullCarousel5ZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
+      <span class="material-symbols-outlined" aria-hidden="true">search</span>
+    </button>
+  </div>
+
+  <div class="carousel-right-controls">
+    <button type="button" class="carousel-btn carousel-prev btn-colorway-icon" aria-label="Previous photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
+    <button type="button" class="carousel-btn carousel-next btn-colorway-icon" aria-label="Next photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
+  </div>
+
+  <div class="carousel-dots">
+    <button type="button" class="carousel-dot dot-colorway is-active" aria-label="Go to photograph 1"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 2"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 3"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 4"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 5"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 6"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 7"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 8"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 9"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 10"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 11"></button>
+    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 12"></button>
+  </div>
+
+  <div class="carousel-caption bg-green text-tan" id="carousel-caption-11">
+    <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose11" aria-label="Close caption">
+      <span class="material-symbols-outlined" aria-hidden="true">close</span>
+    </button>
+    <span id="carousel-caption-text-11"></span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text-11" aria-label="Copy caption text">
+      <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+      <span class="copy-label"></span>
+    </button>
+  </div>
+</section>
+</div>
+
 <div class="footnote-modal-overlay" id="footnoteModalOverlay" hidden>
   <div class="footnote-modal bg-green" role="dialog" aria-modal="true" aria-labelledby="footnoteModalText">
     <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="footnoteModalClose" aria-label="Close citation">
@@ -2406,6 +2504,10 @@
       'William Scott Bond (1876–1952), ca. 1940. Real estate lawyer, and trustee of the University of Chicago (from 1922). Kaiden-Kazanjian Studios, New York. Courtesy of the University of Chicago Library, Special Collections Research Center, Archival Photographic Files.'
     ];
 
+    var captionsFolder7 = [
+      '', '', '', '', '', '', '', '', '', '', '', ''
+    ];
+
     var carousel = document.getElementById('carousel');
     if (carousel) {
       var slides = carousel.querySelectorAll('.carousel-slide');
@@ -2782,6 +2884,15 @@
       captionToggle: document.getElementById('captionToggle10'),
       captionClose: document.getElementById('captionClose10'),
       zoomToggle: document.getElementById('fullCarousel4ZoomToggle')
+    });
+
+    initSimpleCarousel(document.getElementById('fullCarousel5'), {
+      captions: captionsFolder7,
+      captionEl: document.getElementById('carousel-caption-11'),
+      captionText: document.getElementById('carousel-caption-text-11'),
+      captionToggle: document.getElementById('captionToggle11'),
+      captionClose: document.getElementById('captionClose11'),
+      zoomToggle: document.getElementById('fullCarousel5ZoomToggle')
     });
 
     var footnoteData = {
