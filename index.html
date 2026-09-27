@@ -1011,13 +1011,20 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    height: 90vh;
+    height: 95vh;
     padding: 20px;
     box-sizing: border-box;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x proximity;
+    cursor: grab;
+  }
+
+  .hscroll-track.is-dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    user-select: none;
   }
 
   .hscroll-track img {
@@ -1026,6 +1033,8 @@
     width: auto;
     height: 100%;
     scroll-snap-align: center;
+    -webkit-user-drag: none;
+    user-select: none;
   }
 
   .hscroll-track::-webkit-scrollbar {
@@ -2612,6 +2621,60 @@
       startAuto();
     }
 
+    function initDragScroll(track) {
+      if (!track) return;
+      var isDown = false;
+      var startX = 0;
+      var startScroll = 0;
+      var moved = false;
+
+      function down(x) {
+        isDown = true;
+        moved = false;
+        startX = x;
+        startScroll = track.scrollLeft;
+        track.classList.add('is-dragging');
+      }
+
+      function move(x) {
+        if (!isDown) return;
+        var delta = x - startX;
+        if (Math.abs(delta) > 5) moved = true;
+        track.scrollLeft = startScroll - delta;
+      }
+
+      function up() {
+        isDown = false;
+        track.classList.remove('is-dragging');
+      }
+
+      track.addEventListener('mousedown', function (e) {
+        down(e.pageX);
+        e.preventDefault();
+      });
+      window.addEventListener('mousemove', function (e) {
+        move(e.pageX);
+      });
+      window.addEventListener('mouseup', up);
+      track.addEventListener('mouseleave', function () {
+        if (isDown) up();
+      });
+      track.addEventListener('click', function (e) {
+        if (moved) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true);
+
+      track.addEventListener('touchstart', function (e) {
+        down(e.touches[0].pageX);
+      }, { passive: true });
+      track.addEventListener('touchmove', function (e) {
+        move(e.touches[0].pageX);
+      }, { passive: true });
+      track.addEventListener('touchend', up);
+    }
+
     function initSimpleCarousel(root, opts) {
       if (!root) return;
       opts = opts || {};
@@ -2849,6 +2912,8 @@
       captionClose: document.getElementById('captionClose10'),
       zoomToggle: document.getElementById('fullCarousel4ZoomToggle')
     });
+
+    initDragScroll(document.getElementById('hscroll7'));
 
     var footnoteData = {
       '1': 'Mehmed Ali, Yousuf Karsh & John Garo: The Search for a Master’s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).',
