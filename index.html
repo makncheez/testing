@@ -82,6 +82,10 @@
     color: var(--color-tan);
   }
 
+  .caption-toggle .material-symbols-outlined {
+    color: inherit;
+  }
+
   .dot-colorway {
     border-color: var(--color-purple);
     background: var(--color-purple);
@@ -716,10 +720,7 @@
   }
 
   .carousel-left-controls {
-    left: 0;
-    right: 0;
-    width: fit-content;
-    margin: 0 auto;
+    left: 18px;
   }
 
   .caption-toggle,
@@ -805,7 +806,7 @@
 
   .carousel-btn {
     position: absolute;
-    bottom: 5%;
+    bottom: calc(5% + 40px);
     pointer-events: auto;
     width: 32px;
     height: 32px;
