@@ -82,7 +82,7 @@
     color: var(--color-tan);
   }
 
-  .caption-toggle .material-symbols-outlined {
+  .caption-icon-i {
     color: inherit;
   }
 
@@ -691,10 +691,6 @@
     object-position: center top;
   }
 
-  #carousel .carousel-dots {
-    bottom: 10px;
-  }
-
   .carousel-left-controls,
   .carousel-dots {
     position: absolute;
@@ -716,7 +712,7 @@
   }
 
   .carousel-dots {
-    bottom: 18px;
+    bottom: 5%;
   }
 
   .carousel-left-controls {
@@ -731,16 +727,23 @@
     border-radius: 50%;
   }
 
-  .caption-toggle .material-symbols-outlined,
   .zoom-toggle .material-symbols-outlined,
   .carousel-btn .material-symbols-outlined {
     font-family: 'Material Symbols Outlined';
     pointer-events: none;
   }
 
-  .caption-toggle .material-symbols-outlined,
   .zoom-toggle .material-symbols-outlined {
     font-size: 23px;
+  }
+
+  .caption-icon-i {
+    font-family: 'Cardo', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1;
+    pointer-events: none;
   }
 
   /* ---- Zoom view: large version of the current carousel photo, full width, behind the carousel ---- */
@@ -1042,13 +1045,53 @@
     user-select: none;
   }
 
-  .hscroll-track img {
-    display: block;
+  .hscroll-item {
+    position: relative;
     flex: 0 0 auto;
+    height: 100%;
+  }
+
+  .hscroll-item img {
+    display: block;
     width: auto;
     height: 100%;
     -webkit-user-drag: none;
     user-select: none;
+  }
+
+  .hscroll-caption-toggle {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+  }
+
+  .hscroll-caption {
+    position: absolute;
+    top: 54px;
+    left: 12px;
+    z-index: 3;
+    max-width: min(320px, calc(100% - 24px));
+    margin: 0;
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-size: 1em;
+    line-height: 1.4em;
+    text-align: left;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+  }
+
+  .hscroll-caption.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition: opacity 0.2s ease, transform 0.2s ease;
   }
 
   .hscroll-track::-webkit-scrollbar {
@@ -1335,7 +1378,7 @@
     </div>
 
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle" aria-pressed="false" aria-controls="carousel-caption" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
+      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle" aria-pressed="false" aria-controls="carousel-caption" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
       <button type="button" class="zoom-toggle btn-colorway-icon" id="zoomToggle" aria-pressed="false" aria-controls="zoomView" aria-label="View larger image">
         <span class="material-symbols-outlined" aria-hidden="true">search</span>
       </button>
@@ -1373,7 +1416,7 @@
   <div class="full-image bg-tan" id="fullImage">
     <img src="./images/1/1.png" alt="John Higue Garo (1875&ndash;1939), Armenian American portrait photographer and painter, seated reading a newspaper. Photographed by Yousuf Karsh.">
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle3" aria-pressed="false" aria-controls="carousel-caption-3" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
+      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle3" aria-pressed="false" aria-controls="carousel-caption-3" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
     </div>
     <div class="carousel-caption bg-green text-tan" id="carousel-caption-3">
       <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose3" aria-label="Close caption">
@@ -1473,7 +1516,7 @@
   </div>
 
   <div class="carousel-left-controls">
-    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle2" aria-pressed="false" aria-controls="carousel-caption-2" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
+    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle2" aria-pressed="false" aria-controls="carousel-caption-2" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
     <button type="button" class="zoom-toggle btn-colorway-icon" id="fullCarouselZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
       <span class="material-symbols-outlined" aria-hidden="true">search</span>
     </button>
@@ -1521,7 +1564,7 @@
 <div class="full-image-block bg-tan" id="fullImage2">
   <img src="./images/3/1.jpg" alt="">
   <div class="carousel-left-controls">
-    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle4" aria-pressed="false" aria-controls="carousel-caption-4" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
+    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle4" aria-pressed="false" aria-controls="carousel-caption-4" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
   </div>
   <div class="carousel-caption bg-green text-tan" id="carousel-caption-4">
     <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose4" aria-label="Close caption">
@@ -1567,7 +1610,7 @@
     </div>
 
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle5" aria-pressed="false" aria-controls="carousel-caption-5" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
+      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle5" aria-pressed="false" aria-controls="carousel-caption-5" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
       <button type="button" class="zoom-toggle btn-colorway-icon" id="zoomToggle2" aria-pressed="false" aria-label="Toggle zoom">
         <span class="material-symbols-outlined" aria-hidden="true">search</span>
       </button>
@@ -1638,7 +1681,7 @@
     </div>
 
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle6" aria-pressed="false" aria-controls="carousel-caption-6" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
+      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle6" aria-pressed="false" aria-controls="carousel-caption-6" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
       <button type="button" class="zoom-toggle btn-colorway-icon" id="zoomToggle3" aria-pressed="false" aria-label="Toggle zoom">
         <span class="material-symbols-outlined" aria-hidden="true">search</span>
       </button>
@@ -1752,7 +1795,7 @@
   </div>
 
   <div class="carousel-left-controls">
-    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle7" aria-pressed="false" aria-controls="carousel-caption-7" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
+    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle7" aria-pressed="false" aria-controls="carousel-caption-7" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
     <button type="button" class="zoom-toggle btn-colorway-icon" id="fullCarousel2ZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
       <span class="material-symbols-outlined" aria-hidden="true">search</span>
     </button>
@@ -1819,7 +1862,7 @@
   </div>
 
   <div class="carousel-left-controls">
-    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle8" aria-pressed="false" aria-controls="carousel-caption-8" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
+    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle8" aria-pressed="false" aria-controls="carousel-caption-8" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
     <button type="button" class="zoom-toggle btn-colorway-icon" id="fullCarousel3ZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
       <span class="material-symbols-outlined" aria-hidden="true">search</span>
     </button>
@@ -1890,7 +1933,7 @@
     </div>
 
     <div class="carousel-left-controls">
-      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle9" aria-pressed="false" aria-controls="carousel-caption-9" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
+      <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle9" aria-pressed="false" aria-controls="carousel-caption-9" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
       <button type="button" class="zoom-toggle btn-colorway-icon" id="zoomToggle4" aria-pressed="false" aria-label="Toggle zoom">
         <span class="material-symbols-outlined" aria-hidden="true">search</span>
       </button>
@@ -1969,7 +2012,7 @@
   </div>
 
   <div class="carousel-left-controls">
-    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle10" aria-pressed="false" aria-controls="carousel-caption-10" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">info</span></button>
+    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle10" aria-pressed="false" aria-controls="carousel-caption-10" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
     <button type="button" class="zoom-toggle btn-colorway-icon" id="fullCarousel4ZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
       <span class="material-symbols-outlined" aria-hidden="true">search</span>
     </button>
@@ -2056,26 +2099,146 @@
 
 <div class="hscroll-wrap bg-black">
   <div class="hscroll-track" id="hscroll7">
-    <img src="./images/7/1.jpg" alt="The Spur, September 15, 1922. Portrait of Mrs. Goodhue Livingston, Jr., and her son. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-    <img src="./images/7/1a.jpg" alt="The Spur, October 1, 1922. Wedding portrait of Mr. and Mrs. John M. Franklin. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-    <img src="./images/7/2a.jpg" alt="The Spur, October 15, 1922. Portrait of the wedding attendants of Mrs. Kenneth O&rsquo;Brien. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-    <img src="./images/7/2.jpg" alt="The Spur, October 15, 1922. Portrait of Clarence H. Mackay, his daughter, Mrs. Kenneth O&rsquo;Brien, and his mother, Mrs. John W. Mackay at the reception of Mr. and Mrs. O&rsquo;Brien. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-    <img src="./images/7/2b.jpg" alt="The Spur, April 1, 1924. Portrait of Mrs. Joel Ellis Fisher, Jr. and her children. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-    <img src="./images/7/2c.jpg" alt="The Spur, 1931. Portrait of Mrs. F. Bartholomay Jelke in Newport, Rhode Island. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-    <img src="./images/7/2d.jpg" alt="The Spur, 1932. Wedding portrait of Mrs. Helm George Wilde in Lenox, Massachusetts. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-    <img src="./images/7/2e.jpg" alt="The Spur, September 1934. Portrait of Mrs. Henry Adams Ashforth and her children. Kaiden-Kazanjian Studios, New York. Courtesy of the Malikian Collection.">
-    <img src="./images/7/2f.jpg" alt="The Spur, May 1935. Portrait of Mrs. Frederick S. Whitlock. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-    <img src="./images/7/3.jpg" alt="Town and Country, September 20, 1915. Portrait of Mrs. Lydia Hoyt. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-    <img src="./images/7/4.jpg" alt="Vogue, June 1, 1915. Courtesy of the Malikian Collection.">
-    <img src="./images/7/4a.jpg" alt="Vogue, June 1, 1915. Portrait of Mrs. Charles B. Alexander. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-    <img src="./images/7/5.jpg" alt="Vogue, September 15, 1915. Courtesy of the Malikian Collection.">
-    <img src="./images/7/5a.jpg" alt="Vogue, September 15, 1915. Portrait of Miss Elsie De Wolfe. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-    <img src="./images/7/6.jpg" alt="Vogue, May 15, 1915. Courtesy of the Malikian Collection.">
-    <img src="./images/7/6a.jpg" alt="Vogue, May 15, 1915. Portrait of Mrs. William Lawrence Wood. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-    <img src="./images/7/7.jpg" alt="Town &amp; Country, November 15, 1923. Courtesy of the Malikian Collection.">
-    <img src="./images/7/7a.jpg" alt="Town &amp; Country, November 15, 1923. Portrait of the bridal group of Mrs. Philip A.S. Franklin, Jr. Courtesy of the Malikian Collection.">
-    <img src="./images/7/8.jpg" alt="Vogue, July 15, 1925. Courtesy of the Malikian Collection.">
-    <img src="./images/7/8a.jpg" alt="Vogue, July 15, 1925. Wedding portrait of Mrs. James H. Ripley. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
+    <div class="hscroll-item">
+      <img src="./images/7/1.jpg" alt="The Spur, September 15, 1922. Portrait of Mrs. Goodhue Livingston, Jr., and her son. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle1" aria-pressed="false" aria-controls="hscroll-caption-1" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-1">
+        <span>The Spur, September 15, 1922. Portrait of Mrs. Goodhue Livingston, Jr., and her son. Kazanjian Studio, New York. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/1a.jpg" alt="The Spur, October 1, 1922. Wedding portrait of Mr. and Mrs. John M. Franklin. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle2" aria-pressed="false" aria-controls="hscroll-caption-2" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-2">
+        <span>The Spur, October 1, 1922. Wedding portrait of Mr. and Mrs. John M. Franklin. Kazanjian Studio, New York. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/2a.jpg" alt="The Spur, October 15, 1922. Portrait of the wedding attendants of Mrs. Kenneth O&rsquo;Brien. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle3" aria-pressed="false" aria-controls="hscroll-caption-3" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-3">
+        <span>The Spur, October 15, 1922. Portrait of the wedding attendants of Mrs. Kenneth O&rsquo;Brien. Kazanjian Studio, New York. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/2.jpg" alt="The Spur, October 15, 1922. Portrait of Clarence H. Mackay, his daughter, Mrs. Kenneth O&rsquo;Brien, and his mother, Mrs. John W. Mackay at the reception of Mr. and Mrs. O&rsquo;Brien. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle4" aria-pressed="false" aria-controls="hscroll-caption-4" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-4">
+        <span>The Spur, October 15, 1922. Portrait of Clarence H. Mackay, his daughter, Mrs. Kenneth O&rsquo;Brien, and his mother, Mrs. John W. Mackay at the reception of Mr. and Mrs. O&rsquo;Brien. Kazanjian Studio, New York. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/2b.jpg" alt="The Spur, April 1, 1924. Portrait of Mrs. Joel Ellis Fisher, Jr. and her children. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle5" aria-pressed="false" aria-controls="hscroll-caption-5" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-5">
+        <span>The Spur, April 1, 1924. Portrait of Mrs. Joel Ellis Fisher, Jr. and her children. Kazanjian Studio, New York. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/2c.jpg" alt="The Spur, 1931. Portrait of Mrs. F. Bartholomay Jelke in Newport, Rhode Island. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle6" aria-pressed="false" aria-controls="hscroll-caption-6" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-6">
+        <span>The Spur, 1931. Portrait of Mrs. F. Bartholomay Jelke in Newport, Rhode Island. Kazanjian Studio, New York. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/2d.jpg" alt="The Spur, 1932. Wedding portrait of Mrs. Helm George Wilde in Lenox, Massachusetts. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle7" aria-pressed="false" aria-controls="hscroll-caption-7" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-7">
+        <span>The Spur, 1932. Wedding portrait of Mrs. Helm George Wilde in Lenox, Massachusetts. Kazanjian Studio, New York. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/2e.jpg" alt="The Spur, September 1934. Portrait of Mrs. Henry Adams Ashforth and her children. Kaiden-Kazanjian Studios, New York. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle8" aria-pressed="false" aria-controls="hscroll-caption-8" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-8">
+        <span>The Spur, September 1934. Portrait of Mrs. Henry Adams Ashforth and her children. Kaiden-Kazanjian Studios, New York. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/2f.jpg" alt="The Spur, May 1935. Portrait of Mrs. Frederick S. Whitlock. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle9" aria-pressed="false" aria-controls="hscroll-caption-9" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-9">
+        <span>The Spur, May 1935. Portrait of Mrs. Frederick S. Whitlock. Kazanjian Studio, New York. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/3.jpg" alt="Town and Country, September 20, 1915. Portrait of Mrs. Lydia Hoyt. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle10" aria-pressed="false" aria-controls="hscroll-caption-10" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-10">
+        <span>Town and Country, September 20, 1915. Portrait of Mrs. Lydia Hoyt. Kazanjian Studio, New York. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/4.jpg" alt="Vogue, June 1, 1915. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle11" aria-pressed="false" aria-controls="hscroll-caption-11" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-11">
+        <span>Vogue, June 1, 1915. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/4a.jpg" alt="Vogue, June 1, 1915. Portrait of Mrs. Charles B. Alexander. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle12" aria-pressed="false" aria-controls="hscroll-caption-12" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-12">
+        <span>Vogue, June 1, 1915. Portrait of Mrs. Charles B. Alexander. Kazanjian Studio, New York. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/5.jpg" alt="Vogue, September 15, 1915. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle13" aria-pressed="false" aria-controls="hscroll-caption-13" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-13">
+        <span>Vogue, September 15, 1915. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/5a.jpg" alt="Vogue, September 15, 1915. Portrait of Miss Elsie De Wolfe. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle14" aria-pressed="false" aria-controls="hscroll-caption-14" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-14">
+        <span>Vogue, September 15, 1915. Portrait of Miss Elsie De Wolfe. Kazanjian Studio, New York. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/6.jpg" alt="Vogue, May 15, 1915. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle15" aria-pressed="false" aria-controls="hscroll-caption-15" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-15">
+        <span>Vogue, May 15, 1915. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/6a.jpg" alt="Vogue, May 15, 1915. Portrait of Mrs. William Lawrence Wood. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle16" aria-pressed="false" aria-controls="hscroll-caption-16" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-16">
+        <span>Vogue, May 15, 1915. Portrait of Mrs. William Lawrence Wood. Kazanjian Studio, New York. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/7.jpg" alt="Town &amp; Country, November 15, 1923. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle17" aria-pressed="false" aria-controls="hscroll-caption-17" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-17">
+        <span>Town &amp; Country, November 15, 1923. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/7a.jpg" alt="Town &amp; Country, November 15, 1923. Portrait of the bridal group of Mrs. Philip A.S. Franklin, Jr. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle18" aria-pressed="false" aria-controls="hscroll-caption-18" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-18">
+        <span>Town &amp; Country, November 15, 1923. Portrait of the bridal group of Mrs. Philip A.S. Franklin, Jr. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/8.jpg" alt="Vogue, July 15, 1925. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle19" aria-pressed="false" aria-controls="hscroll-caption-19" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-19">
+        <span>Vogue, July 15, 1925. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
+    <div class="hscroll-item">
+      <img src="./images/7/8a.jpg" alt="Vogue, July 15, 1925. Wedding portrait of Mrs. James H. Ripley. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
+      <button type="button" class="caption-toggle btn-colorway-icon hscroll-caption-toggle" id="hscrollCaptionToggle20" aria-pressed="false" aria-controls="hscroll-caption-20" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
+      <div class="hscroll-caption bg-green text-tan" id="hscroll-caption-20">
+        <span>Vogue, July 15, 1925. Wedding portrait of Mrs. James H. Ripley. Kazanjian Studio, New York. Courtesy of the Malikian Collection.</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -2734,6 +2897,26 @@
       }, true);
     }
 
+    function initHscrollCaptions(track) {
+      if (!track) return;
+      track.addEventListener('click', function (e) {
+        var toggle = e.target.closest('.hscroll-caption-toggle');
+        if (!toggle) return;
+        var item = toggle.closest('.hscroll-item');
+        var caption = item && item.querySelector('.hscroll-caption');
+        if (!caption) return;
+        var willOpen = !caption.classList.contains('is-open');
+        track.querySelectorAll('.hscroll-caption.is-open').forEach(function (c) {
+          c.classList.remove('is-open');
+        });
+        track.querySelectorAll('.hscroll-caption-toggle[aria-pressed="true"]').forEach(function (b) {
+          b.setAttribute('aria-pressed', 'false');
+        });
+        caption.classList.toggle('is-open', willOpen);
+        toggle.setAttribute('aria-pressed', String(willOpen));
+      });
+    }
+
     function initSimpleCarousel(root, opts) {
       if (!root) return;
       opts = opts || {};
@@ -2973,6 +3156,7 @@
     });
 
     initDragScroll(document.getElementById('hscroll7'));
+    initHscrollCaptions(document.getElementById('hscroll7'));
 
     var footnoteData = {
       '1': 'Mehmed Ali, Yousuf Karsh & John Garo: The Search for a Master’s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).',
