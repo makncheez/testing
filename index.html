@@ -2627,25 +2627,77 @@
       var startX = 0;
       var startScroll = 0;
       var moved = false;
+      var targetX = 0;
+      var rafId = null;
+      var lastX = 0;
+      var lastT = 0;
+      var velocity = 0;
+      var momentumId = null;
+
+      function cancelMomentum() {
+        if (momentumId !== null) {
+          cancelAnimationFrame(momentumId);
+          momentumId = null;
+        }
+      }
+
+      function applyScroll() {
+        rafId = null;
+        var delta = targetX - startX;
+        if (Math.abs(delta) > 5) moved = true;
+        track.scrollLeft = startScroll - delta;
+      }
+
+      function scheduleScroll(x) {
+        targetX = x;
+        if (rafId === null) rafId = requestAnimationFrame(applyScroll);
+      }
 
       function down(x) {
+        cancelMomentum();
         isDown = true;
         moved = false;
         startX = x;
         startScroll = track.scrollLeft;
+        lastX = x;
+        lastT = performance.now();
+        velocity = 0;
         track.classList.add('is-dragging');
       }
 
       function move(x) {
         if (!isDown) return;
-        var delta = x - startX;
-        if (Math.abs(delta) > 5) moved = true;
-        track.scrollLeft = startScroll - delta;
+        var now = performance.now();
+        var dt = now - lastT;
+        if (dt > 0) velocity = (x - lastX) / dt;
+        lastX = x;
+        lastT = now;
+        scheduleScroll(x);
+      }
+
+      function coastMomentum() {
+        var v = velocity;
+        function step() {
+          track.scrollLeft -= v * 16;
+          v *= 0.94;
+          if (Math.abs(v) < 0.02) {
+            momentumId = null;
+            return;
+          }
+          momentumId = requestAnimationFrame(step);
+        }
+        if (Math.abs(v) > 0.02) momentumId = requestAnimationFrame(step);
       }
 
       function up() {
+        if (!isDown) return;
         isDown = false;
         track.classList.remove('is-dragging');
+        if (rafId !== null) {
+          cancelAnimationFrame(rafId);
+          applyScroll();
+        }
+        coastMomentum();
       }
 
       track.addEventListener('mousedown', function (e) {
