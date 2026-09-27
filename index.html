@@ -672,6 +672,24 @@
     z-index: 1;
   }
 
+  /* ---- fullCarousel5: 3D fold transition, each slide hinges open/closed on its right edge ---- */
+
+  #fullCarousel5 {
+    perspective: 2400px;
+  }
+
+  #fullCarousel5 .carousel-slide {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transform-origin: right center;
+    transform: rotateY(-110deg);
+    transition: transform 0.9s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.4s ease;
+  }
+
+  #fullCarousel5 .carousel-slide.is-active {
+    transform: rotateY(0deg);
+  }
+
   .carousel-slide img {
     width: 100%;
     height: 100%;
