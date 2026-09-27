@@ -672,24 +672,6 @@
     z-index: 1;
   }
 
-  /* ---- fullCarousel5: 3D fold transition, each slide hinges open/closed on its right edge ---- */
-
-  #fullCarousel5 {
-    perspective: 2400px;
-  }
-
-  #fullCarousel5 .carousel-slide {
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    transform-origin: right center;
-    transform: rotateY(-110deg);
-    transition: transform 0.9s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.4s ease;
-  }
-
-  #fullCarousel5 .carousel-slide.is-active {
-    transform: rotateY(0deg);
-  }
-
   .carousel-slide img {
     width: 100%;
     height: 100%;
@@ -1019,6 +1001,46 @@
 
   /* ---- Full-width carousel: placeholder, same photographs, full-bleed ---- */
 
+  .hscroll-wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .hscroll-track {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 90vh;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+
+  .hscroll-track img {
+    display: block;
+    flex: 0 0 auto;
+    width: auto;
+    height: 100%;
+    scroll-snap-align: center;
+  }
+
+  .hscroll-track::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  .hscroll-track::-webkit-scrollbar-track {
+    background: var(--color-black);
+  }
+
+  .hscroll-track::-webkit-scrollbar-thumb {
+    background: var(--color-purple);
+    border-radius: 999px;
+  }
+
   .full-carousel-wrap {
     width: 100%;
     padding: 30px;
@@ -1042,20 +1064,6 @@
   .full-carousel .carousel-slide img {
     width: 90%;
     height: 90%;
-  }
-
-  .full-carousel .carousel-slide.is-pair {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  .full-carousel .carousel-slide.is-pair img {
-    width: auto;
-    max-width: calc(50% - 10px);
-    height: 90%;
-    object-fit: contain;
   }
 
   .full-carousel.is-zoom-active {
@@ -2022,93 +2030,29 @@
  </div>
 </section>
 
-<div class="full-carousel-wrap bg-black">
-<section class="full-carousel bg-black" id="fullCarousel5">
-  <div class="carousel-slide is-pair is-active">
+<div class="hscroll-wrap bg-black">
+  <div class="hscroll-track" id="hscroll7">
     <img src="./images/7/1.jpg" alt="The Spur, September 15, 1922. Portrait of Mrs. Goodhue Livingston, Jr., and her son. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
     <img src="./images/7/1a.jpg" alt="The Spur, October 1, 1922. Wedding portrait of Mr. and Mrs. John M. Franklin. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-  </div>
-  <div class="carousel-slide is-pair">
     <img src="./images/7/2a.jpg" alt="The Spur, October 15, 1922. Portrait of the wedding attendants of Mrs. Kenneth O&rsquo;Brien. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
     <img src="./images/7/2.jpg" alt="The Spur, October 15, 1922. Portrait of Clarence H. Mackay, his daughter, Mrs. Kenneth O&rsquo;Brien, and his mother, Mrs. John W. Mackay at the reception of Mr. and Mrs. O&rsquo;Brien. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-  </div>
-  <div class="carousel-slide">
     <img src="./images/7/2b.jpg" alt="The Spur, April 1, 1924. Portrait of Mrs. Joel Ellis Fisher, Jr. and her children. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-  </div>
-  <div class="carousel-slide">
     <img src="./images/7/2c.jpg" alt="The Spur, 1931. Portrait of Mrs. F. Bartholomay Jelke in Newport, Rhode Island. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-  </div>
-  <div class="carousel-slide">
     <img src="./images/7/2d.jpg" alt="The Spur, 1932. Wedding portrait of Mrs. Helm George Wilde in Lenox, Massachusetts. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-  </div>
-  <div class="carousel-slide">
     <img src="./images/7/2e.jpg" alt="The Spur, September 1934. Portrait of Mrs. Henry Adams Ashforth and her children. Kaiden-Kazanjian Studios, New York. Courtesy of the Malikian Collection.">
-  </div>
-  <div class="carousel-slide">
     <img src="./images/7/2f.jpg" alt="The Spur, May 1935. Portrait of Mrs. Frederick S. Whitlock. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-  </div>
-  <div class="carousel-slide">
     <img src="./images/7/3.jpg" alt="Town and Country, September 20, 1915. Portrait of Mrs. Lydia Hoyt. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-  </div>
-  <div class="carousel-slide is-pair">
     <img src="./images/7/4.jpg" alt="Vogue, June 1, 1915. Courtesy of the Malikian Collection.">
     <img src="./images/7/4a.jpg" alt="Vogue, June 1, 1915. Portrait of Mrs. Charles B. Alexander. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-  </div>
-  <div class="carousel-slide is-pair">
     <img src="./images/7/5.jpg" alt="Vogue, September 15, 1915. Courtesy of the Malikian Collection.">
     <img src="./images/7/5a.jpg" alt="Vogue, September 15, 1915. Portrait of Miss Elsie De Wolfe. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-  </div>
-  <div class="carousel-slide is-pair">
     <img src="./images/7/6.jpg" alt="Vogue, May 15, 1915. Courtesy of the Malikian Collection.">
     <img src="./images/7/6a.jpg" alt="Vogue, May 15, 1915. Portrait of Mrs. William Lawrence Wood. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
-  </div>
-  <div class="carousel-slide is-pair">
     <img src="./images/7/7.jpg" alt="Town &amp; Country, November 15, 1923. Courtesy of the Malikian Collection.">
     <img src="./images/7/7a.jpg" alt="Town &amp; Country, November 15, 1923. Portrait of the bridal group of Mrs. Philip A.S. Franklin, Jr. Courtesy of the Malikian Collection.">
-  </div>
-  <div class="carousel-slide is-pair">
     <img src="./images/7/8.jpg" alt="Vogue, July 15, 1925. Courtesy of the Malikian Collection.">
     <img src="./images/7/8a.jpg" alt="Vogue, July 15, 1925. Wedding portrait of Mrs. James H. Ripley. Kazanjian Studio, New York. Courtesy of the Malikian Collection.">
   </div>
-
-  <div class="carousel-left-controls">
-    <button type="button" class="caption-toggle btn-colorway-icon" id="captionToggle11" aria-pressed="false" aria-controls="carousel-caption-11" aria-label="Toggle caption"><span class="material-symbols-outlined" aria-hidden="true">text_ad</span></button>
-    <button type="button" class="zoom-toggle btn-colorway-icon" id="fullCarousel5ZoomToggle" aria-pressed="false" aria-label="Toggle zoom">
-      <span class="material-symbols-outlined" aria-hidden="true">search</span>
-    </button>
-  </div>
-
-  <div class="carousel-right-controls">
-    <button type="button" class="carousel-btn carousel-prev btn-colorway-icon" aria-label="Previous photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
-    <button type="button" class="carousel-btn carousel-next btn-colorway-icon" aria-label="Next photograph"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
-  </div>
-
-  <div class="carousel-dots">
-    <button type="button" class="carousel-dot dot-colorway is-active" aria-label="Go to photograph 1"></button>
-    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 2"></button>
-    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 3"></button>
-    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 4"></button>
-    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 5"></button>
-    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 6"></button>
-    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 7"></button>
-    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 8"></button>
-    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 9"></button>
-    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 10"></button>
-    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 11"></button>
-    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 12"></button>
-    <button type="button" class="carousel-dot dot-colorway" aria-label="Go to photograph 13"></button>
-  </div>
-
-  <div class="carousel-caption bg-green text-tan" id="carousel-caption-11">
-    <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose11" aria-label="Close caption">
-      <span class="material-symbols-outlined" aria-hidden="true">close</span>
-    </button>
-    <span id="carousel-caption-text-11">The Spur, September 15, 1922. Portrait of Mrs. Goodhue Livingston, Jr., and her son. Kazanjian Studio, New York. Courtesy of the Malikian Collection.&#10;The Spur, October 1, 1922. Wedding portrait of Mr. and Mrs. John M. Franklin. Kazanjian Studio, New York. Courtesy of the Malikian Collection.</span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text-11" aria-label="Copy caption text">
-      <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
-      <span class="copy-label"></span>
-    </button>
-  </div>
-</section>
 </div>
 
 <div class="footnote-modal-overlay" id="footnoteModalOverlay" hidden>
@@ -2528,22 +2472,6 @@
       'William Scott Bond (1876–1952), ca. 1940. Real estate lawyer, and trustee of the University of Chicago (from 1922). Kaiden-Kazanjian Studios, New York. Courtesy of the University of Chicago Library, Special Collections Research Center, Archival Photographic Files.'
     ];
 
-    var captionsFolder7 = [
-      'The Spur, September 15, 1922. Portrait of Mrs. Goodhue Livingston, Jr., and her son. Kazanjian Studio, New York. Courtesy of the Malikian Collection.\nThe Spur, October 1, 1922. Wedding portrait of Mr. and Mrs. John M. Franklin. Kazanjian Studio, New York. Courtesy of the Malikian Collection.',
-      'The Spur, October 15, 1922. Portrait of the wedding attendants of Mrs. Kenneth O’Brien. Kazanjian Studio, New York. Courtesy of the Malikian Collection.\nThe Spur, October 15, 1922. Portrait of Clarence H. Mackay, his daughter, Mrs. Kenneth O’Brien, and his mother, Mrs. John W. Mackay at the reception of Mr. and Mrs. O’Brien. Kazanjian Studio, New York. Courtesy of the Malikian Collection.',
-      'The Spur, April 1, 1924. Portrait of Mrs. Joel Ellis Fisher, Jr. and her children. Kazanjian Studio, New York. Courtesy of the Malikian Collection.',
-      'The Spur, 1931. Portrait of Mrs. F. Bartholomay Jelke in Newport, Rhode Island. Kazanjian Studio, New York. Courtesy of the Malikian Collection.',
-      'The Spur, 1932. Wedding portrait of Mrs. Helm George Wilde in Lenox, Massachusetts. Kazanjian Studio, New York. Courtesy of the Malikian Collection.',
-      'The Spur, September 1934. Portrait of Mrs. Henry Adams Ashforth and her children. Kaiden-Kazanjian Studios, New York. Courtesy of the Malikian Collection.',
-      'The Spur, May 1935. Portrait of Mrs. Frederick S. Whitlock. Kazanjian Studio, New York. Courtesy of the Malikian Collection.',
-      'Town and Country, September 20, 1915. Portrait of Mrs. Lydia Hoyt. Kazanjian Studio, New York. Courtesy of the Malikian Collection.',
-      'Vogue, June 1, 1915. Courtesy of the Malikian Collection.\nVogue, June 1, 1915. Portrait of Mrs. Charles B. Alexander. Kazanjian Studio, New York. Courtesy of the Malikian Collection.',
-      'Vogue, September 15, 1915. Courtesy of the Malikian Collection.\nVogue, September 15, 1915. Portrait of Miss Elsie De Wolfe. Kazanjian Studio, New York. Courtesy of the Malikian Collection.',
-      'Vogue, May 15, 1915. Courtesy of the Malikian Collection.\nVogue, May 15, 1915. Portrait of Mrs. William Lawrence Wood. Kazanjian Studio, New York. Courtesy of the Malikian Collection.',
-      'Town & Country, November 15, 1923. Courtesy of the Malikian Collection.\nTown & Country, November 15, 1923. Portrait of the bridal group of Mrs. Philip A.S. Franklin, Jr. Courtesy of the Malikian Collection.',
-      'Vogue, July 15, 1925. Courtesy of the Malikian Collection.\nVogue, July 15, 1925. Wedding portrait of Mrs. James H. Ripley. Kazanjian Studio, New York. Courtesy of the Malikian Collection.'
-    ];
-
     var carousel = document.getElementById('carousel');
     if (carousel) {
       var slides = carousel.querySelectorAll('.carousel-slide');
@@ -2920,15 +2848,6 @@
       captionToggle: document.getElementById('captionToggle10'),
       captionClose: document.getElementById('captionClose10'),
       zoomToggle: document.getElementById('fullCarousel4ZoomToggle')
-    });
-
-    initSimpleCarousel(document.getElementById('fullCarousel5'), {
-      captions: captionsFolder7,
-      captionEl: document.getElementById('carousel-caption-11'),
-      captionText: document.getElementById('carousel-caption-text-11'),
-      captionToggle: document.getElementById('captionToggle11'),
-      captionClose: document.getElementById('captionClose11'),
-      zoomToggle: document.getElementById('fullCarousel5ZoomToggle')
     });
 
     var footnoteData = {
