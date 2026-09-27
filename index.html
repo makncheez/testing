@@ -1033,13 +1033,12 @@
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x proximity;
+    scroll-behavior: auto;
     cursor: grab;
   }
 
   .hscroll-track.is-dragging {
     cursor: grabbing;
-    scroll-snap-type: none;
     user-select: none;
   }
 
@@ -1048,7 +1047,6 @@
     flex: 0 0 auto;
     width: auto;
     height: 100%;
-    scroll-snap-align: center;
     -webkit-user-drag: none;
     user-select: none;
   }
@@ -2734,14 +2732,6 @@
           e.stopPropagation();
         }
       }, true);
-
-      track.addEventListener('touchstart', function (e) {
-        down(e.touches[0].pageX);
-      }, { passive: true });
-      track.addEventListener('touchmove', function (e) {
-        move(e.touches[0].pageX);
-      }, { passive: true });
-      track.addEventListener('touchend', up);
     }
 
     function initSimpleCarousel(root, opts) {
