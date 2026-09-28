@@ -5,7 +5,8 @@
 <title>Image Index: Aram</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;1,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;1,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Instrument+Serif&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
 <style>
   html, body {
     margin: 0;
@@ -28,40 +29,192 @@
 
   a { color: inherit; }
 
-  /* ---- Header ---- */
+  /* ---- Aram Navigation: recall portrait + speech-bubble menu ---- */
 
-  .page-header {
-    padding: 48px 40px 24px;
+  .qf-portrait {
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    z-index: 20;
+    width: 150px;
+    aspect-ratio: 338 / 456;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    background-image: url("https://codeplayfully.online/img_uploads/aram_circle.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: var(--color-tan);
+    background-blend-mode: multiply;
+    border-radius: 50% / 37%;
+    border: 4px solid var(--color-purple);
+    box-shadow: 0 4px 6.2px 2px rgba(0, 0, 0, 0.25);
+  }
+
+  .qf-portrait-recall-wrap {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 999999;
+    width: 106px;
+    aspect-ratio: 1 / 1;
+    pointer-events: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+  }
+
+  .qf-portrait-recall-wrap.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease;
+  }
+
+  .qf-portrait-recall-ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transform: rotate(-90deg);
+  }
+
+  .qf-portrait-recall-ring-track {
+    fill: none;
+    stroke: var(--color-tan);
+    stroke-width: 4;
+    opacity: 0;
+  }
+
+  .qf-portrait-recall-ring-progress {
+    fill: none;
+    stroke: var(--color-purple);
+    stroke-width: 4;
+    stroke-linecap: round;
+  }
+
+  .qf-portrait-recall {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    bottom: auto;
+    width: 90px;
+    aspect-ratio: 1 / 1;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background-color: transparent;
+    background-blend-mode: normal;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.1s ease;
+  }
+
+  .qf-portrait-recall:active {
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+
+  .qf-portrait-recall:focus-visible {
+    outline: 3px solid var(--color-purple);
+    outline-offset: 3px;
+  }
+
+  .qf-portrait-recall[aria-expanded="true"] {
+    background-image: url("./images/1/portrait_alt.png");
+  }
+
+  .qf-nav-bubble {
+    position: fixed;
+    left: 0;
+    bottom: 24px;
+    z-index: 999999;
+    width: 260px;
+    max-width: calc(100vw - 32px);
+    background: var(--color-tan);
+    border: 3px solid var(--color-green);
+    border-radius: 24px;
+    padding: 5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: scale(0.95);
+    transform-origin: left bottom;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+  }
+
+  .qf-nav-bubble.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: scale(1);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .qf-nav-bubble::before,
+  .qf-nav-bubble::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 53px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    transform: translate(-100%, 50%);
+  }
+
+  .qf-nav-bubble::before {
+    border-width: 14px 17px 14px 0;
+    border-color: transparent var(--color-green) transparent transparent;
+  }
+
+  .qf-nav-bubble::after {
+    border-width: 11px 13px 11px 0;
+    border-color: transparent var(--color-tan) transparent transparent;
+  }
+
+  .qf-nav-bubble-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.5em;
+    text-align: center;
+    letter-spacing: 0px;
+    color: var(--color-green);
+    padding: 5px;
+    margin: 0px;
     border-bottom: 1.4px solid var(--color-green);
   }
 
-  .back-link {
-    display: inline-block;
-    margin-bottom: 20px;
-    font-family: 'DM Mono', monospace;
-    font-size: 1.2em;
-    letter-spacing: 0.02em;
+  .qf-nav-bubble-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 20px;
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.85em;
+    white-space: nowrap;
     color: var(--color-green);
     text-decoration: none;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1.4px solid var(--color-green);
   }
 
-  .back-link:hover,
-  .back-link:focus-visible {
-    border-bottom-color: var(--color-green);
+  .qf-nav-bubble-item:last-child {
+    border-bottom: none;
   }
 
-  .page-header h1 {
-    margin: 0 0 8px;
-    font-size: 2.6em;
-    font-weight: normal;
-    color: var(--color-green);
+  .qf-nav-bubble-item:hover,
+  .qf-nav-bubble-item:focus-visible {
+    background: rgba(38, 63, 39, 0.08);
+    outline: none;
   }
 
-  .page-header p {
-    margin: 0;
-    font-size: 1.4em;
-    color: var(--color-black);
+  .qf-nav-bubble-arrow {
+    flex-shrink: 0;
+    font-family: 'Material Symbols Outlined';
+    font-size: 1em;
   }
 
   /* ---- Filter bar ---- */
@@ -93,8 +246,7 @@
     color: var(--color-green);
   }
 
-  .filter-field select,
-  .filter-field input[type="search"] {
+  .filter-field select {
     font-family: 'DM Mono', monospace;
     font-size: 1.2em;
     padding: 8px 10px;
@@ -103,10 +255,6 @@
     background: var(--color-tan);
     color: var(--color-black);
     min-width: 180px;
-  }
-
-  .filter-field input[type="search"] {
-    min-width: 220px;
   }
 
   .filter-reset {
@@ -173,28 +321,6 @@
     color: var(--color-black);
   }
 
-  .image-card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .image-card-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.9em;
-    letter-spacing: 0.02em;
-    padding: 3px 9px;
-    border-radius: 999px;
-    background: var(--color-green);
-    color: var(--color-tan);
-  }
-
-  .image-card-tag.is-collection {
-    background: transparent;
-    border: 1px solid var(--color-purple);
-    color: var(--color-purple);
-  }
-
   .empty-state {
     display: none;
     padding: 60px 0;
@@ -215,10 +341,6 @@
   }
 
   @media (max-width: 700px) {
-    .page-header {
-      padding: 40px 24px 20px;
-    }
-
     .filter-bar {
       padding: 16px 24px;
     }
@@ -235,10 +357,28 @@
   }
 </style>
 
-<div class="page-header">
-  <a class="back-link" href="./index.html">&larr; Back to exhibition</a>
-  <h1>Image Index</h1>
-  <p>Every photograph used in the Aram Kazanjian digital exhibition, in one filterable list.</p>
+<div class="qf-portrait-recall-wrap" id="portraitRecallWrap">
+  <svg class="qf-portrait-recall-ring" viewBox="0 0 100 100">
+    <circle class="qf-portrait-recall-ring-track" cx="50" cy="50" r="46"></circle>
+    <circle class="qf-portrait-recall-ring-progress" id="portraitRingProgress" cx="50" cy="50" r="46"></circle>
+  </svg>
+  <button type="button" class="qf-portrait qf-portrait-recall" id="quotePortraitRecall" aria-haspopup="true" aria-expanded="false" aria-controls="portraitNavBubble" aria-label="Open Aram Navigation menu"></button>
+</div>
+
+<div class="qf-nav-bubble" id="portraitNavBubble" role="menu" aria-label="Aram Navigation">
+  <div class="qf-nav-bubble-title">Aram Navigation</div>
+  <a class="qf-nav-bubble-item" href="#" id="navTopOfPage" role="menuitem">
+    <span>Top of the Page</span><span class="qf-nav-bubble-arrow material-symbols-outlined" aria-hidden="true">arrow_upward</span>
+  </a>
+  <a class="qf-nav-bubble-item" href="index.html" role="menuitem">
+    <span>Enter Exhibition</span><span class="qf-nav-bubble-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+  </a>
+  <a class="qf-nav-bubble-item" href="#" role="menuitem">
+    <span>Send a Postcard</span><span class="qf-nav-bubble-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+  </a>
+  <a class="qf-nav-bubble-item" href="#" role="menuitem">
+    <span>Exit</span><span class="qf-nav-bubble-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+  </a>
 </div>
 
 <div class="filter-bar">
@@ -260,10 +400,6 @@
       <option value="">All collections</option>
     </select>
   </div>
-  <div class="filter-field">
-    <label for="filterSearch">Search caption</label>
-    <input type="search" id="filterSearch" placeholder="e.g. Boston, wedding, aviator&hellip;">
-  </div>
   <button type="button" class="filter-reset" id="filterReset">Reset filters</button>
   <div class="filter-count" id="filterCount"></div>
 </div>
@@ -273,6 +409,108 @@
 
 <script>
   (function () {
+    var portraitRecallWrap = document.getElementById('portraitRecallWrap');
+    var portraitRingProgress = document.getElementById('portraitRingProgress');
+    var portraitBtn = document.getElementById('quotePortraitRecall');
+    var navBubble = document.getElementById('portraitNavBubble');
+    var navTopLink = document.getElementById('navTopOfPage');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (portraitRecallWrap) {
+      var portraitLingerTimer = null;
+      var navOpen = false;
+      var RING_R = 46;
+      var RING_CIRC = 2 * Math.PI * RING_R;
+      if (portraitRingProgress) {
+        portraitRingProgress.style.strokeDasharray = String(RING_CIRC);
+        portraitRingProgress.style.strokeDashoffset = String(RING_CIRC);
+      }
+
+      function updateRingProgress() {
+        if (!portraitRingProgress) return;
+        var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+        progress = Math.max(0, Math.min(1, progress));
+        portraitRingProgress.style.strokeDashoffset = String(RING_CIRC * (1 - progress));
+      }
+
+      function armLingerTimer() {
+        window.clearTimeout(portraitLingerTimer);
+        portraitLingerTimer = window.setTimeout(function () {
+          portraitRecallWrap.classList.remove('is-visible');
+        }, 4000);
+      }
+
+      function positionNavBubble() {
+        if (!portraitBtn || !navBubble) return;
+        var rect = portraitBtn.getBoundingClientRect();
+        var gap = 16;
+        var bubbleWidth = navBubble.offsetWidth || 260;
+        var left = rect.right + gap;
+        var maxLeft = window.innerWidth - bubbleWidth - 16;
+        left = Math.max(16, Math.min(left, maxLeft));
+        navBubble.style.left = left + 'px';
+      }
+
+      function openNavBubble() {
+        if (!navBubble || !portraitBtn) return;
+        navOpen = true;
+        positionNavBubble();
+        navBubble.classList.add('is-open');
+        portraitBtn.setAttribute('aria-expanded', 'true');
+        window.clearTimeout(portraitLingerTimer);
+        portraitRecallWrap.classList.add('is-visible');
+      }
+
+      function closeNavBubble() {
+        if (!navBubble || !portraitBtn) return;
+        navOpen = false;
+        navBubble.classList.remove('is-open');
+        portraitBtn.setAttribute('aria-expanded', 'false');
+        armLingerTimer();
+      }
+
+      if (portraitBtn) {
+        portraitBtn.addEventListener('click', function () {
+          if (navOpen) {
+            closeNavBubble();
+          } else {
+            openNavBubble();
+          }
+        });
+      }
+
+      if (navTopLink) {
+        navTopLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+          closeNavBubble();
+        });
+      }
+
+      document.addEventListener('click', function (e) {
+        if (!navOpen) return;
+        if (navBubble.contains(e.target) || portraitBtn.contains(e.target)) return;
+        closeNavBubble();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && navOpen) closeNavBubble();
+      });
+
+      window.addEventListener('resize', function () {
+        if (navOpen) positionNavBubble();
+      });
+
+      window.addEventListener('scroll', function () {
+        updateRingProgress();
+        if (navOpen) return;
+        window.clearTimeout(portraitLingerTimer);
+        portraitRecallWrap.classList.add('is-visible');
+        armLingerTimer();
+      }, { passive: true });
+    }
+
     var images = [
       { src: './images/1/10.png', caption: 'Portrait of a young woman, ca. 1910, with a stamp on the mount of Charles H. Gallup, owner of the renowned Gallup photographic studio in Poughkeepsie, New York. Arsen Diran, Diran Studio, Boston. Courtesy of the Malikian Collection.', section: 'Diran Studio', decade: '1910s', collection: 'Malikian Collection' },
       { src: './images/1/11.png', caption: 'Wedding portrait of an Armenian couple, ca. 1900. Arsen Diran, Diran Studio, Boston. Courtesy of the Malikian Collection.', section: 'Diran Studio', decade: '1900s', collection: 'Malikian Collection' },
@@ -326,7 +564,61 @@
       { src: './images/4/2k.jpg', caption: 'R.E. Saleski on a Harvard biplane. He was a Harvard student and an early aviation enthusiast, 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
       { src: './images/4/2m.jpg', caption: 'Horace F. Kearney. Flew the Pfitzner monoplane that was severely damaged in a crash during an unauthorized practice flight on August 31, 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
       { src: './images/4/2n.jpg', caption: 'Man lifting kites on the Harvard Aviation Field during the Harvard-Boston Aero Meet, 1910. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: '1910s', collection: 'Malikian Collection' },
-      { src: './images/4/21.jpg', caption: 'Charles Foster Willard, aviator and engineer, known as the first barnstormer, won $50.00 for second place in take-offs. Augustus Post, adventurer, balloonist, and key pioneer in aviation. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: 'Undated', collection: 'Malikian Collection' }
+      { src: './images/4/21.jpg', caption: 'Charles Foster Willard, aviator and engineer, known as the first barnstormer, won $50.00 for second place in take-offs. Augustus Post, adventurer, balloonist, and key pioneer in aviation. Aram Studio, Boston. Courtesy of the Malikian Collection.', section: 'Harvard-Boston Aero Meet', decade: 'Undated', collection: 'Malikian Collection' },
+      { src: './images/5/1.jpg', caption: 'Fifth Avenue at 42nd Street, New York City, 1912. Courtesy of the Malikian Collection.', section: 'New York: The Later Years', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/5/2.jpg', caption: 'Fifth Avenue at 57th Street, New York City, ca. 1910. Courtesy of the Malikian Collection.', section: 'New York: The Later Years', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/5/3.jpg', caption: 'Fifth Avenue, New York City, January 1943. ACME NEWSPICTURES, Inc. Courtesy of the Malikian Collection.', section: 'New York: The Later Years', decade: '1940s', collection: 'Malikian Collection' },
+      { src: './images/5/4.jpg', caption: 'Caption pending.', section: 'New York: The Later Years', decade: 'Undated', collection: 'Uncredited' },
+      { src: './images/5/5.jpg', caption: 'Caption pending.', section: 'New York: The Later Years', decade: 'Undated', collection: 'Uncredited' },
+      { src: './images/5/6.jpg', caption: 'James C. Sheldon (1872–1931), 1930. Prominent New York attorney, state assemblyman, and general secretary of the American Bankers Association. Kaiden Studio, New York. Courtesy of the Malikian Collection.', section: 'New York: The Later Years', decade: '1930s', collection: 'Malikian Collection' },
+      { src: './images/5/7.jpg', caption: 'Portrait from the McComb Estate, ca. 1920. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'New York: The Later Years', decade: '1920s', collection: 'Malikian Collection' },
+      { src: './images/5/8.jpg', caption: 'Unidentified priest, March 1936. Kaiden-Kazanjian Studios, New York. Courtesy of the Malikian Collection.', section: 'New York: The Later Years', decade: '1930s', collection: 'Malikian Collection' },
+      { src: './images/5/19.jpg', caption: 'Doris Duke (1912–1993), ca. 1925. Billionaire tobacco heiress, philanthropist and socialite. Kaiden-Kazanjian Studios, New York. Courtesy of the Doris Duke Charitable Foundation Historical Archives, David M. Rubenstein Rare Book and Manuscript Library, Duke University, Durham, North Carolina.', section: 'New York: The Later Years', decade: '1920s', collection: 'Doris Duke Charitable Foundation Historical Archives' },
+      { src: './images/5/20.jpg', caption: 'Dorothy Caruso (1893–1955) and her daughter, Gloria Caruso (1919–1999), 1922. American socialite and wife of the Italian operatic tenor Enrico Caruso. Kazanjian Studio, New York. Courtesy of Dominic Winters Auctioneers.', section: 'New York: The Later Years', decade: '1920s', collection: 'Dominic Winters Auctioneers' },
+      { src: './images/5/24.jpg', caption: 'Mrs. William DeWolf Hopper, known as Hedda Hopper (1885–1966), a gossip columnist and actress, with her baby, William Hopper (1915–1970), a stage, film and television actor, 1915. Kazanjian Studio, New York. Courtesy of the George Grantham Bain Collection, Library of Congress.', section: 'New York: The Later Years', decade: '1910s', collection: 'George Grantham Bain Collection, Library of Congress' },
+      { src: './images/5/27.jpg', caption: 'Unidentified children, ca. 1920. Kazanjian Studio, New York. Courtesy of the Hagley Museum & Library, Wilmington, DE. (P.S. du Pont Photographs, 1969_2_B11_011).', section: 'New York: The Later Years', decade: '1920s', collection: 'Hagley Museum & Library' },
+      { src: './images/5/9.jpg', caption: 'Nicholas Murray Butler (1862–1947), 1937. American philosopher, diplomat and educator. President of Columbia University from 1902–1945. Kaiden-Kazanjian Studios, New York. Courtesy of the Malikian Collection.', section: 'New York: The Later Years', decade: '1930s', collection: 'Malikian Collection' },
+      { src: './images/5/10.jpg', caption: 'Theodore Temple Knappen (1900–1951). Internationally known civil and hydraulic engineer. Kaiden-Kazanjian Studios, New York. Courtesy of the Malikian Collection.', section: 'New York: The Later Years', decade: 'Undated', collection: 'Malikian Collection' },
+      { src: './images/5/11.jpg', caption: 'Frank A. Downes, (born ca. 1893), ca. 1930. Engineer, inventor and corporate executive. Served as secretary of the Colorado School of Mines in New York. Kaiden-Kazanjian Studios, New York. Courtesy of the Malikian Collection.', section: 'New York: The Later Years', decade: '1930s', collection: 'Malikian Collection' },
+      { src: './images/5/12.jpg', caption: 'Richard E. Vernor (1890–1958), September 1944. President of the National Fire Protection Association. Kaiden-Kazanjian Studios, New York. Courtesy of the Malikian Collection.', section: 'New York: The Later Years', decade: '1940s', collection: 'Malikian Collection' },
+      { src: './images/5/13.jpg', caption: '“Mac,” ca. 1942. Commissioned officer and a member of WAVES (Women Accepted for Volunteer Emergency Service), which was a branch of the US Naval Reserve during WWII. Kaiden-Kazanjian Studios, New York. Courtesy of the Malikian Collection.', section: 'New York: The Later Years', decade: '1940s', collection: 'Malikian Collection' },
+      { src: './images/5/14.jpg', caption: 'Bishop Hovsep Garabedian, 1939. Bishop of Saint James Church, Watertown, Massachusetts from 1943–1949. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'New York: The Later Years', decade: '1930s', collection: 'Malikian Collection' },
+      { src: './images/5/15.jpg', caption: 'Bishop Hovsep Garabedian, 1949. Bishop of Saint James Church, Watertown, Massachusetts from 1943–1949. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'New York: The Later Years', decade: '1940s', collection: 'Malikian Collection' },
+      { src: './images/5/16.jpg', caption: 'Bishop Hovsep Garabedian, 1949. Bishop of Saint James Church, Watertown, Massachusetts from 1943–1949. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'New York: The Later Years', decade: '1940s', collection: 'Malikian Collection' },
+      { src: './images/5/17.jpg', caption: 'Bishop Hovsep Garabedian with Der Torkom, 1949. Bishop of Saint James Church, Watertown, Massachusetts from 1943–1949. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'New York: The Later Years', decade: '1940s', collection: 'Malikian Collection' },
+      { src: './images/5/18.jpg', caption: 'Baron Édouard de Rothschild (1868–1949), ca. 1945. Aristocrat, French financier and a member of the prominent Rothschild banking family of France. Kaiden-Kazanjian Studios, New York. Courtesy of the Gregor Piatigorsky Archives, Colburn School.', section: 'New York: The Later Years', decade: '1940s', collection: 'Gregor Piatigorsky Archives, Colburn School' },
+      { src: './images/5/21.jpg', caption: 'Herbert P. Zimmermann (1880–1962), ca. 1940. President of R.R. Donnelley and Sons Company, and trustee of the University of Chicago (from 1937). Kaiden-Kazanjian Studios, New York. Courtesy of the University of Chicago Library, Special Collections Research Center, Archival Photographic Files.', section: 'New York: The Later Years', decade: '1940s', collection: 'University of Chicago Library, Special Collections Research Center' },
+      { src: './images/5/22.jpg', caption: 'Isaiah Bowman (1878–1950), ca. 1940. American geographer and President of the Johns Hopkins University, 1935–1948. Kaiden-Kazanjian Studios, New York. Courtesy of Special Collections, Sheridan Libraries, Johns Hopkins University.', section: 'New York: The Later Years', decade: '1940s', collection: 'Sheridan Libraries, Johns Hopkins University' },
+      { src: './images/5/23.jpg', caption: 'Leonor Michaelis (1875–1949), 1946. German biochemist, physical chemist and physician, known for his work on enzyme kinetics in 1913, and enzyme inhibition, pH and quinones. Kaiden-Kazanjian Studios, New York. Courtesy of the Rockefeller Archive Center.', section: 'New York: The Later Years', decade: '1940s', collection: 'Rockefeller Archive Center' },
+      { src: './images/5/26.jpg', caption: 'William Scott Bond (1876–1952), ca. 1940. Real estate lawyer, and trustee of the University of Chicago (from 1922). Kaiden-Kazanjian Studios, New York. Courtesy of the University of Chicago Library, Special Collections Research Center, Archival Photographic Files.', section: 'New York: The Later Years', decade: '1940s', collection: 'University of Chicago Library, Special Collections Research Center' },
+      { src: './images/6/1.jpg', caption: 'Kaiden-Kazanjian Studio Inc., New York. The studio was presented as a “Division of Keystone News and Photo Service” before June 16, 1943.', section: 'The Kaiden-Kazanjian Studio vs. The Federal Trade Commission', decade: 'Undated', collection: 'Uncredited' },
+      { src: './images/6/2.jpg', caption: 'Kaiden Studio advertisement, 1932. Courtesy of the Malikian Collection.', section: 'The Kaiden-Kazanjian Studio vs. The Federal Trade Commission', decade: '1930s', collection: 'Malikian Collection' },
+      { src: './images/6/2a.jpg', caption: 'Kaiden Studio advertisement, 1932. Courtesy of the Malikian Collection.', section: 'The Kaiden-Kazanjian Studio vs. The Federal Trade Commission', decade: '1930s', collection: 'Malikian Collection' },
+      { src: './images/6/4.jpg', caption: 'Edward Howard Griggs (1868–1951), ca. 1940. American lecturer, writer, and academic who served as a professor in the philosophy department at the Brooklyn Institute of Arts and Sciences (now the Brooklyn Museum). Kaiden-Keystone Photos, New York. Courtesy of the Malikian Collection.', section: 'The Kaiden-Kazanjian Studio vs. The Federal Trade Commission', decade: '1940s', collection: 'Malikian Collection' },
+      { src: './images/6/3.jpg', caption: 'Shailer Mathews (1863–1941), ca. 1938. Dean of the University of Chicago Divinity School and professor of Historical Theology. Kaiden-Keystone Photos, New York. Courtesy of the University of Chicago Library, Special Collections Research Center, Archival Photographic Files.', section: 'The Kaiden-Kazanjian Studio vs. The Federal Trade Commission', decade: '1930s', collection: 'University of Chicago Library, Special Collections Research Center' },
+      { src: './images/7/1.jpg', caption: 'The Spur, September 15, 1922. Portrait of Mrs. Goodhue Livingston, Jr., and her son. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1920s', collection: 'Malikian Collection' },
+      { src: './images/7/1a.jpg', caption: 'The Spur, October 1, 1922. Wedding portrait of Mr. and Mrs. John M. Franklin. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1920s', collection: 'Malikian Collection' },
+      { src: './images/7/2a.jpg', caption: 'The Spur, October 15, 1922. Portrait of the wedding attendants of Mrs. Kenneth O’Brien. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1920s', collection: 'Malikian Collection' },
+      { src: './images/7/2.jpg', caption: 'The Spur, October 15, 1922. Portrait of Clarence H. Mackay, his daughter, Mrs. Kenneth O’Brien, and his mother, Mrs. John W. Mackay at the reception of Mr. and Mrs. O’Brien. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1920s', collection: 'Malikian Collection' },
+      { src: './images/7/2b.jpg', caption: 'The Spur, April 1, 1924. Portrait of Mrs. Joel Ellis Fisher, Jr. and her children. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1920s', collection: 'Malikian Collection' },
+      { src: './images/7/2c.jpg', caption: 'The Spur, 1931. Portrait of Mrs. F. Bartholomay Jelke in Newport, Rhode Island. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1930s', collection: 'Malikian Collection' },
+      { src: './images/7/2d.jpg', caption: 'The Spur, 1932. Wedding portrait of Mrs. Helm George Wilde in Lenox, Massachusetts. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1930s', collection: 'Malikian Collection' },
+      { src: './images/7/2e.jpg', caption: 'The Spur, September 1934. Portrait of Mrs. Henry Adams Ashforth and her children. Kaiden-Kazanjian Studios, New York. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1930s', collection: 'Malikian Collection' },
+      { src: './images/7/2f.jpg', caption: 'The Spur, May 1935. Portrait of Mrs. Frederick S. Whitlock. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1930s', collection: 'Malikian Collection' },
+      { src: './images/7/3.jpg', caption: 'Town and Country, September 20, 1915. Portrait of Mrs. Lydia Hoyt. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/7/4.jpg', caption: 'Vogue, June 1, 1915. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/7/4a.jpg', caption: 'Vogue, June 1, 1915. Portrait of Mrs. Charles B. Alexander. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/7/5.jpg', caption: 'Vogue, September 15, 1915. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/7/5a.jpg', caption: 'Vogue, September 15, 1915. Portrait of Miss Elsie De Wolfe. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/7/6.jpg', caption: 'Vogue, May 15, 1915. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/7/6a.jpg', caption: 'Vogue, May 15, 1915. Portrait of Mrs. William Lawrence Wood. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1910s', collection: 'Malikian Collection' },
+      { src: './images/7/7.jpg', caption: 'Town & Country, November 15, 1923. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1920s', collection: 'Malikian Collection' },
+      { src: './images/7/7a.jpg', caption: 'Town & Country, November 15, 1923. Portrait of the bridal group of Mrs. Philip A.S. Franklin, Jr. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1920s', collection: 'Malikian Collection' },
+      { src: './images/7/8.jpg', caption: 'Vogue, July 15, 1925. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1920s', collection: 'Malikian Collection' },
+      { src: './images/7/8a.jpg', caption: 'Vogue, July 15, 1925. Wedding portrait of Mrs. James H. Ripley. Kazanjian Studio, New York. Courtesy of the Malikian Collection.', section: 'Kazanjian’s Contributions to the Elite American Publications', decade: '1920s', collection: 'Malikian Collection' },
+      { src: './images/8/1.jpg', caption: 'Kazanjian, Aram. Snowy winter landscape with sunset, ca. 1920. Oil on canvas. Courtesy of the Malikian Collection.', section: 'The Twilight Years', decade: '1920s', collection: 'Malikian Collection' },
+      { src: './images/8/2.jpg', caption: 'Kazanjian, Aram. Portrait of a baby, ca. 1950. Oil on board. Courtesy of the Malikian Collection.', section: 'The Twilight Years', decade: '1950s', collection: 'Malikian Collection' },
+      { src: './images/8/3.jpg', caption: 'Kazanjian, Aram. Winter scene, ca. 1950. Oil on canvas. Courtesy of the Malikian Collection.', section: 'The Twilight Years', decade: '1950s', collection: 'Malikian Collection' }
     ];
 
     var DECADE_ORDER = ['1900s', '1910s', '1920s', '1930s', '1940s', '1950s', '1960s', 'Undated'];
@@ -357,7 +649,6 @@
     var sectionSelect = document.getElementById('filterSection');
     var decadeSelect = document.getElementById('filterDecade');
     var collectionSelect = document.getElementById('filterCollection');
-    var searchInput = document.getElementById('filterSearch');
     var resetBtn = document.getElementById('filterReset');
     var countEl = document.getElementById('filterCount');
     var listEl = document.getElementById('imageList');
@@ -385,26 +676,6 @@
       captionEl.textContent = data.caption;
       card.appendChild(captionEl);
 
-      var tags = document.createElement('div');
-      tags.className = 'image-card-tags';
-
-      var sectionTag = document.createElement('span');
-      sectionTag.className = 'image-card-tag';
-      sectionTag.textContent = data.section;
-      tags.appendChild(sectionTag);
-
-      var decadeTag = document.createElement('span');
-      decadeTag.className = 'image-card-tag';
-      decadeTag.textContent = data.decade;
-      tags.appendChild(decadeTag);
-
-      var collectionTag = document.createElement('span');
-      collectionTag.className = 'image-card-tag is-collection';
-      collectionTag.textContent = data.collection;
-      tags.appendChild(collectionTag);
-
-      card.appendChild(tags);
-
       listEl.appendChild(card);
 
       return { el: card, data: data };
@@ -414,7 +685,6 @@
       var section = sectionSelect.value;
       var decade = decadeSelect.value;
       var collection = collectionSelect.value;
-      var search = searchInput.value.trim().toLowerCase();
       var visibleCount = 0;
 
       rows.forEach(function (r) {
@@ -422,7 +692,6 @@
         if (section && r.data.section !== section) matches = false;
         if (decade && r.data.decade !== decade) matches = false;
         if (collection && r.data.collection !== collection) matches = false;
-        if (search && r.data.caption.toLowerCase().indexOf(search) === -1) matches = false;
 
         r.el.classList.toggle('is-hidden', !matches);
         if (matches) visibleCount++;
@@ -435,13 +704,11 @@
     [sectionSelect, decadeSelect, collectionSelect].forEach(function (el) {
       el.addEventListener('change', applyFilters);
     });
-    searchInput.addEventListener('input', applyFilters);
 
     resetBtn.addEventListener('click', function () {
       sectionSelect.value = '';
       decadeSelect.value = '';
       collectionSelect.value = '';
-      searchInput.value = '';
       applyFilters();
     });
 
