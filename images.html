@@ -29,7 +29,10 @@
 
   a { color: inherit; }
 
-  /* ---- Page transition: hard push-slide between index.html and images.html ---- */
+  /* ---- Page transition: hard push-slide, arriving from index.html ----
+     The arriving document's stylesheet drives both pseudo-elements: this
+     page (always entered from index.html) pushes the old page left and
+     enters from the right; index.html reverses it for the return trip. */
 
   @view-transition {
     navigation: auto;

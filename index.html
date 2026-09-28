@@ -30,7 +30,11 @@
     --color-red: #CA2727;
   }
 
-  /* ---- Page transition: hard push-slide between index.html and images.html ---- */
+  /* ---- Page transition: hard push-slide, reverse of images.html's ----
+     The arriving document's stylesheet drives both pseudo-elements, so
+     this page (always the "return trip" from images.html) reverses the
+     direction: the old page (images.html) exits right, this page enters
+     from the left. */
 
   @view-transition {
     navigation: auto;
@@ -54,11 +58,11 @@
   }
 
   @keyframes qf-slide-out {
-    to { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
   }
 
   @keyframes qf-slide-in {
-    from { transform: translateX(100%); }
+    from { transform: translateX(-100%); }
   }
 
   @media (prefers-reduced-motion: reduce) {
