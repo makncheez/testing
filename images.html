@@ -29,6 +29,44 @@
 
   a { color: inherit; }
 
+  /* ---- Page transition: hard push-slide between index.html and images.html ---- */
+
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-image-pair(root) {
+    isolation: auto;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(root) {
+    animation: 420ms cubic-bezier(.65, 0, .35, 1) both qf-slide-out;
+  }
+
+  ::view-transition-new(root) {
+    animation: 420ms cubic-bezier(.65, 0, .35, 1) both qf-slide-in;
+  }
+
+  @keyframes qf-slide-out {
+    to { transform: translateX(-100%); }
+  }
+
+  @keyframes qf-slide-in {
+    from { transform: translateX(100%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none !important;
+    }
+  }
+
   /* ---- Aram Navigation: recall portrait + speech-bubble menu ---- */
 
   .qf-portrait {
