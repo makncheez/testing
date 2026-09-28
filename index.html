@@ -1283,7 +1283,60 @@
   .site-footer {
     position: relative;
     z-index: 1;
-    height: 600px;
+    min-height: 600px;
+    padding: 64px 40px;
+    box-sizing: border-box;
+  }
+
+  .footer-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-col {
+    flex: 1 1 380px;
+    min-width: 0;
+  }
+
+  .footer-col h2 {
+    color: var(--color-tan);
+  }
+
+  .footer-col h2::before,
+  .footer-col h2::after {
+    background-color: var(--color-tan);
+  }
+
+  .footer-footnote-item {
+    font-size: 1.1em;
+    line-height: 1.5em;
+    margin: 0 0 14px;
+  }
+
+  .footer-footnote-item sup {
+    margin-right: 4px;
+  }
+
+  .footer-footnote-item sup a {
+    color: var(--color-tan);
+    text-decoration: underline;
+  }
+
+  .footer-footnote-item sup a:hover,
+  .footer-footnote-item sup a:focus-visible {
+    color: var(--color-purple);
+  }
+
+  .footer-acknowledgments p {
+    font-size: 1.4em;
+    line-height: 1.6em;
+  }
+
+  sup[id^="fnref-"] {
+    scroll-margin-top: 100px;
   }
 
   .full-carousel .carousel-slide img {
@@ -1446,7 +1499,7 @@
 
     <div class="qf-edge-left border-green quote-fade"></div>
     <div class="quote-frame-content quote-fade">
-      <p class="quote-text text-green">&ldquo;The fleeting quality of fame is a well-known concept to any scholar of history. Recognition and renown can fade, just as an old-format photographic image will &lsquo;wash-out&rsquo; through overexposure. A few names stand the test of time, but most are lost, except to those who knew the individual personally or who are devoted students of the individual&rsquo;s particular field.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="1">1</button></sup><br>&mdash; Mehmed Ali</p>
+      <p class="quote-text text-green">&ldquo;The fleeting quality of fame is a well-known concept to any scholar of history. Recognition and renown can fade, just as an old-format photographic image will &lsquo;wash-out&rsquo; through overexposure. A few names stand the test of time, but most are lost, except to those who knew the individual personally or who are devoted students of the individual&rsquo;s particular field.&rdquo;<sup id="fnref-1"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="1">1</button></sup><br>&mdash; Mehmed Ali</p>
     </div>
     <div class="qf-edge-right border-green quote-fade"></div>
 
@@ -1515,7 +1568,7 @@
     <div class="intro-copy text-black bg-tan">
       <div class="intro-columns text-green">
         <h1 class="text-green">The History of Armenia Photography in Boston</h1>
-        <p class="text-black">Kazanjian&rsquo;s career emerged and evolved during the early 20th century in Boston. Beyond the camera&rsquo;s ability to accurately record reality and to produce candid portraiture, there was an aesthetic movement referred to as Pictorialism. This movement aimed to establish photography as fine art. Pictorialist photographers manipulated an image &ldquo;to express their artistic and abstract ideas&rdquo; and their &ldquo;subjective points of view.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="2">2</button></sup> Influenced by Impressionism, the 19th century art movement that began in France, photographers practicing Pictorialism employed soft-focus techniques and manipulated light to create compositions that were aesthetically pleasing and &ldquo;painterly in style.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="3">3</button></sup> The ultimate goal was to elevate photography to the rank of fine art. Along with the practice of producing straightforward portraiture, Kazanjian was influenced by this aesthetic movement that created photographic images rather than simply recording them. As such, his oeuvre reflected a blend of varied photographic styles that evolved around the turn of the 20th century.</p>
+        <p class="text-black">Kazanjian&rsquo;s career emerged and evolved during the early 20th century in Boston. Beyond the camera&rsquo;s ability to accurately record reality and to produce candid portraiture, there was an aesthetic movement referred to as Pictorialism. This movement aimed to establish photography as fine art. Pictorialist photographers manipulated an image &ldquo;to express their artistic and abstract ideas&rdquo; and their &ldquo;subjective points of view.&rdquo;<sup id="fnref-2"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="2">2</button></sup> Influenced by Impressionism, the 19th century art movement that began in France, photographers practicing Pictorialism employed soft-focus techniques and manipulated light to create compositions that were aesthetically pleasing and &ldquo;painterly in style.&rdquo;<sup id="fnref-3"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="3">3</button></sup> The ultimate goal was to elevate photography to the rank of fine art. Along with the practice of producing straightforward portraiture, Kazanjian was influenced by this aesthetic movement that created photographic images rather than simply recording them. As such, his oeuvre reflected a blend of varied photographic styles that evolved around the turn of the 20th century.</p>
         <p class="text-black">Boston became a hub for Pictorialism which promoted photography as fine art. Amongst the influx of Armenian immigrants in this rapidly growing diasporan community, those who were entrepreneurial, artistically creative, and trained to practice photography established successful commercial portrait studios. Armenians were widely known to have mastered photography throughout the Ottoman Empire; this reputation not only made assimilation easier into American society, but it also facilitated their efforts to open studios in the major diaspora hubs of Boston and New York.</p>
         <p class="text-black">Along with Kazanjian, two prominent Armenian studios that represented disparate styles in photographic practice around the turn of the 20th century were the Diran Studio run by Suren and Arsen Diran, and the Garo Studio established by John Higue Garo.</p>
       </div>
@@ -1614,8 +1667,8 @@
       <div class="bio-frame">
         <div class="bio-frame-box bg-tan">
           <h2 class="text-green">Garo Studio</h2>
-          <p>Born in Kharpert, Turkey, John Higue Garo (1870&ndash;1939) landed in Worcester, Massachusetts at the age of 14. With his artistic proclivities and penchant for painting, he immersed himself in the study of the arts and the photographic medium. As the proprietor of an upscale portrait studio in Boston, frequented by members of Boston&rsquo;s elite society, Garo emerged as one of the most celebrated and gifted pictorialist photographers in New England. The renowned Armenian photographer and Garo&rsquo;s mentee, Yousuf Karsh, regarded him as &ldquo;one of the greatest photographers in the history of the art.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="4">4</button></sup> During the early 20th century, Garo was the recipient of many national and international honors and awards for his artistic photographs. Many of his portraits were published in prestigious American publications like <em>The Spur</em> which catered to affluent high society.</p>
-          <p>A study of Garo&rsquo;s photographs illustrates his reliance on the aesthetic quality set forth by Impressionism and Art Nouveau (1890&ndash;1914) which emphasized soft flowing imagery and natural light. This artistic style influenced him to create photographs of visual beauty that emphasized his subject&rsquo;s personality and their emotional state. Using soft flowing curves and soft-focus techniques to create blur, Garo was motivated to create a work of art rather than to record it. In his estimation, photography was more than a technical practice to record an image, but an artistic pursuit to make photographs look like paintings or etchings. Described as &ldquo;a renaissance man with many colors on his palette,&rdquo; Garo regarded photography as a true form of art which exceeded all other artistic mediums.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="5">5</button></sup></p>
+          <p>Born in Kharpert, Turkey, John Higue Garo (1870&ndash;1939) landed in Worcester, Massachusetts at the age of 14. With his artistic proclivities and penchant for painting, he immersed himself in the study of the arts and the photographic medium. As the proprietor of an upscale portrait studio in Boston, frequented by members of Boston&rsquo;s elite society, Garo emerged as one of the most celebrated and gifted pictorialist photographers in New England. The renowned Armenian photographer and Garo&rsquo;s mentee, Yousuf Karsh, regarded him as &ldquo;one of the greatest photographers in the history of the art.&rdquo;<sup id="fnref-4"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="4">4</button></sup> During the early 20th century, Garo was the recipient of many national and international honors and awards for his artistic photographs. Many of his portraits were published in prestigious American publications like <em>The Spur</em> which catered to affluent high society.</p>
+          <p>A study of Garo&rsquo;s photographs illustrates his reliance on the aesthetic quality set forth by Impressionism and Art Nouveau (1890&ndash;1914) which emphasized soft flowing imagery and natural light. This artistic style influenced him to create photographs of visual beauty that emphasized his subject&rsquo;s personality and their emotional state. Using soft flowing curves and soft-focus techniques to create blur, Garo was motivated to create a work of art rather than to record it. In his estimation, photography was more than a technical practice to record an image, but an artistic pursuit to make photographs look like paintings or etchings. Described as &ldquo;a renaissance man with many colors on his palette,&rdquo; Garo regarded photography as a true form of art which exceeded all other artistic mediums.<sup id="fnref-5"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="5">5</button></sup></p>
         </div>
       </div>
     </div>
@@ -1633,16 +1686,16 @@
             <div class="plain-quote-box text-green">
               <div class="pqb-edge border-green"></div>
               <blockquote>
-                <p>The one outstanding characteristic of photography&mdash;the quality that distinguishes it from drawing, painting, etching, or any other means of pictorial representation&mdash;is the ability of the lens and sensitive film to record infinitely delicate and subtle gradation of tones. This is where photography is supreme and it is because of this quality that photography claims and holds a special place among the fine arts.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="6">6</button></sup></p>
+                <p>The one outstanding characteristic of photography&mdash;the quality that distinguishes it from drawing, painting, etching, or any other means of pictorial representation&mdash;is the ability of the lens and sensitive film to record infinitely delicate and subtle gradation of tones. This is where photography is supreme and it is because of this quality that photography claims and holds a special place among the fine arts.<sup id="fnref-6"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="6">6</button></sup></p>
                 <footer>&mdash; John Higue Garo</footer>
               </blockquote>
               <div class="pqb-edge border-green"></div>
             </div>
-            <p>By the 1930s, Garo did not make the necessary adjustments in his practice to meet the rapid changes occurring in the photographic medium. His acclaimed and innovative technical achievements, like the gum arabic technique which created a painterly effect, became obsolete. Under the influence of the Art Deco movement (1920s&ndash;1940s), commercial photography shifted towards streamlined, simpler forms and high contrast in lighting. As such, &ldquo;the days of the photo&rsquo;s soft edge and ethereal mood had yielded to the sharp realism practiced by the modernists in the field.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="8">8</button></sup></p>
+            <p>By the 1930s, Garo did not make the necessary adjustments in his practice to meet the rapid changes occurring in the photographic medium. His acclaimed and innovative technical achievements, like the gum arabic technique which created a painterly effect, became obsolete. Under the influence of the Art Deco movement (1920s&ndash;1940s), commercial photography shifted towards streamlined, simpler forms and high contrast in lighting. As such, &ldquo;the days of the photo&rsquo;s soft edge and ethereal mood had yielded to the sharp realism practiced by the modernists in the field.&rdquo;<sup id="fnref-8"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="8">8</button></sup></p>
             <div class="plain-quote-box text-green">
               <div class="pqb-edge border-green"></div>
               <blockquote>
-                <p>&ldquo;I have enjoyed every minute of my life. Photography is my vocation and I love it because I find in it the medium to interpret the art of painting, the art of music, the art of classical literature. But greatest of all, it is my canvas for the fine art of living. Art is everywhere if one can see, hear or feel it. But most of all, it is in life.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="7">7</button></sup></p>
+                <p>&ldquo;I have enjoyed every minute of my life. Photography is my vocation and I love it because I find in it the medium to interpret the art of painting, the art of music, the art of classical literature. But greatest of all, it is my canvas for the fine art of living. Art is everywhere if one can see, hear or feel it. But most of all, it is in life.&rdquo;<sup id="fnref-7"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="7">7</button></sup></p>
                 <footer>&mdash; John Higue Garo</footer>
               </blockquote>
               <div class="pqb-edge border-green"></div>
@@ -1759,13 +1812,13 @@
   <div class="zoom-view bg-tan" id="zoomView2" role="img" aria-label=""></div>
   <div class="studio-col studio-left">
     <div class="studio-copy text-black">
-      <p>Around the turn of the 20th century, Boston underwent a period of significant demographic shifts and modernization. This transformation was characterized by remarkable developments and rapid expansion, such as the opening of the Tremont Street Subway in 1897 which was the first underground transit system in the United States. Within this transformative period of revitalization in Boston, Kazanjian&mdash;who came to America as a traumatized indigent immigrant&mdash;found success both personally and professionally.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="9">9</button></sup></p>
+      <p>Around the turn of the 20th century, Boston underwent a period of significant demographic shifts and modernization. This transformation was characterized by remarkable developments and rapid expansion, such as the opening of the Tremont Street Subway in 1897 which was the first underground transit system in the United States. Within this transformative period of revitalization in Boston, Kazanjian&mdash;who came to America as a traumatized indigent immigrant&mdash;found success both personally and professionally.<sup id="fnref-9"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="9">9</button></sup></p>
       <p>On January 17, 1907, Kazanjian married Leah Ethel Davis, daughter of the actor Albert Davis. It was Kazanjian&rsquo;s artistic background and his playful marketing strategy that brought his future wife to the studio.</p>
       <div class="plain-quote-box text-green">
         <div class="pqb-edge border-green"></div>
         <blockquote>
           <p>&ldquo;It was through his profession that Daddy met my mother. My aunt had heard about this photographer, whom she described as dark, handsome, mysterious, twirling fierce black moustachios, who painted birds, bees and butterflies on a lady&rsquo;s shoulder or cheek when he photographed her! Giggling with the wickedness of it all, my mother and aunt went over to have their pictures taken, and sure enough, Father painted a butterfly on Mother&rsquo;s shoulder.&rdquo;</p>
-          <p>&ldquo;When mother wandered into the studio with my aunt, he must have really been inspired. Taking note of her porcelain beauty&mdash;the fragile of her transparent skin, the wide, blue eyes, the shimmering gold hair&mdash;he painted the most delicate butterfly of his career and began his courtship on the spot by asking permission to call on her.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="10">10</button></sup></p>
+          <p>&ldquo;When mother wandered into the studio with my aunt, he must have really been inspired. Taking note of her porcelain beauty&mdash;the fragile of her transparent skin, the wide, blue eyes, the shimmering gold hair&mdash;he painted the most delicate butterfly of his career and began his courtship on the spot by asking permission to call on her.&rdquo;<sup id="fnref-10"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="10">10</button></sup></p>
           <footer>&mdash; Arlene Kazanjian Francis</footer>
         </blockquote>
         <div class="pqb-edge border-green"></div>
@@ -1899,8 +1952,8 @@
     <div class="studio-copy text-black">
       <h2 class="text-green">Boston: The Early Years,<br>1900&ndash;1913</h2>
       <p>Following an apprenticeship with a photographer in the Boston area, Kazanjian opened his first commercial photographic studios on 160 Tremont Street and on 74 Boylston Street which he named &ldquo;Aram.&rdquo; His earlier portraits were thematically conventional like those produced by many other studios in Boston, such as the Diran Studio run by his Armenian compatriots, Arsen and Suren Diran.</p>
-      <p>It is unknown who mentored Kazanjian. However, given elements of Pictorialism and Art Nouveau in Kazanjian&rsquo;s 1915-1920s portraits of prominent figures, it is conceivable that Garo not only served as an important influence, but he may have mentored him as well. Kazanjian&rsquo;s artistic background might have brought him into Garo&rsquo;s &ldquo;salon&rdquo; which was a gathering place for the cultural and artistic community in Boston.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="11">11</button></sup> In Garo&rsquo;s estimation, Armenian photographers such as Karsh and Kazanjian would have been regarded as &ldquo;gifted artists and master technicians&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="11">11</button></sup></p>
-      <p>In 1905, Kazanjian&rsquo;s photograph, <em>&ldquo;Modern Mother of God and Child Jesus,&rdquo;</em> was awarded the C.P. Goerz Silver Cup; an award that Garo also received in 1904 and 1906.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="12">12</button></sup> Having won the Silver Cup three times, Garo was granted permanent possession of the silver trophy.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="13">13</button></sup> As further evidence of parallels in Garo and Kazanjian&rsquo;s work, both men submitted artistically composed painterly types of portraiture to luxury-focused publications, such as <em>The Spur</em>, which catered to older wealthy families of New York City and the Boston Brahmins.</p>
+      <p>It is unknown who mentored Kazanjian. However, given elements of Pictorialism and Art Nouveau in Kazanjian&rsquo;s 1915-1920s portraits of prominent figures, it is conceivable that Garo not only served as an important influence, but he may have mentored him as well. Kazanjian&rsquo;s artistic background might have brought him into Garo&rsquo;s &ldquo;salon&rdquo; which was a gathering place for the cultural and artistic community in Boston.<sup id="fnref-11"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="11">11</button></sup> In Garo&rsquo;s estimation, Armenian photographers such as Karsh and Kazanjian would have been regarded as &ldquo;gifted artists and master technicians&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="11">11</button></sup></p>
+      <p>In 1905, Kazanjian&rsquo;s photograph, <em>&ldquo;Modern Mother of God and Child Jesus,&rdquo;</em> was awarded the C.P. Goerz Silver Cup; an award that Garo also received in 1904 and 1906.<sup id="fnref-12"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="12">12</button></sup> Having won the Silver Cup three times, Garo was granted permanent possession of the silver trophy.<sup id="fnref-13"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="13">13</button></sup> As further evidence of parallels in Garo and Kazanjian&rsquo;s work, both men submitted artistically composed painterly types of portraiture to luxury-focused publications, such as <em>The Spur</em>, which catered to older wealthy families of New York City and the Boston Brahmins.</p>
     </div>
   </div>
 </section>
@@ -1912,14 +1965,14 @@
       <img src="./images/4/1b.png" alt="">
       <img src="./images/4/1.jpg" alt="">
     </div>
-    <p>During Kazanjian&rsquo;s years in Boston, he stepped out of the studio to visually document the inaugural Harvard-Boston Aero Meet which took place from September 3-13, 1910. These documentary-style photographs captured a sequence of images that chronicled &ldquo;the greatest meet of its kind in America which drew over 60,000 paid spectators.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="14">14</button></sup> Undoubtedly, these photographs, signed as &ldquo;Aram,&rdquo; added an important dimension to his portfolio. It gave him name recognition in the field of commercial and documentary photography.</p>
+    <p>During Kazanjian&rsquo;s years in Boston, he stepped out of the studio to visually document the inaugural Harvard-Boston Aero Meet which took place from September 3-13, 1910. These documentary-style photographs captured a sequence of images that chronicled &ldquo;the greatest meet of its kind in America which drew over 60,000 paid spectators.&rdquo;<sup id="fnref-14"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="14">14</button></sup> Undoubtedly, these photographs, signed as &ldquo;Aram,&rdquo; added an important dimension to his portfolio. It gave him name recognition in the field of commercial and documentary photography.</p>
     <p>Kazanjian produced and commercially distributed postcards that documented the events from the aviation meet of 1910. His photographs taken over the course of ten days not only supplemented his income and produced collectible postcards that were highly valued around the turn of the 20th century, but they also served as memorabilia of a captivating event in the history of American aviation.</p>
-    <p>The months of preparations for this momentous occasion heralded the dawn of modernity with its enhanced forms of advertising and promotion, coordination of vendors, the advanced construction of grandstands capable of seating 150,000 people, and parking areas which accommodated up to 10,000 automobiles.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="15">15</button></sup></p>
+    <p>The months of preparations for this momentous occasion heralded the dawn of modernity with its enhanced forms of advertising and promotion, coordination of vendors, the advanced construction of grandstands capable of seating 150,000 people, and parking areas which accommodated up to 10,000 automobiles.<sup id="fnref-15"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="15">15</button></sup></p>
     <p>Kazanjian&rsquo;s photographs of The Harvard-Boston Aero Meet of 1910 were significant as they recorded the first international air meet of its kind held in the United States which drew the world&rsquo;s top airmen of the day. On August 20, 1910, the <em>New York Tribune</em> reported:</p>
     <div class="plain-quote-box text-green">
       <div class="pqb-edge border-green"></div>
       <blockquote>
-        <p>&ldquo;No aviation meet held in this country, and probably none yet held in the world, has had such a representative list of foremost aviators as is assured the Harvard-Boston Aero Meet according to the list of entrants to date, announced to-night. The entry list is international and includes seventeen individual aviators and eleven types of air navigating machines. The latter embrace the principal types &ndash; the monoplane, biplane, and triplane. It will be the first time the latter type has been exhibited in this country.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="16">16</button></sup></p>
+        <p>&ldquo;No aviation meet held in this country, and probably none yet held in the world, has had such a representative list of foremost aviators as is assured the Harvard-Boston Aero Meet according to the list of entrants to date, announced to-night. The entry list is international and includes seventeen individual aviators and eleven types of air navigating machines. The latter embrace the principal types &ndash; the monoplane, biplane, and triplane. It will be the first time the latter type has been exhibited in this country.&rdquo;<sup id="fnref-16"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="16">16</button></sup></p>
         <footer>&mdash; New York Tribune</footer>
       </blockquote>
       <div class="pqb-edge border-green"></div>
@@ -2015,14 +2068,14 @@
 
 <section class="trio bg-tan" id="copyrightSection">
  <div class="trio-inner text-black">
-    <p>To protect his photographs from unauthorized use and distribution, Kazanjian copyrighted them. Copyright mandates with photographs during the early 20th century were undergoing major revisions. In 1906, John Garo volunteered on a committee that worked with Congress to update the copyright laws affecting photography. At the time, the government mandated that the copyright symbol appear in the corner of a photograph. Garo took issue with this mandate since it &ldquo;ruined the potential artistry of the image.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="17">17</button></sup> With Garo and his committee members&rsquo; efforts, the Copyright Act of 1909 was passed which ended this mandate, thereby allowing the copyright symbol to appear on the margin or the back of a photograph.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="18">18</button></sup> Following the passage of this mandate, the copyright symbol on Kazanjian&rsquo;s commercial photographs no longer appeared on the image but in the margin or on the back of his photographs.</p>
+    <p>To protect his photographs from unauthorized use and distribution, Kazanjian copyrighted them. Copyright mandates with photographs during the early 20th century were undergoing major revisions. In 1906, John Garo volunteered on a committee that worked with Congress to update the copyright laws affecting photography. At the time, the government mandated that the copyright symbol appear in the corner of a photograph. Garo took issue with this mandate since it &ldquo;ruined the potential artistry of the image.&rdquo;<sup id="fnref-17"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="17">17</button></sup> With Garo and his committee members&rsquo; efforts, the Copyright Act of 1909 was passed which ended this mandate, thereby allowing the copyright symbol to appear on the margin or the back of a photograph.<sup id="fnref-18"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="18">18</button></sup> Following the passage of this mandate, the copyright symbol on Kazanjian&rsquo;s commercial photographs no longer appeared on the image but in the margin or on the back of his photographs.</p>
  </div>
 </section>
 
 <section class="trio bg-tan" id="newYorkSection">
  <div class="trio-inner text-black">
     <h2 class="text-green">New York: The Later Years, 1914&ndash;1950s</h2>
-    <p>In 1914, Kazanjian decided to relocate to New York City as it offered greater opportunities for success. Undoubtedly, it proved to be a good move professionally.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="19">19</button></sup></p>
+    <p>In 1914, Kazanjian decided to relocate to New York City as it offered greater opportunities for success. Undoubtedly, it proved to be a good move professionally.<sup id="fnref-19"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="19">19</button></sup></p>
     <p>Between 1915 to 1920 and thereafter, New York City went through a fast-paced era of modern transformation. Iconic skyscrapers like the Woolworth Building reshaped the skyline, the subway system expanded into outer boroughs, and diverse immigrant communities fueled a thriving cultural scene on Broadway. Culturally, this era was a renaissance period for New York City as the arts scene flourished. The Roaring Twenties set in motion several years of glamour and wealth as the city grew into a strong financial and industrial center. This growth set the stage for its role as a global metropolis and a major city in the 20th century.</p>
  </div>
 </section>
@@ -2071,7 +2124,7 @@
 
 <section class="trio bg-tan" id="fifthAvenueSection">
  <div class="trio-inner text-black">
-    <p>Within this dynamic and progressive era in New York City, Kazanjian found enormous success. Along with his partner, Frances Kaiden, they established one of the premier photographic studios in the city. Kazanjian and Kaiden moved the studio four times, but it remained primarily in the Upper East Side along 5th Avenue. Within this world-famous corridor of New York City&rsquo;s elite wealth, grand architecture and cultural landmarks, the studio attracted many affluent patrons with social standing in the arts, politics and the business world. The studio not only attracted affluent members of New York society but also budding photographers in search of training and experience with the medium. Around 1915, the renowned documentary photographer and pioneer in socially committed photography, Dorothea Lange, worked as an assistant at the Kazanjian studio while taking photography classes at Columbia University.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="20">20</button></sup></p>
+    <p>Within this dynamic and progressive era in New York City, Kazanjian found enormous success. Along with his partner, Frances Kaiden, they established one of the premier photographic studios in the city. Kazanjian and Kaiden moved the studio four times, but it remained primarily in the Upper East Side along 5th Avenue. Within this world-famous corridor of New York City&rsquo;s elite wealth, grand architecture and cultural landmarks, the studio attracted many affluent patrons with social standing in the arts, politics and the business world. The studio not only attracted affluent members of New York society but also budding photographers in search of training and experience with the medium. Around 1915, the renowned documentary photographer and pioneer in socially committed photography, Dorothea Lange, worked as an assistant at the Kazanjian studio while taking photography classes at Columbia University.<sup id="fnref-20"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="20">20</button></sup></p>
     <div class="stacked-images">
       <img src="./images/5/4.jpg" alt="">
       <img src="./images/5/5.jpg" alt="">
@@ -2083,7 +2136,7 @@
   <div class="zoom-view bg-tan" id="zoomView4" role="img" aria-label=""></div>
   <div class="studio-col studio-left">
     <div class="studio-copy text-black">
-      <p>During the early years in New York, Kazanjian specialized in children&rsquo;s photographs. He became very successful and garnered the reputation of being one of the best-known men in the field.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="21">21</button></sup> Some of his earlier works used elements of Pictorialism and Art Nouveau to produce photographs with a painterly effect. To achieve this result, these romanticized and idealized compositions emphasized the use of soft-focus techniques and the manipulation of light.</p>
+      <p>During the early years in New York, Kazanjian specialized in children&rsquo;s photographs. He became very successful and garnered the reputation of being one of the best-known men in the field.<sup id="fnref-21"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="21">21</button></sup> Some of his earlier works used elements of Pictorialism and Art Nouveau to produce photographs with a painterly effect. To achieve this result, these romanticized and idealized compositions emphasized the use of soft-focus techniques and the manipulation of light.</p>
       <p>With the passage of time and transformations in the photographic medium, Kazanjian embraced some of the newer elements of image making from the Art Deco movement. This new trend diverged from the artistic, painterly style emphasized by Pictorialism. Art Deco trends in photography came about in the late 1920s and 1930s with the use of bold geometric shapes, sharp lines, dramatic shadows, and a sleek modern style to mirror the architecture and fashion of the machine age. Some of these elements were incorporated into Kazanjian&rsquo;s photographs.</p>
     </div>
   </div>
@@ -2251,7 +2304,7 @@
     <div class="plain-quote-box text-green">
       <div class="pqb-edge border-green"></div>
       <blockquote>
-        <p>&ldquo;The aforesaid acts and practices of the respondents as herein found are all to the prejudice and injury of the public and constitutes unfair and deceptive acts and practices in commerce within the intent and meaning of the Federal Trade Commission Act.&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="22">22</button></sup></p>
+        <p>&ldquo;The aforesaid acts and practices of the respondents as herein found are all to the prejudice and injury of the public and constitutes unfair and deceptive acts and practices in commerce within the intent and meaning of the Federal Trade Commission Act.&rdquo;<sup id="fnref-22"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="22">22</button></sup></p>
         <footer>&mdash; Federal Trade Commission</footer>
       </blockquote>
       <div class="pqb-edge border-green"></div>
@@ -2600,7 +2653,7 @@
   <div class="intro-columns text-green">
     <h1 class="text-green">The Twilight Years</h1>
     <p class="text-black">From Kazanjian&rsquo;s teenage years, which were devoted to studying fine arts in Paris, through adulthood, his devotion to painting became an important creative outlet. His artistic proclivities and passion for painting heavily influenced his illustrious photography career. He brought to photography his imaginative and aesthetic vision. As such, his photographic compositions often looked less like a simple record of a moment in time but more like a thoughtful piece of fine art.</p>
-    <p class="text-black">Today, many of Kazanjian&rsquo;s paintings are scattered and their whereabouts are unknown. As shown by two samples of his work in this exhibit, he painted a spectrum of subjects, ranging from quiet rural landscapes to portraits. His cumulative and vigorous artistic drive to paint as a personal hobby reduced the family&rsquo;s living space, to the extent that the walls were all covered with his paintings. &ldquo;My recollections of childhood are all tied up with trying to find a light switch, so completely covered with his paintings were our walls,&rdquo; noted Arlene Kazanjian Francis.<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="23">23</button></sup> To maximize the family&rsquo;s living space, some of his lesser paintings were auctioned sometime in the 1950s at Plaza Art Galleries established by the O&rsquo;Reilly brothers on the Upper East Side of New York City.</p>
+    <p class="text-black">Today, many of Kazanjian&rsquo;s paintings are scattered and their whereabouts are unknown. As shown by two samples of his work in this exhibit, he painted a spectrum of subjects, ranging from quiet rural landscapes to portraits. His cumulative and vigorous artistic drive to paint as a personal hobby reduced the family&rsquo;s living space, to the extent that the walls were all covered with his paintings. &ldquo;My recollections of childhood are all tied up with trying to find a light switch, so completely covered with his paintings were our walls,&rdquo; noted Arlene Kazanjian Francis.<sup id="fnref-23"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="23">23</button></sup> To maximize the family&rsquo;s living space, some of his lesser paintings were auctioned sometime in the 1950s at Plaza Art Galleries established by the O&rsquo;Reilly brothers on the Upper East Side of New York City.</p>
   </div>
 </section>
 
@@ -2652,7 +2705,7 @@
     <div class="plain-quote-box text-green">
       <div class="pqb-edge border-green"></div>
       <blockquote>
-        <p>&ldquo;He had never learned how to cope with leisure&mdash;not in large doses. You have to have a special talent for that, one which you don&rsquo;t develop if you are reared with a &lsquo;work ethic&rsquo; philosophy which dictates that it is sinful not to improve each shining hour&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="24">24</button></sup></p>
+        <p>&ldquo;He had never learned how to cope with leisure&mdash;not in large doses. You have to have a special talent for that, one which you don&rsquo;t develop if you are reared with a &lsquo;work ethic&rsquo; philosophy which dictates that it is sinful not to improve each shining hour&rdquo;<sup id="fnref-24"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="24">24</button></sup></p>
         <footer>&mdash; Arlene Kazanjian Francis</footer>
       </blockquote>
       <div class="pqb-edge border-green"></div>
@@ -2662,7 +2715,7 @@
     <div class="plain-quote-box text-green">
       <div class="pqb-edge border-green"></div>
       <blockquote>
-        <p>&ldquo;If we are to believe that history progresses forward, that humanity is built upon the foundation of our forerunners, then we need to recognize those who preceded us&rdquo;<sup><button type="button" class="footnote-marker bg-green text-tan" data-footnote="25">25</button></sup></p>
+        <p>&ldquo;If we are to believe that history progresses forward, that humanity is built upon the foundation of our forerunners, then we need to recognize those who preceded us&rdquo;<sup id="fnref-25"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="25">25</button></sup></p>
         <footer>&mdash; Mehmed Ali</footer>
       </blockquote>
       <div class="pqb-edge border-green"></div>
@@ -2670,7 +2723,42 @@
   </div>
 </section>
 
-<footer class="site-footer bg-green text-tan" id="siteFooter"></footer>
+<footer class="site-footer bg-green text-tan" id="siteFooter">
+  <div class="footer-columns">
+    <div class="footer-col footer-footnotes">
+      <h2 class="text-tan">Footnotes</h2>
+        <p class="footer-footnote-item"><sup><a href="#fnref-1">1</a></sup> Mehmed Ali, Yousuf Karsh &amp; John Garo: The Search for a Master&rsquo;s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-2">2</a></sup> Adelaide Ryder, &ldquo;The Photo-Secession Movement: Pioneering Artistry in Early Photography.&rdquo; https://umfa.utah.edu.</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-3">3</a></sup> Adelaide Ryder, &ldquo;The Photo-Secession Movement: Pioneering Artistry in Early Photography.&rdquo; https://umfa.utah.edu.</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-4">4</a></sup> Mehmed Ali, Yousuf Karsh &amp; John Garo: The Search for a Master&rsquo;s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-5">5</a></sup> Mehmed Ali, Yousuf Karsh &amp; John Garo: The Search for a Master&rsquo;s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-6">6</a></sup> American Photography XXIII, no. 12, (1929).</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-7">7</a></sup> Mehmed Ali, Yousuf Karsh &amp; John Garo: The Search for a Master&rsquo;s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-8">8</a></sup> Mehmed Ali, Yousuf Karsh &amp; John Garo: The Search for a Master&rsquo;s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-9">9</a></sup> Arlene Francis with Florence Roman, Arlene Francis: A Memoir. (New York: Simon and Schuster, 1978).</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-10">10</a></sup> Arlene Francis with Florence Roman, Arlene Francis: A Memoir. (New York: Simon and Schuster, 1978).</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-11">11</a></sup> Mehmed Ali, Yousuf Karsh &amp; John Garo: The Search for a Master&rsquo;s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-12">12</a></sup> The Photographic Times, Volume 38, Photographic Times Publishing Assn., 1906.</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-13">13</a></sup> The Photographic Times, Volume 38, Photographic Times Publishing Assn., 1906.</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-14">14</a></sup> &ldquo;The Harvard-Boston Aero Meet of 1910.&rdquo; https://newenglandaviationhistory.com/tag/claude-grahame-white/.</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-15">15</a></sup> &ldquo;The Harvard-Boston Aero Meet of 1910.&rdquo; https://newenglandaviationhistory.com/tag/claude-grahame-white/.</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-16">16</a></sup> &ldquo;The Harvard-Boston Aero Meet of 1910.&rdquo; https://newenglandaviationhistory.com/tag/claude-grahame-white/.</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-17">17</a></sup> Mehmed Ali, Yousuf Karsh &amp; John Garo: The Search for a Master&rsquo;s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-18">18</a></sup> Mehmed Ali, Yousuf Karsh &amp; John Garo: The Search for a Master&rsquo;s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-19">19</a></sup> Arlene Francis with Florence Roman, Arlene Francis: A Memoir. (New York: Simon and Schuster, 1978).</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-20">20</a></sup> &ldquo;Dorothea Lange.&rdquo; https://dokumen.pub/dorothea-lange-0791074609-9780791074602.html.</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-21">21</a></sup> Arlene Francis with Florence Roman, Arlene Francis: A Memoir. (New York: Simon and Schuster, 1978).</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-22">22</a></sup> &ldquo;Kaiden-Kazanjian Studios, Inc., Also Trading As Keystone News &amp; Photo Service, Frances Kaiden, and Aram Kazanjian.&rdquo; Docket 4812. Complaint 14, 1942&mdash;Decision, June 16, 1943. https://www.govinfo.gov/content/pkg/FR-1943-03-13/pdf/FR-1943-03-13.pdf.</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-23">23</a></sup> Arlene Francis with Florence Roman, Arlene Francis: A Memoir. (New York: Simon and Schuster, 1978).</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-24">24</a></sup> Arlene Francis with Florence Roman, Arlene Francis: A Memoir. (New York: Simon and Schuster, 1978).</p>
+        <p class="footer-footnote-item"><sup><a href="#fnref-25">25</a></sup> Mehmed Ali, Yousuf Karsh &amp; John Garo: The Search for a Master&rsquo;s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).</p>
+    </div>
+    <div class="footer-col footer-acknowledgments">
+      <h2 class="text-tan">Acknowledgments</h2>
+      <p>Photographs in this exhibit are from the Malikian Collection and other archives as noted. They may not be reproduced or transmitted without permission.</p>
+    </div>
+  </div>
+</footer>
 
 <div class="footnote-modal-overlay" id="footnoteModalOverlay" hidden>
   <div class="footnote-modal bg-green" role="dialog" aria-modal="true" aria-labelledby="footnoteModalText">
