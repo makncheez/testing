@@ -587,23 +587,6 @@
     z-index: 1;
   }
 
-  .side-by-side-images {
-    display: flex;
-    gap: 20px;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    padding: 20px;
-  }
-
-  .side-by-side-images img {
-    display: block;
-    flex: 1 1 0;
-    min-width: 0;
-    width: 100%;
-    height: auto;
-  }
-
   .column-image img {
     display: block;
     width: 100%;
@@ -1046,6 +1029,10 @@
     user-select: none;
   }
 
+  #hscroll6 {
+    height: 600px;
+  }
+
   .hscroll-item {
     position: relative;
     flex: 0 0 auto;
@@ -1150,9 +1137,6 @@
     }
     .trio {
       padding: 56px 28px;
-    }
-    .side-by-side-images {
-      flex-direction: column;
     }
     .intro-copy,
     .bio-copy,
@@ -2063,14 +2047,12 @@
  </div>
 </section>
 
-<div class="bg-tan" id="studio6Images">
-  <div class="side-by-side-images">
-    <img src="./images/6/2.jpg" alt="">
-    <img src="./images/6/2a.jpg" alt="">
-  </div>
-  <div class="side-by-side-images">
-    <img src="./images/6/4.jpg" alt="">
-    <img src="./images/6/3.jpg" alt="">
+<div class="hscroll-wrap bg-black" id="studio6Images">
+  <div class="hscroll-track" id="hscroll6">
+    <div class="hscroll-item"><img src="./images/6/2.jpg" alt=""></div>
+    <div class="hscroll-item"><img src="./images/6/2a.jpg" alt=""></div>
+    <div class="hscroll-item"><img src="./images/6/4.jpg" alt=""></div>
+    <div class="hscroll-item"><img src="./images/6/3.jpg" alt=""></div>
   </div>
 </div>
 
@@ -3378,6 +3360,7 @@
       zoomToggle: document.getElementById('fullCarousel5ZoomToggle')
     });
 
+    initDragScroll(document.getElementById('hscroll6'));
     initDragScroll(document.getElementById('hscroll7'));
     initHscrollCaptions(document.getElementById('hscroll7'));
 
