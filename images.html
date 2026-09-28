@@ -315,10 +315,50 @@
   }
 
   .image-card-caption {
-    margin: 0 0 10px;
-    font-size: 1.3em;
-    line-height: 1.5em;
+    font-size: 1.4em;
+    line-height: 1.6em;
+    margin: 0 0 20px;
+    padding: 0;
+    -webkit-hyphens: auto;
+    hyphens: auto;
     color: var(--color-black);
+  }
+
+  .image-card-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .image-card-keyword {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.9em;
+    letter-spacing: 0.02em;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--color-green);
+    color: var(--color-tan);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .image-card-keyword:hover,
+  .image-card-keyword:focus-visible {
+    background: var(--color-purple);
+    color: var(--color-tan);
+  }
+
+  .image-card-keyword.is-collection {
+    background: transparent;
+    border: 1px solid var(--color-purple);
+    color: var(--color-purple);
+  }
+
+  .image-card-keyword.is-collection:hover,
+  .image-card-keyword.is-collection:focus-visible {
+    background: var(--color-purple);
+    color: var(--color-tan);
   }
 
   .empty-state {
@@ -658,6 +698,20 @@
     populateSelect(decadeSelect, uniqueSorted(images.map(function (d) { return d.decade; }), DECADE_ORDER));
     populateSelect(collectionSelect, uniqueSorted(images.map(function (d) { return d.collection; })));
 
+    function makeKeywordLink(text, select, isCollection) {
+      var a = document.createElement('a');
+      a.href = '#';
+      a.className = 'image-card-keyword' + (isCollection ? ' is-collection' : '');
+      a.textContent = text;
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        select.value = text;
+        applyFilters();
+        listEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      return a;
+    }
+
     var rows = images.map(function (data) {
       var card = document.createElement('div');
       card.className = 'image-card';
@@ -675,6 +729,13 @@
       captionEl.className = 'image-card-caption';
       captionEl.textContent = data.caption;
       card.appendChild(captionEl);
+
+      var keywords = document.createElement('div');
+      keywords.className = 'image-card-keywords';
+      keywords.appendChild(makeKeywordLink(data.section, sectionSelect, false));
+      keywords.appendChild(makeKeywordLink(data.decade, decadeSelect, false));
+      keywords.appendChild(makeKeywordLink(data.collection, collectionSelect, true));
+      card.appendChild(keywords);
 
       listEl.appendChild(card);
 
