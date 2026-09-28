@@ -243,6 +243,7 @@
     top: auto;
     bottom: 24px;
     left: 24px;
+    width: 90px;
     transform: none;
     z-index: 999999;
     background-color: transparent;
@@ -2545,13 +2546,20 @@
 
     var portraitRecall = document.getElementById('quotePortraitRecall');
     var firstH1 = document.querySelector('#intro h1');
-    if (portraitRecall && firstH1 && 'IntersectionObserver' in window) {
-      var portraitRecallObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          portraitRecall.classList.toggle('is-visible', entry.boundingClientRect.top < 0);
-        });
-      }, { threshold: 0 });
-      portraitRecallObserver.observe(firstH1);
+    if (portraitRecall && firstH1) {
+      var portraitLingerTimer = null;
+      window.addEventListener('scroll', function () {
+        var pastFirstH1 = firstH1.getBoundingClientRect().top < 0;
+        window.clearTimeout(portraitLingerTimer);
+        if (!pastFirstH1) {
+          portraitRecall.classList.remove('is-visible');
+          return;
+        }
+        portraitRecall.classList.add('is-visible');
+        portraitLingerTimer = window.setTimeout(function () {
+          portraitRecall.classList.remove('is-visible');
+        }, 4000);
+      }, { passive: true });
     }
 
     function syncBioOverlap() {
