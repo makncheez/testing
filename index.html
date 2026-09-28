@@ -341,21 +341,22 @@
   .qf-nav-bubble::after {
     content: '';
     position: absolute;
+    left: 0;
     bottom: 53px;
     width: 0;
     height: 0;
-    border-top: 14px solid transparent;
-    border-bottom: 14px solid transparent;
+    border-style: solid;
+    transform: translate(-100%, 50%);
   }
 
   .qf-nav-bubble::before {
-    left: -17px;
-    border-right: 17px solid var(--color-green);
+    border-width: 14px 17px 14px 0;
+    border-color: transparent var(--color-green) transparent transparent;
   }
 
   .qf-nav-bubble::after {
-    left: -13px;
-    border-right: 14px solid var(--color-tan);
+    border-width: 11px 13px 11px 0;
+    border-color: transparent var(--color-tan) transparent transparent;
   }
 
   .qf-nav-bubble-title {
