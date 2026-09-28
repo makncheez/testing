@@ -126,7 +126,8 @@
   .zoom-toggle,
   .carousel-btn,
   .full-carousel .carousel-slide,
-  h2 {
+  h2,
+  .site-footer h1 {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -153,7 +154,8 @@
 
   .hero-label,
   .quote-frame .hero-label-group,
-  h2 {
+  h2,
+  .site-footer h1 {
     font-family: 'DM Mono', monospace;
   }
 
@@ -795,7 +797,8 @@
     pointer-events: none;
   }
 
-  h2 {
+  h2,
+  .site-footer h1 {
     gap: 16px;
     margin: 0 0 32px;
     font-size: 1.4rem;
@@ -804,7 +807,9 @@
   }
 
   h2::before,
-  h2::after {
+  h2::after,
+  .site-footer h1::before,
+  .site-footer h1::after {
     content: '';
     flex-shrink: 0;
     width: 12px;
@@ -1302,12 +1307,12 @@
     min-width: 0;
   }
 
-  .footer-col h2 {
+  .footer-col h1 {
     color: var(--color-tan);
   }
 
-  .footer-col h2::before,
-  .footer-col h2::after {
+  .footer-col h1::before,
+  .footer-col h1::after {
     background-color: var(--color-tan);
   }
 
@@ -2719,7 +2724,7 @@
 <footer class="site-footer bg-green text-tan" id="siteFooter">
   <div class="footer-columns">
     <div class="footer-col footer-footnotes">
-      <h2 class="text-tan">Footnotes</h2>
+      <h1 class="text-tan">Footnotes</h1>
         <p class="footer-footnote-item"><span class="footer-footnote-badges"><sup><a class="footnote-marker bg-tan text-green" href="#fnref-1">1</a></sup><sup><a class="footnote-marker bg-tan text-green" href="#fnref-4">4</a></sup><sup><a class="footnote-marker bg-tan text-green" href="#fnref-5">5</a></sup><sup><a class="footnote-marker bg-tan text-green" href="#fnref-7">7</a></sup><sup><a class="footnote-marker bg-tan text-green" href="#fnref-8">8</a></sup><sup><a class="footnote-marker bg-tan text-green" href="#fnref-11">11</a></sup><sup><a class="footnote-marker bg-tan text-green" href="#fnref-17">17</a></sup><sup><a class="footnote-marker bg-tan text-green" href="#fnref-18">18</a></sup><sup><a class="footnote-marker bg-tan text-green" href="#fnref-25">25</a></sup></span> Mehmed Ali, Yousuf Karsh &amp; John Garo: The Search for a Master&rsquo;s Legacy. (Mansfield, Massachusetts, Benna Books, 2015).</p>
         <p class="footer-footnote-item"><span class="footer-footnote-badges"><sup><a class="footnote-marker bg-tan text-green" href="#fnref-2">2</a></sup><sup><a class="footnote-marker bg-tan text-green" href="#fnref-3">3</a></sup></span> Adelaide Ryder, &ldquo;The Photo-Secession Movement: Pioneering Artistry in Early Photography.&rdquo; https://umfa.utah.edu.</p>
         <p class="footer-footnote-item"><span class="footer-footnote-badges"><sup><a class="footnote-marker bg-tan text-green" href="#fnref-6">6</a></sup></span> American Photography XXIII, no. 12, (1929).</p>
@@ -2730,9 +2735,9 @@
         <p class="footer-footnote-item"><span class="footer-footnote-badges"><sup><a class="footnote-marker bg-tan text-green" href="#fnref-22">22</a></sup></span> &ldquo;Kaiden-Kazanjian Studios, Inc., Also Trading As Keystone News &amp; Photo Service, Frances Kaiden, and Aram Kazanjian.&rdquo; Docket 4812. Complaint 14, 1942&mdash;Decision, June 16, 1943. https://www.govinfo.gov/content/pkg/FR-1943-03-13/pdf/FR-1943-03-13.pdf.</p>
     </div>
     <div class="footer-col footer-acknowledgments">
-      <h2 class="text-tan">Acknowledgments</h2>
+      <h1 class="text-tan">Acknowledgments</h1>
       <p>Photographs in this exhibit are from the Malikian Collection and other archives as noted. They may not be reproduced or transmitted without permission.</p>
-      <h2 class="text-tan">Credits</h2>
+      <h1 class="text-tan">Credits</h1>
       <p>Curation, Archiving, Writing, Editing by Joe Malikian</p>
       <p>Web Design and Development by Happening Studio.</p>
       <p>Produced by Armenian Image Archive</p>
