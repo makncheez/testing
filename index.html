@@ -246,7 +246,7 @@
     z-index: 999999;
     width: 106px;
     aspect-ratio: 1 / 1;
-    pointer-events: none;
+    pointer-events: auto;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease, visibility 0s linear 0.4s;
@@ -263,6 +263,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
+    pointer-events: none;
     transform: rotate(-90deg);
   }
 
@@ -293,6 +294,103 @@
     background-blend-mode: normal;
     border-radius: 50%;
     border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+
+  .qf-portrait-recall:focus-visible {
+    outline: 3px solid var(--color-purple);
+    outline-offset: 3px;
+  }
+
+  .qf-nav-bubble {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    width: 300px;
+    max-width: calc(100vw - 32px);
+    background: var(--color-tan);
+    border: 2px solid var(--color-green);
+    border-radius: 16px;
+    padding: 20px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-50%) scale(0.95);
+    transform-origin: left center;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+  }
+
+  .qf-nav-bubble.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(-50%) scale(1);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .qf-nav-bubble::before,
+  .qf-nav-bubble::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+  }
+
+  .qf-nav-bubble::before {
+    left: -14px;
+    transform: translateY(-50%);
+    border-right: 14px solid var(--color-green);
+  }
+
+  .qf-nav-bubble::after {
+    left: -11px;
+    transform: translateY(-50%);
+    border-right: 12px solid var(--color-tan);
+  }
+
+  .qf-nav-bubble-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.3em;
+    color: var(--color-green);
+    padding: 0 24px 16px;
+    margin: 0 0 4px;
+    border-bottom: 1.4px solid var(--color-green);
+  }
+
+  .qf-nav-bubble-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 24px;
+    font-family: 'Cardo', serif;
+    font-size: 1.4em;
+    color: var(--color-green);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-green);
+  }
+
+  .qf-nav-bubble-item:last-child {
+    border-bottom: none;
+  }
+
+  .qf-nav-bubble-item:hover,
+  .qf-nav-bubble-item:focus-visible {
+    background: rgba(38, 63, 39, 0.08);
+    outline: none;
+  }
+
+  .qf-nav-bubble-arrow {
+    flex-shrink: 0;
+    font-size: 1.1em;
   }
 
   /* ---- Hero labels: small typographic elements positioned around the hero ---- */
@@ -1375,12 +1473,28 @@
       </svg>
     </div>
     <div class="qf-portrait" id="quotePortrait" role="img" aria-label="Circular black-and-white portrait of Aram Kazanjian."></div>
-    <div class="qf-portrait-recall-wrap" id="portraitRecallWrap" aria-hidden="true">
+    <div class="qf-portrait-recall-wrap" id="portraitRecallWrap">
       <svg class="qf-portrait-recall-ring" viewBox="0 0 100 100">
         <circle class="qf-portrait-recall-ring-track" cx="50" cy="50" r="46"></circle>
         <circle class="qf-portrait-recall-ring-progress" id="portraitRingProgress" cx="50" cy="50" r="46"></circle>
       </svg>
-      <div class="qf-portrait qf-portrait-recall" id="quotePortraitRecall"></div>
+      <button type="button" class="qf-portrait qf-portrait-recall" id="quotePortraitRecall" aria-haspopup="true" aria-expanded="false" aria-controls="portraitNavBubble" aria-label="Open Kazanjian navigation menu"></button>
+    </div>
+
+    <div class="qf-nav-bubble" id="portraitNavBubble" role="menu" aria-label="Kazanjian navigation">
+      <div class="qf-nav-bubble-title">Kazanjian Nav</div>
+      <a class="qf-nav-bubble-item" href="#" id="navTopOfPage" role="menuitem">
+        <span>Top of the Page</span><span class="qf-nav-bubble-arrow" aria-hidden="true">&uarr;</span>
+      </a>
+      <a class="qf-nav-bubble-item" href="images.html" role="menuitem">
+        <span>Exhibition Checklist</span><span class="qf-nav-bubble-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="qf-nav-bubble-item" href="#" role="menuitem">
+        <span>Send a Postcard</span><span class="qf-nav-bubble-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="qf-nav-bubble-item" href="#" role="menuitem">
+        <span>Exit</span><span class="qf-nav-bubble-arrow" aria-hidden="true">&rarr;</span>
+      </a>
     </div>
 
 <div class="hero-spacer"></div>
@@ -2588,9 +2702,13 @@
 
     var portraitRecallWrap = document.getElementById('portraitRecallWrap');
     var portraitRingProgress = document.getElementById('portraitRingProgress');
+    var portraitBtn = document.getElementById('quotePortraitRecall');
+    var navBubble = document.getElementById('portraitNavBubble');
+    var navTopLink = document.getElementById('navTopOfPage');
     var firstH1 = document.querySelector('#intro h1');
     if (portraitRecallWrap && firstH1) {
       var portraitLingerTimer = null;
+      var navOpen = false;
       var RING_R = 46;
       var RING_CIRC = 2 * Math.PI * RING_R;
       if (portraitRingProgress) {
@@ -2606,8 +2724,78 @@
         portraitRingProgress.style.strokeDashoffset = String(RING_CIRC * (1 - progress));
       }
 
+      function armLingerTimer() {
+        window.clearTimeout(portraitLingerTimer);
+        portraitLingerTimer = window.setTimeout(function () {
+          portraitRecallWrap.classList.remove('is-visible');
+        }, 4000);
+      }
+
+      function positionNavBubble() {
+        if (!portraitBtn || !navBubble) return;
+        var rect = portraitBtn.getBoundingClientRect();
+        var gap = 16;
+        var bubbleWidth = navBubble.offsetWidth || 300;
+        var left = rect.right + gap;
+        var maxLeft = window.innerWidth - bubbleWidth - 16;
+        left = Math.max(16, Math.min(left, maxLeft));
+        navBubble.style.left = left + 'px';
+        navBubble.style.top = (rect.top + rect.height / 2) + 'px';
+      }
+
+      function openNavBubble() {
+        if (!navBubble || !portraitBtn) return;
+        navOpen = true;
+        positionNavBubble();
+        navBubble.classList.add('is-open');
+        portraitBtn.setAttribute('aria-expanded', 'true');
+        window.clearTimeout(portraitLingerTimer);
+        portraitRecallWrap.classList.add('is-visible');
+      }
+
+      function closeNavBubble() {
+        if (!navBubble || !portraitBtn) return;
+        navOpen = false;
+        navBubble.classList.remove('is-open');
+        portraitBtn.setAttribute('aria-expanded', 'false');
+        armLingerTimer();
+      }
+
+      if (portraitBtn) {
+        portraitBtn.addEventListener('click', function () {
+          if (navOpen) {
+            closeNavBubble();
+          } else {
+            openNavBubble();
+          }
+        });
+      }
+
+      if (navTopLink) {
+        navTopLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+          closeNavBubble();
+        });
+      }
+
+      document.addEventListener('click', function (e) {
+        if (!navOpen) return;
+        if (navBubble.contains(e.target) || portraitBtn.contains(e.target)) return;
+        closeNavBubble();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && navOpen) closeNavBubble();
+      });
+
+      window.addEventListener('resize', function () {
+        if (navOpen) positionNavBubble();
+      });
+
       window.addEventListener('scroll', function () {
         updateRingProgress();
+        if (navOpen) return;
         var pastFirstH1 = firstH1.getBoundingClientRect().top < 0;
         window.clearTimeout(portraitLingerTimer);
         if (!pastFirstH1) {
@@ -2615,9 +2803,7 @@
           return;
         }
         portraitRecallWrap.classList.add('is-visible');
-        portraitLingerTimer = window.setTimeout(function () {
-          portraitRecallWrap.classList.remove('is-visible');
-        }, 4000);
+        armLingerTimer();
       }, { passive: true });
     }
 
