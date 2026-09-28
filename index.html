@@ -641,10 +641,19 @@
     justify-content: center;
     background: transparent;
     padding: 24px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: scale(0.96);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
   }
 
-  .footnote-modal-overlay[hidden] {
-    display: none;
+  .footnote-modal-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: scale(1);
+    transition: opacity 0.25s ease, transform 0.25s ease;
   }
 
   .footnote-modal {
@@ -2792,7 +2801,7 @@
   </div>
 </footer>
 
-<div class="footnote-modal-overlay" id="footnoteModalOverlay" hidden>
+<div class="footnote-modal-overlay" id="footnoteModalOverlay">
   <div class="footnote-modal bg-green" role="dialog" aria-modal="true" aria-labelledby="footnoteModalText">
     <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="footnoteModalClose" aria-label="Close citation">
       <span class="material-symbols-outlined" aria-hidden="true">close</span>
@@ -3894,7 +3903,7 @@
       var text = footnoteData[num];
       if (!text || !footnoteOverlay || !footnoteText) return;
       footnoteText.textContent = text;
-      footnoteOverlay.hidden = false;
+      footnoteOverlay.classList.add('is-open');
       footnoteLastFocused = document.activeElement;
       footnoteCloseBtn.focus();
       // Deferred so the click's own focus-scroll (if the trigger was near
@@ -3905,8 +3914,8 @@
     }
 
     function closeFootnoteModal() {
-      if (!footnoteOverlay || footnoteOverlay.hidden) return;
-      footnoteOverlay.hidden = true;
+      if (!footnoteOverlay || !footnoteOverlay.classList.contains('is-open')) return;
+      footnoteOverlay.classList.remove('is-open');
       window.clearTimeout(footnoteScrollArmTimer);
       window.removeEventListener('scroll', onFootnoteScroll);
       if (footnoteLastFocused && footnoteLastFocused.focus) footnoteLastFocused.focus();
