@@ -587,10 +587,28 @@
     z-index: 1;
   }
 
+  .column-image {
+    position: relative;
+  }
+
   .column-image img {
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  .column-image-caption-toggle {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+  }
+
+  .column-image .carousel-caption {
+    z-index: 3;
+    bottom: auto;
+    top: 54px;
+    max-width: min(320px, calc(100% - 24px));
   }
 
   .studio-col {
@@ -2033,7 +2051,17 @@
     <h2 class="text-green">The Kaiden-Kazanjian Studio vs. The Federal Trade Commission</h2>
     <p>Amid Kaiden-Kazanjian Studio&rsquo;s success, on August 14, 1942, the Federal Trade Commission (FTC) filed a complaint against them, along with its principals, for deceptively presenting commercial portrait work as legitimate news and press photography. Operating under the name Keystone News and Photo Service, the Kaiden-Kazanjian company was accused of misrepresenting its business practices.</p>
     <div class="column-image">
+      <button type="button" class="caption-toggle btn-colorway-icon column-image-caption-toggle" id="captionToggle12" aria-pressed="false" aria-controls="carousel-caption-12" aria-label="Toggle caption"><span class="caption-icon-i" aria-hidden="true">i</span></button>
       <img src="./images/6/1.jpg" alt="Kaiden-Kazanjian Studio Inc., New York. The studio was presented as a &ldquo;Division of Keystone News and Photo Service&rdquo; before June 16, 1943.">
+      <div class="carousel-caption bg-green text-tan" id="carousel-caption-12">
+        <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="captionClose12" aria-label="Close caption">
+          <span class="material-symbols-outlined" aria-hidden="true">close</span>
+        </button>
+        <span id="carousel-caption-text-12">Kaiden-Kazanjian Studio Inc., New York. The studio was presented as a &ldquo;Division of Keystone News and Photo Service&rdquo; before June 16, 1943.</span><button type="button" class="icon-btn copy-btn text-tan" data-copy-target="carousel-caption-text-12" aria-label="Copy caption text">
+          <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+          <span class="copy-label"></span>
+        </button>
+      </div>
     </div>
     <p>As per the alleged violation of Section 5 of the Act of Congress established in 1914, The New York Times reported on August 20, 1942, that the Federal Trade Commission charged the studio, a corporation, Frances Kaiden, as president and secretary of Kaiden-Kazanjian Studios, Inc., and Aram Kazanjian, as vice president and treasurer of Kaiden-Kazanjian Studios, Inc. for trading individually as Keystone News &amp; Photo Service. Although the studio may have sold a very small percentage of photographs to various media outlets, the FTC complaint ultimately found that the studio and principals were falsely claiming to operate an independent news and photo agency, and that they used deceptive representations, such as pretending to manage official press publicity to market commercial photography services. Furthermore, the studio was cited for some other advertising practices that were misleading and false. On June 16, 1943, the studio was required to cease-and-desist from all such practices. It was the FTC&rsquo;s decision and conclusion that:</p>
     <div class="plain-quote-box text-green">
@@ -2557,6 +2585,7 @@
 
     initEdgeCaption('captionToggle3', 'captionClose3', 'carousel-caption-3', fullImageTrack);
     initEdgeCaption('captionToggle4', 'captionClose4', 'carousel-caption-4', document.getElementById('fullImage2'));
+    initEdgeCaption('captionToggle12', 'captionClose12', 'carousel-caption-12', document.querySelector('.column-image'));
     var fadeDistance = (window.innerHeight || 800) * 0.4;
     var fallRange = fadeDistance * 2.5;
     var colorFadeDistance = fadeDistance * 0.5;
