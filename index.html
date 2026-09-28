@@ -239,6 +239,25 @@
     box-shadow: 0 4px 6.2px 2px rgba(0, 0, 0, 0.25);
   }
 
+  .qf-portrait-recall {
+    top: auto;
+    bottom: 24px;
+    left: 24px;
+    transform: none;
+    z-index: 999999;
+    background-color: transparent;
+    background-blend-mode: normal;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+  }
+
+  .qf-portrait-recall.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease;
+  }
+
   /* ---- Hero labels: small typographic elements positioned around the hero ---- */
 
   .hero-label {
@@ -1319,6 +1338,7 @@
       </svg>
     </div>
     <div class="qf-portrait" id="quotePortrait" role="img" aria-label="Circular black-and-white portrait of Aram Kazanjian."></div>
+    <div class="qf-portrait qf-portrait-recall" id="quotePortraitRecall" aria-hidden="true"></div>
 
 <div class="hero-spacer"></div>
 
@@ -2522,6 +2542,17 @@
 
     var fullImageTrack = document.getElementById('fullImageTrack');
     var fullImageEl = document.getElementById('fullImage');
+
+    var portraitRecall = document.getElementById('quotePortraitRecall');
+    var firstH1 = document.querySelector('#intro h1');
+    if (portraitRecall && firstH1 && 'IntersectionObserver' in window) {
+      var portraitRecallObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          portraitRecall.classList.toggle('is-visible', entry.boundingClientRect.top < 0);
+        });
+      }, { threshold: 0 });
+      portraitRecallObserver.observe(firstH1);
+    }
 
     function syncBioOverlap() {
       if (!fullImageTrack || !fullImageEl || !bio || !quotes) return;
