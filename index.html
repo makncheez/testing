@@ -4490,8 +4490,8 @@
         ctx.translate(cx, cy);
         ctx.rotate(angleRad);
         ctx.shadowColor = 'rgba(0, 0, 0, 0.55)';
-        ctx.shadowBlur = 34;
-        ctx.shadowOffsetY = 14;
+        ctx.shadowBlur = w * 0.08;
+        ctx.shadowOffsetY = w * 0.033;
         ctx.drawImage(img, -w / 2, -h / 2, w, h);
         ctx.restore();
       }
@@ -4541,7 +4541,7 @@
         var backImg = document.getElementById('postcardBackImg');
         if (!frontImg || !backImg) return;
 
-        var W = 1600, H = 1200;
+        var W = 2400, H = 1750;
         var canvas = document.createElement('canvas');
         canvas.width = W;
         canvas.height = H;
@@ -4549,7 +4549,7 @@
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, W, H);
 
-        var cardW = 420;
+        var cardW = 950;
         var cardH = cardW / (1305 / 2000);
         var centerY = H / 2;
         var frontCx = W / 2 - cardW * 0.28;
@@ -4567,7 +4567,7 @@
           link.href = url;
           link.click();
           window.setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
-        }, 'image/jpeg', 0.95);
+        }, 'image/jpeg', 0.97);
       });
     })();
 
