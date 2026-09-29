@@ -764,7 +764,10 @@
 
   .postcard-stage-wrap {
     position: relative;
-    width: min(84vw, 380px);
+    width: min(94vw, 440px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .postcard-stage-wrap .icon-btn-close-top {
@@ -772,8 +775,52 @@
     z-index: 6;
   }
 
-  .postcard-perspective {
+  .postcard-picker-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
     width: 100%;
+  }
+
+  .postcard-side-nav {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: opacity 0.2s ease, visibility 0s linear;
+  }
+
+  .postcard-side-nav .material-symbols-outlined {
+    font-size: 22px;
+  }
+
+  .postcard-stage-wrap.is-flipped .postcard-side-nav {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .postcard-dots-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+    transition: opacity 0.2s ease, visibility 0s linear;
+  }
+
+  .postcard-stage-wrap.is-flipped .postcard-dots-row {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .postcard-perspective {
+    width: min(70vw, 320px);
+    flex-shrink: 0;
     perspective: 2400px;
   }
 
@@ -993,7 +1040,17 @@
 
   @media (max-width: 500px) {
     .postcard-stage-wrap {
-      width: min(84vw, 300px);
+      width: min(96vw, 340px);
+    }
+    .postcard-perspective {
+      width: min(72vw, 250px);
+    }
+    .postcard-side-nav {
+      width: 30px;
+      height: 30px;
+    }
+    .postcard-side-nav .material-symbols-outlined {
+      font-size: 18px;
     }
   }
 
@@ -3152,50 +3209,50 @@
     <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="postcardClose" aria-label="Close">
       <span class="material-symbols-outlined" aria-hidden="true">close</span>
     </button>
-    <div class="postcard-perspective">
-      <div class="postcard-stage" id="postcardStage">
-        <div class="postcard-face postcard-face-front" id="postcardFrontFace">
-          <div class="postcard-front-carousel" id="postcardFrontCarousel">
-            <div class="carousel-slide is-active"><img src="./images/postcards/1-front.webp" alt="Postcard design 1"></div>
-            <div class="carousel-slide"><img src="./images/postcards/2-front.webp" alt="Postcard design 2"></div>
-            <div class="carousel-slide"><img src="./images/postcards/3-front.webp" alt="Postcard design 3"></div>
-            <div class="carousel-right-controls">
-              <button type="button" class="carousel-btn carousel-prev btn-colorway-icon" aria-label="Previous design"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
-              <button type="button" class="carousel-btn carousel-next btn-colorway-icon" aria-label="Next design"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
+    <div class="postcard-picker-row" id="postcardPickerRow">
+      <button type="button" class="postcard-side-nav btn-colorway-icon" id="postcardPrevBtn" aria-label="Previous design"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
+      <div class="postcard-perspective">
+        <div class="postcard-stage" id="postcardStage">
+          <div class="postcard-face postcard-face-front" id="postcardFrontFace">
+            <div class="postcard-front-carousel" id="postcardFrontCarousel">
+              <div class="carousel-slide is-active"><img src="./images/postcards/1-front.webp" alt="Postcard design 1"></div>
+              <div class="carousel-slide"><img src="./images/postcards/2-front.webp" alt="Postcard design 2"></div>
+              <div class="carousel-slide"><img src="./images/postcards/3-front.webp" alt="Postcard design 3"></div>
+              <button type="button" class="postcard-btn postcard-choose-btn" id="postcardChooseBtn">Choose This Design</button>
             </div>
-            <div class="carousel-dots">
-              <button type="button" class="carousel-dot dot-colorway is-active" aria-label="Go to design 1"></button>
-              <button type="button" class="carousel-dot dot-colorway" aria-label="Go to design 2"></button>
-              <button type="button" class="carousel-dot dot-colorway" aria-label="Go to design 3"></button>
+          </div>
+          <div class="postcard-face postcard-face-back" id="postcardBackFace">
+            <img class="postcard-back-img" src="./images/postcards/1-back.webp" alt="" id="postcardBackImg">
+            <div class="postcard-draw-layer" id="postcardDrawLayer">
+              <canvas class="postcard-draw-canvas" id="postcardDrawCanvas" aria-label="Draw or write anywhere on the card"></canvas>
             </div>
-            <button type="button" class="postcard-btn postcard-choose-btn" id="postcardChooseBtn">Choose This Design</button>
+            <div class="postcard-toolbar" id="postcardToolbar">
+              <button type="button" class="postcard-tool-btn is-active" id="postcardToolPen" data-tool="pen" aria-label="Draw" aria-pressed="true">
+                <span class="material-symbols-outlined" aria-hidden="true">draw</span>
+              </button>
+              <button type="button" class="postcard-tool-btn" id="postcardToolText" data-tool="text" aria-label="Add text" aria-pressed="false">
+                <span class="material-symbols-outlined" aria-hidden="true">text_fields</span>
+              </button>
+              <span class="postcard-toolbar-divider"></span>
+              <button type="button" class="postcard-color-btn is-active" data-color="#263F27" style="--swatch: #263F27" aria-label="Green ink" aria-pressed="true"></button>
+              <button type="button" class="postcard-color-btn" data-color="#9767a3" style="--swatch: #9767a3" aria-label="Purple ink" aria-pressed="false"></button>
+              <button type="button" class="postcard-color-btn" data-color="#000000" style="--swatch: #000000" aria-label="Black ink" aria-pressed="false"></button>
+              <span class="postcard-toolbar-divider"></span>
+              <button type="button" class="postcard-tool-btn" id="postcardToolClear" aria-label="Clear everything">
+                <span class="material-symbols-outlined" aria-hidden="true">delete_sweep</span>
+              </button>
+            </div>
+            <button type="button" class="postcard-btn postcard-btn-ghost postcard-back-link" id="postcardBackToFront">&larr; choose another design</button>
+            <button type="button" class="postcard-btn postcard-finish-btn" id="postcardFinishBtn">Finish Postcard</button>
           </div>
-        </div>
-        <div class="postcard-face postcard-face-back" id="postcardBackFace">
-          <img class="postcard-back-img" src="./images/postcards/1-back.webp" alt="" id="postcardBackImg">
-          <div class="postcard-draw-layer" id="postcardDrawLayer">
-            <canvas class="postcard-draw-canvas" id="postcardDrawCanvas" aria-label="Draw or write anywhere on the card"></canvas>
-          </div>
-          <div class="postcard-toolbar" id="postcardToolbar">
-            <button type="button" class="postcard-tool-btn is-active" id="postcardToolPen" data-tool="pen" aria-label="Draw" aria-pressed="true">
-              <span class="material-symbols-outlined" aria-hidden="true">draw</span>
-            </button>
-            <button type="button" class="postcard-tool-btn" id="postcardToolText" data-tool="text" aria-label="Add text" aria-pressed="false">
-              <span class="material-symbols-outlined" aria-hidden="true">text_fields</span>
-            </button>
-            <span class="postcard-toolbar-divider"></span>
-            <button type="button" class="postcard-color-btn is-active" data-color="#263F27" style="--swatch: #263F27" aria-label="Green ink" aria-pressed="true"></button>
-            <button type="button" class="postcard-color-btn" data-color="#9767a3" style="--swatch: #9767a3" aria-label="Purple ink" aria-pressed="false"></button>
-            <button type="button" class="postcard-color-btn" data-color="#000000" style="--swatch: #000000" aria-label="Black ink" aria-pressed="false"></button>
-            <span class="postcard-toolbar-divider"></span>
-            <button type="button" class="postcard-tool-btn" id="postcardToolClear" aria-label="Clear everything">
-              <span class="material-symbols-outlined" aria-hidden="true">delete_sweep</span>
-            </button>
-          </div>
-          <button type="button" class="postcard-btn postcard-btn-ghost postcard-back-link" id="postcardBackToFront">&larr; choose another design</button>
-          <button type="button" class="postcard-btn postcard-finish-btn" id="postcardFinishBtn">Finish Postcard</button>
         </div>
       </div>
+      <button type="button" class="postcard-side-nav btn-colorway-icon" id="postcardNextBtn" aria-label="Next design"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
+    </div>
+    <div class="postcard-dots-row" id="postcardDotsRow">
+      <button type="button" class="carousel-dot dot-colorway is-active" aria-label="Go to design 1"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to design 2"></button>
+      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to design 3"></button>
     </div>
   </div>
 
@@ -4418,6 +4475,9 @@
       var chooseBtn = document.getElementById('postcardChooseBtn');
       var backToFrontBtn = document.getElementById('postcardBackToFront');
       var finishBtn = document.getElementById('postcardFinishBtn');
+      var prevBtn = document.getElementById('postcardPrevBtn');
+      var nextBtn = document.getElementById('postcardNextBtn');
+      var dotsRow = document.getElementById('postcardDotsRow');
       var backImg = document.getElementById('postcardBackImg');
       var drawLayer = document.getElementById('postcardDrawLayer');
       var drawCanvas = document.getElementById('postcardDrawCanvas');
@@ -4432,7 +4492,7 @@
 
       var frontIndex = 0;
       var frontSlides = frontCarousel.querySelectorAll('.carousel-slide');
-      var frontDots = frontCarousel.querySelectorAll('.carousel-dot');
+      var frontDots = dotsRow.querySelectorAll('.carousel-dot');
 
       function goToFront(index) {
         var next = (index + frontSlides.length) % frontSlides.length;
@@ -4443,10 +4503,10 @@
         frontDots[frontIndex].classList.add('is-active');
       }
 
-      frontCarousel.querySelector('.carousel-next').addEventListener('click', function () {
+      nextBtn.addEventListener('click', function () {
         goToFront(frontIndex + 1);
       });
-      frontCarousel.querySelector('.carousel-prev').addEventListener('click', function () {
+      prevBtn.addEventListener('click', function () {
         goToFront(frontIndex - 1);
       });
       frontDots.forEach(function (dot, i) {
@@ -4583,6 +4643,7 @@
 
       function resetPostcard() {
         stage.classList.remove('is-flipped');
+        stageWrap.classList.remove('is-flipped');
         clearDrawing();
         finished.hidden = true;
         stageWrap.hidden = false;
@@ -4624,11 +4685,13 @@
 
       chooseBtn.addEventListener('click', function () {
         stage.classList.add('is-flipped');
+        stageWrap.classList.add('is-flipped');
         window.setTimeout(sizeDrawCanvas, 350);
       });
 
       backToFrontBtn.addEventListener('click', function () {
         stage.classList.remove('is-flipped');
+        stageWrap.classList.remove('is-flipped');
       });
 
       // ---- Shared front+back composition (used by the finished preview and the download) ----
@@ -4679,9 +4742,21 @@
         ctx.restore();
       }
 
+      // Tilt varies per finished postcard: picked fresh each time "Finish
+      // Postcard" runs, then held steady so the on-screen preview and the
+      // downloaded file always match.
+      var FRONT_ANGLE_RANGE = [-12, -4];
+      var BACK_ANGLE_RANGE = [4, 12];
+      var currentFrontAngleDeg = -7;
+      var currentBackAngleDeg = 6;
+
+      function randomInRange(range) {
+        return range[0] + Math.random() * (range[1] - range[0]);
+      }
+
       function composePostcardCanvas() {
         var frontImg = frontSlides[frontIndex].querySelector('img');
-        var W = 2400, H = 1750;
+        var W = 2500, H = 2350;
         var canvas = document.createElement('canvas');
         canvas.width = W;
         canvas.height = H;
@@ -4689,19 +4764,23 @@
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, W, H);
 
-        var cardW = 950;
+        var cardW = 1280;
         var cardH = cardW / (1305 / 2000);
         var centerY = H / 2;
+        var frontAngle = currentFrontAngleDeg * Math.PI / 180;
+        var backAngle = currentBackAngleDeg * Math.PI / 180;
         var frontCx = W / 2 - cardW * 0.28;
         var backCx = W / 2 + cardW * 0.24;
 
-        drawRotatedCard(ctx, frontImg, frontCx, centerY, cardW, cardH, -7 * Math.PI / 180);
-        drawRotatedCard(ctx, backImg, backCx, centerY, cardW, cardH, 6 * Math.PI / 180);
-        drawFreeformOnCard(ctx, backCx, centerY, cardW, cardH, 6 * Math.PI / 180);
+        drawRotatedCard(ctx, frontImg, frontCx, centerY, cardW, cardH, frontAngle);
+        drawRotatedCard(ctx, backImg, backCx, centerY, cardW, cardH, backAngle);
+        drawFreeformOnCard(ctx, backCx, centerY, cardW, cardH, backAngle);
         return canvas;
       }
 
       finishBtn.addEventListener('click', function () {
+        currentFrontAngleDeg = randomInRange(FRONT_ANGLE_RANGE);
+        currentBackAngleDeg = randomInRange(BACK_ANGLE_RANGE);
         var canvas = composePostcardCanvas();
         finishedPreview.src = canvas.toDataURL('image/jpeg', 0.95);
         stageWrap.hidden = true;
