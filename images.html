@@ -70,6 +70,32 @@
     }
   }
 
+  /* ---- Page transition fallback: browsers without cross-document View
+     Transitions support (notably mobile Safari) never run the rules
+     above, so this page would otherwise navigate with no animation at
+     all. body.qf-slide-* manually slides the whole page instead — a
+     transform on body becomes the containing block for its position:fixed
+     descendants (the recall button, nav bubble), so they ride along as
+     one unit, same as the native version. ---- */
+
+  body.qf-slide-anim {
+    transition: transform 420ms cubic-bezier(.65, 0, .35, 1);
+  }
+
+  body.qf-slide-left {
+    transform: translateX(-100%);
+  }
+
+  body.qf-slide-right {
+    transform: translateX(100%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body.qf-slide-anim {
+      transition: none !important;
+    }
+  }
+
   /* ---- Aram Navigation: recall portrait + speech-bubble menu ---- */
 
   .qf-portrait {
@@ -446,7 +472,7 @@
   <a class="qf-nav-bubble-item" href="#" id="navTopOfPage" role="menuitem">
     <span>Top of the Page</span><span class="qf-nav-bubble-arrow material-symbols-outlined" aria-hidden="true">arrow_upward</span>
   </a>
-  <a class="qf-nav-bubble-item" href="index.html" role="menuitem">
+  <a class="qf-nav-bubble-item" href="index.html" id="navEnterExhibition" role="menuitem">
     <span>Enter Exhibition</span><span class="qf-nav-bubble-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
   </a>
   <a class="qf-nav-bubble-item" href="#" role="menuitem">
@@ -491,6 +517,51 @@
     var navBubble = document.getElementById('portraitNavBubble');
     var navTopLink = document.getElementById('navTopOfPage');
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Manual push-slide fallback for browsers without cross-document View
+    // Transitions support (notably mobile Safari) — see the qf-slide-*
+    // CSS rules above. Runs only when the native API is unavailable, so
+    // it never doubles up with the declarative version.
+    if (!('startViewTransition' in document)) {
+      (function () {
+        var SLIDE_DURATION = 420;
+        var backLink = document.getElementById('navEnterExhibition');
+
+        var dir = sessionStorage.getItem('qfSlideDir');
+        if (dir && !reduceMotion) {
+          sessionStorage.removeItem('qfSlideDir');
+          document.body.classList.add(dir === 'back' ? 'qf-slide-left' : 'qf-slide-right');
+          window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(function () {
+              document.body.classList.add('qf-slide-anim');
+              document.body.classList.remove('qf-slide-left', 'qf-slide-right');
+            });
+          });
+          document.body.addEventListener('transitionend', function done(e) {
+            if (e.propertyName !== 'transform') return;
+            document.body.removeEventListener('transitionend', done);
+            document.body.classList.remove('qf-slide-anim');
+          });
+        } else {
+          sessionStorage.removeItem('qfSlideDir');
+        }
+
+        if (backLink) {
+          backLink.addEventListener('click', function (e) {
+            if (reduceMotion) return;
+            e.preventDefault();
+            var href = backLink.getAttribute('href');
+            document.body.classList.add('qf-slide-anim');
+            document.body.offsetHeight;
+            document.body.classList.add('qf-slide-right');
+            sessionStorage.setItem('qfSlideDir', 'back');
+            window.setTimeout(function () {
+              window.location.href = href;
+            }, SLIDE_DURATION);
+          });
+        }
+      })();
+    }
 
     if (portraitRecallWrap) {
       var portraitLingerTimer = null;

@@ -72,6 +72,32 @@
     }
   }
 
+  /* ---- Page transition fallback: browsers without cross-document View
+     Transitions support (notably mobile Safari) never run the rules
+     above, so this page would otherwise navigate with no animation at
+     all. body.qf-slide-* manually slides the whole page instead — a
+     transform on body becomes the containing block for its position:fixed
+     descendants (the hero, recall button, nav bubble), so they ride
+     along as one unit, same as the native version. ---- */
+
+  body.qf-slide-anim {
+    transition: transform 420ms cubic-bezier(.65, 0, .35, 1);
+  }
+
+  body.qf-slide-left {
+    transform: translateX(-100%);
+  }
+
+  body.qf-slide-right {
+    transform: translateX(100%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body.qf-slide-anim {
+      transition: none !important;
+    }
+  }
+
   /* ---- Colorways: background fills, text colors, icon fills, borders ---- */
 
   .bg-tan { background-color: var(--color-tan); }
@@ -1618,7 +1644,7 @@
       <a class="qf-nav-bubble-item" href="#" id="navTopOfPage" role="menuitem">
         <span>Top of the Page</span><span class="qf-nav-bubble-arrow material-symbols-outlined" aria-hidden="true">arrow_upward</span>
       </a>
-      <a class="qf-nav-bubble-item" href="images.html" role="menuitem">
+      <a class="qf-nav-bubble-item" href="images.html" id="navEnterChecklist" role="menuitem">
         <span>Exhibition Checklist</span><span class="qf-nav-bubble-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
       </a>
       <a class="qf-nav-bubble-item" href="#" role="menuitem">
@@ -2850,6 +2876,51 @@
     var quotes = document.getElementById('quotes');
     var revealTargets = [intro, studio, bio, quotes];
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Manual push-slide fallback for browsers without cross-document View
+    // Transitions support (notably mobile Safari) — see the qf-slide-*
+    // CSS rules above. Runs only when the native API is unavailable, so
+    // it never doubles up with the declarative version.
+    if (!('startViewTransition' in document)) {
+      (function () {
+        var SLIDE_DURATION = 420;
+        var enterLink = document.getElementById('navEnterChecklist');
+
+        var dir = sessionStorage.getItem('qfSlideDir');
+        if (dir && !reduceMotion) {
+          sessionStorage.removeItem('qfSlideDir');
+          document.body.classList.add(dir === 'back' ? 'qf-slide-left' : 'qf-slide-right');
+          window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(function () {
+              document.body.classList.add('qf-slide-anim');
+              document.body.classList.remove('qf-slide-left', 'qf-slide-right');
+            });
+          });
+          document.body.addEventListener('transitionend', function done(e) {
+            if (e.propertyName !== 'transform') return;
+            document.body.removeEventListener('transitionend', done);
+            document.body.classList.remove('qf-slide-anim');
+          });
+        } else {
+          sessionStorage.removeItem('qfSlideDir');
+        }
+
+        if (enterLink) {
+          enterLink.addEventListener('click', function (e) {
+            if (reduceMotion) return;
+            e.preventDefault();
+            var href = enterLink.getAttribute('href');
+            document.body.classList.add('qf-slide-anim');
+            document.body.offsetHeight;
+            document.body.classList.add('qf-slide-left');
+            sessionStorage.setItem('qfSlideDir', 'fwd');
+            window.setTimeout(function () {
+              window.location.href = href;
+            }, SLIDE_DURATION);
+          });
+        }
+      })();
+    }
 
     var fullImageTrack = document.getElementById('fullImageTrack');
     var fullImageEl = document.getElementById('fullImage');
