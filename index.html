@@ -355,11 +355,6 @@
     font: inherit;
     cursor: pointer;
     pointer-events: auto;
-    transition: transform 0.1s ease;
-  }
-
-  .qf-portrait-recall:active {
-    transform: translate(-50%, -50%) scale(0.92);
   }
 
   .qf-portrait-recall:focus-visible {
@@ -2951,18 +2946,29 @@
         if (navOpen) positionNavBubble();
       });
 
-      window.addEventListener('scroll', function () {
+      // Polled via rAF instead of a 'scroll' listener: on mobile a nested
+      // scrollable ancestor (or a browser that throttles/coalesces scroll
+      // events during touch momentum) can leave 'scroll' events on window
+      // unreliable. Reading window.scrollY directly every frame sidesteps
+      // that entirely.
+      var portraitLastScrollY = window.scrollY;
+      function pollPortraitScroll() {
         updateRingProgress();
-        if (navOpen) return;
-        var pastFirstH1 = firstH1.getBoundingClientRect().top < 0;
-        window.clearTimeout(portraitLingerTimer);
-        if (!pastFirstH1) {
-          portraitRecallWrap.classList.remove('is-visible');
-          return;
+        var currentScrollY = window.scrollY;
+        if (!navOpen && currentScrollY !== portraitLastScrollY) {
+          var pastFirstH1 = firstH1.getBoundingClientRect().top < 0;
+          window.clearTimeout(portraitLingerTimer);
+          if (!pastFirstH1) {
+            portraitRecallWrap.classList.remove('is-visible');
+          } else {
+            portraitRecallWrap.classList.add('is-visible');
+            armLingerTimer();
+          }
         }
-        portraitRecallWrap.classList.add('is-visible');
-        armLingerTimer();
-      }, { passive: true });
+        portraitLastScrollY = currentScrollY;
+        window.requestAnimationFrame(pollPortraitScroll);
+      }
+      window.requestAnimationFrame(pollPortraitScroll);
     }
 
     function syncBioOverlap() {

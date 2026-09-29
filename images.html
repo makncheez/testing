@@ -151,11 +151,6 @@
     font: inherit;
     cursor: pointer;
     pointer-events: auto;
-    transition: transform 0.1s ease;
-  }
-
-  .qf-portrait-recall:active {
-    transform: translate(-50%, -50%) scale(0.92);
   }
 
   .qf-portrait-recall:focus-visible {
@@ -583,13 +578,24 @@
         if (navOpen) positionNavBubble();
       });
 
-      window.addEventListener('scroll', function () {
+      // Polled via rAF instead of a 'scroll' listener: on mobile a nested
+      // scrollable ancestor (or a browser that throttles/coalesces scroll
+      // events during touch momentum) can leave 'scroll' events on window
+      // unreliable. Reading window.scrollY directly every frame sidesteps
+      // that entirely.
+      var portraitLastScrollY = window.scrollY;
+      function pollPortraitScroll() {
         updateRingProgress();
-        if (navOpen) return;
-        window.clearTimeout(portraitLingerTimer);
-        portraitRecallWrap.classList.add('is-visible');
-        armLingerTimer();
-      }, { passive: true });
+        var currentScrollY = window.scrollY;
+        if (!navOpen && currentScrollY !== portraitLastScrollY) {
+          window.clearTimeout(portraitLingerTimer);
+          portraitRecallWrap.classList.add('is-visible');
+          armLingerTimer();
+        }
+        portraitLastScrollY = currentScrollY;
+        window.requestAnimationFrame(pollPortraitScroll);
+      }
+      window.requestAnimationFrame(pollPortraitScroll);
     }
 
     var images = [
