@@ -838,27 +838,102 @@
     object-fit: cover;
   }
 
-  .postcard-message {
+  .postcard-draw-layer {
     position: absolute;
-    left: 7.5%;
-    right: 7%;
-    top: 26.5%;
-    bottom: 13%;
+    inset: 0;
     z-index: 2;
-    border: none;
-    background: transparent;
-    resize: none;
-    outline: none;
-    font-family: 'DM Mono', monospace;
-    font-size: clamp(0.8em, 2.6vw, 1em);
-    line-height: 1.5em;
-    color: var(--color-green);
-    text-align: center;
-    padding: 6px;
   }
 
-  .postcard-message.has-text {
-    background: var(--color-tan);
+  .postcard-draw-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    cursor: crosshair;
+  }
+
+  .postcard-text-note {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    min-width: 24px;
+    max-width: 80%;
+    outline: none;
+    border: 1px dashed transparent;
+    border-radius: 3px;
+    font-family: 'DM Mono', monospace;
+    font-size: clamp(0.75em, 2.4vw, 0.95em);
+    line-height: 1.3em;
+    white-space: pre-wrap;
+    word-break: break-word;
+    text-align: center;
+    cursor: text;
+  }
+
+  .postcard-text-note:hover,
+  .postcard-text-note:focus {
+    border-color: rgba(38, 63, 39, 0.35);
+  }
+
+  .postcard-toolbar {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: 999px;
+    background: rgba(213, 204, 164, 0.94);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  }
+
+  .postcard-tool-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--color-green);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .postcard-tool-btn .material-symbols-outlined {
+    font-size: 16px;
+  }
+
+  .postcard-tool-btn.is-active,
+  .postcard-tool-btn:hover,
+  .postcard-tool-btn:focus-visible {
+    background: var(--color-green);
+    color: var(--color-tan);
+  }
+
+  .postcard-toolbar-divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(38, 63, 39, 0.3);
+  }
+
+  .postcard-color-btn {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: var(--swatch);
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .postcard-color-btn.is-active {
+    border-color: var(--color-tan);
+    box-shadow: 0 0 0 1.5px var(--color-green);
   }
 
   .postcard-back-link {
@@ -901,62 +976,14 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 30px 0;
+    padding: 10px 0;
   }
 
-  .postcard-finished-card {
-    width: min(34vw, 210px);
-    aspect-ratio: 1305 / 2000;
-    border-radius: 5px;
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
-  }
-
-  img.postcard-finished-front {
+  .postcard-finished-preview {
     display: block;
-    object-fit: cover;
-    transform: rotate(-7deg);
-    margin-right: -7%;
-    z-index: 1;
-    position: relative;
-  }
-
-  .postcard-finished-back {
-    position: relative;
-    transform: rotate(6deg);
-    z-index: 2;
-    background: var(--color-tan);
-    overflow: hidden;
-  }
-
-  .postcard-finished-back img {
-    position: absolute;
-    inset: 0;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .postcard-finished-message {
-    position: absolute;
-    left: 7.5%;
-    right: 7%;
-    top: 26.5%;
-    bottom: 13%;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'DM Mono', monospace;
-    font-size: clamp(0.55em, 1.5vw, 0.8em);
-    line-height: 1.4em;
-    color: var(--color-green);
-    text-align: center;
-    overflow: hidden;
-  }
-
-  .postcard-finished-message.has-text {
-    background: var(--color-tan);
+    max-width: 640px;
+    border-radius: 4px;
   }
 
   .postcard-finished-actions {
@@ -967,9 +994,6 @@
   @media (max-width: 500px) {
     .postcard-stage-wrap {
       width: min(84vw, 300px);
-    }
-    .postcard-finished-card {
-      width: min(38vw, 160px);
     }
   }
 
@@ -3149,7 +3173,25 @@
         </div>
         <div class="postcard-face postcard-face-back" id="postcardBackFace">
           <img class="postcard-back-img" src="./images/postcards/1-back.webp" alt="" id="postcardBackImg">
-          <textarea class="postcard-message" id="postcardMessage" maxlength="200" aria-label="Write your postcard message"></textarea>
+          <div class="postcard-draw-layer" id="postcardDrawLayer">
+            <canvas class="postcard-draw-canvas" id="postcardDrawCanvas" aria-label="Draw or write anywhere on the card"></canvas>
+          </div>
+          <div class="postcard-toolbar" id="postcardToolbar">
+            <button type="button" class="postcard-tool-btn is-active" id="postcardToolPen" data-tool="pen" aria-label="Draw" aria-pressed="true">
+              <span class="material-symbols-outlined" aria-hidden="true">draw</span>
+            </button>
+            <button type="button" class="postcard-tool-btn" id="postcardToolText" data-tool="text" aria-label="Add text" aria-pressed="false">
+              <span class="material-symbols-outlined" aria-hidden="true">text_fields</span>
+            </button>
+            <span class="postcard-toolbar-divider"></span>
+            <button type="button" class="postcard-color-btn is-active" data-color="#263F27" style="--swatch: #263F27" aria-label="Green ink" aria-pressed="true"></button>
+            <button type="button" class="postcard-color-btn" data-color="#9767a3" style="--swatch: #9767a3" aria-label="Purple ink" aria-pressed="false"></button>
+            <button type="button" class="postcard-color-btn" data-color="#000000" style="--swatch: #000000" aria-label="Black ink" aria-pressed="false"></button>
+            <span class="postcard-toolbar-divider"></span>
+            <button type="button" class="postcard-tool-btn" id="postcardToolClear" aria-label="Clear everything">
+              <span class="material-symbols-outlined" aria-hidden="true">delete_sweep</span>
+            </button>
+          </div>
           <button type="button" class="postcard-btn postcard-btn-ghost postcard-back-link" id="postcardBackToFront">&larr; choose another design</button>
           <button type="button" class="postcard-btn postcard-finish-btn" id="postcardFinishBtn">Finish Postcard</button>
         </div>
@@ -3162,11 +3204,7 @@
       <span class="material-symbols-outlined" aria-hidden="true">close</span>
     </button>
     <div class="postcard-finished-stage">
-      <img class="postcard-finished-card postcard-finished-front" id="postcardFinishedFrontImg" src="./images/postcards/1-front.webp" alt="">
-      <div class="postcard-finished-card postcard-finished-back">
-        <img src="./images/postcards/1-back.webp" alt="" id="postcardFinishedBackImg">
-        <p class="postcard-finished-message" id="postcardFinishedMessage"></p>
-      </div>
+      <img class="postcard-finished-preview" id="postcardFinishedPreview" src="" alt="Your finished postcard, front and back">
     </div>
     <div class="postcard-finished-actions">
       <button type="button" class="postcard-btn postcard-btn-ghost" id="postcardEditBtn">&larr; Edit</button>
@@ -4380,20 +4418,18 @@
       var chooseBtn = document.getElementById('postcardChooseBtn');
       var backToFrontBtn = document.getElementById('postcardBackToFront');
       var finishBtn = document.getElementById('postcardFinishBtn');
-      var messageBox = document.getElementById('postcardMessage');
+      var backImg = document.getElementById('postcardBackImg');
+      var drawLayer = document.getElementById('postcardDrawLayer');
+      var drawCanvas = document.getElementById('postcardDrawCanvas');
+      var toolbar = document.getElementById('postcardToolbar');
+      var toolClear = document.getElementById('postcardToolClear');
       var finished = document.getElementById('postcardFinished');
-      var finishedFrontImg = document.getElementById('postcardFinishedFrontImg');
-      var finishedMessage = document.getElementById('postcardFinishedMessage');
+      var finishedPreview = document.getElementById('postcardFinishedPreview');
       var editBtn = document.getElementById('postcardEditBtn');
       var downloadBtn = document.getElementById('postcardDownloadBtn');
       var sendLink = document.getElementById('navSendPostcard');
       if (!lightbox || !sendLink) return;
 
-      var FRONT_SRCS = [
-        './images/postcards/1-front.webp',
-        './images/postcards/2-front.webp',
-        './images/postcards/3-front.webp'
-      ];
       var frontIndex = 0;
       var frontSlides = frontCarousel.querySelectorAll('.carousel-slide');
       var frontDots = frontCarousel.querySelectorAll('.carousel-dot');
@@ -4417,10 +4453,137 @@
         dot.addEventListener('click', function () { goToFront(i); });
       });
 
+      // ---- Freeform draw + text on the back ----
+      var drawCtx = drawCanvas.getContext('2d');
+      var currentTool = 'pen';
+      var currentColor = '#263F27';
+      var strokes = [];
+      var textNotes = [];
+      var activeStroke = null;
+      var isDrawing = false;
+
+      function sizeDrawCanvas() {
+        var rect = drawCanvas.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        var dpr = window.devicePixelRatio || 1;
+        drawCanvas.width = Math.round(rect.width * dpr);
+        drawCanvas.height = Math.round(rect.height * dpr);
+        redrawStrokes();
+      }
+
+      function redrawStrokes() {
+        var w = drawCanvas.width, h = drawCanvas.height;
+        drawCtx.clearRect(0, 0, w, h);
+        strokes.forEach(function (stroke) {
+          if (stroke.pts.length < 2) return;
+          drawCtx.strokeStyle = stroke.color;
+          drawCtx.lineWidth = Math.max(2, w * 0.007);
+          drawCtx.lineCap = 'round';
+          drawCtx.lineJoin = 'round';
+          drawCtx.beginPath();
+          stroke.pts.forEach(function (pt, i) {
+            var x = pt[0] * w, y = pt[1] * h;
+            if (i === 0) drawCtx.moveTo(x, y); else drawCtx.lineTo(x, y);
+          });
+          drawCtx.stroke();
+        });
+      }
+
+      function relPos(e) {
+        var rect = drawCanvas.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width;
+        var y = (e.clientY - rect.top) / rect.height;
+        return [Math.max(0, Math.min(1, x)), Math.max(0, Math.min(1, y))];
+      }
+
+      function addTextNote(pos) {
+        var note = document.createElement('div');
+        note.className = 'postcard-text-note';
+        note.contentEditable = 'true';
+        note.style.left = (pos[0] * 100) + '%';
+        note.style.top = (pos[1] * 100) + '%';
+        note.style.color = currentColor;
+        drawLayer.appendChild(note);
+
+        var entry = { color: currentColor, xPct: pos[0], yPct: pos[1], text: '', el: note };
+        textNotes.push(entry);
+
+        note.addEventListener('input', function () {
+          entry.text = note.textContent;
+        });
+        note.addEventListener('blur', function () {
+          if (!note.textContent.trim()) {
+            note.remove();
+            var idx = textNotes.indexOf(entry);
+            if (idx !== -1) textNotes.splice(idx, 1);
+          }
+        });
+        note.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            note.blur();
+          }
+        });
+        window.setTimeout(function () { note.focus(); }, 0);
+      }
+
+      drawCanvas.addEventListener('pointerdown', function (e) {
+        if (currentTool === 'text') {
+          addTextNote(relPos(e));
+          return;
+        }
+        isDrawing = true;
+        drawCanvas.setPointerCapture(e.pointerId);
+        activeStroke = { color: currentColor, pts: [relPos(e)] };
+        strokes.push(activeStroke);
+      });
+      drawCanvas.addEventListener('pointermove', function (e) {
+        if (!isDrawing || !activeStroke) return;
+        activeStroke.pts.push(relPos(e));
+        redrawStrokes();
+      });
+      function endStroke() {
+        isDrawing = false;
+        activeStroke = null;
+      }
+      drawCanvas.addEventListener('pointerup', endStroke);
+      drawCanvas.addEventListener('pointercancel', endStroke);
+
+      var toolButtons = toolbar.querySelectorAll('.postcard-tool-btn[data-tool]');
+      toolButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          currentTool = btn.getAttribute('data-tool');
+          toolButtons.forEach(function (b) {
+            var active = b === btn;
+            b.classList.toggle('is-active', active);
+            b.setAttribute('aria-pressed', String(active));
+          });
+        });
+      });
+
+      var colorButtons = toolbar.querySelectorAll('.postcard-color-btn');
+      colorButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          currentColor = btn.getAttribute('data-color');
+          colorButtons.forEach(function (b) {
+            var active = b === btn;
+            b.classList.toggle('is-active', active);
+            b.setAttribute('aria-pressed', String(active));
+          });
+        });
+      });
+
+      function clearDrawing() {
+        strokes.length = 0;
+        redrawStrokes();
+        textNotes.forEach(function (n) { n.el.remove(); });
+        textNotes.length = 0;
+      }
+      toolClear.addEventListener('click', clearDrawing);
+
       function resetPostcard() {
         stage.classList.remove('is-flipped');
-        messageBox.value = '';
-        messageBox.classList.remove('has-text');
+        clearDrawing();
         finished.hidden = true;
         stageWrap.hidden = false;
         goToFront(0);
@@ -4433,6 +4596,7 @@
         var portraitBtn = document.getElementById('quotePortraitRecall');
         if (navBubble) navBubble.classList.remove('is-open');
         if (portraitBtn) portraitBtn.setAttribute('aria-expanded', 'false');
+        window.setTimeout(sizeDrawCanvas, 50);
       }
 
       function closeLightbox() {
@@ -4454,36 +4618,20 @@
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
       });
+      window.addEventListener('resize', function () {
+        if (lightbox.classList.contains('is-open') && !stageWrap.hidden) sizeDrawCanvas();
+      });
 
       chooseBtn.addEventListener('click', function () {
         stage.classList.add('is-flipped');
-        window.setTimeout(function () { messageBox.focus(); }, 350);
+        window.setTimeout(sizeDrawCanvas, 350);
       });
 
       backToFrontBtn.addEventListener('click', function () {
         stage.classList.remove('is-flipped');
       });
 
-      messageBox.addEventListener('input', function () {
-        messageBox.classList.toggle('has-text', messageBox.value.trim().length > 0);
-      });
-
-      function wrapCanvasText(ctx, text, maxWidth) {
-        var words = text.split(/\s+/).filter(Boolean);
-        var lines = [];
-        var line = '';
-        words.forEach(function (word) {
-          var test = line ? line + ' ' + word : word;
-          if (ctx.measureText(test).width > maxWidth && line) {
-            lines.push(line);
-            line = word;
-          } else {
-            line = test;
-          }
-        });
-        if (line) lines.push(line);
-        return lines;
-      }
+      // ---- Shared front+back composition (used by the finished preview and the download) ----
 
       function drawRotatedCard(ctx, img, cx, cy, w, h, angleRad) {
         ctx.save();
@@ -4496,51 +4644,43 @@
         ctx.restore();
       }
 
-      function drawMessageOnCard(ctx, cx, cy, w, h, angleRad, message) {
-        if (!message) return;
+      function drawFreeformOnCard(ctx, cx, cy, w, h, angleRad) {
         ctx.save();
         ctx.translate(cx, cy);
         ctx.rotate(angleRad);
-        var boxLeft = -w / 2 + w * 0.075;
-        var boxRight = -w / 2 + w * 0.93;
-        var boxTop = -h / 2 + h * 0.265;
-        var boxBottom = -h / 2 + h * 0.87;
-        ctx.fillStyle = '#D5CCA4';
-        ctx.fillRect(boxLeft, boxTop, boxRight - boxLeft, boxBottom - boxTop);
-        ctx.fillStyle = '#263F27';
-        var fontSize = Math.max(16, w * 0.038);
-        ctx.font = fontSize + 'px "DM Mono", monospace';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        var maxWidth = boxRight - boxLeft - 20;
-        var lines = wrapCanvasText(ctx, message, maxWidth);
-        var lineHeight = fontSize * 1.5;
-        var startY = (boxTop + boxBottom) / 2 - ((lines.length - 1) * lineHeight) / 2;
-        lines.forEach(function (l, i) {
-          ctx.fillText(l, (boxLeft + boxRight) / 2, startY + i * lineHeight);
+        strokes.forEach(function (stroke) {
+          if (stroke.pts.length < 2) return;
+          ctx.strokeStyle = stroke.color;
+          ctx.lineWidth = Math.max(3, w * 0.007);
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          ctx.beginPath();
+          stroke.pts.forEach(function (pt, i) {
+            var x = -w / 2 + pt[0] * w, y = -h / 2 + pt[1] * h;
+            if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+          });
+          ctx.stroke();
+        });
+        textNotes.forEach(function (note) {
+          if (!note.text.trim()) return;
+          ctx.fillStyle = note.color;
+          var fontSize = Math.max(14, w * 0.032);
+          ctx.font = fontSize + 'px "DM Mono", monospace';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          var x = -w / 2 + note.xPct * w, y = -h / 2 + note.yPct * h;
+          var lines = note.text.split('\n');
+          var lineHeight = fontSize * 1.3;
+          var startY = y - ((lines.length - 1) * lineHeight) / 2;
+          lines.forEach(function (line, i) {
+            ctx.fillText(line, x, startY + i * lineHeight);
+          });
         });
         ctx.restore();
       }
 
-      finishBtn.addEventListener('click', function () {
-        finishedFrontImg.src = FRONT_SRCS[frontIndex];
-        var message = messageBox.value.trim();
-        finishedMessage.textContent = message;
-        finishedMessage.classList.toggle('has-text', message.length > 0);
-        stageWrap.hidden = true;
-        finished.hidden = false;
-      });
-
-      editBtn.addEventListener('click', function () {
-        finished.hidden = true;
-        stageWrap.hidden = false;
-      });
-
-      downloadBtn.addEventListener('click', function () {
+      function composePostcardCanvas() {
         var frontImg = frontSlides[frontIndex].querySelector('img');
-        var backImg = document.getElementById('postcardBackImg');
-        if (!frontImg || !backImg) return;
-
         var W = 2400, H = 1750;
         var canvas = document.createElement('canvas');
         canvas.width = W;
@@ -4557,8 +4697,25 @@
 
         drawRotatedCard(ctx, frontImg, frontCx, centerY, cardW, cardH, -7 * Math.PI / 180);
         drawRotatedCard(ctx, backImg, backCx, centerY, cardW, cardH, 6 * Math.PI / 180);
-        drawMessageOnCard(ctx, backCx, centerY, cardW, cardH, 6 * Math.PI / 180, messageBox.value.trim());
+        drawFreeformOnCard(ctx, backCx, centerY, cardW, cardH, 6 * Math.PI / 180);
+        return canvas;
+      }
 
+      finishBtn.addEventListener('click', function () {
+        var canvas = composePostcardCanvas();
+        finishedPreview.src = canvas.toDataURL('image/jpeg', 0.95);
+        stageWrap.hidden = true;
+        finished.hidden = false;
+      });
+
+      editBtn.addEventListener('click', function () {
+        finished.hidden = true;
+        stageWrap.hidden = false;
+        window.setTimeout(sizeDrawCanvas, 50);
+      });
+
+      downloadBtn.addEventListener('click', function () {
+        var canvas = composePostcardCanvas();
         canvas.toBlob(function (blob) {
           if (!blob) return;
           var url = URL.createObjectURL(blob);
