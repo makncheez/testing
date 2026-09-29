@@ -710,6 +710,269 @@
     line-height: 1.3em;
   }
 
+  /* ---- Send a Postcard lightbox ---- */
+
+  .postcard-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.92);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+  }
+
+  .postcard-lightbox.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.25s ease;
+  }
+
+  .postcard-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85em;
+    letter-spacing: 0.02em;
+    padding: 9px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    border: 1.4px solid var(--color-tan);
+    background: var(--color-green);
+    color: var(--color-tan);
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .postcard-btn:hover,
+  .postcard-btn:focus-visible {
+    background: var(--color-purple);
+  }
+
+  .postcard-btn-ghost {
+    background: transparent;
+    color: var(--color-tan);
+  }
+
+  .postcard-btn-ghost:hover,
+  .postcard-btn-ghost:focus-visible {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .postcard-stage-wrap {
+    position: relative;
+    width: min(84vw, 380px);
+  }
+
+  .postcard-stage-wrap .icon-btn-close-top {
+    top: -18px;
+    z-index: 6;
+  }
+
+  .postcard-perspective {
+    width: 100%;
+    perspective: 2400px;
+  }
+
+  .postcard-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1305 / 2000;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(.6, .02, .2, 1);
+  }
+
+  .postcard-stage.is-flipped {
+    transform: rotateY(180deg);
+  }
+
+  .postcard-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    background: var(--color-tan);
+  }
+
+  .postcard-face-back {
+    transform: rotateY(180deg);
+  }
+
+  .postcard-stage.is-flipped .postcard-face-front {
+    pointer-events: none;
+  }
+
+  .postcard-stage:not(.is-flipped) .postcard-face-back {
+    pointer-events: none;
+  }
+
+  .postcard-front-carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .postcard-front-carousel .carousel-slide img {
+    object-fit: cover;
+  }
+
+  .postcard-choose-btn {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+
+  .postcard-back-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .postcard-message {
+    position: absolute;
+    left: 7.5%;
+    right: 7%;
+    top: 26.5%;
+    bottom: 13%;
+    z-index: 2;
+    border: none;
+    background: transparent;
+    resize: none;
+    outline: none;
+    font-family: 'DM Mono', monospace;
+    font-size: clamp(0.8em, 2.6vw, 1em);
+    line-height: 1.5em;
+    color: var(--color-green);
+    text-align: center;
+    padding: 6px;
+  }
+
+  .postcard-message.has-text {
+    background: var(--color-tan);
+  }
+
+  .postcard-back-link {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    z-index: 3;
+    font-size: 0.75em;
+    padding: 7px 14px;
+  }
+
+  .postcard-finish-btn {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    z-index: 3;
+  }
+
+  .postcard-finished {
+    width: min(92vw, 760px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+  }
+
+  .postcard-finished[hidden],
+  .postcard-stage-wrap[hidden] {
+    display: none;
+  }
+
+  .postcard-finished .icon-btn-close-top {
+    top: -18px;
+    z-index: 6;
+  }
+
+  .postcard-finished-stage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 30px 0;
+  }
+
+  .postcard-finished-card {
+    width: min(34vw, 210px);
+    aspect-ratio: 1305 / 2000;
+    border-radius: 5px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+  }
+
+  img.postcard-finished-front {
+    display: block;
+    object-fit: cover;
+    transform: rotate(-7deg);
+    margin-right: -7%;
+    z-index: 1;
+    position: relative;
+  }
+
+  .postcard-finished-back {
+    position: relative;
+    transform: rotate(6deg);
+    z-index: 2;
+    background: var(--color-tan);
+    overflow: hidden;
+  }
+
+  .postcard-finished-back img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .postcard-finished-message {
+    position: absolute;
+    left: 7.5%;
+    right: 7%;
+    top: 26.5%;
+    bottom: 13%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: clamp(0.55em, 1.5vw, 0.8em);
+    line-height: 1.4em;
+    color: var(--color-green);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .postcard-finished-message.has-text {
+    background: var(--color-tan);
+  }
+
+  .postcard-finished-actions {
+    display: flex;
+    gap: 12px;
+  }
+
+  @media (max-width: 500px) {
+    .postcard-stage-wrap {
+      width: min(84vw, 300px);
+    }
+    .postcard-finished-card {
+      width: min(38vw, 160px);
+    }
+  }
+
   .icon-btn {
     display: inline-flex;
     align-items: center;
@@ -1648,7 +1911,7 @@
       <a class="qf-nav-bubble-item" href="images.html" id="navEnterChecklist" role="menuitem">
         <span>Exhibition Checklist</span><span class="qf-nav-bubble-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
       </a>
-      <a class="qf-nav-bubble-item" href="#" role="menuitem">
+      <a class="qf-nav-bubble-item" href="#" id="navSendPostcard" role="menuitem">
         <span>Send a Postcard</span><span class="qf-nav-bubble-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
       </a>
       <a class="qf-nav-bubble-item" href="#" role="menuitem">
@@ -2860,6 +3123,58 @@
   </div>
 </div>
 
+<div class="postcard-lightbox" id="postcardLightbox" role="dialog" aria-modal="true" aria-label="Send a postcard">
+  <div class="postcard-stage-wrap" id="postcardStageWrap">
+    <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="postcardClose" aria-label="Close">
+      <span class="material-symbols-outlined" aria-hidden="true">close</span>
+    </button>
+    <div class="postcard-perspective">
+      <div class="postcard-stage" id="postcardStage">
+        <div class="postcard-face postcard-face-front" id="postcardFrontFace">
+          <div class="postcard-front-carousel" id="postcardFrontCarousel">
+            <div class="carousel-slide is-active"><img src="./images/postcards/1-front.webp" alt="Postcard design 1"></div>
+            <div class="carousel-slide"><img src="./images/postcards/2-front.webp" alt="Postcard design 2"></div>
+            <div class="carousel-slide"><img src="./images/postcards/3-front.webp" alt="Postcard design 3"></div>
+            <div class="carousel-right-controls">
+              <button type="button" class="carousel-btn carousel-prev btn-colorway-icon" aria-label="Previous design"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
+              <button type="button" class="carousel-btn carousel-next btn-colorway-icon" aria-label="Next design"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
+            </div>
+            <div class="carousel-dots">
+              <button type="button" class="carousel-dot dot-colorway is-active" aria-label="Go to design 1"></button>
+              <button type="button" class="carousel-dot dot-colorway" aria-label="Go to design 2"></button>
+              <button type="button" class="carousel-dot dot-colorway" aria-label="Go to design 3"></button>
+            </div>
+            <button type="button" class="postcard-btn postcard-choose-btn" id="postcardChooseBtn">Choose This Design</button>
+          </div>
+        </div>
+        <div class="postcard-face postcard-face-back" id="postcardBackFace">
+          <img class="postcard-back-img" src="./images/postcards/1-back.webp" alt="" id="postcardBackImg">
+          <textarea class="postcard-message" id="postcardMessage" maxlength="200" aria-label="Write your postcard message"></textarea>
+          <button type="button" class="postcard-btn postcard-btn-ghost postcard-back-link" id="postcardBackToFront">&larr; choose another design</button>
+          <button type="button" class="postcard-btn postcard-finish-btn" id="postcardFinishBtn">Finish Postcard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="postcard-finished" id="postcardFinished" hidden>
+    <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="postcardFinishedClose" aria-label="Close">
+      <span class="material-symbols-outlined" aria-hidden="true">close</span>
+    </button>
+    <div class="postcard-finished-stage">
+      <img class="postcard-finished-card postcard-finished-front" id="postcardFinishedFrontImg" src="./images/postcards/1-front.webp" alt="">
+      <div class="postcard-finished-card postcard-finished-back">
+        <img src="./images/postcards/1-back.webp" alt="" id="postcardFinishedBackImg">
+        <p class="postcard-finished-message" id="postcardFinishedMessage"></p>
+      </div>
+    </div>
+    <div class="postcard-finished-actions">
+      <button type="button" class="postcard-btn postcard-btn-ghost" id="postcardEditBtn">&larr; Edit</button>
+      <button type="button" class="postcard-btn" id="postcardDownloadBtn">Download Postcard</button>
+    </div>
+  </div>
+</div>
+
 <script>
   (function () {
     var heroEl = document.getElementById('hero');
@@ -4053,6 +4368,208 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeFootnoteModal();
     });
+
+    // ---- Send a Postcard ----
+    (function () {
+      var lightbox = document.getElementById('postcardLightbox');
+      var stageWrap = document.getElementById('postcardStageWrap');
+      var closeBtn = document.getElementById('postcardClose');
+      var finishedCloseBtn = document.getElementById('postcardFinishedClose');
+      var stage = document.getElementById('postcardStage');
+      var frontCarousel = document.getElementById('postcardFrontCarousel');
+      var chooseBtn = document.getElementById('postcardChooseBtn');
+      var backToFrontBtn = document.getElementById('postcardBackToFront');
+      var finishBtn = document.getElementById('postcardFinishBtn');
+      var messageBox = document.getElementById('postcardMessage');
+      var finished = document.getElementById('postcardFinished');
+      var finishedFrontImg = document.getElementById('postcardFinishedFrontImg');
+      var finishedMessage = document.getElementById('postcardFinishedMessage');
+      var editBtn = document.getElementById('postcardEditBtn');
+      var downloadBtn = document.getElementById('postcardDownloadBtn');
+      var sendLink = document.getElementById('navSendPostcard');
+      if (!lightbox || !sendLink) return;
+
+      var FRONT_SRCS = [
+        './images/postcards/1-front.webp',
+        './images/postcards/2-front.webp',
+        './images/postcards/3-front.webp'
+      ];
+      var frontIndex = 0;
+      var frontSlides = frontCarousel.querySelectorAll('.carousel-slide');
+      var frontDots = frontCarousel.querySelectorAll('.carousel-dot');
+
+      function goToFront(index) {
+        var next = (index + frontSlides.length) % frontSlides.length;
+        frontSlides[frontIndex].classList.remove('is-active');
+        frontDots[frontIndex].classList.remove('is-active');
+        frontIndex = next;
+        frontSlides[frontIndex].classList.add('is-active');
+        frontDots[frontIndex].classList.add('is-active');
+      }
+
+      frontCarousel.querySelector('.carousel-next').addEventListener('click', function () {
+        goToFront(frontIndex + 1);
+      });
+      frontCarousel.querySelector('.carousel-prev').addEventListener('click', function () {
+        goToFront(frontIndex - 1);
+      });
+      frontDots.forEach(function (dot, i) {
+        dot.addEventListener('click', function () { goToFront(i); });
+      });
+
+      function resetPostcard() {
+        stage.classList.remove('is-flipped');
+        messageBox.value = '';
+        messageBox.classList.remove('has-text');
+        finished.hidden = true;
+        stageWrap.hidden = false;
+        goToFront(0);
+      }
+
+      function openLightbox() {
+        lightbox.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        var navBubble = document.getElementById('portraitNavBubble');
+        var portraitBtn = document.getElementById('quotePortraitRecall');
+        if (navBubble) navBubble.classList.remove('is-open');
+        if (portraitBtn) portraitBtn.setAttribute('aria-expanded', 'false');
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('is-open');
+        document.body.style.overflow = '';
+        window.setTimeout(resetPostcard, 250);
+      }
+
+      sendLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        openLightbox();
+      });
+
+      if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+      if (finishedCloseBtn) finishedCloseBtn.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+      });
+
+      chooseBtn.addEventListener('click', function () {
+        stage.classList.add('is-flipped');
+        window.setTimeout(function () { messageBox.focus(); }, 350);
+      });
+
+      backToFrontBtn.addEventListener('click', function () {
+        stage.classList.remove('is-flipped');
+      });
+
+      messageBox.addEventListener('input', function () {
+        messageBox.classList.toggle('has-text', messageBox.value.trim().length > 0);
+      });
+
+      function wrapCanvasText(ctx, text, maxWidth) {
+        var words = text.split(/\s+/).filter(Boolean);
+        var lines = [];
+        var line = '';
+        words.forEach(function (word) {
+          var test = line ? line + ' ' + word : word;
+          if (ctx.measureText(test).width > maxWidth && line) {
+            lines.push(line);
+            line = word;
+          } else {
+            line = test;
+          }
+        });
+        if (line) lines.push(line);
+        return lines;
+      }
+
+      function drawRotatedCard(ctx, img, cx, cy, w, h, angleRad) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(angleRad);
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.55)';
+        ctx.shadowBlur = 34;
+        ctx.shadowOffsetY = 14;
+        ctx.drawImage(img, -w / 2, -h / 2, w, h);
+        ctx.restore();
+      }
+
+      function drawMessageOnCard(ctx, cx, cy, w, h, angleRad, message) {
+        if (!message) return;
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(angleRad);
+        var boxLeft = -w / 2 + w * 0.075;
+        var boxRight = -w / 2 + w * 0.93;
+        var boxTop = -h / 2 + h * 0.265;
+        var boxBottom = -h / 2 + h * 0.87;
+        ctx.fillStyle = '#D5CCA4';
+        ctx.fillRect(boxLeft, boxTop, boxRight - boxLeft, boxBottom - boxTop);
+        ctx.fillStyle = '#263F27';
+        var fontSize = Math.max(16, w * 0.038);
+        ctx.font = fontSize + 'px "DM Mono", monospace';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        var maxWidth = boxRight - boxLeft - 20;
+        var lines = wrapCanvasText(ctx, message, maxWidth);
+        var lineHeight = fontSize * 1.5;
+        var startY = (boxTop + boxBottom) / 2 - ((lines.length - 1) * lineHeight) / 2;
+        lines.forEach(function (l, i) {
+          ctx.fillText(l, (boxLeft + boxRight) / 2, startY + i * lineHeight);
+        });
+        ctx.restore();
+      }
+
+      finishBtn.addEventListener('click', function () {
+        finishedFrontImg.src = FRONT_SRCS[frontIndex];
+        var message = messageBox.value.trim();
+        finishedMessage.textContent = message;
+        finishedMessage.classList.toggle('has-text', message.length > 0);
+        stageWrap.hidden = true;
+        finished.hidden = false;
+      });
+
+      editBtn.addEventListener('click', function () {
+        finished.hidden = true;
+        stageWrap.hidden = false;
+      });
+
+      downloadBtn.addEventListener('click', function () {
+        var frontImg = frontSlides[frontIndex].querySelector('img');
+        var backImg = document.getElementById('postcardBackImg');
+        if (!frontImg || !backImg) return;
+
+        var W = 1600, H = 1200;
+        var canvas = document.createElement('canvas');
+        canvas.width = W;
+        canvas.height = H;
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, W, H);
+
+        var cardW = 420;
+        var cardH = cardW / (1305 / 2000);
+        var centerY = H / 2;
+        var frontCx = W / 2 - cardW * 0.28;
+        var backCx = W / 2 + cardW * 0.24;
+
+        drawRotatedCard(ctx, frontImg, frontCx, centerY, cardW, cardH, -7 * Math.PI / 180);
+        drawRotatedCard(ctx, backImg, backCx, centerY, cardW, cardH, 6 * Math.PI / 180);
+        drawMessageOnCard(ctx, backCx, centerY, cardW, cardH, 6 * Math.PI / 180, messageBox.value.trim());
+
+        canvas.toBlob(function (blob) {
+          if (!blob) return;
+          var url = URL.createObjectURL(blob);
+          var link = document.createElement('a');
+          link.download = 'aram-kazanjian-postcard.jpg';
+          link.href = url;
+          link.click();
+          window.setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+        }, 'image/jpeg', 0.95);
+      });
+    })();
 
     document.querySelectorAll('.copy-btn').forEach(function (btn) {
       var label = btn.querySelector('.copy-label');
