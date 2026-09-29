@@ -230,6 +230,19 @@
     transition: background-color 0.05s linear;
   }
 
+  /* Below the width where the hero labels stack (see HERO_LABEL_STACK_WIDTH
+     in the script), the hero's own content can exceed the viewport height,
+     making it independently scrollable — which then swallows touch-scroll
+     gestures near the top of the page instead of letting them reach the
+     real document scroll that drives the recall-portrait ring and the
+     page's other scroll-linked effects. Let content spill instead of
+     capturing its own scroll. */
+  @media (max-width: 820px) {
+    .hero {
+      overflow-y: visible;
+    }
+  }
+
   .quote-frame {
     position: relative;
     top: 50px;
@@ -1417,6 +1430,12 @@
     }
     .qf-portrait {
       width: 112px;
+    }
+    .qf-portrait-recall-wrap {
+      width: 76px;
+    }
+    .qf-portrait-recall {
+      width: 64px;
     }
   }
 
