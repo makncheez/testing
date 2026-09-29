@@ -1453,10 +1453,11 @@
       width: 112px;
     }
     .qf-portrait-recall-wrap {
-      width: 76px;
+      left: 12px;
+      width: 88px;
     }
     .qf-portrait-recall {
-      width: 64px;
+      width: 74px;
     }
   }
 
@@ -2862,6 +2863,7 @@
 <script>
   (function () {
     var heroEl = document.getElementById('hero');
+    var heroSpacer = document.querySelector('.hero-spacer');
     var quoteEl = document.getElementById('quote');
     var introLead = document.getElementById('introLead');
     var portrait = document.getElementById('quotePortrait');
@@ -3292,7 +3294,19 @@
       }
     }
 
+    // Mobile browsers can disagree with themselves about the height of
+    // 100vh (the CSS unit used by .hero-spacer) versus window.innerHeight
+    // (what updateIntroBg() measures against): if the CSS value comes out
+    // smaller, introLead sits partly inside the viewport at scroll:0 and
+    // the intro's green background starts creeping in before any actual
+    // scrolling happens. Pin the spacer to the exact pixel value the JS
+    // math uses so the two can never disagree.
+    function syncHeroSpacerHeight() {
+      if (heroSpacer) heroSpacer.style.height = window.innerHeight + 'px';
+    }
+
     if (!reduceMotion) {
+      syncHeroSpacerHeight();
       positionLogos();
       positionHeroLabels();
       window.addEventListener('scroll', onScroll, { passive: true });
@@ -3300,6 +3314,7 @@
         fadeDistance = (window.innerHeight || 800) * 0.4;
         fallRange = fadeDistance * 2.5;
         colorFadeDistance = fadeDistance * 0.5;
+        syncHeroSpacerHeight();
         positionLogos();
         positionHeroLabels();
         schedulePortrait();
