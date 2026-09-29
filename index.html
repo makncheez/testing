@@ -764,7 +764,7 @@
 
   .postcard-stage-wrap {
     position: relative;
-    width: min(94vw, 440px);
+    width: min(96vw, 620px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -819,7 +819,7 @@
   }
 
   .postcard-perspective {
-    width: min(70vw, 320px);
+    width: min(90vw, 500px);
     flex-shrink: 0;
     perspective: 2400px;
   }
@@ -866,14 +866,6 @@
 
   .postcard-front-carousel .carousel-slide img {
     object-fit: cover;
-  }
-
-  .postcard-choose-btn {
-    position: absolute;
-    left: 50%;
-    bottom: 18px;
-    transform: translateX(-50%);
-    z-index: 3;
   }
 
   .postcard-back-img {
@@ -983,20 +975,44 @@
     box-shadow: 0 0 0 1.5px var(--color-green);
   }
 
-  .postcard-back-link {
-    position: absolute;
-    left: 14px;
-    bottom: 14px;
-    z-index: 3;
-    font-size: 0.75em;
-    padding: 7px 14px;
+  .postcard-actions-stack {
+    display: grid;
+    width: 100%;
+    margin-top: 16px;
   }
 
-  .postcard-finish-btn {
-    position: absolute;
-    right: 14px;
-    bottom: 14px;
-    z-index: 3;
+  .postcard-front-actions,
+  .postcard-back-actions {
+    grid-area: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    transition: opacity 0.2s ease, visibility 0s linear;
+  }
+
+  .postcard-stage-wrap.is-flipped .postcard-front-actions {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .postcard-back-actions {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .postcard-stage-wrap.is-flipped .postcard-back-actions {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .postcard-back-link {
+    font-size: 0.75em;
+    padding: 7px 14px;
   }
 
   .postcard-finished {
@@ -3218,7 +3234,6 @@
               <div class="carousel-slide is-active"><img src="./images/postcards/1-front.webp" alt="Postcard design 1"></div>
               <div class="carousel-slide"><img src="./images/postcards/2-front.webp" alt="Postcard design 2"></div>
               <div class="carousel-slide"><img src="./images/postcards/3-front.webp" alt="Postcard design 3"></div>
-              <button type="button" class="postcard-btn postcard-choose-btn" id="postcardChooseBtn">Choose This Design</button>
             </div>
           </div>
           <div class="postcard-face postcard-face-back" id="postcardBackFace">
@@ -3242,8 +3257,6 @@
                 <span class="material-symbols-outlined" aria-hidden="true">delete_sweep</span>
               </button>
             </div>
-            <button type="button" class="postcard-btn postcard-btn-ghost postcard-back-link" id="postcardBackToFront">&larr; choose another design</button>
-            <button type="button" class="postcard-btn postcard-finish-btn" id="postcardFinishBtn">Finish Postcard</button>
           </div>
         </div>
       </div>
@@ -3253,6 +3266,15 @@
       <button type="button" class="carousel-dot dot-colorway is-active" aria-label="Go to design 1"></button>
       <button type="button" class="carousel-dot dot-colorway" aria-label="Go to design 2"></button>
       <button type="button" class="carousel-dot dot-colorway" aria-label="Go to design 3"></button>
+    </div>
+    <div class="postcard-actions-stack">
+      <div class="postcard-front-actions" id="postcardFrontActions">
+        <button type="button" class="postcard-btn" id="postcardChooseBtn">Choose This Design</button>
+      </div>
+      <div class="postcard-back-actions" id="postcardBackActions">
+        <button type="button" class="postcard-btn postcard-btn-ghost postcard-back-link" id="postcardBackToFront">&larr; choose another design</button>
+        <button type="button" class="postcard-btn postcard-finish-btn" id="postcardFinishBtn">Finish Postcard</button>
+      </div>
     </div>
   </div>
 
