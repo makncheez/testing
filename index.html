@@ -736,7 +736,7 @@
 
   .postcard-btn {
     font-family: 'DM Mono', monospace;
-    font-size: 0.85em;
+    font-size: 1.1em;
     letter-spacing: 0.02em;
     padding: 9px 18px;
     border-radius: 999px;
@@ -1011,7 +1011,7 @@
   }
 
   .postcard-back-link {
-    font-size: 0.75em;
+    font-size: 1em;
     padding: 7px 14px;
   }
 
@@ -3269,11 +3269,11 @@
     </div>
     <div class="postcard-actions-stack">
       <div class="postcard-front-actions" id="postcardFrontActions">
-        <button type="button" class="postcard-btn" id="postcardChooseBtn">Choose This Design</button>
+        <button type="button" class="postcard-btn" id="postcardChooseBtn">Select Design</button>
       </div>
       <div class="postcard-back-actions" id="postcardBackActions">
-        <button type="button" class="postcard-btn postcard-btn-ghost postcard-back-link" id="postcardBackToFront">&larr; choose another design</button>
-        <button type="button" class="postcard-btn postcard-finish-btn" id="postcardFinishBtn">Finish Postcard</button>
+        <button type="button" class="postcard-btn postcard-btn-ghost postcard-back-link" id="postcardBackToFront">&larr; Go Back</button>
+        <button type="button" class="postcard-btn postcard-finish-btn" id="postcardFinishBtn">Finish Design</button>
       </div>
     </div>
   </div>
@@ -3286,7 +3286,7 @@
       <img class="postcard-finished-preview" id="postcardFinishedPreview" src="" alt="Your finished postcard, front and back">
     </div>
     <div class="postcard-finished-actions">
-      <button type="button" class="postcard-btn postcard-btn-ghost" id="postcardEditBtn">&larr; Edit</button>
+      <button type="button" class="postcard-btn postcard-btn-ghost" id="postcardEditBtn">&larr; Go back</button>
       <button type="button" class="postcard-btn" id="postcardDownloadBtn">Download Postcard</button>
     </div>
   </div>
@@ -4767,8 +4767,8 @@
       // Tilt varies per finished postcard: picked fresh each time "Finish
       // Postcard" runs, then held steady so the on-screen preview and the
       // downloaded file always match.
-      var FRONT_ANGLE_RANGE = [-12, -4];
-      var BACK_ANGLE_RANGE = [4, 12];
+      var FRONT_ANGLE_RANGE = [-5, 5];
+      var BACK_ANGLE_RANGE = [-5, 5];
       var currentFrontAngleDeg = -7;
       var currentBackAngleDeg = 6;
 
