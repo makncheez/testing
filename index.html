@@ -828,6 +828,36 @@
     z-index: 6;
   }
 
+  .postcard-step-header {
+    width: 100%;
+    margin-bottom: 20px;
+    transition: opacity 0.2s ease, visibility 0s linear;
+  }
+
+  .postcard-stage-wrap.is-flipped .postcard-step-header {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .postcard-step-eyebrow {
+    margin: 0 0 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85em;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-tan);
+  }
+
+  .postcard-step-title {
+    margin: 0;
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: 2.1em;
+    line-height: 1.15;
+    color: var(--color-tan);
+  }
+
   .postcard-picker-row {
     display: flex;
     align-items: center;
@@ -1045,6 +1075,33 @@
     transition: opacity 0.2s ease, visibility 0s linear;
   }
 
+  .postcard-front-actions {
+    justify-content: flex-end;
+  }
+
+  .postcard-select-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.15s ease, opacity 0.2s ease;
+  }
+
+  .postcard-select-btn .material-symbols-outlined {
+    font-size: 30px;
+  }
+
+  .postcard-select-btn:hover,
+  .postcard-select-btn:focus-visible {
+    transform: scale(1.06);
+  }
+
   .postcard-stage-wrap.is-flipped .postcard-front-actions {
     opacity: 0;
     visibility: hidden;
@@ -1120,6 +1177,19 @@
     }
     .postcard-side-nav .material-symbols-outlined {
       font-size: 18px;
+    }
+    .postcard-step-title {
+      font-size: 1.5em;
+    }
+    .postcard-step-eyebrow {
+      font-size: 0.75em;
+    }
+    .postcard-select-btn {
+      width: 44px;
+      height: 44px;
+    }
+    .postcard-select-btn .material-symbols-outlined {
+      font-size: 24px;
     }
   }
 
@@ -3310,6 +3380,10 @@
     <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="postcardClose" aria-label="Close">
       <span class="material-symbols-outlined" aria-hidden="true">close</span>
     </button>
+    <div class="postcard-step-header" id="postcardStepHeader">
+      <p class="postcard-step-eyebrow">Step 1</p>
+      <h2 class="postcard-step-title">Choose your postcard design</h2>
+    </div>
     <div class="postcard-picker-row" id="postcardPickerRow">
       <button type="button" class="postcard-side-nav btn-colorway-icon" id="postcardPrevBtn" aria-label="Previous design"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
       <div class="postcard-perspective">
@@ -3354,7 +3428,9 @@
     </div>
     <div class="postcard-actions-stack">
       <div class="postcard-front-actions" id="postcardFrontActions">
-        <button type="button" class="postcard-btn" id="postcardChooseBtn">Select Design</button>
+        <button type="button" class="postcard-select-btn bg-green text-tan" id="postcardChooseBtn" aria-label="Select this design">
+          <span class="material-symbols-outlined" aria-hidden="true">keyboard_arrow_right</span>
+        </button>
       </div>
       <div class="postcard-back-actions" id="postcardBackActions">
         <button type="button" class="postcard-btn postcard-btn-ghost postcard-back-link" id="postcardBackToFront">&larr; Go Back</button>
