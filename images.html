@@ -683,6 +683,8 @@
         portraitLastScrollY = currentScrollY;
         window.requestAnimationFrame(pollPortraitScroll);
       }
+      portraitRecallWrap.classList.add('is-visible');
+      armLingerTimer();
       window.requestAnimationFrame(pollPortraitScroll);
     }
 
