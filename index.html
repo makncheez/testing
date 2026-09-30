@@ -773,7 +773,7 @@
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: rgba(0, 0, 0, 0.92);
+    background: rgba(0, 0, 0, 1);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -823,9 +823,13 @@
     align-items: center;
   }
 
-  .postcard-stage-wrap .icon-btn-close-top {
-    top: -18px;
-    z-index: 6;
+  .postcard-lightbox .icon-btn-close-top {
+    position: fixed;
+    top: 24px;
+    left: auto;
+    right: 24px;
+    transform: none;
+    z-index: 1000000;
   }
 
   .postcard-step-header {
@@ -838,15 +842,6 @@
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-  }
-
-  .postcard-step-eyebrow {
-    margin: 0 0 6px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.85em;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-tan);
   }
 
   .postcard-step-title {
@@ -868,17 +863,16 @@
 
   .postcard-side-nav {
     flex-shrink: 0;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     border: none;
-    font-size: 1.5em;
     cursor: pointer;
     transition: opacity 0.2s ease, visibility 0s linear;
   }
 
   .postcard-side-nav .material-symbols-outlined {
-    font-size: 22px;
+    font-size: 24px;
   }
 
   .postcard-stage-wrap.is-flipped .postcard-side-nav {
@@ -1060,7 +1054,7 @@
 
   .postcard-actions-stack {
     display: grid;
-    width: 100%;
+    width: min(90vw, 500px);
     margin-top: 16px;
   }
 
@@ -1079,27 +1073,14 @@
     justify-content: flex-end;
   }
 
-  .postcard-select-btn {
+  .postcard-proceed-btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    flex-shrink: 0;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    padding: 0;
-    transition: transform 0.15s ease, opacity 0.2s ease;
+    gap: 2px;
   }
 
-  .postcard-select-btn .material-symbols-outlined {
-    font-size: 30px;
-  }
-
-  .postcard-select-btn:hover,
-  .postcard-select-btn:focus-visible {
-    transform: scale(1.06);
+  .postcard-proceed-btn .material-symbols-outlined {
+    font-size: 20px;
   }
 
   .postcard-stage-wrap.is-flipped .postcard-front-actions {
@@ -1138,11 +1119,6 @@
     display: none;
   }
 
-  .postcard-finished .icon-btn-close-top {
-    top: -18px;
-    z-index: 6;
-  }
-
   .postcard-finished-stage {
     position: relative;
     display: flex;
@@ -1171,25 +1147,11 @@
     .postcard-perspective {
       width: min(72vw, 250px);
     }
-    .postcard-side-nav {
-      width: 30px;
-      height: 30px;
-    }
-    .postcard-side-nav .material-symbols-outlined {
-      font-size: 18px;
+    .postcard-actions-stack {
+      width: min(72vw, 250px);
     }
     .postcard-step-title {
       font-size: 1.5em;
-    }
-    .postcard-step-eyebrow {
-      font-size: 0.75em;
-    }
-    .postcard-select-btn {
-      width: 44px;
-      height: 44px;
-    }
-    .postcard-select-btn .material-symbols-outlined {
-      font-size: 24px;
     }
   }
 
@@ -3381,7 +3343,6 @@
       <span class="material-symbols-outlined" aria-hidden="true">close</span>
     </button>
     <div class="postcard-step-header" id="postcardStepHeader">
-      <p class="postcard-step-eyebrow">Step 1</p>
       <h2 class="postcard-step-title">Choose your postcard design</h2>
     </div>
     <div class="postcard-picker-row" id="postcardPickerRow">
@@ -3428,8 +3389,8 @@
     </div>
     <div class="postcard-actions-stack">
       <div class="postcard-front-actions" id="postcardFrontActions">
-        <button type="button" class="postcard-select-btn bg-green text-tan" id="postcardChooseBtn" aria-label="Select this design">
-          <span class="material-symbols-outlined" aria-hidden="true">keyboard_arrow_right</span>
+        <button type="button" class="postcard-btn postcard-proceed-btn" id="postcardChooseBtn">
+          Proceed <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
         </button>
       </div>
       <div class="postcard-back-actions" id="postcardBackActions">
