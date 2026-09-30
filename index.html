@@ -835,13 +835,6 @@
   .postcard-step-header {
     width: 100%;
     margin-bottom: 20px;
-    transition: opacity 0.2s ease, visibility 0s linear;
-  }
-
-  .postcard-stage-wrap.is-flipped .postcard-step-header {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
   }
 
   .postcard-step-title {
@@ -851,6 +844,18 @@
     font-size: 2.1em;
     line-height: 1.15;
     color: var(--color-tan);
+  }
+
+  .postcard-step-title-back {
+    display: none;
+  }
+
+  .postcard-stage-wrap.is-flipped .postcard-step-title-front {
+    display: none;
+  }
+
+  .postcard-stage-wrap.is-flipped .postcard-step-title-back {
+    display: block;
   }
 
   .postcard-picker-row {
@@ -971,7 +976,7 @@
 
   .postcard-text-note {
     position: absolute;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
     min-width: 24px;
     max-width: 80%;
     outline: none;
@@ -982,7 +987,7 @@
     line-height: 1.3em;
     white-space: pre-wrap;
     word-break: break-word;
-    text-align: center;
+    text-align: left;
     cursor: text;
   }
 
@@ -999,6 +1004,9 @@
     z-index: 4;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: calc(100% - 16px);
     gap: 6px;
     padding: 6px 8px;
     border-radius: 999px;
@@ -1052,6 +1060,37 @@
     box-shadow: 0 0 0 1.5px var(--color-green);
   }
 
+  .postcard-size-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .postcard-size-dot {
+    display: block;
+    border-radius: 50%;
+    background: var(--color-green);
+  }
+
+  .postcard-size-btn.is-active,
+  .postcard-size-btn:hover,
+  .postcard-size-btn:focus-visible {
+    background: var(--color-green);
+  }
+
+  .postcard-size-btn.is-active .postcard-size-dot,
+  .postcard-size-btn:hover .postcard-size-dot,
+  .postcard-size-btn:focus-visible .postcard-size-dot {
+    background: var(--color-tan);
+  }
+
   .postcard-actions-stack {
     display: grid;
     width: min(90vw, 500px);
@@ -1090,6 +1129,7 @@
   }
 
   .postcard-back-actions {
+    justify-content: space-between;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -1101,9 +1141,27 @@
     pointer-events: auto;
   }
 
-  .postcard-back-link {
-    font-size: 1em;
-    padding: 7px 14px;
+  .postcard-circle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.15s ease, opacity 0.2s ease;
+  }
+
+  .postcard-circle-btn .material-symbols-outlined {
+    font-size: 26px;
+  }
+
+  .postcard-circle-btn:hover,
+  .postcard-circle-btn:focus-visible {
+    transform: scale(1.06);
   }
 
   .postcard-finished {
@@ -3343,7 +3401,8 @@
       <span class="material-symbols-outlined" aria-hidden="true">close</span>
     </button>
     <div class="postcard-step-header" id="postcardStepHeader">
-      <h2 class="postcard-step-title">Choose your postcard design</h2>
+      <h2 class="postcard-step-title postcard-step-title-front">Choose your postcard design</h2>
+      <h2 class="postcard-step-title postcard-step-title-back">Write your message and download</h2>
     </div>
     <div class="postcard-picker-row" id="postcardPickerRow">
       <button type="button" class="postcard-side-nav btn-colorway-icon" id="postcardPrevBtn" aria-label="Previous design"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
@@ -3373,6 +3432,10 @@
               <button type="button" class="postcard-color-btn" data-color="#9767a3" style="--swatch: #9767a3" aria-label="Purple ink" aria-pressed="false"></button>
               <button type="button" class="postcard-color-btn" data-color="#000000" style="--swatch: #000000" aria-label="Black ink" aria-pressed="false"></button>
               <span class="postcard-toolbar-divider"></span>
+              <button type="button" class="postcard-size-btn" data-size="0.5" aria-label="Thin stroke" aria-pressed="false"><span class="postcard-size-dot" style="width: 4px; height: 4px"></span></button>
+              <button type="button" class="postcard-size-btn is-active" data-size="1" aria-label="Medium stroke" aria-pressed="true"><span class="postcard-size-dot" style="width: 7px; height: 7px"></span></button>
+              <button type="button" class="postcard-size-btn" data-size="1.8" aria-label="Thick stroke" aria-pressed="false"><span class="postcard-size-dot" style="width: 11px; height: 11px"></span></button>
+              <span class="postcard-toolbar-divider"></span>
               <button type="button" class="postcard-tool-btn" id="postcardToolClear" aria-label="Clear everything">
                 <span class="material-symbols-outlined" aria-hidden="true">delete_sweep</span>
               </button>
@@ -3394,8 +3457,12 @@
         </button>
       </div>
       <div class="postcard-back-actions" id="postcardBackActions">
-        <button type="button" class="postcard-btn postcard-btn-ghost postcard-back-link" id="postcardBackToFront">&larr; Go Back</button>
-        <button type="button" class="postcard-btn postcard-finish-btn" id="postcardFinishBtn">Finish Design</button>
+        <button type="button" class="postcard-circle-btn bg-green text-tan" id="postcardBackToFront" aria-label="Go back to design picker">
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+        </button>
+        <button type="button" class="postcard-circle-btn bg-green text-tan" id="postcardFinishBtn" aria-label="Finish and download">
+          <span class="material-symbols-outlined" aria-hidden="true">download</span>
+        </button>
       </div>
     </div>
   </div>
@@ -4697,6 +4764,7 @@
       var drawCtx = drawCanvas.getContext('2d');
       var currentTool = 'pen';
       var currentColor = '#263F27';
+      var currentLineWidthScale = 1;
       var strokes = [];
       var textNotes = [];
       var activeStroke = null;
@@ -4717,7 +4785,7 @@
         strokes.forEach(function (stroke) {
           if (stroke.pts.length < 2) return;
           drawCtx.strokeStyle = stroke.color;
-          drawCtx.lineWidth = Math.max(2, w * 0.007);
+          drawCtx.lineWidth = Math.max(2, w * 0.007 * stroke.size);
           drawCtx.lineCap = 'round';
           drawCtx.lineJoin = 'round';
           drawCtx.beginPath();
@@ -4774,7 +4842,7 @@
         }
         isDrawing = true;
         drawCanvas.setPointerCapture(e.pointerId);
-        activeStroke = { color: currentColor, pts: [relPos(e)] };
+        activeStroke = { color: currentColor, size: currentLineWidthScale, pts: [relPos(e)] };
         strokes.push(activeStroke);
       });
       drawCanvas.addEventListener('pointermove', function (e) {
@@ -4806,6 +4874,18 @@
         btn.addEventListener('click', function () {
           currentColor = btn.getAttribute('data-color');
           colorButtons.forEach(function (b) {
+            var active = b === btn;
+            b.classList.toggle('is-active', active);
+            b.setAttribute('aria-pressed', String(active));
+          });
+        });
+      });
+
+      var sizeButtons = toolbar.querySelectorAll('.postcard-size-btn');
+      sizeButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          currentLineWidthScale = parseFloat(btn.getAttribute('data-size'));
+          sizeButtons.forEach(function (b) {
             var active = b === btn;
             b.classList.toggle('is-active', active);
             b.setAttribute('aria-pressed', String(active));
@@ -4894,7 +4974,7 @@
         strokes.forEach(function (stroke) {
           if (stroke.pts.length < 2) return;
           ctx.strokeStyle = stroke.color;
-          ctx.lineWidth = Math.max(3, w * 0.007);
+          ctx.lineWidth = Math.max(3, w * 0.007 * stroke.size);
           ctx.lineCap = 'round';
           ctx.lineJoin = 'round';
           ctx.beginPath();
@@ -4909,7 +4989,7 @@
           ctx.fillStyle = note.color;
           var fontSize = Math.max(14, w * 0.032);
           ctx.font = fontSize + 'px "DM Mono", monospace';
-          ctx.textAlign = 'center';
+          ctx.textAlign = 'left';
           ctx.textBaseline = 'middle';
           var x = -w / 2 + note.xPct * w, y = -h / 2 + note.yPct * h;
           var lines = note.text.split('\n');
