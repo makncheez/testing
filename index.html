@@ -620,6 +620,22 @@
     text-align: center;
   }
 
+  /* ---- Closing frame: reuses the hero's quote-frame bracket styling to
+     set off the site's final paragraph and quote as a deliberate close. ---- */
+
+  .closing-frame {
+    top: 0;
+    width: 100%;
+    max-width: 700px;
+    margin: 56px auto 0;
+  }
+
+  .closing-frame-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
   .hero-spacer {
     height: 100vh;
     width: 100%;
@@ -3351,14 +3367,30 @@
       <div class="pqb-edge border-green"></div>
     </div>
     <p class="text-black">With his premature retirement, Kazanjian became severely withdrawn by the absence of work that once gave him purpose and meaning. Periods of dysphoria eventually worsened with the onset of dementia, marked by alarming forgetfulness, disorientation, and a rapid flight of ideas. His declining health forced the family to make the heartbreaking decision to place him in a nursing home, where he lived until he passed away in January 1966.</p>
-    <p class="text-black">Reflecting on Kazanjian&rsquo;s tangible legacy and impact, his photographic oeuvre and renown may have faded with the passage of time and changes within the photographic medium. Yet, as with some of the earlier accomplished Armenian photographers, such as John Higue Garo, Kazanjian&rsquo;s artistic background and passion for the visual arts shaped how he took pictures, turning them into dramatic and carefully balanced works of art.</p>
-    <div class="plain-quote-box text-green">
-      <div class="pqb-edge border-green"></div>
-      <blockquote>
-        <p>&ldquo;If we are to believe that history progresses forward, that humanity is built upon the foundation of our forerunners, then we need to recognize those who preceded us&rdquo;<sup id="fnref-25"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="25">25</button></sup></p>
-        <footer>&mdash; Mehmed Ali</footer>
-      </blockquote>
-      <div class="pqb-edge border-green"></div>
+    <div class="quote-frame closing-frame">
+      <div class="qf-corner qf-corner-tl"><div class="qf-dot bg-green-dot"></div></div>
+      <div class="qf-bar qf-bar-top bg-green-dot"></div>
+      <div class="qf-corner qf-corner-tr"><div class="qf-dot bg-green-dot"></div></div>
+
+      <div class="qf-edge-left border-green"></div>
+      <div class="quote-frame-content">
+        <div class="closing-frame-copy">
+          <p class="text-black">Reflecting on Kazanjian&rsquo;s tangible legacy and impact, his photographic oeuvre and renown may have faded with the passage of time and changes within the photographic medium. Yet, as with some of the earlier accomplished Armenian photographers, such as John Higue Garo, Kazanjian&rsquo;s artistic background and passion for the visual arts shaped how he took pictures, turning them into dramatic and carefully balanced works of art.</p>
+          <div class="plain-quote-box text-green">
+            <div class="pqb-edge border-green"></div>
+            <blockquote>
+              <p>&ldquo;If we are to believe that history progresses forward, that humanity is built upon the foundation of our forerunners, then we need to recognize those who preceded us&rdquo;<sup id="fnref-25"><button type="button" class="footnote-marker bg-green text-tan" data-footnote="25">25</button></sup></p>
+              <footer>&mdash; Mehmed Ali</footer>
+            </blockquote>
+            <div class="pqb-edge border-green"></div>
+          </div>
+        </div>
+      </div>
+      <div class="qf-edge-right border-green"></div>
+
+      <div class="qf-corner qf-corner-bl"><div class="qf-dot bg-green-dot"></div></div>
+      <div class="qf-bar qf-bar-bottom bg-green-dot"></div>
+      <div class="qf-corner qf-corner-br"><div class="qf-dot bg-green-dot"></div></div>
     </div>
   </div>
 </section>
