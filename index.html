@@ -4231,6 +4231,12 @@
         setZoomOpen(!zoomView.classList.contains('is-open'));
       });
 
+      carousel.addEventListener('click', function (e) {
+        if (!zoomView.classList.contains('is-open')) return;
+        if (e.target.closest('button')) return;
+        setZoomOpen(false);
+      });
+
       document.addEventListener('keydown', function (e) {
         if (e.key !== 'Escape') return;
         if (captionEl.classList.contains('is-open')) setCaptionOpen(false);
@@ -4556,6 +4562,12 @@
 
         root.addEventListener('mouseleave', function () {
           if (zoomActive) resetSlideZoom(slides[current]);
+        });
+
+        root.addEventListener('click', function (e) {
+          if (!zoomActive) return;
+          if (e.target.closest('button')) return;
+          setZoomActive(false);
         });
       }
 
