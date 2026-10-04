@@ -620,6 +620,52 @@
     text-align: center;
   }
 
+  /* On a short (not narrow) window, the hero's portrait is pinned 40px from
+     the viewport top while "Pictorealism" and "Aram Kazanjian" are
+     positioned relative to the quote box, which sits lower the taller the
+     window is. On a short window the box gets centered higher up, pushing
+     those labels into the fixed portrait or off the top edge entirely.
+     Shrinking everything here keeps the whole stack compact enough to fit
+     without overlapping or clipping. */
+  @media (max-height: 800px) {
+    .qf-portrait {
+      width: 100px;
+    }
+
+    .qf-logo {
+      width: 160px;
+      margin-bottom: 10px;
+    }
+
+    .quote-frame-content {
+      padding: 32px;
+    }
+
+    .quote-text {
+      font-size: 1.25em;
+      line-height: 1.3em;
+    }
+
+    .quote-frame .hero-label-corner {
+      top: -150px;
+      font-size: 1.05em;
+    }
+
+    .quote-frame .hero-label-group {
+      margin-bottom: 12px;
+      gap: 4px;
+    }
+
+    .hero-label-title {
+      font-size: 2.2em;
+    }
+
+    .hero-label-sub {
+      font-size: 0.95em;
+      gap: 40px;
+    }
+  }
+
   /* ---- Closing frame: reuses the hero's quote-frame bracket styling to
      set off the site's final paragraph and quote as a deliberate close. ---- */
 
