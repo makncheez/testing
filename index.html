@@ -621,14 +621,15 @@
   }
 
   /* On a short (not narrow) window, "Pictorealism" and "Aram Kazanjian" are
-     positioned relative to the quote box, which sits lower the taller the
-     window is. On a short window the box gets centered higher up, pushing
-     those labels into the portrait (whose own on-screen position is
-     computed by JS, not a fixed value, so a static CSS offset can't
-     reliably dodge it) or off the top edge entirely. Shrinking everything
-     keeps the stack compact; "Aram Kazanjian" is simply hidden rather than
-     repositioned, since there's no static offset that's guaranteed to
-     clear the portrait at every short-window size. */
+     normally positioned relative to the quote box, which sits lower the
+     taller the window is. On a short window the box gets centered higher
+     up, pushing those labels into the portrait or off the top edge
+     entirely. Shrinking everything keeps the stack compact. "Aram
+     Kazanjian" is pinned to the viewport's own top edge instead (rather
+     than positioned relative to the quote box, whose on-screen position
+     varies, or the portrait, whose position is computed by JS) — a fixed
+     few pixels from the top is reliably clear of the portrait, which never
+     renders flush against the edge. */
   @media (max-height: 800px) {
     .qf-portrait {
       width: 100px;
@@ -649,7 +650,13 @@
     }
 
     .quote-frame .hero-label-corner {
-      display: none;
+      position: fixed;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 1em;
+      z-index: 22;
     }
 
     .quote-frame .hero-label-group {
