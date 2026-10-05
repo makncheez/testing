@@ -25,7 +25,7 @@
     #aia-exhibit-grid {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 0;
+      padding: 20px;
       font-family: Georgia, 'Times New Roman', serif;
       color: #222;
       background: transparent;
@@ -36,7 +36,7 @@
 
     #aia-exhibit-grid .aia-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
     #aia-exhibit-grid .aia-card {
@@ -45,17 +45,22 @@
       overflow: hidden;
       border-radius: 2px;
       background: #111;
-      aspect-ratio: 4 / 3;
       cursor: pointer;
     }
     #aia-exhibit-grid .aia-card.aia-soon { cursor: default; }
-    #aia-exhibit-grid .aia-img-base,
+    #aia-exhibit-grid .aia-img-base {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: opacity 0.4s ease;
+    }
     #aia-exhibit-grid .aia-img-hover {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       transition: opacity 0.4s ease;
     }
     #aia-exhibit-grid .aia-img-base { opacity: 1; }
@@ -86,7 +91,8 @@
     }
 
     @media (max-width: 640px) {
-      #aia-exhibit-grid .aia-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+      #aia-exhibit-grid { padding: 20px; }
+      #aia-exhibit-grid .aia-grid { grid-template-columns: 1fr; gap: 20px; }
       #aia-exhibit-grid .aia-overlay-text { font-size: 0.9em; padding: 8px 12px; }
     }
   </style>
