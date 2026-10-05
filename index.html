@@ -3560,9 +3560,9 @@
       <button type="button" class="postcard-color-btn" data-color="#9767a3" style="--swatch: #9767a3" aria-label="Purple ink" aria-pressed="false"></button>
       <button type="button" class="postcard-color-btn" data-color="#000000" style="--swatch: #000000" aria-label="Black ink" aria-pressed="false"></button>
       <span class="postcard-toolbar-divider"></span>
-      <button type="button" class="postcard-size-btn" data-size="0.5" aria-label="Thin stroke" aria-pressed="false"><span class="postcard-size-dot" style="width: 5px; height: 5px"></span></button>
-      <button type="button" class="postcard-size-btn is-active" data-size="1" aria-label="Medium stroke" aria-pressed="true"><span class="postcard-size-dot" style="width: 9px; height: 9px"></span></button>
-      <button type="button" class="postcard-size-btn" data-size="1.8" aria-label="Thick stroke" aria-pressed="false"><span class="postcard-size-dot" style="width: 14px; height: 14px"></span></button>
+      <button type="button" class="postcard-size-btn" data-size="1" aria-label="Thin stroke" aria-pressed="false"><span class="postcard-size-dot" style="width: 5px; height: 5px"></span></button>
+      <button type="button" class="postcard-size-btn is-active" data-size="2" aria-label="Medium stroke" aria-pressed="true"><span class="postcard-size-dot" style="width: 9px; height: 9px"></span></button>
+      <button type="button" class="postcard-size-btn" data-size="3" aria-label="Thick stroke" aria-pressed="false"><span class="postcard-size-dot" style="width: 14px; height: 14px"></span></button>
       <span class="postcard-toolbar-divider"></span>
       <button type="button" class="postcard-tool-btn" id="postcardToolClear" aria-label="Clear everything">
         <span class="material-symbols-outlined" aria-hidden="true">delete_sweep</span>
@@ -4897,7 +4897,7 @@
       var drawCtx = drawCanvas.getContext('2d');
       var currentTool = 'pen';
       var currentColor = '#263F27';
-      var currentLineWidthScale = 1;
+      var currentLineWidthScale = 2;
       var strokes = [];
       var textNotes = [];
       var activeStroke = null;
