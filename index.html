@@ -893,10 +893,30 @@
 
   .postcard-stage-wrap {
     position: relative;
-    width: min(96vw, 620px);
+    width: min(94vw, 1100px);
+    max-height: calc(100vh - 48px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(32px, 6vw, 96px);
+    overflow-y: auto;
+  }
+
+  .postcard-media-col {
+    flex-shrink: 0;
+    width: min(90vw, 620px);
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .postcard-info-col {
+    width: min(90vw, 460px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
   }
 
   .postcard-lightbox .icon-btn-close-top {
@@ -910,7 +930,6 @@
 
   .postcard-step-header {
     width: 100%;
-    margin-bottom: 20px;
   }
 
   .postcard-step-title {
@@ -1077,8 +1096,7 @@
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
-    width: min(90vw, 500px);
-    margin: 14px auto 0;
+    width: 100%;
     gap: 10px;
     padding: 10px 12px;
     border-radius: 999px;
@@ -1169,8 +1187,7 @@
 
   .postcard-actions-stack {
     display: grid;
-    width: min(90vw, 500px);
-    margin-top: 16px;
+    width: 100%;
   }
 
   .postcard-front-actions,
@@ -1285,19 +1302,30 @@
 
   @media (max-width: 500px) {
     .postcard-stage-wrap {
+      flex-direction: column;
       width: min(96vw, 340px);
+      gap: 14px;
+    }
+    .postcard-media-col,
+    .postcard-info-col {
+      width: 100%;
+    }
+    .postcard-info-col {
+      gap: 12px;
     }
     .postcard-perspective {
-      width: min(72vw, 250px);
+      width: min(52vw, 170px);
     }
     .postcard-actions-stack {
       width: min(72vw, 250px);
+      margin: 0 auto;
     }
     .postcard-toolbar {
       width: min(96vw, 340px);
+      margin: 0 auto;
     }
     .postcard-step-title {
-      font-size: 1.5em;
+      font-size: 1.3em;
     }
   }
 
@@ -3518,67 +3546,71 @@
     <button type="button" class="icon-btn icon-btn-close-top bg-purple text-green" id="postcardClose" aria-label="Close">
       <span class="material-symbols-outlined" aria-hidden="true">close</span>
     </button>
-    <div class="postcard-step-header" id="postcardStepHeader">
-      <h2 class="postcard-step-title postcard-step-title-front">Choose your postcard design</h2>
-      <h2 class="postcard-step-title postcard-step-title-back">Write your message and download</h2>
-    </div>
-    <div class="postcard-picker-row" id="postcardPickerRow">
-      <button type="button" class="postcard-side-nav btn-colorway-icon" id="postcardPrevBtn" aria-label="Previous design"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
-      <div class="postcard-perspective">
-        <div class="postcard-stage" id="postcardStage">
-          <div class="postcard-face postcard-face-front" id="postcardFrontFace">
-            <div class="postcard-front-carousel" id="postcardFrontCarousel">
-              <div class="carousel-slide is-active"><img src="./images/postcards/1-front.webp" alt="Postcard design 1"></div>
-              <div class="carousel-slide"><img src="./images/postcards/2-front.webp" alt="Postcard design 2"></div>
-              <div class="carousel-slide"><img src="./images/postcards/3-front.webp" alt="Postcard design 3"></div>
+    <div class="postcard-media-col">
+      <div class="postcard-picker-row" id="postcardPickerRow">
+        <button type="button" class="postcard-side-nav btn-colorway-icon" id="postcardPrevBtn" aria-label="Previous design"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
+        <div class="postcard-perspective">
+          <div class="postcard-stage" id="postcardStage">
+            <div class="postcard-face postcard-face-front" id="postcardFrontFace">
+              <div class="postcard-front-carousel" id="postcardFrontCarousel">
+                <div class="carousel-slide is-active"><img src="./images/postcards/1-front.webp" alt="Postcard design 1"></div>
+                <div class="carousel-slide"><img src="./images/postcards/2-front.webp" alt="Postcard design 2"></div>
+                <div class="carousel-slide"><img src="./images/postcards/3-front.webp" alt="Postcard design 3"></div>
+              </div>
             </div>
-          </div>
-          <div class="postcard-face postcard-face-back" id="postcardBackFace">
-            <img class="postcard-back-img" src="./images/postcards/1-back.webp" alt="" id="postcardBackImg">
-            <div class="postcard-draw-layer" id="postcardDrawLayer">
-              <canvas class="postcard-draw-canvas" id="postcardDrawCanvas" aria-label="Draw or write anywhere on the card"></canvas>
+            <div class="postcard-face postcard-face-back" id="postcardBackFace">
+              <img class="postcard-back-img" src="./images/postcards/1-back.webp" alt="" id="postcardBackImg">
+              <div class="postcard-draw-layer" id="postcardDrawLayer">
+                <canvas class="postcard-draw-canvas" id="postcardDrawCanvas" aria-label="Draw or write anywhere on the card"></canvas>
+              </div>
             </div>
           </div>
         </div>
+        <button type="button" class="postcard-side-nav btn-colorway-icon" id="postcardNextBtn" aria-label="Next design"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
       </div>
-      <button type="button" class="postcard-side-nav btn-colorway-icon" id="postcardNextBtn" aria-label="Next design"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
+      <div class="postcard-dots-row" id="postcardDotsRow">
+        <button type="button" class="carousel-dot dot-colorway is-active" aria-label="Go to design 1"></button>
+        <button type="button" class="carousel-dot dot-colorway" aria-label="Go to design 2"></button>
+        <button type="button" class="carousel-dot dot-colorway" aria-label="Go to design 3"></button>
+      </div>
     </div>
-    <div class="postcard-dots-row" id="postcardDotsRow">
-      <button type="button" class="carousel-dot dot-colorway is-active" aria-label="Go to design 1"></button>
-      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to design 2"></button>
-      <button type="button" class="carousel-dot dot-colorway" aria-label="Go to design 3"></button>
-    </div>
-    <div class="postcard-toolbar" id="postcardToolbar">
-      <button type="button" class="postcard-tool-btn is-active" id="postcardToolPen" data-tool="pen" aria-label="Draw" aria-pressed="true">
-        <span class="material-symbols-outlined" aria-hidden="true">draw</span>
-      </button>
-      <button type="button" class="postcard-tool-btn" id="postcardToolText" data-tool="text" aria-label="Add text" aria-pressed="false">
-        <span class="material-symbols-outlined" aria-hidden="true">text_fields</span>
-      </button>
-      <span class="postcard-toolbar-divider"></span>
-      <button type="button" class="postcard-color-btn is-active" data-color="#263F27" style="--swatch: #263F27" aria-label="Green ink" aria-pressed="true"></button>
-      <button type="button" class="postcard-color-btn" data-color="#9767a3" style="--swatch: #9767a3" aria-label="Purple ink" aria-pressed="false"></button>
-      <button type="button" class="postcard-color-btn" data-color="#000000" style="--swatch: #000000" aria-label="Black ink" aria-pressed="false"></button>
-      <span class="postcard-toolbar-divider"></span>
-      <button type="button" class="postcard-size-btn" data-size="1" aria-label="Thin stroke" aria-pressed="false"><span class="postcard-size-dot" style="width: 5px; height: 5px"></span></button>
-      <button type="button" class="postcard-size-btn is-active" data-size="2" aria-label="Medium stroke" aria-pressed="true"><span class="postcard-size-dot" style="width: 9px; height: 9px"></span></button>
-      <button type="button" class="postcard-size-btn" data-size="3" aria-label="Thick stroke" aria-pressed="false"><span class="postcard-size-dot" style="width: 14px; height: 14px"></span></button>
-      <span class="postcard-toolbar-divider"></span>
-      <button type="button" class="postcard-tool-btn" id="postcardToolClear" aria-label="Clear everything">
-        <span class="material-symbols-outlined" aria-hidden="true">delete_sweep</span>
-      </button>
-    </div>
-    <div class="postcard-actions-stack">
-      <div class="postcard-front-actions" id="postcardFrontActions">
-        <button type="button" class="postcard-btn postcard-proceed-btn" id="postcardChooseBtn">
-          Proceed <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+    <div class="postcard-info-col">
+      <div class="postcard-step-header" id="postcardStepHeader">
+        <h2 class="postcard-step-title postcard-step-title-front">Choose your postcard design</h2>
+        <h2 class="postcard-step-title postcard-step-title-back">Write your message and download</h2>
+      </div>
+      <div class="postcard-toolbar" id="postcardToolbar">
+        <button type="button" class="postcard-tool-btn is-active" id="postcardToolPen" data-tool="pen" aria-label="Draw" aria-pressed="true">
+          <span class="material-symbols-outlined" aria-hidden="true">draw</span>
+        </button>
+        <button type="button" class="postcard-tool-btn" id="postcardToolText" data-tool="text" aria-label="Add text" aria-pressed="false">
+          <span class="material-symbols-outlined" aria-hidden="true">text_fields</span>
+        </button>
+        <span class="postcard-toolbar-divider"></span>
+        <button type="button" class="postcard-color-btn is-active" data-color="#263F27" style="--swatch: #263F27" aria-label="Green ink" aria-pressed="true"></button>
+        <button type="button" class="postcard-color-btn" data-color="#9767a3" style="--swatch: #9767a3" aria-label="Purple ink" aria-pressed="false"></button>
+        <button type="button" class="postcard-color-btn" data-color="#000000" style="--swatch: #000000" aria-label="Black ink" aria-pressed="false"></button>
+        <span class="postcard-toolbar-divider"></span>
+        <button type="button" class="postcard-size-btn" data-size="1" aria-label="Thin stroke" aria-pressed="false"><span class="postcard-size-dot" style="width: 5px; height: 5px"></span></button>
+        <button type="button" class="postcard-size-btn is-active" data-size="2" aria-label="Medium stroke" aria-pressed="true"><span class="postcard-size-dot" style="width: 9px; height: 9px"></span></button>
+        <button type="button" class="postcard-size-btn" data-size="3" aria-label="Thick stroke" aria-pressed="false"><span class="postcard-size-dot" style="width: 14px; height: 14px"></span></button>
+        <span class="postcard-toolbar-divider"></span>
+        <button type="button" class="postcard-tool-btn" id="postcardToolClear" aria-label="Clear everything">
+          <span class="material-symbols-outlined" aria-hidden="true">delete_sweep</span>
         </button>
       </div>
-      <div class="postcard-back-actions" id="postcardBackActions">
-        <button type="button" class="postcard-circle-btn bg-green text-tan" id="postcardBackToFront" aria-label="Go back to design picker">
-          <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
-        </button>
-        <button type="button" class="postcard-circle-btn postcard-circle-btn-text bg-green text-tan" id="postcardFinishBtn" aria-label="Finish and download">OK</button>
+      <div class="postcard-actions-stack">
+        <div class="postcard-front-actions" id="postcardFrontActions">
+          <button type="button" class="postcard-btn postcard-proceed-btn" id="postcardChooseBtn">
+            Proceed <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+          </button>
+        </div>
+        <div class="postcard-back-actions" id="postcardBackActions">
+          <button type="button" class="postcard-circle-btn bg-green text-tan" id="postcardBackToFront" aria-label="Go back to design picker">
+            <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+          </button>
+          <button type="button" class="postcard-circle-btn postcard-circle-btn-text bg-green text-tan" id="postcardFinishBtn" aria-label="Finish and download">OK</button>
+        </div>
       </div>
     </div>
   </div>
