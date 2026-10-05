@@ -1,0 +1,160 @@
+<!-- ============================================================
+     Armenian Image Archive — Exhibition Grid (WordPress embed)
+
+     Paste this entire block into a WPBakery "Raw HTML" element.
+     Everything (styles, markup, script) is scoped under the
+     #aia-exhibit-grid wrapper so it cannot leak onto, or be broken
+     by, the host theme/plugins.
+
+     TO ADD A NEW EXHIBITION CARD: add one object to the EXHIBITS
+     array below (near the bottom of the <script> block). The grid
+     reflows itself automatically — no other edits needed. Leave
+     "link" as '' for an unlinked "Coming Soon" placeholder card.
+     ============================================================ -->
+<div id="aia-exhibit-grid">
+  <style>
+    #aia-exhibit-grid, #aia-exhibit-grid *, #aia-exhibit-grid *::before, #aia-exhibit-grid *::after {
+      box-sizing: border-box !important;
+    }
+    #aia-exhibit-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+      font-family: Georgia, 'Times New Roman', serif;
+      color: #222;
+      background: transparent;
+      line-height: 1.4;
+    }
+    #aia-exhibit-grid a { text-decoration: none; color: inherit; }
+    #aia-exhibit-grid img { max-width: 100%; display: block; border: 0; }
+    #aia-exhibit-grid ul, #aia-exhibit-grid li { list-style: none; margin: 0; padding: 0; }
+
+    #aia-exhibit-grid .aia-header {
+      text-align: center;
+      margin: 0 0 32px;
+    }
+    #aia-exhibit-grid .aia-logo {
+      width: 150px;
+      max-width: 40vw;
+      margin: 0 auto 16px;
+    }
+    #aia-exhibit-grid .aia-tagline {
+      font-size: 1.14em;
+      font-weight: 400;
+      line-height: 1.4em;
+      margin: 0 auto;
+      max-width: 640px;
+      color: #222;
+      text-decoration: none;
+      -webkit-hyphens: none;
+      -ms-hyphens: none;
+      hyphens: none;
+    }
+
+    #aia-exhibit-grid .aia-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    #aia-exhibit-grid .aia-card {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      border-radius: 2px;
+      background: #111;
+      aspect-ratio: 4 / 3;
+    }
+    #aia-exhibit-grid .aia-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease, opacity 0.3s ease;
+    }
+    #aia-exhibit-grid .aia-card:hover img { transform: scale(1.05); opacity: 0.6; }
+    #aia-exhibit-grid .aia-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      background: rgba(0, 0, 0, 0.35);
+      pointer-events: none;
+      text-align: center;
+    }
+    #aia-exhibit-grid .aia-card:hover .aia-overlay { opacity: 1; }
+    #aia-exhibit-grid .aia-overlay-text {
+      color: #fff;
+      font-size: 1.1em;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px solid #fff;
+      padding: 10px 18px;
+    }
+    #aia-exhibit-grid .aia-card.aia-soon { cursor: default; }
+    #aia-exhibit-grid .aia-card.aia-soon .aia-overlay {
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 640px) {
+      #aia-exhibit-grid .aia-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+      #aia-exhibit-grid .aia-overlay-text { font-size: 0.9em; padding: 8px 12px; }
+    }
+  </style>
+
+  <div class="aia-header">
+    <img class="aia-logo" src="https://www.armenianimage.org/wp-content/uploads/2021/10/armenian_images.png" alt="Armenian Image Archive">
+    <p class="aia-tagline">Preservation, research &amp; exhibition of Armenian photographers &amp; photography related to Armenian subject-matter</p>
+  </div>
+
+  <div class="aia-grid" id="aiaExhibitGridCards"></div>
+
+  <script>
+  (function () {
+    // To add a new exhibition: add one object here. Cards render in
+    // array order; the CSS grid reflows on its own as the list grows,
+    // so there is no row/column math to redo by hand.
+    var EXHIBITS = [
+      { img: 'https://www.armenianimage.org/wp-content/uploads/2023/01/part1_kurk.png', link: 'https://www.armenianimage.org/exhibition-part1-ohannes-kurkdjian/', alt: 'Ohannes Kurkdjian, Part 1' },
+      { img: 'https://www.armenianimage.org/wp-content/uploads/2023/01/part2_kurk.png', link: 'https://www.armenianimage.org/exhibition-part-2-ohannes-kurkdjian-surabaya/', alt: 'Ohannes Kurkdjian, Part 2: Surabaya' },
+      { img: 'https://www.armenianimage.org/wp-content/uploads/2023/01/cover_via_dolorosapng.png', link: 'https://www.armenianimage.org/viadolorosa/viadolorosa-intro/', alt: 'Studio Bonfils: Via Dolorosa' },
+      { img: 'https://www.armenianimage.org/wp-content/uploads/2023/01/aftermath2-1.png', link: 'https://www.armenianimage.org/exhibition-aftermath-entrance/', alt: 'Aftermath: The Armenian Earthquake of 1988' },
+      { img: 'https://www.armenianimage.org/wp-content/uploads/2023/01/davis-cover3.png', link: 'https://www.armenianimage.org/exhibition-davis-collection/', alt: 'Leslie Davis Collection: Lost and Found' },
+      { img: 'https://www.armenianimage.org/wp-content/uploads/2023/01/cover_art6.jpg', link: 'https://www.armenianimage.org/exhibition-elia-kahvedjian-entrance/', alt: 'Elia Kahvedjian' },
+      { img: 'https://www.armenianimage.org/wp-content/uploads/2023/01/cover3-1.jpg', link: 'https://www.armenianimage.org/exhibition-krikor-djololian-entrance/', alt: 'Krikor Djololian' },
+      { img: 'https://www.armenianimage.org/wp-content/uploads/2023/01/22.jpg', link: 'https://www.armenianimage.org/exhibition-haroutiun-derhagopian-entrance/', alt: 'Haroutiun Derhagopian' },
+      { img: 'https://www.armenianimage.org/wp-content/uploads/2023/01/cover_k_derahgo.jpg', link: 'https://www.armenianimage.org/exhibition-kevork-derhagopian-part-2-entrance/', alt: 'Kevork Derhagopian, Part 2' },
+      { img: 'https://www.armenianimage.org/wp-content/uploads/2023/01/cover_art8.jpg', link: '', alt: 'Coming Soon' },
+      { img: 'https://www.armenianimage.org/wp-content/uploads/2023/01/cover_art5.jpg', link: '', alt: 'Coming Soon' }
+    ];
+
+    var grid = document.getElementById('aiaExhibitGridCards');
+    if (!grid) return;
+
+    EXHIBITS.forEach(function (item) {
+      var isLink = !!item.link;
+      var card = document.createElement(isLink ? 'a' : 'div');
+      card.className = 'aia-card' + (isLink ? '' : ' aia-soon');
+      if (isLink) card.href = item.link;
+
+      var img = document.createElement('img');
+      img.src = item.img;
+      img.alt = item.alt || '';
+      img.loading = 'lazy';
+      card.appendChild(img);
+
+      var overlay = document.createElement('div');
+      overlay.className = 'aia-overlay';
+      var text = document.createElement('div');
+      text.className = 'aia-overlay-text';
+      text.textContent = isLink ? 'Enter Exhibition' : 'Coming Soon';
+      overlay.appendChild(text);
+      card.appendChild(overlay);
+
+      grid.appendChild(card);
+    });
+  })();
+  </script>
+</div>
