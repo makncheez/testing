@@ -4137,6 +4137,28 @@
       positionHeroLabels();
     }
 
+    // positionLogos()/positionHeroLabels() above run synchronously against
+    // whatever layout exists at that instant. On a slower connection
+    // (mobile, in practice) the webfonts or hero portrait image can still
+    // be loading then, and swapping in afterward reflows the quote frame
+    // the logos are measured against — leaving the right-hand logo (and
+    // anything else derived from that measurement) stuck in a stale
+    // position until something else happens to trigger a resize (which is
+    // why scrolling, which can collapse a mobile browser's address bar,
+    // "fixes" it). Re-run the same positioning once fonts are actually
+    // ready, and again after the window's load event, so it's correct
+    // without needing that incidental resize.
+    function resyncHeroLayout() {
+      syncHeroSpacerHeight();
+      positionLogos();
+      positionHeroLabels();
+      if (!reduceMotion) schedulePortrait();
+    }
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(resyncHeroLayout);
+    }
+    window.addEventListener('load', resyncHeroLayout);
+
     if ('IntersectionObserver' in window && !reduceMotion) {
       var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
